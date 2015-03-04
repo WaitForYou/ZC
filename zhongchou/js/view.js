@@ -143,11 +143,12 @@ app.views.index = Backbone.View.extend({
 	render:function(){
 		console.log("div");
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
-		var that = this
-		$(this.el).empty();
+		var that = this;
+		//$(this.el).empty();
 		$.each(this.data.announcement,function(i,n){
 			var newAn=$('<div>公告'+i+'</div>').appendTo($(that.el));
 			newAn.data("an",n);
+
 			newAn.unbind("click").bind("click",function(){
 				app.objs.announcementDetailV.data = $(this).data("an");
 				app.objs.route.navigate("?page=announcementDetail",{trigger: true});
