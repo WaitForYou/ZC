@@ -194,7 +194,7 @@ a {
 	position: relative;
 	min-width: 1101px;
 	background: url(../img/common/header-bg.png) no-repeat top center;
-	border-bottom: solid 4px #dd0120;
+	border-bottom: solid 4px #aa380c;
 }
 #header .inner {
 	position: relative;
@@ -222,6 +222,7 @@ a {
 	width: 100%;
 }
 .header-right-top {
+	/* background: #AA380C;*/
 	/* height: 96px; */
 	/* margin-left: 20px; */
 }

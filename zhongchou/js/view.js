@@ -25,7 +25,7 @@ app.views.head = Backbone.View.extend({
 			$.each(this.nav,function(i,n){
 				//navFirst+="<div id='"+n.id+"'>"+n.name+"</div>"
 				//<li><a href="/cncrowd">中筹模式<br><span class="en_t">What's CNCrowd</span></a></li>
-				navFirst += "<li id='"+n.id+"'>"+n.name+"<br><span class='en_t'>What's CNCrowd</span></li>";
+				navFirst += "<li id='"+n.id+"'><a>"+n.name+"<br><span class='en_t'>What's CNCrowd</span></a></li>";
 			});
 			//$(this.el).html(buttonHtml+navFirst);
 			$(this.el).find(".top_btn_group").html(buttonHtml);
@@ -34,7 +34,7 @@ app.views.head = Backbone.View.extend({
 			var page=["login","register","mode","product","procedure","FAQS","about"]
 			$.each(page,function(i,n){
 				$("#"+n).unbind("click").bind("click",function(){
-				app.objs.route.navigate("?page="+n,{trigger: true});
+				    app.objs.route.navigate("?page="+n,{trigger: true});
 				})
 			})
 			$("#zone").unbind("click").bind("click",function(){
@@ -82,7 +82,7 @@ app.views.foot = Backbone.View.extend({
 		$.each(this.nav,function(i,n){
 			$("#"+n.id).unbind("click").bind("click",function(){
 				app.objs.route.navigate("?page="+n.id,{trigger: true});
-				})
+				});
 			})
 		}
 	})
@@ -133,7 +133,7 @@ app.views.middle = Backbone.View.extend({
 			$("#"+n).unbind("click").bind("click",function(){
 			app.objs.route.navigate("?page="+n,{trigger: true});
 			})
-			});
+		});
 		}
 	})
 /*首页*/
@@ -141,6 +141,7 @@ app.views.index = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
+		console.log("div");
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this
 		$(this.el).empty();
@@ -150,8 +151,8 @@ app.views.index = Backbone.View.extend({
 			newAn.unbind("click").bind("click",function(){
 				app.objs.announcementDetailV.data = $(this).data("an");
 				app.objs.route.navigate("?page=announcementDetail",{trigger: true});
-			})
-		})
+			});
+		});
 		}
 	})
 /*登录*/
@@ -172,7 +173,7 @@ app.views.mode = Backbone.View.extend({
 		console.log(this.data)
 		$(this.el).html("众筹模式")
 	}
-	})
+})
 /*我要众筹*/
 app.views.product = Backbone.View.extend({
 	el:".middle",
