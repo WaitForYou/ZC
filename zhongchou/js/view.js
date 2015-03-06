@@ -155,7 +155,7 @@ app.views.index = Backbone.View.extend({
 			});
 		});
 		}
-	})
+})
 /*登录*/
 app.views.login = Backbone.View.extend({
 	el:".middle",
@@ -211,7 +211,7 @@ app.views.FAQS = Backbone.View.extend({
 		console.log(this.data)
 		$(this.el).html("常见问题")
 	}
-	})
+})
 /*关于我们*/
 app.views.about = Backbone.View.extend({
 	el:".middle",
