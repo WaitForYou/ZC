@@ -217,64 +217,7 @@ app.views.index = Backbone.View.extend({
               });
          });
 		//介绍我们是做什么的
-		$("#index_video").find("h1").text(this.data.promotion.introduceVideo.title);
-		$("#index_video").find("h2").text(this.data.promotion.introduceVideo.dsc);
-		$.each(this.data.promotion.introduceVideo.data,function(i,n){
-			var newElem = $('<div class="video_style1 mg_r34">'
-            +'<span class="vedette1 mobileCS" style="display: none;">'
-                  +'<video id="Html5Video" poster="/img/top/video_m5.png" controls="controls" width="302" height="170">'
-                      +'<source src="/flowplayer/v6.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">'
-                  +'</video>'
-             +'</span>'
-	         +'<span class="computerCS" style="display: block;">'
-	         +'<a href="#videomodal1" data-toggle="modal" data-target="#video-modal1">'
-	         +'<img src="/img/top/video_m5.png">'
-	         +'</a>'
-	         +'</span>'
-	         +'<h4>马博士课堂·三期</h4>'
-	         +'<h5>新年理财第一步 关注房地产众筹</h5>'
-	      +'</div>').appendTo($("#index_video").find(".video_area"));
-            newElem.data("data",n);
-			newElem.unbind("click").bind("click",function(){
-				//app.objs.announcementDetailV.data = $(this).data("an");
-				//app.objs.route.navigate("?page=announcementDetail",{trigger: true});
-			});
-		});
-        $(".video_style1").last().removeClass("mg_r34");
-        //大图充值
-        var introducePicElem = $('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
-		introducePicElem.data("data",this.data.promotion.introducePic);
-		//产品
-        $.each(this.data.product,function(i,value){
-            var newElem = $('<div class="project_intro">'
-	          +'<div class="left">'
-	             +'<span class="intro_pic"><a href="/items/30093164">'
-        		  +'<img src="/img/top/project_03a.jpg" width="475" height="255">'
-		         +'</a></span>'
-	             +'<span class="timer">'
-	             +'<div id="30093164" class="remaining-day">火爆众筹中 ……</div></span>'
-	          +'</div>'
-	          +'<div class="right">'
-	            +'<div class="r01">'
-                       +'<h4>目标金额：<span>￥'+value.payed+'</span></h4>'
-                       +'<a class="a" role="button" data-toggle="modal" onclick="">认&nbsp;&nbsp;&nbsp;&nbsp;购</a>'
-                   +'</div>'
-                   +'<div class="clear"></div>'
-                   +'<div class="title01">'
-                       +'<h2><a href="/items/30093164">'+value.title+'-'+value.subhead+'</a></h2>'
-                       +'<h4>年化收益率高达'+value.yearReturn+'以上</h4>'
-                   +'</div>'
-                   +'<div class="price">'
-                       +'<span class="price_01"><h4>当前市值</h4><h5>￥'+value.costPrice+'</h5></span>'
-                       +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
-                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
-                  +' </div>'
-                   +'<h5 class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;"></b></h5>'
-                   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
-	         +'</div>'
-	      +'</div>').appendTo($(".project_area"));
-
-        });
+		
 		}//render
 })
 /*登录*/
