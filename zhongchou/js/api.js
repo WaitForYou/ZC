@@ -1,9 +1,38 @@
 /*检测用户名*/
 app.apis.checkUser=function(data,fn,err){
-	fn(true)
+	var data = "name"/*传输入的东西过来*/
+	var checkReturn = {code:1}
+	if(checkReturn&&checkReturn.code){
+		fn(true);
+	}else{
+		err();
+	}
+	
+	}
+/*检测手机号*/
+app.apis.checkPhone=function(data,fn,err){
+	var data = "phone"/*传输入的东西过来*/
+	var checkReturn = {code:1}
+	if(checkReturn&&checkReturn.code){
+		fn(true);
+	}else{
+		err();
+	}
+	}
+/*检测邮箱*/
+app.apis.checkPhone=function(data,fn,err){
+	var data = "email"/*传输入的东西过来*/
+	var checkReturn = {code:1}
+	if(checkReturn&&checkReturn.code){
+		fn(true);
+	}else{
+		err();
+	}
 	}
 /*登录*/
 app.apis.login=function(data,fn,err){
+	var data = {"userName":"aa",/*登录名/手机/邮箱*/
+				"passWord":"djisk"}/*密码*/
 	var loginReturn={
 					code:1,
 					data:{"id":"001","type":1,"userName":"aa","image":"http://","place":"bb","phone":"6575798","email":"dcghf@tgh.com","name":"fdgh","contacts":"sddfsf","contactsPhone":"34242","record":"本科","university":"你妹的学校","job":"做你妹","company":"你妹的"}
@@ -22,15 +51,48 @@ app.apis.login=function(data,fn,err){
 	}
 /*注册*/
 app.apis.register=function(data,fn,err){
-	fn()
+	var data = {
+		"id":uuid(),/*id*/
+		"type":1,/*类型,1普通用户2管理用户*/
+		"userName":"用户名",/*用户名*/
+		"image":"http://",/*头像*/
+		"place":"地址",/*地址*/
+		"phone":"18239208903",/*手机*/
+		"email":"fhdj@email.com",/*邮箱*/
+		"name":"真实名",/*真实姓名*/
+		"contacts":"联系人",/*联系人*/
+		"contactsPhone":"2738948393",/*联系人电话*/
+		"record":"本科",/*学历*/
+		"university":"华农",/*毕业院校*/
+		"job":"这个职位",/*职位*/
+		"company":"公司"/*公司*/
+	}
+	var registerReturn = {code:1}
+	if(registerReturn && registerReturn.code){
+		fn()
+	}else{
+		err()
+	}
+	
 	}
 /*重置密码*/
 app.apis.resetKey=function(data,fn,err){
-	fn()
+	var data = {
+				id:"2333r3",/*用户id*/
+				oldKey:"1231231",/*旧密码*/
+				newKey:"532424"/*新密码*/
+				}
+		var resetReturn = {code:1}
+		if(resetReturn && resetReturn.code){
+			fn();
+		}else{
+			err();
+		}
 	}
 /**********************************************************************/
 /*获取商品*/
 app.apis.getProduct=function(data,fn,err){
+	var data = null/*不用传*/
 	var productReturn = {
 		code : 1,
 		time : 10086,
@@ -57,19 +119,93 @@ app.apis.getProduct=function(data,fn,err){
 	}
 /*添加商品*/
 app.apis.addProduct=function(data,fn,err){
-	fn()
+	var data = {"id":uuid(),/*id*/
+				"title":"aa",/*标题*/
+				"subhead":"nnnn",/*副标题*/
+				"image":["http://","http://"],/*图片*/
+				"price":1000,/*价格*/
+				"costPrice":2000,/*原价*/
+				"money":20000,/*金额*/
+				"payed":10000,/*以筹金额*/
+				"payedCount":10,/*众筹笔数*/
+				"copy":20,/*份数*/
+				"maxTime":10086,/*持有期限*/
+				"minUnit":1,/*最小单位*/
+				"maxUnit":200,/*最大单位*/
+				"tax":8,/*税费预算*/
+				"area":1223,/*面积*/
+				"costUnitPrice":10,/*原单价*/
+				"UnitPrice":9,/*单价*/
+				"developer":"你妹",/*开发商*/
+				"place":"那个地址",/*地址*/
+				"decorate":"一般",/*装修状况*/
+				"propertyType":"公寓",/*物业类型*/
+				"stratTime":0,/*开始时间*/
+				"buildTime":1024,/*建造时间*/
+				"rightType":"商业用房",/*产权类型*/
+				"haveLease":0,/*有否租约*/
+				"yearReturn":"15%以上"/*年收益率*/
+			}
+	var addReturn = {code:1}
+	if(addReturn && addReturn.code){
+		fn()
+	}else{
+		err()
+	}
+	
 	}
 /*修改商品*/
 app.apis.editProduct=function(data,fn,err){
-	fn()
+	var data = {"id":"38u3",/*id*/
+				"title":"aa",/*标题*/
+				"subhead":"nnnn",/*副标题*/
+				"image":["http://","http://"],/*图片*/
+				"price":1000,/*价格*/
+				"costPrice":2000,/*原价*/
+				"money":20000,/*金额*/
+				"payed":10000,/*以筹金额*/
+				"payedCount":10,/*众筹笔数*/
+				"copy":20,/*份数*/
+				"maxTime":10086,/*持有期限*/
+				"minUnit":1,/*最小单位*/
+				"maxUnit":200,/*最大单位*/
+				"tax":8,/*税费预算*/
+				"area":1223,/*面积*/
+				"costUnitPrice":10,/*原单价*/
+				"UnitPrice":9,/*单价*/
+				"developer":"你妹",/*开发商*/
+				"place":"那个地址",/*地址*/
+				"decorate":"一般",/*装修状况*/
+				"propertyType":"公寓",/*物业类型*/
+				"stratTime":0,/*开始时间*/
+				"buildTime":1024,/*建造时间*/
+				"rightType":"商业用房",/*产权类型*/
+				"haveLease":0,/*有否租约*/
+				"yearReturn":"15%以上"/*年收益率*/
+			}
+	var editReturn = {code:1}
+	if(editReturn&&editReturn.code){
+		fn()
+	}else{
+		err()
+	}
+	
 	}
 /*删除商品*/
 app.apis.removeProduct=function(data,fn,err){
-	fn()
+	var data = "ddssfs"/*商品id*/
+	var removeReturn={code:1}
+	if(removeReturn && removeReturn.code == 1){
+		fn();
+	}else{
+		err();
+	}
+	
 	}
 /**********************************************************************/
 /*获取客户*/
 app.apis.getClient=function(data,fn,err){
+	var data = null/*不用传*/
 	var clientReturn={
 		code:1,
 		time:10086,
@@ -97,27 +233,76 @@ app.apis.getClient=function(data,fn,err){
 	}
 /*添加客户*/
 app.apis.addClient=function(data,fn,err){
-	fn()
+	var data = {
+		"id":uuid(),/*id*/
+		"type":1,/*类型,1普通用户2管理用户*/
+		"userName":"用户名",/*用户名*/
+		"image":"http://",/*头像*/
+		"place":"地址",/*地址*/
+		"phone":"18239208903",/*手机*/
+		"email":"fhdj@email.com",/*邮箱*/
+		"name":"真实名",/*真实姓名*/
+		"contacts":"联系人",/*联系人*/
+		"contactsPhone":"2738948393",/*联系人电话*/
+		"record":"本科",/*学历*/
+		"university":"华农",/*毕业院校*/
+		"job":"这个职位",/*职位*/
+		"company":"公司"/*公司*/
+	}
+	var addReturn = {code:1}
+	if(addReturn && addReturn.code){
+		fn()
+	}else{
+		err()
+	}
+	
 	}
 /*修改客户*/
 app.apis.editClient=function(data,fn,err){
-	fn()
+	var data = {
+		"id":"24253",/*id*/
+		"type":1,/*类型,1普通用户2管理用户*/
+		"userName":"用户名",/*用户名*/
+		"image":"http://",/*头像*/
+		"place":"地址",/*地址*/
+		"phone":"18239208903",/*手机*/
+		"email":"fhdj@email.com",/*邮箱*/
+		"name":"真实名",/*真实姓名*/
+		"contacts":"联系人",/*联系人*/
+		"contactsPhone":"2738948393",/*联系人电话*/
+		"record":"本科",/*学历*/
+		"university":"华农",/*毕业院校*/
+		"job":"这个职位",/*职位*/
+		"company":"公司"/*公司*/
+	}
+	var editReturn = {code:1}
+	if(editReturn && editReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*删除客户*/
 app.apis.removeClient=function(data,fn,err){
-	fn()
+	var djish = "eeerf"/*客户id*/
+	var removeReturn = {code:1}
+	if(removeReturn && removeReturn.code){
+		fn()
+	}
+	
 	}
 /************************************************************************/
 /*获取管理员*/
 app.apis.getAdmin=function(data,fn,err){
+	var data = null/*不用传*/
 	var adminReturn={
 					code:1,
 					time:10086,
 					data:[
-						{"id":"001","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false},
-						{"id":"002","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false},
-						{"id":"003","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false},
-						{"id":"004","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false}
+						{"id":"001","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false,"type":2},
+						{"id":"002","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false,"type":2},
+						{"id":"003","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false,"type":2},
+						{"id":"004","userName":"","client":false,"admin":false,"announcement":false,"recruit":false,"company":false,"product":false,"promotion":false,"redPacket":false,"type":2}
 					]
 					}
 		if(adminReturn && adminReturn.code && adminReturn.code != 0){
@@ -135,19 +320,62 @@ app.apis.getAdmin=function(data,fn,err){
 	}
 /*添加管理员*/
 app.apis.addAdmin=function(data,fn,err){
-	fn()
+	var data = {
+		"id":uuid(),/*id*/
+		"userName":"sfdffgdgdgd",/*帐号*/
+		"type":2,/*类型,1普通用户2管理用户*/
+		"client":false,/*用户管理*/
+		"admin":false,/*管理员管理*/
+		"announcement":false,/*公告管理*/
+		"recruit":false,/*招聘管理*/
+		"company":false,/*企业信息管理*/
+		"product":false,/*商品管理*/
+		"promotion":false,/*宣传管理*/
+		"redPacket":false/*红包管理*/
+		}
+	var addReturn = {code:1}
+	if(addReturn && addReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*修改管理员*/
 app.apis.editAdmin=function(data,fn,err){
-	fn()
+	var data = {
+		"id":"fssfs",/*id*/
+		"userName":"sfdffgdgdgd",/*帐号*/
+		"type":2,/*类型,1普通用户2管理用户*/
+		"client":false,/*用户管理*/
+		"admin":false,/*管理员管理*/
+		"announcement":false,/*公告管理*/
+		"recruit":false,/*招聘管理*/
+		"company":false,/*企业信息管理*/
+		"product":false,/*商品管理*/
+		"promotion":false,/*宣传管理*/
+		"redPacket":false/*红包管理*/
+		}
+	var editReturn = {code:1}
+	if(editReturn && editReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*删除管理员*/
 app.apis.removeAdmin=function(data,fn,err){
-	fn()
+	var data = "ddgdgd"/*管理员id*/
+	var removeReturn = {code:1}
+	if(removeReturn && removeReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /**************************************************************************/
 /*获取公告*/
 app.apis.getannouncement=function(data,fn,err){
+	var data=null/*不用传*/
 	var announcementReturn={
 		code:1,
 		time:10086,
@@ -175,19 +403,50 @@ app.apis.getannouncement=function(data,fn,err){
 	}
 /*添加公告*/
 app.apis.addannouncement=function(data,fn,err){
-	fn()
+	var data={
+		"id":uuid(),/*id*/
+		"title":"eee",/*标题*/
+		"message":"rewr",/*内容*/
+		"start":0,/*生效时间*/
+		"end":0/*结束时间*/
+		}
+	var addReturn = {code:1}
+	if(addReturn && addReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*修改公告*/
 app.apis.editannouncement=function(data,fn,err){
-	fn()
+	var data={
+		"id":"sfs",/*id*/
+		"title":"eee",/*标题*/
+		"message":"rewr",/*内容*/
+		"start":0,/*生效时间*/
+		"end":0/*结束时间*/
+		}
+	var editReturn = {code:1}
+	if(editReturn && editReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*删除公告*/
 app.apis.removeannouncement=function(data,fn,err){
-	fn()
+	var data="ehdjk"
+	var removeReturn = {code:1}
+	if(removeReturn && removeReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /******************************************************************************/
 /*获取招聘*/
 app.apis.getrecruit=function(data,fn,err){
+	var data = null/*不用传*/
 	var recruitReturn = {
 						code:1,
 						time:10086,
@@ -215,19 +474,52 @@ app.apis.getrecruit=function(data,fn,err){
 	}
 /*添加招聘*/
 app.apis.addrecruit=function(data,fn,err){
-	fn()
+	var data = {
+		"id":uuid(),/*id*/
+		"title":"dssfs",/*标题*/
+		"message":"sfsfs",/*内容*/
+		"start":0,/*生效时间*/
+		"end":0/*结束时间*/
+		}
+
+	var addReturn = {code:1}
+	if(addReturn && addReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*修改招聘*/
 app.apis.editrecruit=function(data,fn,err){
-	fn()
+	var data = {
+		"id":"errdgd",/*id*/
+		"title":"dssfs",/*标题*/
+		"message":"sfsfs",/*内容*/
+		"start":0,/*生效时间*/
+		"end":0/*结束时间*/
+		}
+
+	var editReturn = {code:1}
+	if(editReturn && editReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*删除招聘*/
 app.apis.removerecruit=function(data,fn,err){
-	fn()
+	var data = "dsfsg"/*招聘id*/
+	var removeReturn = {code:1}
+	if(removeReturn && removeReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /******************************************************************************/
 /*获取企业资料*/
 app.apis.getcompany=function(data,fn,err){
+	var data = null;/*不传*/
 	var companyReturn = {
 						code : 1,
 						time : 10086,
@@ -255,61 +547,90 @@ app.apis.getcompany=function(data,fn,err){
 	}
 /*添加企业资料*/
 app.apis.addcompany=function(data,fn,err){
-	fn()
+	var data={
+		"id":uuid(),/*id*/
+		"title":"erree",/*标题*/
+		"message":"erreer",/*内容*/
+		"start":0,/*生效时间*/
+		"end":0/*结束时间*/
+		}
+	var addReturn = {code:1}
+	if(addReturn && addReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*修改企业资料*/
 app.apis.editcompany=function(data,fn,err){
-	fn()
+	var data={
+		"id":"dsfs",/*id*/
+		"title":"erree",/*标题*/
+		"message":"erreer",/*内容*/
+		"start":0,/*生效时间*/
+		"end":0/*结束时间*/
+		}
+	var editReturn = {code:1}
+	if(editReturn && editReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /*删除企业资料*/
 app.apis.removecompany=function(data,fn,err){
-	fn()
+	var data="dfsf"/*资料id*/
+	var removeReturn={code:1}
+	if(removeReturn && removeReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /********************************************************************/
 /*获取宣传*/
 app.apis.getpromotion=function(data,fn,err){
+	var data=null/*不用传*/
 	var promotionReturn = {
 		code : 1,
 		time : 10086,
 		data : {
-			"index":{
-						"visualPic":{
-							id:"001",
-							title:"首页大图",
-							dsc:"不说",
-							data:[
-									{"id":"001","name":"","image":"http://","dsc":"","job":"",group:"001"}
-								]
+			"index":[
+						{id:"001",
+						title:"首页大图",
+						dsc:"不说",
+						data:[
+								{"id":"001","name":"","image":"http://","dsc":"","job":"",group:"001"}
+							]
 						},
-						"introduceVideo":{
-							id:"002",
-							title:"我们是做什么的",
-							dsc:"提供最低的投资们门槛、最赚钱的投资模式、最简单的投资流程，助你实现投资梦想。",
-							data:[
-									{"id":"002","name":"马博士课堂第三期","image":"http://","dsc":"新年理财第一步，关注房地产众筹","job":"",group:"002"},
-									{"id":"003","name":"房地产众筹","image":"http://","dsc":"了解我们如何创造高收益","job":"",group:"002"},
-									{"id":"004","name":"大佬观点","image":"http://","dsc":"投资新观点，专业权威解读","job":"",group:"002"},
-								]
+						{id:"002",
+						title:"我们是做什么的",
+						dsc:"提供最低的投资们门槛、最赚钱的投资模式、最简单的投资流程，助你实现投资梦想。",
+						data:[
+								{"id":"002","name":"马博士课堂第三期","image":"http://","dsc":"新年理财第一步，关注房地产众筹","job":"",group:"002"},
+								{"id":"003","name":"房地产众筹","image":"http://","dsc":"了解我们如何创造高收益","job":"",group:"002"},
+								{"id":"004","name":"大佬观点","image":"http://","dsc":"投资新观点，专业权威解读","job":"",group:"002"},
+							]
 						},
-						"introducePic":{id:"003",
-							title:"首页下部大图",
-							dsc:"不说",
-							data:[
-									{"id":"005","name":"","image":"http://","dsc":"","job":"",group:"003"}
-								]
+						{id:"003",
+						title:"首页下部大图",
+						dsc:"不说",
+						data:[
+								{"id":"005","name":"","image":"http://","dsc":"","job":"",group:"003"}
+							]
 						},
-						"visualPic":{id:"004",
-							title:"360°全方位风险控制",
-							dsc:"风险控制小组由专业、稳健、实战经验丰富的房地产相关产业链专家组成，从投前筛选、投后管理到获利退出，全方位为众筹人保驾护航。",
-							data:[
-									{"id":"006","name":"袭刚","image":"http://","dsc":"曾任通用电气资本公司全球地产及鼎晖地产基金创始合伙人","job":"风控组长",group:"004"},
-									{"id":"007","name":"周雪爽","image":"http://","dsc":"华诚律师事务所合伙人，丰富的地产及金融法律服务经验","job":"法律",group:"004"},
-									{"id":"008","name":"谢猛虎","image":"http://","dsc":"中礁资产管理公司总经理，丰富的商业及工业地产等全产业链实践经验","job":"资管",group:"004"},
-									{"id":"009","name":"李明","image":"http://","dsc":"沪港国际咨询集团副总经理，丰富的咨询、会计及评估领域服务经验","job":"评估",group:"004"},
-									{"id":"010","name":"郑福泉","image":"http://","dsc":"中瑞岳华税务师事务所合伙人，曾任百安居中国税务总监","job":"税务",group:"004"}
-								]
+						{id:"004",
+						title:"360°全方位风险控制",
+						dsc:"风险控制小组由专业、稳健、实战经验丰富的房地产相关产业链专家组成，从投前筛选、投后管理到获利退出，全方位为众筹人保驾护航。",
+						data:[
+								{"id":"006","name":"袭刚","image":"http://","dsc":"曾任通用电气资本公司全球地产及鼎晖地产基金创始合伙人","job":"风控组长",group:"004"},
+								{"id":"007","name":"周雪爽","image":"http://","dsc":"华诚律师事务所合伙人，丰富的地产及金融法律服务经验","job":"法律",group:"004"},
+								{"id":"008","name":"谢猛虎","image":"http://","dsc":"中礁资产管理公司总经理，丰富的商业及工业地产等全产业链实践经验","job":"资管",group:"004"},
+								{"id":"009","name":"李明","image":"http://","dsc":"沪港国际咨询集团副总经理，丰富的咨询、会计及评估领域服务经验","job":"评估",group:"004"},
+								{"id":"010","name":"郑福泉","image":"http://","dsc":"中瑞岳华税务师事务所合伙人，曾任百安居中国税务总监","job":"税务",group:"004"}
+							]
 						}
-					},
+					],
 			"mode":[
 					{id:"005",
 					title:"众筹模式",
@@ -411,21 +732,30 @@ app.apis.getpromotion=function(data,fn,err){
 			}
 	fn(app.objs.promotion.get())
 	}
-/*添加宣传*/
-app.apis.addpromotion=function(data,fn,err){
-	fn()
-	}
+
 /*修改宣传*/
 app.apis.editpromotion=function(data,fn,err){
-	fn()
+	var data = {
+		page:"index",/*所在页面*/
+		data:[{id:"001",/*组id*/
+						title:"首页大图",/*组名*/
+						dsc:"不说",/*组描述*/
+						data:[
+								{"id":"001","name":"","image":"http://","dsc":"","job":"",group:"001"}/*单个的*/
+							]
+						}] 
 	}
-/*删除宣传*/
-app.apis.removepromotion=function(data,fn,err){
-	fn()
+	var editReturn = {code:1}
+	if(editReturn && editReturn.code){
+		fn()
+	}else{
+		err() 
+	}
 	}
 /************************************************************************/
 /*获取单用户红包*/
 app.apis.redPacketDetail=function(data,fn,err){
+	var data = "ssfsfs"/*用户id*/
 	var redPacketReturn = {
 							code:1,
 							time:10086,
@@ -450,11 +780,37 @@ app.apis.redPacketDetail=function(data,fn,err){
 	}
 /*获取所有红包*/
 app.apis.getRedPacket=function(data,fn,err){
-	fn()
+	var data = null/*不传*/
+	var getReturn = {
+		code:1,
+		data:[
+								{"id":"001","userId":"001","money":0,"type":0,"strat":0,"end":0},
+								{"id":"002","userId":"001","money":0,"type":0,"strat":0,"end":0},
+								{"id":"003","userId":"001","money":0,"type":0,"strat":0,"end":0}
+								]
+	}
+	if(getReturn && getReturn.code){
+		fn()
+	}else{
+		err();
+	}
 	}
 /*发红包*/
 app.apis.addRedPacket=function(data,fn,err){
-	fn()
+	var data = {
+		"id":uuid(),/*id*/
+		"userId":"sfsgsf",/*用户id*/
+		"money":0,/*金额*/
+		"type":0,/*类型*/
+		"strat":0,/*发放日期*/
+		"end":0/*消费日期*/
+		}
+	var addReturn={code:1}
+	if(addReturn&&addReturn.code){
+		fn()
+	}else{
+		err()
+	}
 	}
 /************************************************************************/
 /*获取帐户信息*/
@@ -506,8 +862,4 @@ app.apis.paid=function(data,fn,err){
 	fn()
 	}
 
-/*********************************by Lin*******************************************/
-/*添加首页头部的内容*/
-app.apis.getHeaderConent=function(data,fn,err){
-	fn();
-}
+/****************************************************************************/
