@@ -352,7 +352,10 @@ app.routers=Backbone.Router.extend({
 		"*action":"changePage"
     },
 	"changePage":function(){
-		var get=$_GET();
+
+		app.apis.config(null,function(data){
+			app.objs.configData=data;
+			var get=$_GET();
 		if(!get.page){
 			get.page = "index"
 			}
@@ -372,5 +375,7 @@ app.routers=Backbone.Router.extend({
 			}
 		
 		app.objs.routeTable[get.page].fn(get);
+		}) 
+		
 		}
 	});
