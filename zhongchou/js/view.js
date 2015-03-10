@@ -138,15 +138,14 @@ app.views.middle = Backbone.View.extend({
 	})
 /*首页*/
 app.views.index = Backbone.View.extend({
-	el:".middle",
+	el:".middleTab",
 	data:{},
 	render:function(){
-		console.log("div");
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this;
-		//$(this.el).empty();
+		//公告
 		$.each(this.data.announcement,function(i,n){
-			var newAn=$('<div>公告'+i+'</div>').appendTo($(that.el));
+			var newAn=$('<div class="caption">'+n.title+'</div>').appendTo($("#slides").children(".slides_container"));
 			newAn.data("an",n);
 
 			newAn.unbind("click").bind("click",function(){
@@ -154,6 +153,66 @@ app.views.index = Backbone.View.extend({
 				app.objs.route.navigate("?page=announcementDetail",{trigger: true});
 			});
 		});
+		$(function(){
+              $('#slides').slides({
+                preload: true,
+                play: 4000,
+                pause: 1000,
+                hoverPause: true
+              });
+         });
+		//介绍我们是做什么的
+		$("#index_video").find("h1").text(this.data.promotion.introduceVideo.title);
+		$("#index_video").find("h2").text(this.data.promotion.introduceVideo.dsc);
+		$.each(this.data.promotion.introduceVideo.data,function(i,n){
+			var newElem = $('<div class="video_style1 mg_r34">'
+            +'<span class="vedette1 mobileCS" style="display: none;">'
+                  +'<video id="Html5Video" poster="/img/top/video_m5.png" controls="controls" width="302" height="170">'
+                      +'<source src="/flowplayer/v6.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">'
+                  +'</video>'
+             +'</span>'
+	         +'<span class="computerCS" style="display: block;">'
+	         +'<a href="#videomodal1" data-toggle="modal" data-target="#video-modal1">'
+	         +'<img src="/img/top/video_m5.png">'
+	         +'</a>'
+	         +'</span>'
+	         +'<h4>马博士课堂·三期</h4>'
+	         +'<h5>新年理财第一步 关注房地产众筹</h5>'
+	      +'</div>').appendTo($("#index_video").find(".video_area"));
+            newElem.data("data",n);
+			newElem.unbind("click").bind("click",function(){
+				//app.objs.announcementDetailV.data = $(this).data("an");
+				//app.objs.route.navigate("?page=announcementDetail",{trigger: true});
+			});
+		});
+        $(".video_style1").last().removeClass("mg_r34");
+        //大图充值
+        var introducePicElem = $('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
+		introducePicElem.data("data",this.data.promotion.introducePic);
+		//产品
+        $.each(this.data.product,function(i,value){
+            var newElem = $('<div class="project_intro">'
+	          +'<div class="left">'
+	             +'<span class="intro_pic"><a href="/items/30093164">'
+        		  +'<img src="/img/top/project_03a.jpg" width="475" height="255">'
+		         +'</a></span>'
+	             +'<span class="timer">'
+	             +'<script>//document.write("<div id=30093164 class=\"remaining-day\">火爆众筹中 ……</div>");</script>'
+	             +'<div id="30093164" class="remaining-day">火爆众筹中 ……</div></span>'
+	          +'</div>'
+	          +'<div class="right">'
+	            +'<div class="r01">'
+                       +'<h4>目标金额：<span>￥'+value.payed+'</span></h4>'
+                       +'<a class="a" role="button" data-toggle="modal" onclick="buyBtn('30093164')">认&nbsp;&nbsp;&nbsp;&nbsp;购</a>'
+                   +'</div>'
+
+	         +'</div>'
+	      +'</div>').appendTo($(".project_area"));
+
+        });
+
+
+
 		}
 })
 /*登录*/
