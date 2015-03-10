@@ -72,39 +72,36 @@ app.views.head = Backbone.View.extend({
 app.views.foot = Backbone.View.extend({
 	done:null,
 	el:".footerBox",
+	data:app.objs.configData,
 	nav:[{id:"mode",name:"中筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
-	info:{title:"全国首家专业房地产众筹平台",slogan:"人人参与  创新投资",mobile:"（021）6181-3682",time:"（周一至周五 10:00-18:30）",number:"400-661-3350",
-	      companyName:"",companyUrl:"",concept:["为全国首家专业房地产众筹平台","致力于通过互联网金融的创新","推动传统房地产投融资模式的变革和创新"],
-	      cooperationEmail:"biz@cncrowd.com",recruitmentEmail:"biz@cncrowd.com",address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;邮编：200052"],
+	info:{titleText:"全国首家专业房地产众筹平台",slogan:"人人参与  创新投资",mobile:"（021）6181-3682",fax:"（021）6181-3682",time:"（周一至周五 10:00-18:30）",number:"400-661-3350",
+	      companyName:"上海中筹互联网金融信息服务有限公司",referredToAs:"",companyUrl:"",concept:["为全国首家专业房地产众筹平台","致力于通过互联网金融的创新","推动传统房地产投融资模式的变革和创新"],
+	      cooperationEmail:"biz@cncrowd.com",recruitmentEmail:"biz@cncrowd.com",address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
 	      copRight:"©2014 CNCrowd",record:" 沪ICP备14044695号-1"
          },
 	render:function(){
 		console.log(app.objs.configData)
-		//var configApp = new app.apis.config();
-		//console.log(configApp.data)
-		//app.apis.config(function(){
-			//console.log(this.data)
-		//});
+		var configData = app.objs.configData.footerInfo;
 		var newElem = $('<div class="footer_area">'
 			   +'<div class="footer">'
-			   		+'<h1>'+this.info.title+'</h1>'
-			        +'<h2><i></i><span> '+this.info.slogan+'</span><i></i></h2>' 
+			   		+'<h1>'+configData.titleText+'</h1>'
+			        +'<h2><i></i><span> '+configData.slogan+'</span><i></i></h2>' 
 			        +'<div class="contact_infor">'
 			           +' <ul>'
 			                +'<li class="fci_s1 ">'
-			                    +'<i></i><p>电话: '+this.info.mobile+'传真: '+this.info.title+'</p>'
+			                    +'<i></i><p>电话: '+configData.mobile+'传真: '+configData.fax+'</p>'
 			                +'</li>'
 			                +'<li class="fci_s2 ">'
-			                    +'<i></i><p>众筹洽谈'+this.info.title+'<br><span>'+this.info.title+'</span></p>'
+			                    +'<i></i><p>众筹洽谈'+configData.time+'<br><span>'+configData.number+'</span></p>'
 			                +'</li>'
 			                +'<li class="fci_s3 ">'
-			                    +'<p>'+this.info.title+'<br>中筹网金（'+this.info.title+'）<br>'+this.info.title+'<br>'+this.info.title+'<br>'+this.info.title+'</p>'
+			                    +'<p>'+configData.companyName+'<br>'+configData.referredToAs+'（'+configData.number+'）<br>'+configData.concept[0]+'<br>'+configData.concept[1]+'<br>'+this.data.concept[2]+'</p>'
 			                +'</li>'
 			                +'<li class="fci_s4 ">'
-			                   +' <i></i><p>商务合作：'+this.info.title+'<br>人才招聘：'+this.info.title+'</p>'
+			                   +' <i></i><p>商务合作：'+configData.cooperationEmail+'<br>人才招聘：'+configData.recruitmentEmail+'</p>'
 			                +'</li>'
 			                +'<li class="fci_s5">'
-			                   +' <i></i><p>地址：'+this.info.title+'<br>'+this.info.title+'&nbsp;&nbsp;&nbsp;&nbsp;邮编：'+this.info.title+'</p>'
+			                   +' <i></i><p>地址：'+configData.address[0]+'<br>'+configData.address[1]+'&nbsp;&nbsp;&nbsp;&nbsp;邮编：'+configData.address[2]+'</p>'
 			               +' </li>'
 			                +'<li class="fci_s6">'
 			                    
@@ -125,12 +122,12 @@ app.views.foot = Backbone.View.extend({
 			            +'<div id="fl_s4_img" style="display: none;"></div> ' 
 			        +'</div>'
 			     +'<h3></h3>'
-			        +'<h5>'+this.info.title+' &nbsp;&nbsp;&nbsp;&nbsp;备案号: <a target="_blank" href="http://www.beianbeian.com/beianxinxi/1c979456-a73d-42d8-bb76-2ab1afbb4a5e.html"> '+this.info.title+'</a></h5>'
+			        +'<h5>'+this.copRight+' &nbsp;&nbsp;&nbsp;&nbsp;备案号: <a target="_blank" href="http://www.beianbeian.com/beianxinxi/1c979456-a73d-42d8-bb76-2ab1afbb4a5e.html"> '+this.record+'</a></h5>'
 			  +'</div>'
 			   +'<div class="clear"></div>'
 			+'</div>').appendTo($(this.el));
 		var nav="";
-		$.each(this.nav,function(i,n){
+		$.each(configData.nav,function(i,n){
 			nav += '<a class="'+n.id+'" id="'+n.id+'">'+n.name+'</a>|';
 			})
 		//$(this.el).find("h3").html(nav)
