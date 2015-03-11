@@ -95,7 +95,7 @@ app.views.foot = Backbone.View.extend({
 			                    +'<i></i><p>众筹洽谈'+configData.time+'<br><span>'+configData.number+'</span></p>'
 			                +'</li>'
 			                +'<li class="fci_s3 ">'
-			                    +'<p>'+configData.companyName+'<br>'+configData.referredToAs+'（'+configData.number+'）<br>'+configData.concept[0]+'<br>'+configData.concept[1]+'<br>'+this.data.concept[2]+'</p>'
+			                    +'<p>'+configData.companyName+'<br>'+configData.referredToAs+'（'+configData.number+'）<br>'+configData.conText_0+'<br>'+configData.conText_1+'<br>'+configData.conText_2+'</p>'
 			                +'</li>'
 			                +'<li class="fci_s4 ">'
 			                   +' <i></i><p>商务合作：'+configData.cooperationEmail+'<br>人才招聘：'+configData.recruitmentEmail+'</p>'
@@ -122,7 +122,7 @@ app.views.foot = Backbone.View.extend({
 			            +'<div id="fl_s4_img" style="display: none;"></div> ' 
 			        +'</div>'
 			     +'<h3></h3>'
-			        +'<h5>'+this.copRight+' &nbsp;&nbsp;&nbsp;&nbsp;备案号: <a target="_blank" href="http://www.beianbeian.com/beianxinxi/1c979456-a73d-42d8-bb76-2ab1afbb4a5e.html"> '+this.record+'</a></h5>'
+			        +'<h5>'+configData.copRight+' &nbsp;&nbsp;&nbsp;&nbsp;备案号: <a target="_blank" href="http://www.beianbeian.com/beianxinxi/1c979456-a73d-42d8-bb76-2ab1afbb4a5e.html"> '+configData.record+'</a></h5>'
 			  +'</div>'
 			   +'<div class="clear"></div>'
 			+'</div>').appendTo($(this.el));
