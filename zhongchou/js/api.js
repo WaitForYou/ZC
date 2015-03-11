@@ -1,6 +1,34 @@
 /*检测用户名*/
 app.apis.checkUser=function(data,fn,err){
 	fn(true)
+	var data = "name"/*传输入的东西过来*/
+	var checkReturn = {code:1}
+	if(checkReturn&&checkReturn.code){
+		fn(true);
+	}else{
+		err();
+	}
+	
+	}
+/*检测手机号*/
+app.apis.checkPhone=function(data,fn,err){
+	var data = "phone"/*传输入的东西过来*/
+	var checkReturn = {code:1}
+	if(checkReturn&&checkReturn.code){
+		fn(true);
+	}else{
+		err();
+	}
+	}
+/*检测邮箱*/
+app.apis.checkEmail=function(data,fn,err){
+	var data = "email"/*传输入的东西过来*/
+	var checkReturn = {code:1}
+	if(checkReturn&&checkReturn.code){
+		fn(true);
+	}else{
+		err();
+	}
 	}
 /*登录*/
 app.apis.login=function(data,fn,err){
