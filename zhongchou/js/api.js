@@ -20,7 +20,7 @@ app.apis.checkPhone=function(data,fn,err){
 	}
 	}
 /*检测邮箱*/
-app.apis.checkPhone=function(data,fn,err){
+app.apis.checkEmail=function(data,fn,err){
 	var data = "email"/*传输入的东西过来*/
 	var checkReturn = {code:1}
 	if(checkReturn&&checkReturn.code){
