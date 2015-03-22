@@ -411,7 +411,7 @@ app.views.mode = Backbone.View.extend({
 		    +'<img src="/img/concept/bar-down.png" class="bar-down" alt="">' 
 		  +'</div>').appendTo($(this.el));
 
-        var picBoxElem = $('<div id="main" class="concept"></div>').appendTo($(this.el))
+        var picBoxElem = $('<div id="main" class="concept"></div>').appendTo($(this.el));
         $.each(pageData.data,function(i,value){
           var str = '';
           if(i%2!=0){ 
@@ -457,8 +457,29 @@ app.views.procedure = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
-		console.log(this.data)
-		$(this.el).html("仲筹步聚")
+		$(this.el).empty();
+		console.log(this.data);
+		var pageData = this.data[0];
+		app.fns.setSecondNav($(this.el),pageData.title);
+		    var newProcedure = $('<div class="cnc_step">'
+			   +'<div class="step_s1">'
+					+'<img src="'+pageData.data[0].image+'">' 
+			   +'</div>'
+			   +'<div class="step_list">'
+			       +'<ul>'
+			       +'</ul>'
+			   +'</div>'
+			+'<div class="clear" style=" "></div>'
+			   +'<br>'
+		      +'<p class="text-center" style=" ">'
+		        +'<a href="https://www.cncrowd.com:443/declare"><img class="oc" src="/img/start/btn_sm.png" alt=""></a>'
+		      +'</p>'
+			+'</div>').appendTo($(this.el));
+		$.each(pageData.data,function(index,value){ 
+           if(index>0){ 
+             $('<li><img src="'+value.image+'"></li>').appendTo(newProcedure.find("ul"));
+           }
+		});
 	}
 })
 /*常见问题*/
