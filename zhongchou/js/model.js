@@ -81,7 +81,8 @@ app.models.imageAndWord=Backbone.Model.extend({
 		"image":"",/*头像*/
 		"dsc":"",/*描述*/
 		"job":"",/*职位*/
-		"group":""/*分组*/
+		"group":"",/*分组*/
+		"data":[]/*子数据*/
 		}
 	});
 /*红包*/
