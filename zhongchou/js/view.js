@@ -183,16 +183,91 @@ app.views.middle = Backbone.View.extend({
 		$(this.el).html(this.template[this.type]);
 		$.each(this.page,function(i,n){
 			$("#"+n).unbind("click").bind("click",function(){
-			app.objs.route.navigate("?page="+n,{trigger: true});
+			    app.objs.route.navigate("?page="+n,{trigger: true});
 			})
 		});
 		}
 	})
 /*首页*/
 app.views.index = Backbone.View.extend({
-	el:".middleTab",
+	el:".middle",
 	data:{},
 	render:function(){
+		$(this.el).empty();
+		$('<div id="visual"> '   
+		           +'<div id="demo" style="overflow: hidden; width:100%; align: center;">'
+		            +'<table cellspacing="0" cellpadding="0" align="center" border="0">'
+		              +'<tbody>'
+		              +'<tr>'
+		                +'<td id="marquePic1" valign="top">'
+		                    +'<table width="100%" height="494" border="0" cellpadding="0" cellspacing="0">'
+		                      +'<tbody><tr>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
+		                      +'</tr>'
+		                    +'</tbody></table>'    
+		                +'</td>'
+		                +'<td id="marquePic2" valign="top">'
+		                    +'<table width="100%" height="494" border="0" cellpadding="0" cellspacing="0">'
+		                      +'<tbody><tr>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
+		                      +'</tr>'
+		                    +'</tbody></table>  '  
+		                +'</td>'
+		              +'</tr>'
+		            +'</tbody></table>'
+		            +'<p>'
+		            +'</p>' 
+		        +'</div>'
+
+		      +'<div class="header-banner">'
+		       +'<div class="inner">'
+		           +'<div class="banner">'
+		            +'<a href="reg" rel="nofollow">'
+		                +'<img class="hover" src="/img/top/header_banner2-1.png" alt="">'
+		           +'</a>'
+		            +'<a href=+'+'"#smp">'
+		              +'<img class="hover" src="/img/top/header_banner3.png" alt="">'
+		            +'</a>'
+		          +'</div>'
+		        +'</div>'
+		      +'</div>'
+		    +'</div>'
+
+		   +' <div id="topics">'
+			     +'<div class="inner" style=" height:30px;">'
+			       +' <span style=" display:block; float:left;"><img src="img/topics.png" alt=""></span>'
+			        +'<div id="slides"><div class="slides_container"></div></div>'
+			        +'<a href="/company?id=3" style=" color:#F00; font-size:12px; float:right;">查看更多 &gt;&gt;</a>'
+			      +'</div>'
+			    +'</div>'
+			    +'<div id="index_video">'
+					+'<div class="center_video"><h1></h1><h2></h2><div class="video_area"></div>'
+			    +'</div>'
+		    +'</div>'
+		    +'<div class="recharge_style03"></div>'
+		    +'<div class="index_center"><div class="project_area"></div></div>'
+		    +'<div class="slide earnings"></div> '
+		    +'<div class="team" id="smp"></div>').appendTo($(this.el));
+              var demo = document.getElementById("demo");
+              var marquePic2 = document.getElementById("marquePic2");
+              var marquePic1 = document.getElementById("marquePic1");
+     	      var speed=15 ;
+              marquePic2.innerHTML=marquePic1.innerHTML;
+              function Marquee(){ 
+                 if(demo.scrollLeft>=marquePic1.scrollWidth){ 
+                   demo.scrollLeft=0 ;
+                  }else{ 
+                   demo.scrollLeft++ ;
+                 }
+              } 
+              var MyMar=setInterval(Marquee,speed);
+              if(demo){ 
+		          demo.onmouseover=function() {clearInterval(MyMar);}; 
+		          demo.onmouseout=function() {MyMar=setInterval(Marquee,speed);};  
+              }
+       
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this;
 		//公告
@@ -305,14 +380,14 @@ app.views.index = Backbone.View.extend({
 	       +'</ul>'
 	    +'</div>').appendTo($(".earnings"));
         $.each(earnings.steps,function(i,value){
-         earningsElem.find(".spear").before('<h4 class="sp_'+i+'">'+value+'</h4>');
+           earningsElem.find(".spear").before('<h4 class="sp_'+i+'">'+value+'</h4>');
         });
 		}//rendert
 })
 /*登录*/
 app.views.login = Backbone.View.extend({
 	el:".middle",
-	render:function(){}
+	render:function(){ }
 	})
 /*注册*/
 app.views.register = Backbone.View.extend({
@@ -324,8 +399,36 @@ app.views.mode = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
-		console.log(this.data)
-		$(this.el).html("众筹模式");
+		$(this.el).empty();
+		var pageData = this.data[0];
+		console.log("djfkdjk");
+		console.log(pageData);
+        app.fns.setSecondNav($(this.el),pageData.title);
+
+        $('<div id="mark-navi">'
+		    +'<img src="/img/concept/bar-up.png" class="bar-up" alt="">'
+		    +'<ul><li class="active"><a href="#b00"></a></li><li class=""><a href="#b01"></a></li><li class=""><a href="#b02"></a></li><li class=""><a href="#b03"></a></li><li class=""><a href="#b04"></a></li><li class=""><a href="#b05"></a></li><li class=""><a href="#b06"></a></li><li><a href="#b07"></a></li><li><a href="#b08"></a></li><li><a href="#b09"></a></li></ul>'
+		    +'<img src="/img/concept/bar-down.png" class="bar-down" alt="">' 
+		  +'</div>').appendTo($(this.el));
+
+        var picBoxElem = $('<div id="main" class="concept"></div>').appendTo($(this.el))
+        $.each(pageData.data,function(i,value){
+          var str = '';
+          if(i%2!=0){ 
+             str += '<div class="box box2 clearfix" id="b0'+i+'">'
+          }else{ 
+            str += '<div class="box clearfix" id="b0'+i+'">'
+          }
+          str +='<div style="background-color: #fff; height: 296px; line-height: 296px; text-align: center;">'
+		        +'<img style="vertical-align: middle;" src="/img/00'+i+'.gif" alt=""><p></p>'
+		      +'</div>'
+		      +'<p class="next-btn"><a href="#b0'+i+'"><img src="/img/concept/next-btn.png" alt=""></a></p>'
+		    +'</div>';
+          $(str).appendTo(picBoxElem);
+          $('<p id="p01" style=" ">'
+              +'<a href="https://www.cncrowd.com:443/reg"><img class="oc" src="/img/start/btn01.png" alt=""></a>'
+          +'</p>').appendTo(picBoxElem);
+        });
 	}
 })
 /*我要众筹*/
@@ -333,7 +436,8 @@ app.views.product = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
-		console.log(this.data)
+		console.log(this.data);
+		app.fns.setSecondNav($(this.el));
 		var that = this;
 		$(this.el).empty();
 		$.each(this.data,function(i,n){
@@ -347,7 +451,7 @@ app.views.product = Backbone.View.extend({
 			})
 		})
 	}
-	})
+});
 /*众筹步聚*/
 app.views.procedure = Backbone.View.extend({
 	el:".middle",
@@ -356,7 +460,7 @@ app.views.procedure = Backbone.View.extend({
 		console.log(this.data)
 		$(this.el).html("仲筹步聚")
 	}
-	})
+})
 /*常见问题*/
 app.views.FAQS = Backbone.View.extend({
 	el:".middle",

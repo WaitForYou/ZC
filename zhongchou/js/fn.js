@@ -49,3 +49,13 @@ app.fns.stopBubble=function(e){
   window.event.cancelBubble = true;
   };
   };
+/************************************************************************************/
+app.fns.setSecondNav = function(obj,text){ 
+		$('<div class="topic-path">'
+			+'<div class="inner clearfix">'
+			+'<div class="topics-text">'
+			 +'<p><a href="/" id="topOfPage">首页</a> &gt; '+text+'</p>'
+			+'</div>'
+			+'</div>'
+		+'</div>').appendTo(obj);
+}
