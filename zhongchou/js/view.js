@@ -272,7 +272,42 @@ app.views.index = Backbone.View.extend({
 	      +'</div>').appendTo($(".project_area"));
 
         });
-		}//render
+        //----start人物介绍
+        // console.log(this.data.promotion) alert();
+         var peopleData = this.data.promotion.visualPic;
+         var peoplesElem = $('<h1>'+peopleData.title+'</h1>'
+		  +'<h2><span>'+peopleData.dsc_1+'</span>,<br><span>'+peopleData.dsc+'</span></h2>').appendTo($('#smp'));
+         var peoplesElem = $('<ul></ul>');
+         $.each(peopleData.data,function(i,value){
+               var singlePeopleElem = $('<li>'
+		         +'<span><img src="'+value.image+'"></span>'
+		         +'<h4>'+value.job+'</h4>'
+		         +'<h5>'+value.name+'</h5>'
+		         +'<h6>'+value.dsc+'</h6>'
+		      +'</li>').appendTo(peoplesElem);
+              singlePeopleElem.data("data",value);
+              if(value.zhiJi){ 
+                 $('<i style="font-style:normal;">'+value.zhiJi+'</i>').appendTo(singlePeopleElem.find('h4'));
+              }
+         });//eac.appendTo()h peopleData
+         peoplesElem.appendTo($('#smp'));
+         //收益介绍
+         var earnings = app.objs.configData.earnings;
+
+         var earningsElem = $('<div class="slide_pic">'
+	     +'<h1>'+earnings.titleText+'</h1>'
+	     +'<h2>'+earnings.dsc+'</h2>  '
+	      
+	       +'<h3>'+earnings.earningsRateTitle+'<span>'+earnings.earningsRate+'</span></h3>'
+	       +'<h6 class="spear">'+earnings.title_2+'</h6>'
+	       +'<ul>'
+	           +'<li><img src="'+earnings.image+'"></li>' 
+	       +'</ul>'
+	    +'</div>').appendTo($(".earnings"));
+        $.each(earnings.steps,function(i,value){
+         earningsElem.find(".spear").before('<h4 class="sp_'+i+'">'+value+'</h4>');
+        });
+		}//rendert
 })
 /*登录*/
 app.views.login = Backbone.View.extend({
