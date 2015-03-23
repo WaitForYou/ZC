@@ -66,7 +66,8 @@ app.apis.register=function(data,fn,err){
 		"record":"本科",/*学历*/
 		"university":"华农",/*毕业院校*/
 		"job":"这个职位",/*职位*/
-		"company":"公司"/*公司*/
+		"company":"公司",/*公司*/
+		"password":"123456"/*密码*/
 	}
 	var registerReturn = {code:1}
 	if(registerReturn && registerReturn.code){
