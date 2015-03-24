@@ -207,7 +207,7 @@ app.apis.removeProduct=function(data,fn,err){
 /**********************************************************************/
 /*获取客户*/
 app.apis.getClient=function(data,fn,err){
-	var data = null/*不用传*/
+	var data = app.objs.clientTime/*更新时间*/
 	var clientReturn={
 		code:1,
 		time:10086,
@@ -296,7 +296,7 @@ app.apis.removeClient=function(data,fn,err){
 /************************************************************************/
 /*获取管理员*/
 app.apis.getAdmin=function(data,fn,err){
-	var data = null/*不用传*/
+	var data = app.objs.adminTime/*更新时间*/
 	var adminReturn={
 					code:1,
 					time:10086,
@@ -377,7 +377,7 @@ app.apis.removeAdmin=function(data,fn,err){
 /**************************************************************************/
 /*获取公告*/
 app.apis.getannouncement=function(data,fn,err){
-	var data=null/*不用传*/
+	var data=app.objs.announcementTime/*更新时间*/
 	var announcementReturn={
 		code:1,
 		time:10086,
@@ -521,7 +521,7 @@ app.apis.removerecruit=function(data,fn,err){
 /******************************************************************************/
 /*获取企业资料*/
 app.apis.getcompany=function(data,fn,err){
-	var data = null;/*不传*/
+	var data = app.objs.companyTime;/*更新时间*/
 	var companyReturn = {
 						code : 1,
 						time : 10086,
@@ -655,6 +655,11 @@ app.apis.getpromotion=function(data,fn,err){
 					}
 					],
 			"procedure":[
+						{id:"013",
+						name:"大图",
+						dsc:"不说"
+						data:[{"id":"021","name":"","image":"http://","dsc":"","job":"",group:"013"}]
+								},
 						{id:"006",
 						name:"众筹步聚",
 						dsc:"不说",
@@ -669,6 +674,7 @@ app.apis.getpromotion=function(data,fn,err){
 						}
 						],
 			"FAQS":[
+
 					{id:"007",
 					name:"常见问题",
 					dsc:"不说",
@@ -893,6 +899,8 @@ app.apis.config = function(data,fn,err){
            title_2:"众筹",
            image:"http://"
          },
+         button:[[{id:"login",name:"登陆"},{id:"register",name:"注册"}],[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}],[{id:"out",name:"退出"}]],
+         nav:[{id:"mode",name:"众筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}]
      }
 	 fn(data);
 }
