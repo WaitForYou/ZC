@@ -657,7 +657,7 @@ app.apis.getpromotion=function(data,fn,err){
 			"procedure":[
 						{id:"013",
 						name:"大图",
-						dsc:"不说"
+						dsc:"不说",
 						data:[{"id":"021","name":"","image":"http://","dsc":"","job":"",group:"013"}]
 								},
 						{id:"006",
