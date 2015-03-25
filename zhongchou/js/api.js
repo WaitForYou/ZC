@@ -94,7 +94,7 @@ app.apis.resetKey=function(data,fn,err){
 /**********************************************************************/
 /*获取商品*/
 app.apis.getProduct=function(data,fn,err){
-	var data = null/*不用传*/
+	var data = app.objs.productTime/*更新时间*/
 	var productReturn = {
 		code : 1,
 		time : 10086,
@@ -448,7 +448,7 @@ app.apis.removeannouncement=function(data,fn,err){
 /******************************************************************************/
 /*获取招聘*/
 app.apis.getrecruit=function(data,fn,err){
-	var data = null/*不用传*/
+	var data = app.objs.recruitTime/*更新时间*/
 	var recruitReturn = {
 						code:1,
 						time:10086,
@@ -592,7 +592,7 @@ app.apis.removecompany=function(data,fn,err){
 /********************************************************************/
 /*获取宣传*/
 app.apis.getpromotion=function(data,fn,err){
-	var data=null/*不用传*/
+	var data=app.objs.promotionTime/*更新时间*/
 	var promotionReturn = {
 		code : 1,
 		time : 10086,
@@ -792,7 +792,7 @@ app.apis.redPacketDetail=function(data,fn,err){
 	}
 /*获取所有红包*/
 app.apis.getRedPacket=function(data,fn,err){
-	var data = null/*不传*/
+	var data = app.objs.redPacketTime/*更新时间*/
 	var getReturn = {
 		code:1,
 		data:[
