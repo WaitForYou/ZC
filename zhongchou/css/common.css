@@ -60,6 +60,9 @@ a {
 	border: solid 1px #cccccc;
 	background-color: #efefef;
 }
+.table-std th.little{
+	width: 144px;
+}
 .table-std td {
 	padding: 20px;
 	border: solid 1px #cccccc;

@@ -1,0 +1,28 @@
+.qu_answer_top { width:100%; height:390px; background:url(../img/faq/qu_answer.jpg) repeat-x;}
+.qu_answer_toppic { width:980px; height:390px; margin:0 auto; background:url(../img/faq/qu_answer_pic.png) center 40px no-repeat;  position:relative;}
+.qu_answer_video { position:absolute; top:57px; left:61px;}
+.qu_answer_toppic h1 { position:absolute; top:105px; left:480px; font-size:46px; color:#df0000; height: 50px; line-height: 50px;}
+.qu_answer_toppic h4 { position:absolute; top:185px; left:502px; height:30px; line-height:30px; font-size:24px; color:#fff; letter-spacing:4px}
+
+.qu_answer_s1 { width:100%; height:390px; background:#fff;}
+.qu_answer_s2 { width:100%; height:390px; background:#efefef;}
+
+.qa_contain { width:990px; height:390px; margin:0 auto;}
+.qu_list { display:block; float:left; width:250px; height:310px; padding:40px;}
+.qu_list h4 { display:block; width:250px; height:auto; min-height:50px; font-size:20px; color:#df0000;}
+.qu_list h4 i {display:block; float:left; width:34px; height:34px; line-height:33px;font-style: normal; background:#df0000; border-radius:30px; color:#fff; text-align:center; margin-top:8px; margin-right:10px;}
+.qu_list h4 span {display:block; float:left; width:206px; padding:10px 0; line-height:26px;}
+.qu_list p { font-size:14px; color:#444; line-height:26px;}
+.qu_list a,.qu_list a:visited { display:block; float:left; width:140px; height:36px; line-height:36px; text-align:center;background:#888; border-radius:3px; color:#fff; margin-top:15px; font-size:14px;}
+.qu_list a:hover { background:#666;}
+
+#submit_problem { width: 980px;  margin: 50px auto;}
+#submit_problem h1 { background:url(../img/faq/submit_problem_icon.png) center no-repeat; width: 100px; height: 100px; margin:0 auto; padding-bottom: 20px; }
+#submit_problem h2 { height: 60px; line-height: 60px; font-size: 30px; color: #f06467; text-align: center;}
+#submit_problem h3 { height: 50px; line-height: 30px; font-size: 18px; color: #888; text-align: center; }
+#submit_problem .sub_problem_detail { width:620px; height:180px; border-radius:5px; background: #e3e3e3; margin: 0 auto; padding:20px; }
+#submit_problem .sub_problem_detail input { display: inline-block; width: 260px; height: 30px; line-height: 30px; color: #888;padding: 5px 10px; font-size: 14px; }
+#submit_problem .sub_problem_detail span { display: inline-block; width:48px; font-size: 16px; color: #888; text-align: center;}
+#submit_problem .sub_problem_detail textarea {width:598px; height:100px; padding: 10px; font-size: 14px; line-height: 18px;color: #888;resize: none;}
+.submit_problem_btn { margin-top: 20px;}
+.submit_problem_btn a,.submit_problem_btn a:visited { display: block; width: 200px; height: 40px; border-radius: 5px; background: #f06467; margin: 0 auto; text-align: center; line-height: 40px; font-size: 16px; color: #fff;}
