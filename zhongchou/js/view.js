@@ -387,12 +387,131 @@ app.views.index = Backbone.View.extend({
 /*登录*/
 app.views.login = Backbone.View.extend({
 	el:".middle",
-	render:function(){ }
-	})
+	render:function(){
+	$(this.el).empty(); 
+      var loginElem=$('<div class="mainPanel calHeight"> '
+    +' <div class="main"> '
+     +'<div class="login_title">'
+         +'<h1>欢迎登录</h1>'
+         +'<h2>使用您的用户名、手机号码、绑定邮箱都可登录</h2>'
+         +'<h4><span></span></h4>'
+     +'</div>'
+      +'<form action="user/login" method="post" id="loginForm" name="loginForm">'
+        +'<div class="login_input_area"> '
+       +'<ul class="loginUl">'
+        +' <li> '
+            +'<span class="login_span"> '
+              +'<label class="usernameIcon"></label> <input type="text" placeholder="用户名/已验证手机/已绑定邮箱" id="userName" name="userName"> '
+            +'</span> '
+         +' </li> '
+         +' <li> '
+           +' <span class="login_span"> '
+             +' <label class="passwordIcon"></label> <input type="password" placeholder="输入密码" value="" id="userPass" name="password" class="vn"> '
+            +'</span> '
+         +' </li> '
+         +' <li>'
+            +'<span class="btn_span mt5 ">'
+              +'<input type="text" placeholder="输入验证码" id="verificationCode" name="imgValidCode" onkeydown="keyDown(event)">'
+            +'</span>' 
+            +'<span class="verificationCode" style="width:100px;height:41px;margin-top:13px;"><img id="validImg" onclick="javascript:refreshImgValidCode();" src="/imageServlet"><input type="hidden" id="imgCode" value="366f2"></span> '
+            +'<a href="#" onclick="refreshImgValidCode();" type="button" class="codeRefresh" style="margin-top:13px;"></a>'
+          +'</li> '
+          +'<li class="h30 mt100"> '
+            +'<span class="chx_span mt0 w304"> '
+            +'<span class="agreementChxChecked agreementChxNoCheck" style=" display:none; float:left;">'
+              +'<input type="checkbox" name="agreement" id="agreement" value="" class="agreementChx">'
+            +'</span> '
+            +'<label style="display:none; float:left; margin-top:5px;">记住用户名</label> '
+            +'<a href="" id="register" class="fbtext fr">立即注册</a> '
+            +'<span class="fr">&nbsp;&nbsp;|&nbsp;&nbsp;</span>'
+            +'<a href="findPass" class="fr mr5">忘记密码</a>  '
+           +' </span> '
+         +' </li> '
+          +'<li class="h50">' 
+          +'  <input type="button" value="登　录" class="btnLogin " onclick="validLoginForm()"> '
+         +' </li>'
+      +' </ul> '
+      +' </div>'
+      +'</form>'
+     +'</div> '
+    +'</div>').appendTo($(this.el));
+    loginElem.find("#userName").blur(function(){
+       app.apis.checkUser($(this).val(),function(data){},function(data){});
+    });
+	loginElem.find("#register").unbind("click").bind("click",function(){
+	    app.objs.route.navigate("?page=register",{trigger: true});
+	});
+	
+  }
+})
 /*注册*/
 app.views.register = Backbone.View.extend({
 	el:".middle",
-	render:function(){}
+	render:function(){
+		$(this.el).empty();
+		var registerElem=$('<div class="mainPanel calHeight">'
+		    +'<div class="main reg">'
+		      +'<div class="login_title">'
+		        +'<h1>欢迎注册</h1>'
+		        +'<h2>设置您的用户名及密码，绑定手机号码即可注册</h2>'
+		      +'</div>'
+		       
+		      +'<div class="fr" style="position:absolute; top:30px; right:30px;"> 已有账号？ <a href="" id="loginBtn" class="fbtext" style=""> 立即登录 </a> </div> '
+		      +'<form action="/user/reg" method="post" id="regForm" name="regForm"> '
+		         +' <div class="reg_input_area">  '
+		             +'<ul class="regUl"> '
+		                +'<li> '
+		                   +'<div class="in_title">用户名/邮箱：<input type="hidden" name=""> </div>'
+		                   +'<span class="in_span"><label class="usernameIcon"> </label> <input type="text" placeholder="输入用户名/邮箱" id="userName" name="userName" onclick="txtFocus(this)" onblur="txtBlur(this);" onkeypress=""> </span>'
+		                   +'<span class="in_notice"></span>'
+		               +' </li> '
+		                +'<li>'
+		                   +' <div class="in_title">登陆密码：</div>'
+		                  +' <span class="in_span"> <label class="passwordIcon"> </label> <input type="password" placeholder="输入密码" id="userPass" name="password" onclick="passFocus(this)" onblur="passBlur(this)"> </span>'
+		                   +'<span class="in_notice"> </span>'
+		               +' </li> '
+		                +'<li> '
+		                +'<div class="in_title">重复密码：</div> '
+		                   +'<span class="in_span"> <label class="repeatPassIcon"> </label> <input type="password" placeholder="再次输入密码" id="checkPass" name="passwordConfirm" onclick="passFocus(this)" onblur="passBlur(this)"> </span>'
+		                   +'<span class="in_notice"> </span>'
+		                +'</li>' 
+		                +'<li> '
+		                   +'<div class="in_title">手机号码：</div>'
+		                   +'<span class="in_span"> <label class="emailIcon"> </label> <input type="text" placeholder="输入手机号码" id="phoneNumber" name="phoneNumber" onclick="phoneCheck()" onblur="phoneCheck()"> </span>'
+		                   +'<span id="phoneNumberNotice" class="in_notice"> </span>'
+		                +'</li> '
+		                +'<li> '
+		        			+'<div class="in_title">短信验证码:</div> '
+		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode" onclick="msgValidCodeCheck()" onblur="msgValidCodeCheck()"> </span> '
+		                    +'<a id="btnSendmsg" onclick="msgSendCheck()" style="margin-left:15px;">获取验证码</a> '
+		                    +'<span id="msgValidNotice" class="in_notice"> </span> '
+		         		+'</li>'
+		               
+		                  
+		                +'<li class="item40" style=" position:relative; margin-top:10px;">'
+		                   +'<span class="chx_span ml86" id="jieru" style=" margin-top:0; margin-left:120px;">'
+		                   +'<span class="agreementChxChecked agreementChxNoCheck"> '
+		                        +'<input type="checkbox" name="" id="agreement" value="" class="agreementChx" onclick="txtFocus(this)"> '
+		                   +'</span>'
+		                       +'<label class="f14"> 我同意 <a target="blank" href="/assets/service_prot.pdf" class="fbtext"> 《服务协议》 </a> </label>'
+		                   +'</span>'
+		                   +'<span id="agreeMentNotice" class="in_notice mt" style=" margin-top:-20px; margin-left:-140px;"></span>'
+		                +'</li>'
+		                 +'<li class="item"><input type="button" value="注　册" class="btnReg ml86" onclick="validRegForm()"></li> '
+		            +'</ul> '
+		             +'<div class="clear"></div> '
+		          +'</div>'
+		     +' </form>'
+		    +'</div>'
+		  +'</div>').appendTo($(this.el));
+$("#agreement").click(function(){
+   $(this).parents().toggleClass("agreementChxNoCheck");
+});
+	registerElem.find("#loginBtn").unbind("click").bind("click",function(){
+	    app.objs.route.navigate("?page=login",{trigger: true});
+	})
+
+	}
 	})
 /*众筹模式*/
 app.views.mode = Backbone.View.extend({
@@ -400,10 +519,10 @@ app.views.mode = Backbone.View.extend({
 	data:{},
 	render:function(){
 		$(this.el).empty();
+		app.fns.setSecondNav($(this.el),"众筹模式");
 		var pageData = this.data[0];
-		console.log("djfkdjk");
 		console.log(pageData);
-        app.fns.setSecondNav($(this.el),pageData.title);
+
 
         $('<div id="mark-navi">'
 		    +'<img src="/img/concept/bar-up.png" class="bar-up" alt="">'
@@ -436,20 +555,70 @@ app.views.product = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
+				$(this.el).empty();
 		console.log(this.data);
-		app.fns.setSecondNav($(this.el));
+		app.fns.setSecondNav($(this.el),"我要众筹");
 		var that = this;
-		$(this.el).empty();
+
+		var navElem = $('<div id="product_tab" class="product">'
+		    +'<ul id="tab" class="clearfix">'
+		      +'<li id="products1"  v="end_product" class="hover select">火爆众筹中</li>'
+		      +'<li id="products2"  v="noStart_product" class="">即将开始众筹</li>'
+		      +'<li id="products3"  v="on_product" class="">众筹结束</li>'
+		    +'</ul>'
+		    +'<div id="con_products_1" class="products-lst" style="display: none;">'
+		    +'<ul>').appendTo($(that.el));
+		navElem.find("li").unbind("click").bind("click",function(){
+          $(this).siblings().removeClass('hover select');
+          $(this).addClass('hover select');
+          $(".products-lst").hide();
+          $("#"+$(this).attr("v")).show();
+		});
+		$('<div id="end_product" class="products-lst"></div>'
+         +'<div id="noStart_product" class="products-lst" style="display: none;"></div>'
+         +'<div id="on_product" class="products-lst" style="display: none;"></div>').appendTo($(that.el));
 		$.each(this.data,function(i,n){
-			var newProduct=$('<div>商品'+i+'</div>').appendTo($(that.el));
-			newProduct.data("product",n)
+			$.each(n,function(index,value){
+			     var newProduct = $('<div class="project_intro">'
+				          +'<div class="left">'
+				             +'<span class="intro_pic"><a href="/items/30093164">'
+			        		  +'<img src="/img/top/project_03a.jpg" width="475" height="255">'
+					         +'</a></span>'
+				             +'<span class="timer">'
+				             +'<div id="30093164" class="remaining-day">火爆众筹中 ……</div></span>'
+				          +'</div>'
+				          +'<div class="right">'
+				            +'<div class="r01">'
+			                       +'<h4>目标金额：<span>￥'+value.payed+'</span></h4>'
+			                       +'<a class="a" role="button" data-toggle="modal" onclick="">认&nbsp;&nbsp;&nbsp;&nbsp;购</a>'
+			                   +'</div>'
+			                   +'<div class="clear"></div>'
+			                   +'<div class="title01">'
+			                       +'<h2><a href="/items/30093164">'+value.title+'-'+value.subhead+'</a></h2>'
+			                       +'<h4>年化收益率高达'+value.yearReturn+'以上</h4>'
+			                   +'</div>'
+			                   +'<div class="price">'
+			                       +'<span class="price_01"><h4>当前市值</h4><h5>￥'+value.costPrice+'</h5></span>'
+			                       +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
+			                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
+			                  +' </div>'
+			                   +'<h5 class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;"></b></h5>'
+			                   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
+				         +'</div>'
+				      +'</div>').appendTo($("#"+i+"_product"));
+				
+
+			//var newProduct=$('<div>商品'+i+'</div>').appendTo($(that.el));
+			newProduct.data("product",value);
+
 			newProduct.unbind("click").bind("click",function(){
 				app.objs.productDetailV.data = $(this).data("product");
 				app.objs.route.navigate("?page=productDetail",{trigger: true});
 
 				app.apis.buy({},this.render(),function(){})
-			})
-		})
+			});
+		});
+	})
 	}
 });
 /*众筹步聚*/
@@ -457,10 +626,11 @@ app.views.procedure = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
+
 		$(this.el).empty();
 		console.log(this.data);
 		var pageData = this.data[0];
-		app.fns.setSecondNav($(this.el),pageData.title);
+		app.fns.setSecondNav($(this.el),"众筹步聚");
 		    var newProcedure = $('<div class="cnc_step">'
 			   +'<div class="step_s1">'
 					+'<img src="'+pageData.data[0].image+'">' 
@@ -475,7 +645,7 @@ app.views.procedure = Backbone.View.extend({
 		        +'<a href="https://www.cncrowd.com:443/declare"><img class="oc" src="/img/start/btn_sm.png" alt=""></a>'
 		      +'</p>'
 			+'</div>').appendTo($(this.el));
-		$.each(pageData.data,function(index,value){ 
+		$.each(this.data[1].data,function(index,value){ 
            if(index>0){ 
              $('<li><img src="'+value.image+'"></li>').appendTo(newProcedure.find("ul"));
            }
@@ -487,7 +657,32 @@ app.views.FAQS = Backbone.View.extend({
 	el:".middle",
 	render:function(){
 		console.log(this.data)
-		$(this.el).html("常见问题")
+		$(this.el).empty();
+		app.fns.setSecondNav($(this.el),"常见问题");
+
+		var qu_answer_s1=$('<div class="qu_answer_s1">'
+		    +'<div class="qa_contain">'
+		    +'</div>'
+		+'</div>').appendTo($(this.el));
+	    var qu_answer_s2=$('<div class="qu_answer_s2">'
+			+'<div class="qa_contain">'
+		    +'</div>'
+		+'</div>').appendTo($(this.el));
+
+		$.each(this.data[0].data,function(index,value){ 
+		  var qu_list = $(' <div class="qu_list">'
+            +'<h4><i>'+(index+1)+'</i><span>'+value.name+'</span></h4>'
+            +'<p>'+value.dsc+'</p>'
+          +'</div>');
+          qu_list.data("data",value);
+           if(index<3){ 
+             qu_list.appendTo(qu_answer_s1.find('.qa_contain'));
+           }else{
+           	 qu_list.appendTo(qu_answer_s2.find('.qa_contain'));
+           }
+		});
+
+
 	}
 })
 /*关于我们*/
@@ -495,17 +690,169 @@ app.views.about = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
+		var that=this;
 		console.log(this.data)
 		var that = this
 		$(this.el).empty();
-		$.each(this.data.announcement,function(i,n){
-			var newAn=$('<div>公告'+i+'</div>').appendTo($(that.el));
-			newAn.data("an",n);
-			newAn.unbind("click").bind("click",function(){
-				app.objs.announcementDetailV.data = $(this).data("an");
-				app.objs.route.navigate("?page=announcementDetail",{trigger: true});
-			})
-		})
+		var navElem = $('<div id="company_tab" class="company">'
+		+'<ul id="tab" class="clearfix">'
+			+'<li id="company1"  v="company_1" class="hover select">团队介绍</li>'
+			+'<li id="company5"   v="company_5" class="">公司信息</li>'
+			+'<li id="company2"  v="company_2" class="">经营理念</li>'
+			+'<li id="company3"  v="company_3" class="">企业公告</li>'
+			+'<li id="company4" v="company_4" cclass="">招贤纳士</li>'
+		+'</ul>'
+	+'</div>'
+	+'<div id="con_company_1" class="team_intro tabCompany" style="display: block;"></div>').appendTo($(this.el));
+	$('<div id="con_company_5" class="content tabCompany" style="display: none;"></div>'
+		+'<div id="con_company_2" class="content tabCompany" style="display: none;"></div>'
+		+'<div id="con_company_3" class="content tabCompany" style="display: none;"></div>'
+		+'<div id="con_company_4" class="content tabCompany" style="display: none;"></div>').appendTo($(this.el));
+	navElem.find("li").unbind("click").bind("click",function(){
+          $(this).siblings().removeClass('hover select');
+          $(this).addClass('hover select');
+          $(".tabCompany").hide();
+          $("#con_"+$(this).attr("v")).show();
+		});
+    $('<div class="team_introbox1"><img alt="" src="'+this.data.team[0].image+'"></div>').appendTo($("#con_company_1"));
+    $('<div class="team_introbox3"></div><div class="clear"></div>').appendTo($("#con_company_1"));
+    $.each(this.data.team[1].data,function(index,value){ 
+   	 var fengxian_team = $('<div class="fengxian_team mr_40">'
+             +'<h2><img src="'+value.image+'"></h2>'
+             +'<h3>'+value.name+'</h3>'
+             +'<h4>'+value.job+'</h4>'
+             +'<p>'+value.dsc+'</p>'
+        +'</div>')
+     if((index!=0)&&(index%3==0)){
+     	fengxian_team.removeClass('mr_40');
+     }
+   	 fengxian_team.appendTo($(".team_introbox3"));
+      fengxian_team.data("data",value);
+   });
+   var team_introbox3 = $('<div class="team_introbox3"></div>').after('.tab_3');
+   /********************/
+   $.each(this.data.team[2].data,function(index,value){ 
+      var elem = $('<div class="team_introbox2">'
+      	 +'<h1>'+that.data.team[2].name+'</h1>'
+        +'<div class="leader_intro2">'
+	    +'<h2>'+value.name+'<span>'+value.job+'</span></h2>'
+	    +'<p>'+value.dsc+'</p>'
+	+'<img alt="" src="'+value.image+'">'
+        +'</div>'
+    +'</div>').appendTo($("#con_company_1"));
+      elem.data("data",value);
+   });
+   $.each(this.data.team[3].data,function(index,value){ 
+      var elem = $('<div class="team_introbox2">'
+      	 +'<h1>'+that.data.team[3].name+'</h1>'
+        +'<div class="leader_intro2">'
+	    +'<h2>'+value.name+'<span>'+value.job+'</span></h2>'
+	    +'<p>'+value.dsc+'</p>'
+	+'<img alt="" src="'+value.image+'">'
+        +'</div>'
+    +'</div>').appendTo($("#con_company_1"));
+      elem.data("data",value);
+   });
+   var tableElem=$('<div class="conts cf seminar">'
+		    +'<div class="contMain">'
+		      +'<section class="wrap mgn-btm">'
+		        +'<table class="table-std">'
+		          +'<tbody>'
+		              +'</tbody>'
+			        +'</table>'
+			      +'</section>'
+			    +'</div>'
+			  +'</div>').appendTo($("#con_company_5"));
+   $.each(this.data.company,function(index,value){ 
+      var elem = $('<tr><th class="little"><span>'+value.title+'</span></th><td>'+value.message+'</td></tr>').appendTo(tableElem.find("tbody"));
+      elem.data("data",value);
+   });
+    
+   /****经营理念*****/
+   $('<div class="conts cf seminar">'
+			+'<div class="contMain">'
+				+'<div>'
+					+'<div class="wrap">'
+						+'<br>'
+						+'<p class="box text-center">'
+							+'<img alt="" src="'+this.data.idea[0].data[0].image+'">'
+						+'</p>'
+					+'</div>'
+					+'<div class="wrap mgn-btm">'
+						+'<p class="business_detail">'+this.data.idea[0].data[0].title+'</p>'
+						+'<p class="business_detail">'+this.data.idea[0].data[0].title_0+'</p>'
+						+'<br>'
+						+'<p class="business_detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+this.data.idea[0].data[0].dsc+'</p>'
+						+'<br>'
+						+'<p class="text text-right">'+this.data.idea[0].data[0].company+'</p>'
+						+'<p class="text text-right">'+this.data.idea[0].data[0].time+'</p>'
+					+'</div>'
+				+'</div>'
+			+'</div>'
+		+'</div>').appendTo($("#con_company_2"));
+   /****企业公告*****/
+   var gongGaoElem=$(' <div class="conts cf ir">'
+	+'<div class="wrap mgn-btm">'
+		+'<section class="box">'
+			+'<div class="title-box">'
+				+'<h1 class="title">公司新闻</h1>'
+				+'<p class="eng">Hot News</p>'
+			+'</div>'
+			+'<ul>'
+			+'</ul>'
+		+'</section>'
+	+'</div>'
++'</div>').appendTo($("#con_company_3"));
+ $.each(this.data.announcement,function(index,value){ 
+  var elem=$('<li><p><strong>'+value.start+' &nbsp; </strong><a href="">'+value.message+'</a></p></li>').appendTo(gongGaoElem.find("ul"));
+	// newAn.data("an",n);
+	elem.data("data",value);
+	elem.find("a").unbind("click").bind("click",function(){
+		app.objs.announcementDetailV.data = $(this).data("data");
+		app.objs.route.navigate("?page=announcementDetail",{trigger: true});
+	});
+  }); 
+   var tableElem=$('<div class="conts cf seminar">'
+		    +'<div class="contMain">'
+		      +'<section class="wrap mgn-btm">'
+		        +'<table class="table-std">'
+		          +'<tbody>'
+		              +'</tbody>'
+			        +'</table>'
+			      +'</section>'
+			    +'</div>'
+			  +'</div>').appendTo($("#con_company_4"));
+   $.each(this.data.company,function(index,value){ 
+      var elem = $('<tr><th class="little"><span>'+value.title+'</span></th><td></td></tr>').appendTo(tableElem.find("tbody"));
+      elem.find("td").html(value.message);
+      elem.data("data",value);
+   });
+			// <div class="uc_pagnation" id="uc_pagnation">
+   //               <a href="javascript: gotoPage(1)">首页</a>                
+   //               <a href="javascript: gotoPage(1-1)" class="page-prev"></a>                                 
+   //               <a href="javascript: gotoPage(1+1)" class="page-next"></a>       
+   //               <a href="javascript: gotoPage(2)">尾页</a>
+   //               <span class="uc_gopage2">转到:
+   //               	<select onchange="gotoPage(this.value)" id="_pn">
+                 		            
+   //                        <option value="1">1</option>                   
+                                   
+   //                        <option value="2">2</option>                   
+                                               
+   //                 </select>
+   //              	页</span>
+   //          </div>
+   //          <input id="pageCount" type="hidden" value="2">
+   //          <input id="currentPage" type="hidden" value="1">
+
+		// $.each(this.data.announcement,function(i,n){
+		// 	var newAn=$('<div>公告'+i+'</div>').appendTo($(that.el));
+		// 	newAn.data("an",n);
+		// 	newAn.unbind("click").bind("click",function(){
+		// 		app.objs.announcementDetailV.data = $(this).data("an");
+		// 		app.objs.route.navigate("?page=announcementDetail",{trigger: true});
+		// 	})
+		// })
 	}
 	})
 /*商品详情*/
