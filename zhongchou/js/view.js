@@ -202,16 +202,16 @@ app.views.index = Backbone.View.extend({
 		                +'<td id="marquePic1" valign="top">'
 		                    +'<table width="100%" height="494" border="0" cellpadding="0" cellspacing="0">'
 		                      +'<tbody><tr>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
 		                      +'</tr>'
 		                    +'</tbody></table>'    
 		                +'</td>'
 		                +'<td id="marquePic2" valign="top">'
 		                    +'<table width="100%" height="494" border="0" cellpadding="0" cellspacing="0">'
 		                      +'<tbody><tr>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/img/top/visual.png"></a></td>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
+		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
 		                      +'</tr>'
 		                    +'</tbody></table>  '  
 		                +'</td>'
@@ -294,17 +294,17 @@ app.views.index = Backbone.View.extend({
 		$.each(this.data.promotion.introduceVideo.data,function(i,n){
 			var newElem = $('<div class="video_style1 mg_r34">'
             +'<span class="vedette1 mobileCS" style="display: none;">'
-                  +'<video id="Html5Video" poster="/img/top/video_m5.png" controls="controls" width="302" height="170">'
-                      +'<source src="/flowplayer/v6.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">'
+                  +'<video id="Html5Video" poster="'+n.image+'" controls="controls" width="302" height="170">'
+                      +'<source src="'+n.video+'" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">'
                   +'</video>'
              +'</span>'
 	         +'<span class="computerCS" style="display: block;">'
 	         +'<a href="#videomodal1" data-toggle="modal" data-target="#video-modal1">'
-	         +'<img src="/img/top/video_m5.png">'
+	         +'<img src="'+n.image+'">'
 	         +'</a>'
 	         +'</span>'
-	         +'<h4>马博士课堂·三期</h4>'
-	         +'<h5>新年理财第一步 关注房地产众筹</h5>'
+	         +'<h4>'+n.name+'</h4>'
+	         +'<h5>'+n.dsc+'</h5>'
 	      +'</div>').appendTo($("#index_video").find(".video_area"));
             newElem.data("data",n);
 			newElem.unbind("click").bind("click",function(){
@@ -314,14 +314,15 @@ app.views.index = Backbone.View.extend({
 		});
         $(".video_style1").last().removeClass("mg_r34");
         //大图充值
-        var introducePicElem = $('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
+        var introducePicElem =$(".recharge_style03").css("background-image","url("+this.data.promotion.introducePic.data[0].image+")");
+         //$('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
 		introducePicElem.data("data",this.data.promotion.introducePic);
 		//产品
         $.each(this.data.product,function(i,value){
             var newElem = $('<div class="project_intro">'
 	          +'<div class="left">'
 	             +'<span class="intro_pic"><a href="/items/30093164">'
-        		  +'<img src="/img/top/project_03a.jpg" width="475" height="255">'
+        		  +'<img src="'+value.image[0]+'" width="475" height="255">'
 		         +'</a></span>'
 	             +'<span class="timer">'
 	             +'<div id="30093164" class="remaining-day">火爆众筹中 ……</div></span>'
@@ -349,9 +350,9 @@ app.views.index = Backbone.View.extend({
         });
         //----start人物介绍
         // console.log(this.data.promotion) alert();
-         var peopleData = this.data.promotion.visualPic;
-         var peoplesElem = $('<h1>'+peopleData.title+'</h1>'
-		  +'<h2><span>'+peopleData.dsc_1+'</span>,<br><span>'+peopleData.dsc+'</span></h2>').appendTo($('#smp'));
+         var peopleData = this.data.promotion.danger;
+         var peoplesElem = $('<h1>'+peopleData.name+'</h1>'
+		  +'<h2><span>'+peopleData["dsc_1"]+'</span>,<br><span>'+peopleData.dsc+'</span></h2>').appendTo($('#smp'));
          var peoplesElem = $('<ul></ul>');
          $.each(peopleData.data,function(i,value){
                var singlePeopleElem = $('<li>'
@@ -373,15 +374,15 @@ app.views.index = Backbone.View.extend({
 	     +'<h1>'+earnings.titleText+'</h1>'
 	     +'<h2>'+earnings.dsc+'</h2>  '
 	      
-	       +'<h3>'+earnings.earningsRateTitle+'<span>'+earnings.earningsRate+'</span></h3>'
-	       +'<h6 class="spear">'+earnings.title_2+'</h6>'
+	      // +'<h3>'+earnings.earningsRateTitle+'<span>'+earnings.earningsRate+'</span></h3>'
+	       //+'<h6 class="spear">'+earnings.title_2+'</h6>'
 	       +'<ul>'
 	           +'<li><img src="'+earnings.image+'"></li>' 
 	       +'</ul>'
 	    +'</div>').appendTo($(".earnings"));
-        $.each(earnings.steps,function(i,value){
-           earningsElem.find(".spear").before('<h4 class="sp_'+i+'">'+value+'</h4>');
-        });
+        //$.each(earnings.steps,function(i,value){
+          // earningsElem.find(".spear").before('<h4 class="sp_'+i+'">'+value+'</h4>');
+        //});
 		}//rendert
 })
 /*登录*/
@@ -539,14 +540,14 @@ app.views.mode = Backbone.View.extend({
             str += '<div class="box clearfix" id="b0'+i+'">'
           }
           str +='<div style="background-color: #fff; height: 296px; line-height: 296px; text-align: center;">'
-		        +'<img style="vertical-align: middle;" src="/img/00'+i+'.gif" alt=""><p></p>'
+		        +'<img style="vertical-align: middle;" src="'+value.image[0]+'" alt=""/><img style="vertical-align: middle;" src="'+value.image[1]+'" alt=""/><p></p>'
 		      +'</div>'
 		      +'<p class="next-btn"><a href="#b0'+i+'"><img src="/img/concept/next-btn.png" alt=""></a></p>'
 		    +'</div>';
           $(str).appendTo(picBoxElem);
-          $('<p id="p01" style=" ">'
-              +'<a href="https://www.cncrowd.com:443/reg"><img class="oc" src="/img/start/btn01.png" alt=""></a>'
-          +'</p>').appendTo(picBoxElem);
+        //  $('<p id="p01" style=" ">'
+        //      +'<a href="https://www.cncrowd.com:443/reg"><img class="oc" src="/img/start/btn01.png" alt=""></a>'
+        //  +'</p>').appendTo(picBoxElem);
         });
 	}
 })
@@ -582,7 +583,7 @@ app.views.product = Backbone.View.extend({
 			     var newProduct = $('<div class="project_intro">'
 				          +'<div class="left">'
 				             +'<span class="intro_pic"><a href="/items/30093164">'
-			        		  +'<img src="/img/top/project_03a.jpg" width="475" height="255">'
+			        		  +'<img src="'+value.image[0]+'" width="475" height="255">'
 					         +'</a></span>'
 				             +'<span class="timer">'
 				             +'<div id="30093164" class="remaining-day">火爆众筹中 ……</div></span>'
@@ -630,6 +631,7 @@ app.views.procedure = Backbone.View.extend({
 		$(this.el).empty();
 		console.log(this.data);
 		var pageData = this.data[0];
+
 		app.fns.setSecondNav($(this.el),"众筹步聚");
 		    var newProcedure = $('<div class="cnc_step">'
 			   +'<div class="step_s1">'
@@ -646,9 +648,9 @@ app.views.procedure = Backbone.View.extend({
 		      +'</p>'
 			+'</div>').appendTo($(this.el));
 		$.each(this.data[1].data,function(index,value){ 
-           if(index>0){ 
+          // if(index>0){ 
              $('<li><img src="'+value.image+'"></li>').appendTo(newProcedure.find("ul"));
-           }
+          // }
 		});
 	}
 })
@@ -714,7 +716,7 @@ app.views.about = Backbone.View.extend({
           $(".tabCompany").hide();
           $("#con_"+$(this).attr("v")).show();
 		});
-    $('<div class="team_introbox1"><img alt="" src="'+this.data.team[0].image+'"></div>').appendTo($("#con_company_1"));
+    $('<div class="team_introbox1"><img alt="" src="'+this.data.team[0].data[0].image+'"></div>').appendTo($("#con_company_1"));
     $('<div class="team_introbox3"></div><div class="clear"></div>').appendTo($("#con_company_1"));
     $.each(this.data.team[1].data,function(index,value){ 
    	 var fengxian_team = $('<div class="fengxian_team mr_40">'
