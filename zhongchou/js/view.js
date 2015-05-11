@@ -411,10 +411,12 @@ app.views.login = Backbone.View.extend({
          +' </li> '
          +' <li>'
             +'<span class="btn_span mt5 ">'
-              +'<input type="text" placeholder="输入验证码" id="verificationCode" name="imgValidCode" onkeydown="keyDown(event)">'
+              +'<input type="text" placeholder="输入验证码" id="code1" name="imgValidCode" onkeydown="keyDown(event)">'
             +'</span>' 
-            +'<span class="verificationCode" style="width:100px;height:41px;margin-top:13px;"><img id="validImg" onclick="javascript:refreshImgValidCode();" src="/imageServlet"><input type="hidden" id="imgCode" value="366f2"></span> '
-            +'<a href="#" onclick="refreshImgValidCode();" type="button" class="codeRefresh" style="margin-top:13px;"></a>'
+            +'<div class="verificationCode" id="vCode1" style="width:100px;height:41px;margin-top:13px;">'
+              // +'<img id="validImg" onclick="javascript:refreshImgValidCode();" src="/imageServlet"><input type="hidden" id="imgCode" value="366f2">'
+            +'</div> '
+            +'<span href="" onClick="javascript:void(0)" id="refreshBtn" type="button" class="codeRefresh" style="margin-top:13px;"></span>'
           +'</li> '
           +'<li class="h30 mt100"> '
             +'<span class="chx_span mt0 w304"> '
@@ -441,8 +443,16 @@ app.views.login = Backbone.View.extend({
 	loginElem.find("#register").unbind("click").bind("click",function(){
 	    app.objs.route.navigate("?page=register",{trigger: true});
 	});
-	
-  }
+	/**验证码***/
+
+    // document.getElementById("btn1").addEventListener("click", function () {
+    //     alert(code1.verify(document.getElementById("code1").value));
+    // }, false);
+	//登录按钮
+	var data = {"userName":loginElem.find("#userName").val(),/*登录名/手机/邮箱*/
+				"passWord":loginElem.find("#userPass").val()}/*密码*/
+	app.apis.login(data,function(data){},function(error){});
+}
 })
 /*注册*/
 app.views.register = Backbone.View.extend({
