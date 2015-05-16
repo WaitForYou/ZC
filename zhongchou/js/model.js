@@ -60,7 +60,8 @@ app.models.product=Backbone.Model.extend({
 		"buildTime":0,/*建造时间*/
 		"rightType":"",/*产权类型*/
 		"haveLease":"",/*有否租约*/
-		"yearReturn":""/*年收益率*/
+		"yearReturn":"",/*年收益率*/
+		"more":0/*增值*/
 		}
 	});
 /*公告/招聘/企业信息*/
@@ -94,5 +95,18 @@ app.models.redPacket=Backbone.Model.extend({
 		"type":0,/*类型*/
 		"strat":0,/*发放日期*/
 		"end":0/*消费日期*/
+		}
+	});
+/*订单*/
+app.models.deal=Backbone.Model.extend({
+	defaults:{
+		"id":"",
+		"productId":"",
+		"userId":"",
+		"startTime":0,
+		"endTime":0,
+		"buyPrice":0,
+		"sellPrice":0,
+		"count":0
 		}
 	});

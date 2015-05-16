@@ -22,3 +22,7 @@ app.collections.imageAndWord = Backbone.Collection.extend({
 app.collections.redPacket = Backbone.Collection.extend({
 	model:app.models.redPacket
 	})
+/*订单*/
+app.collections.deal = Backbone.Collection.extend({
+	model:app.models.deal
+	})

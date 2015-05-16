@@ -7,13 +7,13 @@ app.objs.uploadOk = [];
 	/*用户信息*/
 	var userMessage=null;
 	/*商品信息*/
-	var product = null;
+	var product = new app.collections.product();
 	/*客户列表*/
 	var client = null;
 	/*管理员列表*/
 	var admin = null;
 	/*公告列表*/
-	var announcement = null;
+	var announcement = new app.collections.message();
 	/*招聘列表*/
 	var recruit = null;
 	/*企业信息列表*/
@@ -22,6 +22,8 @@ app.objs.uploadOk = [];
 	var promotion = null;
 	/*红包列表*/
 	var redPacket = null;
+	/*交易信息*/
+	var deal = null;
 /***************************************************************************/	
 objs.user={}
 	objs.user.get = function(){
@@ -30,6 +32,16 @@ objs.user={}
 	objs.user.set = function(data){
 		if(data){
 			userMessage=data
+			}
+		}
+/***************************************************************************/	
+objs.deal={}
+	objs.deal.get = function(){
+		return	deal
+		}
+	objs.deal.set = function(data){
+		if(data){
+			deal=data
 			}
 		}
 	
@@ -122,6 +134,7 @@ app.objs.recruitTime = 0;
 app.objs.companyTime = 0;
 app.objs.promotionTime = 0;
 app.objs.redPacketTime = 0;
+app.objs.dealTime=0;
 /****************************************************************************************/
 
 app.objs.headV = new app.views.head();

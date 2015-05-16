@@ -600,7 +600,6 @@ app.routers=Backbone.Router.extend({
 		"*action":"changePage"
     },
 	"changePage":function(){
-
 		app.apis.config(null,function(data){
 			app.objs.configData=data;
 			var get=$_GET();

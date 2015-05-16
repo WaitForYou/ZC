@@ -34,15 +34,15 @@ app.views.head = Backbone.View.extend({
 			var page=["login","register","mode","product","procedure","FAQS","about"]
 			$.each(page,function(i,n){
 				$("#"+n).unbind("click").bind("click",function(){
-				    app.objs.route.navigate("?page="+n,{trigger: true});
+				    app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n,{trigger: true});
 				})
 			})
 			$("#zone").unbind("click").bind("click",function(){
 				if(app.obs.user.get().type==1){
-					app.objs.route.navigate("?page=account",{trigger: true});
+					app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
 					}
 				if(app.obs.user.get().type==2){
-					app.objs.route.navigate("?page=account",{trigger: true});
+					app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
 					}
 				})
 			$("#out").unbind("click").bind("click",function(){
@@ -64,7 +64,7 @@ app.views.head = Backbone.View.extend({
 				app.objs.companyTime = 0;
 				app.objs.promotionTime = 0;
 				app.objs.redPacketTime = 0;
-				app.objs.route.navigate("?page=index",{trigger: true});
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=index",{trigger: true});
 				})
 		}
 	})
@@ -133,7 +133,7 @@ app.views.foot = Backbone.View.extend({
 		//$(this.el).find("h3").html(nav)
 		$.each(this.nav,function(i,n){
 			$("."+n.id).unbind("click").bind("click",function(){
-				app.objs.route.navigate("?page="+n.id,{trigger: true});
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n.id,{trigger: true});
 			});
 		});
 		}
@@ -183,7 +183,7 @@ app.views.middle = Backbone.View.extend({
 		$(this.el).html(this.template[this.type]);
 		$.each(this.page,function(i,n){
 			$("#"+n).unbind("click").bind("click",function(){
-			    app.objs.route.navigate("?page="+n,{trigger: true});
+			    app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n,{trigger: true});
 			})
 		});
 		}
@@ -277,7 +277,7 @@ app.views.index = Backbone.View.extend({
 
 			newAn.unbind("click").bind("click",function(){
 				app.objs.announcementDetailV.data = $(this).data("an");
-				app.objs.route.navigate("?page=announcementDetail",{trigger: true});
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
 			});
 		});
 		$(function(){
@@ -309,7 +309,7 @@ app.views.index = Backbone.View.extend({
             newElem.data("data",n);
 			newElem.unbind("click").bind("click",function(){
 				//app.objs.announcementDetailV.data = $(this).data("an");
-				//app.objs.route.navigate("?page=announcementDetail",{trigger: true});
+				//app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
 			});
 		});
         $(".video_style1").last().removeClass("mg_r34");
@@ -442,7 +442,7 @@ app.views.login = Backbone.View.extend({
        app.apis.checkUser($(this).val(),function(data){},function(data){});
     });
 	loginElem.find("#register").unbind("click").bind("click",function(){
-	    app.objs.route.navigate("?page=register",{trigger: true});
+	    app.objs.route.navigate(location.pathname.replace("/","")+"?page=register",{trigger: true});
 	});
 	/**验证码***/
 
@@ -519,7 +519,7 @@ $("#agreement").click(function(){
    $(this).parents().toggleClass("agreementChxNoCheck");
 });
 	registerElem.find("#loginBtn").unbind("click").bind("click",function(){
-	    app.objs.route.navigate("?page=login",{trigger: true});
+	    app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
 	})
 
 	}
@@ -624,7 +624,7 @@ app.views.product = Backbone.View.extend({
 
 			newProduct.unbind("click").bind("click",function(){
 				app.objs.productDetailV.data = $(this).data("product");
-				app.objs.route.navigate("?page=productDetail",{trigger: true});
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=productDetail",{trigger: true});
 
 				app.apis.buy({},this.render(),function(){})
 			});
@@ -821,7 +821,7 @@ app.views.about = Backbone.View.extend({
 	elem.data("data",value);
 	elem.find("a").unbind("click").bind("click",function(){
 		app.objs.announcementDetailV.data = $(this).data("data");
-		app.objs.route.navigate("?page=announcementDetail",{trigger: true});
+		app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
 	});
   }); 
    var tableElem=$('<div class="conts cf seminar">'
