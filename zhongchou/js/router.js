@@ -12,6 +12,9 @@ app.objs.routeTable={
 					/*获取商品*/
 					app.apis.getProduct(data,function(product){
 						/*出页面*/
+						console.log(promotion);
+						console.log(announcement);
+						console.log(product);
 						app.objs.indexV.data = {
 							promotion : promotion.index,
 							announcement : announcement,

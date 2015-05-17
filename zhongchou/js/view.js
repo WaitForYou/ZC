@@ -194,7 +194,7 @@ app.views.index = Backbone.View.extend({
 	data:{},
 	render:function(){
 		$(this.el).empty();
-		$('<div id="visual"> '   
+		/*$('<div id="visual"> '   
 		           +'<div id="demo" style="overflow: hidden; width:100%; align: center;">'
 		            +'<table cellspacing="0" cellpadding="0" align="center" border="0">'
 		              +'<tbody>'
@@ -234,23 +234,34 @@ app.views.index = Backbone.View.extend({
 		        +'</div>'
 		      +'</div>'
 		    +'</div>'
+*/
+$('<div class="index_top">'
+	+'<div class="index_top_left">'
 
-		   +' <div id="topics">'
+	+'</div>'
+	+'<div class="index_top_right">'
+		+'<div class="index_canvar_1"></div>'
+		+'<div class="index_canvar_2"></div>'
+		+'<div class="index_canvar_3"></div>'
+		+'<div class="index_promo_1"></div>'
+		+'<div class="index_promo_2"></div>'
+		+'<div class="index_promo_3"></div>'
+	+'</div>'
+	+'<div class="clear"></div>'
+	+'</div>').appendTo($(this.el));
+		   $(' <div id="topics">'
 			     +'<div class="inner" style=" height:30px;">'
 			       +' <span style=" display:block; float:left;"><img src="img/topics.png" alt=""></span>'
 			        +'<div id="slides"><div class="slides_container"></div></div>'
 			        +'<a href="/company?id=3" style=" color:#F00; font-size:12px; float:right;">查看更多 &gt;&gt;</a>'
 			      +'</div>'
 			    +'</div>'
-			    +'<div id="index_video">'
-					+'<div class="center_video"><h1></h1><h2></h2><div class="video_area"></div>'
-			    +'</div>'
 		    +'</div>'
-		    +'<div class="recharge_style03"></div>'
+		   /* +'<div class="recharge_style03"></div>'*/
 		    +'<div class="index_center"><div class="project_area"></div></div>'
-		    +'<div class="slide earnings"></div> '
-		    +'<div class="team" id="smp"></div>').appendTo($(this.el));
-              var demo = document.getElementById("demo");
+		    +'<div class="slide earnings"></div> ').appendTo($(this.el));
+		  /*  +'<div class="team" id="smp"></div>'*/
+              /*var demo = document.getElementById("demo");
               var marquePic2 = document.getElementById("marquePic2");
               var marquePic1 = document.getElementById("marquePic1");
      	      var speed=15 ;
@@ -267,7 +278,7 @@ app.views.index = Backbone.View.extend({
 		          demo.onmouseover=function() {clearInterval(MyMar);}; 
 		          demo.onmouseout=function() {MyMar=setInterval(Marquee,speed);};  
               }
-       
+       */
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this;
 		//公告
@@ -289,6 +300,7 @@ app.views.index = Backbone.View.extend({
               });
          });
 		//介绍我们是做什么的
+		/*
 		$("#index_video").find("h1").text(this.data.promotion.introduceVideo.title);
 		$("#index_video").find("h2").text(this.data.promotion.introduceVideo.dsc);
 		$.each(this.data.promotion.introduceVideo.data,function(i,n){
@@ -311,12 +323,12 @@ app.views.index = Backbone.View.extend({
 				//app.objs.announcementDetailV.data = $(this).data("an");
 				//app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
 			});
-		});
-        $(".video_style1").last().removeClass("mg_r34");
+		});*/
+ /*       $(".video_style1").last().removeClass("mg_r34");
         //大图充值
         var introducePicElem =$(".recharge_style03").css("background-image","url("+this.data.promotion.introducePic.data[0].image+")");
          //$('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
-		introducePicElem.data("data",this.data.promotion.introducePic);
+		introducePicElem.data("data",this.data.promotion.introducePic);*/
 		//产品
         $.each(this.data.product,function(i,value){
             var newElem = $('<div class="project_intro">'
@@ -350,6 +362,7 @@ app.views.index = Backbone.View.extend({
         });
         //----start人物介绍
         // console.log(this.data.promotion) alert();
+        /*
          var peopleData = this.data.promotion.danger;
          var peoplesElem = $('<h1>'+peopleData.name+'</h1>'
 		  +'<h2><span>'+peopleData["dsc_1"]+'</span>,<br><span>'+peopleData.dsc+'</span></h2>').appendTo($('#smp'));
@@ -366,8 +379,9 @@ app.views.index = Backbone.View.extend({
                  $('<i style="font-style:normal;">'+value.zhiJi+'</i>').appendTo(singlePeopleElem.find('h4'));
               }
          });//eac.appendTo()h peopleData
-         peoplesElem.appendTo($('#smp'));
+         peoplesElem.appendTo($('#smp'));*/
          //收益介绍
+
          var earnings = app.objs.configData.earnings;
 
          var earningsElem = $('<div class="slide_pic">'
@@ -383,6 +397,8 @@ app.views.index = Backbone.View.extend({
         //$.each(earnings.steps,function(i,value){
           // earningsElem.find(".spear").before('<h4 class="sp_'+i+'">'+value+'</h4>');
         //});
+
+
 		}//rendert
 })
 /*登录*/
