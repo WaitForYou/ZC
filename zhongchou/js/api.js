@@ -304,7 +304,7 @@ app.apis.login=function(data,fn,err){
 			var newUser = new app.models.member(loginReturn.data);
 			app.objs.user.set(newUser)
 			}
-		fn(app.objs.user.toJSON)
+		fn(app.objs.user.get().toJSON())
 		}else{
 			alert("登陆失败");
 			err();
@@ -649,6 +649,7 @@ app.apis.getrecruit=function(data,fn,err){
 		data:data
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(recruitReturn){
+		console.log(recruitReturn);
 		if(recruitReturn && recruitReturn.code && recruitReturn.code !=0){
 			if(recruitReturn.code == 1){
 				app.objs.recruitTime = recruitReturn.time;

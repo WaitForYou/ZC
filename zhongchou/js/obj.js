@@ -15,9 +15,9 @@ app.objs.uploadOk = [];
 	/*公告列表*/
 	var announcement = new app.collections.message();
 	/*招聘列表*/
-	var recruit = null;
+	var recruit = new app.collections.message();
 	/*企业信息列表*/
-	var company = null;
+	var company = new app.collections.message();
 	/*宣传列表*/
 	var promotion = null;
 	/*红包列表*/

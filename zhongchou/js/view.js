@@ -5,7 +5,7 @@ app.views.head = Backbone.View.extend({
 	typeBefore:null,
 	el:".header",
 	button:[[{id:"login",name:"登陆"},{id:"register",name:"注册"}],[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}],[{id:"out",name:"退出"}]],
-	nav:[{id:"mode",name:"众筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
+	nav:[{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
 	render:function(){
 		var buttonKey ;
 		if(this.type==0){
@@ -145,24 +145,206 @@ app.views.middle = Backbone.View.extend({
 	el:".middle",
 	template:[
 			'',
-			'<div class="top"></div>'+
-			'<div class="bottom">'+
-				'<div class="left">'+
-					'<div id="account">我的帐户</div>'+
-					'<div id="recharge">充值</div>'+
-					'<div id="paid">提现</div>'+
-					'<div id="card">银行卡</div>'+
-					'<div id="capitalDetail">资金记录</div>'+
-					'<div id="redPacketDetail">红包记录</div>'+
-					'<div id="safeQusetion">安全问题</div>'+
-					'<div id="emailVerify">邮箱验证</div>'+
-					'<div id="setPhone">修改手机</div>'+
-					'<div id="setDetail">修改资料</div>'+
-					'<div id="setPassWord">修改密码</div>'+
-				'</div>'+
-				'<div class="right"></div>'+
-				'<div class="clear"></div>'+
-			'</div>',
+			'<div class="member_top">'+
+    '<div class="member">'+
+        '<h2><img src="/img/uc/member_headerpic.jpg"></h2>'+
+        '<h4><span>jiumogaoao86</span> 您好，欢迎回来！</h4>'+
+        '<h5 style="display: block;" id="redEnvelopeBanner"><span>您有未领取的红包！</span><a href="redEnvelope">领取</a></h5>'+
+        '<!-- <h5><span>恭喜您获得10元红包！</span></h5> -->'+
+    '</div>'+
+'</div>'+
+			'<div class="content_center">'+
+		'<!-- left -->'+
+		
+
+'<div class="mb_left" id="tabs_menu">'+
+    '<ul>'+
+        '<li class=""><h4><i class="nav_01"></i><span>我的账户</span></h4>'+
+            '<ul>'+
+                '<li id="center" class="hover"><a href="center">我的账户</a></li>'+
+            '</ul>'+
+        '</li>'+
+        '<!-- <li><h4><i class="nav_02"></i><span>我的投资</span></h4>'+
+            '<ul>'+
+                 '<li><a href="#">投资统计</a></li>'+
+                '<li id="invest"><a href="invest">投资项目</a></li>'+
+            '</ul>'+
+        '</li> -->'+
+        '<li><h4><i class="nav_03"></i><span>资金管理</span></h4>'+
+            '<ul>'+
+                '<li id="recharge"><a href="recharge?recharge=1">充值</a></li>'+
+                '<li id="cash"><a href="cash?cash=1">提现</a></li>'+
+'<!--                 <li id="bankCard"><a href="bankCard">银行卡</a></li> -->'+
+                '<li id="fund"><a href="fund">资金记录</a></li>'+
+                '<li id="redEnvelope"><a href="redEnvelope">红包记录</a></li>'+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            '</ul>'+
+        '</li>'+
+        '<li><h4><i class="nav_04"></i><span>账户</span></h4>'+
+            '<ul>'+
+                '<li id="secureQuestion"><a href="secureQuestion">安全问题</a></li>'+
+                '<li id="mailAuthenticate"><a href="mailAuthenticate">邮箱认证</a></li>'+
+            '</ul>'+
+        '</li>'+
+        '<li><h4><i class="nav_02"></i><span>基本设置</span></h4>'+
+            '<ul>'+
+                '<!--  <li id="auth"><a href="auth">用户认证</a></li>-->'+
+                '<li id="tel"><a href="tel">修改手机</a></li>'+
+                '<li id="modifyUser"><a href="modifyUser">修改资料</a></li>'+
+                '<li id="modifyPwd"><a href="modifyPwd">修改密码</a></li>'+
+            '</ul>'+
+        '</li>'+
+'<!--         <li> -->'+
+'<!--         <h4><i class="nav_03"></i><span>房地产金融顾问</span></h4> -->'+
+'<!--             <ul> -->'+
+
+'<!--                 <li id="counselorApply"><a href="counselorApp">填写申请资料</a></li> -->'+
+
+
+'<!--                 <li id="counselorApply"><a href="counselorApp">修改申请资料</a></li> -->'+
+
+
+'<!--                 <li id="counselorApply"><a href="applyToSale">产品出售申请</a></li> -->'+
+
+'<!--                 <li id="clientManage"><a href="clientManagement">客户管理</a></li>  -->'+
+'<!--             </ul> -->'+
+'<!--         </li> -->'+
+'<!--         <li><h4><i class="nav_03"></i><span>活动管理</span></h4> -->'+
+'<!--         	<ul> -->'+
+'<!--         		<li id="clientManage"><a href="clientManagement">我的推荐</a></li> -->'+
+'<!--         		<li id="recommend"><a href="recommend">我要推荐</a></li> -->'+
+'<!--         	</ul> -->'+
+'<!--         </li> -->'+
+    '</ul>'+
+'</div>'+
+		'<!-- right -->'+
+		'<div class="mb_right" style="height: 672px;">'+
+			'<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
+				'<h2>我的资产</h2>'+
+				
+			'</div>'+
+			'<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
+				'<ul>'+
+					'<li class="m_a_left"><p>绿地账户余额：'+
+						'</p><h4>'+
+							'<span>￥0</span>元'+
+						'</h4>'+
+						'<p></p>'+
+						'<p>可用红包：'+
+						'</p><h4>'+
+							'<span id="reAmt">￥0.00</span>元'+
+						'</h4>'+
+						'<p></p>'+
+						'</li>'+
+					'<li class="m_a_center"><p>冻结金额：'+
+						'</p><h4>'+
+							'<span id="totalBal">￥0</span>元'+
+						'</h4>'+
+						'<p></p>'+
+						'<!-- <p>已认购金额：20,000.00 元</p> --></li>'+
+					'<li class="m_a_right"><a href="recharge?recharge=1">充值</a><a onclick="Prompt()">提现</a></li>'+
+				'</ul>'+
+			'</div>'+
+'<!-- 			<div class="my_commission"> -->'+
+'<!-- 				<h2>我的佣金</h2> -->'+
+'<!-- 				<ul> -->'+
+'<!-- 					<li> -->'+
+'<!-- 						<h4> -->'+
+
+'<!-- 						</h4> -->'+
+'<!-- 						<h4> -->'+
+
+'<!-- 						</h4> -->'+
+'<!-- 					</li> -->'+
+'<!-- 					<li> -->'+
+'<!-- 						<div class="commission_rollout"> -->'+
+
+'<!-- 							<span class="input_word"><input id="TransAmt" -->'+
+'<!-- 								name="TransAmt" type="text"> -->'+
+'<!-- 							<h4>元</h4></span> <span class="input_btn"><input id="rolloff" -->'+
+'<!-- 								type="button" name="rolloff" value="转出"></span> <span -->'+
+'<!-- 								class="input_ts" id="amtNotice"></span> -->'+
+'<!-- 						</div> -->'+
+'<!-- 					</li> -->'+
+'<!-- 				</ul> -->'+
+'<!-- 			</div> -->'+
+
+			'<div class="my_accountsafety">'+
+				'<h2>账户安全</h2>'+
+				'<ul>'+
+					'<li class="m_ac_top"><h3>'+
+							'安全等级：<span>低'+
+								
+								
+								'</span>'+
+						'</h3>'+
+						'<h4 class="m_ac_progress">'+
+							'<img src="/img/uc/progress_pic1.png">'+
+						'</h4>'+
+						'<h4 class="m_ac_progress" style="display:none">'+
+							'<img src="/img/uc/progress_pic2.png">'+
+						'</h4>'+
+						'<h4 class="m_ac_progress" style="display:none">'+
+							'<img src="/img/uc/progress_pic3.png">'+
+						'</h4>'+
+						'<h4 class="m_ac_progress" style="display:none">'+
+							'<img src="/img/uc/progress_pic4.png">'+
+						'</h4></li>'+
+					'<div class="clear"></div>'+
+					'<li class="m_ac_propic" id="mailSet">'+
+						'<img src="/img/uc/icon_a1.jpg" alt="">'+
+					'<h4>电子邮箱</h4>'+
+						'<a href="mailAuthenticate">未绑定</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="mailModify" style="display:none">'+
+						'<img src="/img/uc/icon_a1_on.jpg" alt="">'+
+					'<h4>电子邮箱</h4>'+
+						'<a href="mailAuthenticate">修改</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="secQuesSet">'+
+						'<img src="/img/uc/icon_a2.jpg" alt="">'+
+					'<h4>密码问题</h4>'+
+						'<a href="secureQuestion">未设置</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="secQuesModify" style="display:none">'+
+						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
+					'<h4>密码问题</h4>'+
+						'<a href="secureQuestion">修改</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="infoSet">'+
+						'<img src="/img/uc/icon_a3.jpg" alt="">'+
+					'<h4>个人资料</h4>'+
+						'<a href="modifyUser">未完善</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="infoModify" style="display:none">'+
+						'<img src="/img/uc/icon_a3_on.jpg" alt="">'+
+					'<h4>个人资料</h4>'+
+						'<a href="modifyUser">修改</a>'+
+					'</li>'+
+				'</ul>'+
+			'</div>'+
+
+			'<div class="my_projectlist">'+
+				'<h2>我的众筹产品</h2>'+
+				'<ul>'+
+					
+					'<div class="clear"></div>'+
+				'</ul>'+
+			'</div>'+
+		'</div>'+
+		'<div class="clear"></div>'+
+	'</div>',
 			'<div class="bottom">'+
 				'<div class="left">'+
 					'<div id="adminManage">管理员管理</div>'+
@@ -239,13 +421,14 @@ $('<div class="index_top">'
 	+'<div class="index_top_left">'
 		+'<div class="index_message_head">全国首家专业房地产众筹平台</div>'
 		+'<div class="index_message_frame">'
+			+'<div class="index_message_title">预期年化利率达<span style="font-size:30px">15%</span>以上</div>'
 			+'<div class="index_message_list">资金全程托管 安全可靠</div>'
 			+'<div class="index_message_list">投资门槛低 100元即可参与</div>'
 			+'<div class="index_message_list">专业、优秀的风控及资管团队</div>'
 			+'<div class="index_message_list">一线城市或地标优质资产</div>'
 			+'<div class="index_message_list">注册即可享受随机红包10-100元</div>'
 		+'</div>'
-		+'<div class="index_message_foot"></div>'
+		+'<img class="index_message_foot" src="images/index.png"/>'
 	+'</div>'
 	+'<div class="index_top_right">'
 		+'<div class="index_canvar_1">'
@@ -565,13 +748,22 @@ app.views.login = Backbone.View.extend({
            +' </span> '
          +' </li> '
           +'<li class="h50">' 
-          +'  <input type="button" value="登　录" class="btnLogin " onclick="validLoginForm()"> '
+          +'  <input id="login" type="button" value="登　录" class="btnLogin"> '
          +' </li>'
       +' </ul> '
       +' </div>'
       +'</form>'
      +'</div> '
     +'</div>').appendTo($(this.el));
+	loginElem.find("#login").unbind("click").bind("click",function(){
+		//登录按钮
+	var data = {"userName":loginElem.find("#userName").val(),/*登录名/手机/邮箱*/
+				"passWord":loginElem.find("#userPass").val()}/*密码*/
+	app.apis.login(data,function(data){
+		app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+	},function(error){});
+		
+	})
     loginElem.find("#userName").blur(function(){
        app.apis.checkUser($(this).val(),function(data){},function(data){});
     });
@@ -583,10 +775,7 @@ app.views.login = Backbone.View.extend({
     // document.getElementById("btn1").addEventListener("click", function () {
     //     alert(code1.verify(document.getElementById("code1").value));
     // }, false);
-	//登录按钮
-	var data = {"userName":loginElem.find("#userName").val(),/*登录名/手机/邮箱*/
-				"passWord":loginElem.find("#userPass").val()}/*密码*/
-	app.apis.login(data,function(data){},function(error){});
+	
 }
 })
 /*注册*/
@@ -1021,42 +1210,45 @@ app.views.announcementDetail = Backbone.View.extend({
 /*用户部分**********************************************************************/
 /*账户*/
 app.views.account = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
+	data:{},
 	render:function(){
+		console.log(this);
+		debugger;
 		$(this.el).html("帐户")
 	}
 	})
 /*充值*/
 app.views.recharge = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){
 		$(this.el).html("充值")
 	}
 	})
 /*提现*/
 app.views.paid = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){
 		$(this.el).html("提现")
 	}
 	})
 /*银行卡*/
 app.views.card = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){
 		$(this.el).html("银行卡")
 	}
 	})
 /*资金纪录*/
 app.views.capitalDetail = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){
 		$(this.el).html("资金记录")
 	}
 	})
 /*红包记录*/
 app.views.redPacketDetail = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	data:{},
 	render:function(){
 		console.log(this.data);
@@ -1065,27 +1257,27 @@ app.views.redPacketDetail = Backbone.View.extend({
 	})
 /*安全问题*/
 app.views.safeQusetion = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){}
 	})
 /*邮箱验证*/
 app.views.emailVerify = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){}
 	})
 /*修改手机*/
 app.views.setPhone = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){}
 	})
 /*修改资料*/
 app.views.setDetail = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){}
 	})
 /*修改密码*/
 app.views.setPassWord = Backbone.View.extend({
-	el:".right",
+	el:".mb_right",
 	render:function(){}
 	})
 /*后台部分************************************************************************************/
