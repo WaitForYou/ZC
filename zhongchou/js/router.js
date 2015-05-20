@@ -386,6 +386,7 @@ app.objs.routeTable={
 	"account":{
 				type:1,
 				fn:function(data){
+					app.objs.accountV.el=".mb_right";
 					app.objs.accountV.data=app.objs.user.get().toJSON();
 					/*出页面*/
 					app.objs.accountV.render();

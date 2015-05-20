@@ -150,13 +150,10 @@ app.views.middle = Backbone.View.extend({
         '<h2><img src="/img/uc/member_headerpic.jpg"></h2>'+
         '<h4><span>jiumogaoao86</span> 您好，欢迎回来！</h4>'+
         '<h5 style="display: block;" id="redEnvelopeBanner"><span>您有未领取的红包！</span><a href="redEnvelope">领取</a></h5>'+
-        '<!-- <h5><span>恭喜您获得10元红包！</span></h5> -->'+
     '</div>'+
 '</div>'+
 			'<div class="content_center">'+
 		'<!-- left -->'+
-		
-
 '<div class="mb_left" id="tabs_menu">'+
     '<ul>'+
         '<li class=""><h4><i class="nav_01"></i><span>我的账户</span></h4>'+
@@ -164,31 +161,12 @@ app.views.middle = Backbone.View.extend({
                 '<li id="center" class="hover"><a href="center">我的账户</a></li>'+
             '</ul>'+
         '</li>'+
-        '<!-- <li><h4><i class="nav_02"></i><span>我的投资</span></h4>'+
-            '<ul>'+
-                 '<li><a href="#">投资统计</a></li>'+
-                '<li id="invest"><a href="invest">投资项目</a></li>'+
-            '</ul>'+
-        '</li> -->'+
         '<li><h4><i class="nav_03"></i><span>资金管理</span></h4>'+
             '<ul>'+
                 '<li id="recharge"><a href="recharge?recharge=1">充值</a></li>'+
                 '<li id="cash"><a href="cash?cash=1">提现</a></li>'+
-'<!--                 <li id="bankCard"><a href="bankCard">银行卡</a></li> -->'+
                 '<li id="fund"><a href="fund">资金记录</a></li>'+
                 '<li id="redEnvelope"><a href="redEnvelope">红包记录</a></li>'+
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
             '</ul>'+
         '</li>'+
         '<li><h4><i class="nav_04"></i><span>账户</span></h4>'+
@@ -199,166 +177,48 @@ app.views.middle = Backbone.View.extend({
         '</li>'+
         '<li><h4><i class="nav_02"></i><span>基本设置</span></h4>'+
             '<ul>'+
-                '<!--  <li id="auth"><a href="auth">用户认证</a></li>-->'+
                 '<li id="tel"><a href="tel">修改手机</a></li>'+
                 '<li id="modifyUser"><a href="modifyUser">修改资料</a></li>'+
                 '<li id="modifyPwd"><a href="modifyPwd">修改密码</a></li>'+
             '</ul>'+
         '</li>'+
-'<!--         <li> -->'+
-'<!--         <h4><i class="nav_03"></i><span>房地产金融顾问</span></h4> -->'+
-'<!--             <ul> -->'+
-
-'<!--                 <li id="counselorApply"><a href="counselorApp">填写申请资料</a></li> -->'+
-
-
-'<!--                 <li id="counselorApply"><a href="counselorApp">修改申请资料</a></li> -->'+
-
-
-'<!--                 <li id="counselorApply"><a href="applyToSale">产品出售申请</a></li> -->'+
-
-'<!--                 <li id="clientManage"><a href="clientManagement">客户管理</a></li>  -->'+
-'<!--             </ul> -->'+
-'<!--         </li> -->'+
-'<!--         <li><h4><i class="nav_03"></i><span>活动管理</span></h4> -->'+
-'<!--         	<ul> -->'+
-'<!--         		<li id="clientManage"><a href="clientManagement">我的推荐</a></li> -->'+
-'<!--         		<li id="recommend"><a href="recommend">我要推荐</a></li> -->'+
-'<!--         	</ul> -->'+
-'<!--         </li> -->'+
     '</ul>'+
 '</div>'+
 		'<!-- right -->'+
 		'<div class="mb_right" style="height: 672px;">'+
-			'<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
-				'<h2>我的资产</h2>'+
-				
-			'</div>'+
-			'<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
-				'<ul>'+
-					'<li class="m_a_left"><p>绿地账户余额：'+
-						'</p><h4>'+
-							'<span>￥0</span>元'+
-						'</h4>'+
-						'<p></p>'+
-						'<p>可用红包：'+
-						'</p><h4>'+
-							'<span id="reAmt">￥0.00</span>元'+
-						'</h4>'+
-						'<p></p>'+
-						'</li>'+
-					'<li class="m_a_center"><p>冻结金额：'+
-						'</p><h4>'+
-							'<span id="totalBal">￥0</span>元'+
-						'</h4>'+
-						'<p></p>'+
-						'<!-- <p>已认购金额：20,000.00 元</p> --></li>'+
-					'<li class="m_a_right"><a href="recharge?recharge=1">充值</a><a onclick="Prompt()">提现</a></li>'+
-				'</ul>'+
-			'</div>'+
-'<!-- 			<div class="my_commission"> -->'+
-'<!-- 				<h2>我的佣金</h2> -->'+
-'<!-- 				<ul> -->'+
-'<!-- 					<li> -->'+
-'<!-- 						<h4> -->'+
-
-'<!-- 						</h4> -->'+
-'<!-- 						<h4> -->'+
-
-'<!-- 						</h4> -->'+
-'<!-- 					</li> -->'+
-'<!-- 					<li> -->'+
-'<!-- 						<div class="commission_rollout"> -->'+
-
-'<!-- 							<span class="input_word"><input id="TransAmt" -->'+
-'<!-- 								name="TransAmt" type="text"> -->'+
-'<!-- 							<h4>元</h4></span> <span class="input_btn"><input id="rolloff" -->'+
-'<!-- 								type="button" name="rolloff" value="转出"></span> <span -->'+
-'<!-- 								class="input_ts" id="amtNotice"></span> -->'+
-'<!-- 						</div> -->'+
-'<!-- 					</li> -->'+
-'<!-- 				</ul> -->'+
-'<!-- 			</div> -->'+
-
-			'<div class="my_accountsafety">'+
-				'<h2>账户安全</h2>'+
-				'<ul>'+
-					'<li class="m_ac_top"><h3>'+
-							'安全等级：<span>低'+
-								
-								
-								'</span>'+
-						'</h3>'+
-						'<h4 class="m_ac_progress">'+
-							'<img src="/img/uc/progress_pic1.png">'+
-						'</h4>'+
-						'<h4 class="m_ac_progress" style="display:none">'+
-							'<img src="/img/uc/progress_pic2.png">'+
-						'</h4>'+
-						'<h4 class="m_ac_progress" style="display:none">'+
-							'<img src="/img/uc/progress_pic3.png">'+
-						'</h4>'+
-						'<h4 class="m_ac_progress" style="display:none">'+
-							'<img src="/img/uc/progress_pic4.png">'+
-						'</h4></li>'+
-					'<div class="clear"></div>'+
-					'<li class="m_ac_propic" id="mailSet">'+
-						'<img src="/img/uc/icon_a1.jpg" alt="">'+
-					'<h4>电子邮箱</h4>'+
-						'<a href="mailAuthenticate">未绑定</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="mailModify" style="display:none">'+
-						'<img src="/img/uc/icon_a1_on.jpg" alt="">'+
-					'<h4>电子邮箱</h4>'+
-						'<a href="mailAuthenticate">修改</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="secQuesSet">'+
-						'<img src="/img/uc/icon_a2.jpg" alt="">'+
-					'<h4>密码问题</h4>'+
-						'<a href="secureQuestion">未设置</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="secQuesModify" style="display:none">'+
-						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
-					'<h4>密码问题</h4>'+
-						'<a href="secureQuestion">修改</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="infoSet">'+
-						'<img src="/img/uc/icon_a3.jpg" alt="">'+
-					'<h4>个人资料</h4>'+
-						'<a href="modifyUser">未完善</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="infoModify" style="display:none">'+
-						'<img src="/img/uc/icon_a3_on.jpg" alt="">'+
-					'<h4>个人资料</h4>'+
-						'<a href="modifyUser">修改</a>'+
-					'</li>'+
-				'</ul>'+
-			'</div>'+
-
-			'<div class="my_projectlist">'+
-				'<h2>我的众筹产品</h2>'+
-				'<ul>'+
-					
-					'<div class="clear"></div>'+
-				'</ul>'+
-			'</div>'+
+			
 		'</div>'+
 		'<div class="clear"></div>'+
 	'</div>',
-			'<div class="bottom">'+
-				'<div class="left">'+
-					'<div id="adminManage">管理员管理</div>'+
-					'<div id="announcementManage">公告管理</div>'+
-					'<div id="clientManage">客户管理</div>'+
-					'<div id="procedureManage">商品管理</div>'+
-					'<div id="recruitManage">招聘管理</div>'+
-					'<div id="companyManage">公司资料管理</div>'+
-					'<div id="promotionManage">宣传管理</div>'+
-					'<div id="redPacketManage">红包管理</div>'+
-				'</div>'+
-				'<div class="right"></div>'+
-				'<div class="clear"></div>'+
-			'</div>'
+	'<div class="member_top">'+
+    '<div class="member">'+
+        '<h2><img src="/img/uc/member_headerpic.jpg"></h2>'+
+        '<h4><span>jiumogaoao86</span> 您好，欢迎回来！</h4>'+
+    '</div>'+
+'</div>'+
+			'<div class="content_center">'+
+		'<!-- left -->'+
+'<div class="mb_left" id="tabs_menu">'+
+    '<ul>'+
+        '<li class=""><h4><i class="nav_01"></i><span>后台管理</span></h4>'+
+            '<ul>'+
+                '<li><a>管理员管理</a></li>'+
+				'<li><a>公告管理</a></li>'+
+				'<li><a>客户管理</a></li>'+
+				'<li><a>招聘管理</a></li>'+
+				'<li><a>公司资料管理</a></li>'+
+				'<li><a>宣传管理</a></li>'+
+				'<li><a>红包管理</a></li>'+
+            '</ul>'+
+        '</li>'+
+    '</ul>'+
+'</div>'+
+		'<!-- right -->'+
+		'<div class="mb_right" style="height: 672px;">'+
+			
+		'</div>'+
+		'<div class="clear"></div>'+
+	'</div>'
 	],
 	page:["account","recharge","paid","card","capitalDetail","redPacketDetail","safeQusetion","emailVerify","setPhone","setDetail","setPassWord","adminManage","announcementManage","clientManage","procedureManage","recruitManage","companyManage","promotionManage","redPacketManage"],
 	render:function(){
@@ -655,7 +515,8 @@ var pieData = [
                        +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
                        +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
                   +' </div>'
-                   +'<h5 class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;"></b></h5>'
+                   +'<h5 class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;">'
+				   +'</b></h5>'
                    +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
 	         +'</div>'
 	      +'</div>').appendTo($(".project_area"));
@@ -1214,8 +1075,75 @@ app.views.account = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this);
-		debugger;
-		$(this.el).html("帐户")
+		$(this.el).html('<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
+				'<h2>我的资产</h2>'+
+				
+			'</div>'+
+			
+
+
+			'<div class="my_accountsafety">'+
+				'<h2>账户安全</h2>'+
+				'<ul>'+
+					'<li class="m_ac_top"><h3>'+
+							'安全等级：<span>低'+
+								
+								
+								'</span>'+
+						'</h3>'+
+						'<h4 class="m_ac_progress">'+
+							'<img src="/img/uc/progress_pic1.png">'+
+						'</h4>'+
+						'<h4 class="m_ac_progress" style="display:none">'+
+							'<img src="/img/uc/progress_pic2.png">'+
+						'</h4>'+
+						'<h4 class="m_ac_progress" style="display:none">'+
+							'<img src="/img/uc/progress_pic3.png">'+
+						'</h4>'+
+						'<h4 class="m_ac_progress" style="display:none">'+
+							'<img src="/img/uc/progress_pic4.png">'+
+						'</h4></li>'+
+					'<div class="clear"></div>'+
+					'<li class="m_ac_propic" id="mailSet">'+
+						'<img src="/img/uc/icon_a1.jpg" alt="">'+
+					'<h4>电子邮箱</h4>'+
+						'<a href="mailAuthenticate">未绑定</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="mailModify" style="display:none">'+
+						'<img src="/img/uc/icon_a1_on.jpg" alt="">'+
+					'<h4>电子邮箱</h4>'+
+						'<a href="mailAuthenticate">修改</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="secQuesSet">'+
+						'<img src="/img/uc/icon_a2.jpg" alt="">'+
+					'<h4>密码问题</h4>'+
+						'<a href="secureQuestion">未设置</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="secQuesModify" style="display:none">'+
+						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
+					'<h4>密码问题</h4>'+
+						'<a href="secureQuestion">修改</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="infoSet">'+
+						'<img src="/img/uc/icon_a3.jpg" alt="">'+
+					'<h4>个人资料</h4>'+
+						'<a href="modifyUser">未完善</a>'+
+					'</li>'+
+					'<li class="m_ac_propic" id="infoModify" style="display:none">'+
+						'<img src="/img/uc/icon_a3_on.jpg" alt="">'+
+					'<h4>个人资料</h4>'+
+						'<a href="modifyUser">修改</a>'+
+					'</li>'+
+				'</ul>'+
+			'</div>'+
+
+			'<div class="my_projectlist">'+
+				'<h2>我的众筹产品</h2>'+
+				'<ul>'+
+					
+					'<div class="clear"></div>'+
+				'</ul>'+
+			'</div>')
 	}
 	})
 /*充值*/

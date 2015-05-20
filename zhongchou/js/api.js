@@ -12,11 +12,9 @@ app.apis.getProduct=function(data,fn,err){
 		if(productReturn && productReturn.code && productReturn.code != 0){
 		if(productReturn.code == 1){
 			app.objs.productTime = productReturn.time;
-			var newProduct = new app.collections.product();
-			newProduct.add(productReturn.data)
-			app.objs.product.set(newProduct)
+			app.objs.product.set(productReturn.data)
 			}
-			fn(app.objs.product.get().toJSON())
+			fn(app.objs.product.get())
 		}else{
 			alert("获取商品信息失败")
 			err();
@@ -142,11 +140,9 @@ app.apis.getClient=function(data,fn,err){
 		if(clientReturn && clientReturn.code && clientReturn.code != 0){
 		if(clientReturn.code == 1){
 			app.objs.clientTime = clientReturn.time
-			var newClient = new app.collections.client();
-			newClient.add(clientReturn.data)
-			app.objs.client.set(newClient)
+			app.objs.client.set(clientReturn.data)
 			}
-		fn(app.objs.client.get().toJSON())
+		fn(app.objs.client.get())
 		}else{
 			alert("获取客户信息失败")
 			err()
@@ -301,10 +297,9 @@ app.apis.login=function(data,fn,err){
 	$.get("http://"+location.hostname+":8888/",sendData,function(loginReturn){
 		if(loginReturn && loginReturn.code && loginReturn.code != 0){
 		if(loginReturn.code == 1){
-			var newUser = new app.models.member(loginReturn.data);
-			app.objs.user.set(newUser)
+			app.objs.user.set(loginReturn.data)
 			}
-		fn(app.objs.user.get().toJSON())
+		fn(app.objs.user.get())
 		}else{
 			alert("登陆失败");
 			err();
@@ -465,10 +460,10 @@ app.apis.getAdmin=function(data,fn,err){
 			if(adminReturn.code==1){
 				app.objs.adminTime = adminReturn.time;
 				var newClient = new app.collections.admin();
-				newClient.add(adminReturn.data)
-				app.objs.admin.set(newClient)
+
+				app.objs.admin.set(adminReturn.data)
 				}
-			fn(app.objs.admin.toJSON);
+			fn(app.objs.admin.get());
 			}else{
 				err();
 				}
@@ -563,11 +558,9 @@ app.apis.getannouncement=function(data,fn,err){
 		if(announcementReturn && announcementReturn.code && announcementReturn.code != 0){
 		if(announcementReturn.code==1){
 			app.objs.announcementTime = announcementReturn.time
-			var newAnnouncement= new app.collections.message();
-			newAnnouncement.add(announcementReturn.data)
-			app.objs.announcement.set(newAnnouncement)
+			app.objs.announcement.set(announcementReturn.data)
 			}
-			fn(app.objs.announcement.get().toJSON())
+			fn(app.objs.announcement.get())
 		}else{
 			alert("获取公告失败")
 			err();
@@ -653,11 +646,9 @@ app.apis.getrecruit=function(data,fn,err){
 		if(recruitReturn && recruitReturn.code && recruitReturn.code !=0){
 			if(recruitReturn.code == 1){
 				app.objs.recruitTime = recruitReturn.time;
-				var newRecruit= new app.collections.message();
-				newRecruit.add(recruitReturn.data)
-				app.objs.recruit.set(newRecruit)
+				app.objs.recruit.set(recruitReturn.data)
 				}
-				fn(app.objs.recruit.get().toJSON());
+				fn(app.objs.recruit.get());
 			}else{
 				alert("获取招聘信息失败")
 				err();
@@ -744,11 +735,9 @@ app.apis.getcompany=function(data,fn,err){
 		if(companyReturn && companyReturn.code && companyReturn.code !=0){
 			if(companyReturn.code == 1){
 				app.objs.companyTime = companyReturn.time
-				var newCompany = new app.collections.message();
-				newCompany.add(companyReturn.data);
-				app.objs.company.set(newCompany)
+				app.objs.company.set(companyReturn.data)
 				}
-			fn(app.objs.company.get().toJSON());
+			fn(app.objs.company.get());
 			}else{
 				alert("获取企业资料失败")
 				err();
@@ -885,11 +874,9 @@ app.apis.redPacketDetail=function(data,fn,err){
 		if(redPacketReturn && redPacketReturn.code && redPacketReturn.code !=0){
 			if(redPacketReturn.code == 1){
 				app.objs.redPacketTime = redPacketReturn.time;
-				var newPacket = new app.collections.redPacket();
-				newPacket.add(redPacketReturn.data);
-				app.objs.redPacket.set(newPacket);
+				app.objs.redPacket.set(redPacketReturn.data);
 				}
-			fn(app.objs.redPacket.get().toJSON())
+			fn(app.objs.redPacket.get())
 			}else{
 				err();
 				}
@@ -954,10 +941,9 @@ app.apis.getdeal=function(data,fn,err){
 	$.get("http://"+location.hostname+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code && returndata.code != 0){
 		if(returndata.code == 1){
-			var newDeal = new app.models.member(returndata.data);
-			app.objs.deal.set(newDeal)
+			app.objs.deal.set(returndata.data)
 			}
-		fn(app.objs.deal.toJSON)
+		fn(app.objs.deal.get())
 		}else{
 			alert("登陆失败");
 			err();

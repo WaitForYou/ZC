@@ -7,17 +7,17 @@ app.objs.uploadOk = [];
 	/*用户信息*/
 	var userMessage=null;
 	/*商品信息*/
-	var product = new app.collections.product();
+	var product = null;
 	/*客户列表*/
 	var client = null;
 	/*管理员列表*/
 	var admin = null;
 	/*公告列表*/
-	var announcement = new app.collections.message();
+	var announcement = null;
 	/*招聘列表*/
-	var recruit = new app.collections.message();
+	var recruit = null;
 	/*企业信息列表*/
-	var company = new app.collections.message();
+	var company = null;
 	/*宣传列表*/
 	var promotion = null;
 	/*红包列表*/
