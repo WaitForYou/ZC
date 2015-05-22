@@ -387,7 +387,7 @@ app.objs.routeTable={
 				type:1,
 				fn:function(data){
 					app.objs.accountV.el=".mb_right";
-					app.objs.accountV.data=app.objs.user.get().toJSON();
+					app.objs.accountV.data=app.objs.user.get();
 					/*出页面*/
 					app.objs.accountV.render();
 				}
@@ -427,8 +427,10 @@ app.objs.routeTable={
 					type:1,
 					fn:function(data){
 					/*获取帐户信息*/
-					app.apis.getAccount(data,function(Account){
+					app.apis.getdealList(data,function(deal){
 						/*出页面*/
+					app.objs.capitalDetailV.el=".mb_right";
+					app.objs.capitalDetailV.data=deal;
 					app.objs.capitalDetailV.render();
 					});
 					}
@@ -439,6 +441,7 @@ app.objs.routeTable={
 						fn:function(data){
 						/*获取红包*/
 						app.apis.redPacketDetail(data,function(redPacket){
+							app.objs.redPacketDetailV.el=".mb_right";
 							app.objs.redPacketDetailV.data=redPacket;
 							/*出页面*/
 						app.objs.redPacketDetailV.render();
@@ -452,6 +455,7 @@ app.objs.routeTable={
 					/*获取安全问题*/
 					app.apis.getSafeQusetion(data,function(SafeQusetion){
 						/*出页面*/
+						app.objs.safeQusetionV.el=".mb_right";
 						app.objs.safeQusetionV.render();
 						})
 					}
@@ -461,6 +465,7 @@ app.objs.routeTable={
 					type:1,
 					fn:function(data){
 					/*出页面*/
+					app.objs.emailVerifyV.el=".mb_right";
 					app.objs.emailVerifyV.data=app.objs.user.set();
 					app.objs.emailVerifyV.render();
 					}
@@ -470,6 +475,7 @@ app.objs.routeTable={
 				type:1,
 				fn:function(data){
 				/*出页面*/
+				app.objs.setPhoneV.el=".mb_right";
 				app.objs.setPhoneV.data=app.objs.user.set();
 				app.objs.setPhoneV.render();
 				}
@@ -479,6 +485,7 @@ app.objs.routeTable={
 				type:1,
 				fn:function(data){
 				/*出页面*/
+				app.objs.setDetailV.el=".mb_right";
 				app.objs.setDetailV.data=app.objs.user.set();
 				app.objs.setDetailV.render();
 				}
@@ -488,7 +495,8 @@ app.objs.routeTable={
 					type:1,
 					fn:function(data){
 					/*出页面*/
-					app.objs.setPassWord.render();
+					app.objs.setPassWordV.el=".mb_right";
+					app.objs.setPassWordV.render();
 					}
 		},
 	/*后台管理***********************************************************************************************/
@@ -499,6 +507,7 @@ app.objs.routeTable={
 					/*获取管理员*/
 					app.apis.getAdmin(data,function(Admin){
 						/*出页面*/
+					app.objs.adminManageV.el=".mb_right";
 					app.objs.adminManageV.data=Admin;
 					app.objs.adminManageV.render();
 						});
@@ -511,6 +520,7 @@ app.objs.routeTable={
 						/*获取公告*/
 						app.apis.getannouncement(data,function(announcement){
 							/*出页面*/
+						app.objs.announcementManageV.el=".mb_right";
 						app.objs.announcementManageV.data=announcement
 						app.objs.announcementManageV.render()
 							})
@@ -523,6 +533,7 @@ app.objs.routeTable={
 					/*获取客户资料*/
 					app.apis.getClient(data,function(Client){
 						/*出页面*/
+						app.objs.clientManageV.el=".mb_right";
 						app.objs.clientManageV.data=Client;
 						app.objs.clientManageV.render();
 						})
@@ -533,6 +544,7 @@ app.objs.routeTable={
 				type:2,
 				fn:function(data){
 				/*出页面*/
+				app.objs.clientDetailV.el=".mb_right";
 				app.objs.clientDetailV.render();
 				}
 		},
@@ -543,6 +555,7 @@ app.objs.routeTable={
 					/*获取商品信息*/
 					app.apis.getProduct(data,function(Product){
 						/*出页面*/
+					app.objs.procedureManageV.el=".mb_right";
 					app.objs.procedureManageV.data=Product;
 					app.objs.procedureManageV.render();
 						})
@@ -555,6 +568,7 @@ app.objs.routeTable={
 		/*获取招聘信息*/
 		app.apis.getrecruit(data,function(recruit){
 			/*出页面*/
+			app.objs.recruitManageV.el=".mb_right";
 			app.objs.recruitManageV.data=recruit;
 			app.objs.recruitManageV.render();
 			})
@@ -567,8 +581,9 @@ app.objs.routeTable={
 		/*获取公司资料*/
 		app.apis.getcompany(data,function(company){
 			/*出页面*/
-			app.objs.recruitManageV.data=company;
-			app.objs.recruitManageV.render();
+			app.objs.companyManageV.el=".mb_right";
+			app.objs.companyManageV.data=company;
+			app.objs.companyManageV.render();
 			})	
 		}
 		},
@@ -579,6 +594,7 @@ app.objs.routeTable={
 		/*获取宣传信息*/
 		app.apis.getpromotion(data,function(promotion){
 			/*出页面*/
+			app.objs.promotionManageV.el=".mb_right";
 			app.objs.promotionManageV.data(promotion)
 			app.objs.promotionManageV.render();
 			})
@@ -591,6 +607,7 @@ app.objs.routeTable={
 				/*获取红包信息*/
 				app.apis.getRedPacket(data,function(redPacket){
 					/*出页面*/
+					app.objs.redPacketManageV.el=".mb_right";
 					app.objs.redPacketManageV.data=redPacket;
 					app.objs.redPacketManageV.render();
 					})

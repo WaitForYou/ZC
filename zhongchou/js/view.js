@@ -158,28 +158,26 @@ app.views.middle = Backbone.View.extend({
     '<ul>'+
         '<li class=""><h4><i class="nav_01"></i><span>我的账户</span></h4>'+
             '<ul>'+
-                '<li id="center" class="hover"><a href="center">我的账户</a></li>'+
+                '<li id="account" class="hover"><a>我的账户</a></li>'+
             '</ul>'+
         '</li>'+
         '<li><h4><i class="nav_03"></i><span>资金管理</span></h4>'+
             '<ul>'+
-                '<li id="recharge"><a href="recharge?recharge=1">充值</a></li>'+
-                '<li id="cash"><a href="cash?cash=1">提现</a></li>'+
-                '<li id="fund"><a href="fund">资金记录</a></li>'+
-                '<li id="redEnvelope"><a href="redEnvelope">红包记录</a></li>'+
+                '<li id="capitalDetail"><a>资金记录</a></li>'+
+                '<li id="redPacketDetail"><a>红包记录</a></li>'+
             '</ul>'+
         '</li>'+
         '<li><h4><i class="nav_04"></i><span>账户</span></h4>'+
             '<ul>'+
-                '<li id="secureQuestion"><a href="secureQuestion">安全问题</a></li>'+
-                '<li id="mailAuthenticate"><a href="mailAuthenticate">邮箱认证</a></li>'+
+                '<li id="safeQusetion"><a>安全问题</a></li>'+
+                '<li id="emailVerify"><a>邮箱认证</a></li>'+
             '</ul>'+
         '</li>'+
         '<li><h4><i class="nav_02"></i><span>基本设置</span></h4>'+
             '<ul>'+
-                '<li id="tel"><a href="tel">修改手机</a></li>'+
-                '<li id="modifyUser"><a href="modifyUser">修改资料</a></li>'+
-                '<li id="modifyPwd"><a href="modifyPwd">修改密码</a></li>'+
+                '<li id="setPhone"><a>修改手机</a></li>'+
+                '<li id="setDetail"><a>修改资料</a></li>'+
+                '<li id="setPassWord"><a>修改密码</a></li>'+
             '</ul>'+
         '</li>'+
     '</ul>'+
@@ -202,13 +200,14 @@ app.views.middle = Backbone.View.extend({
     '<ul>'+
         '<li class=""><h4><i class="nav_01"></i><span>后台管理</span></h4>'+
             '<ul>'+
-                '<li><a>管理员管理</a></li>'+
-				'<li><a>公告管理</a></li>'+
-				'<li><a>客户管理</a></li>'+
-				'<li><a>招聘管理</a></li>'+
-				'<li><a>公司资料管理</a></li>'+
-				'<li><a>宣传管理</a></li>'+
-				'<li><a>红包管理</a></li>'+
+                '<li id="adminManage"><a>管理员管理</a></li>'+
+				'<li id="announcementManage"><a>公告管理</a></li>'+
+				'<li id="clientManage"><a>客户管理</a></li>'+
+				'<li id="procedureManage"><a>产品管理</a></li>'+
+				'<li id="recruitManage"><a>招聘管理</a></li>'+
+				'<li id="companyManage"><a>公司资料管理</a></li>'+
+				'<li id="promotionManage"><a>宣传管理</a></li>'+
+				'<li id="redPacketManage"><a>红包管理</a></li>'+
             '</ul>'+
         '</li>'+
     '</ul>'+
@@ -1077,7 +1076,26 @@ app.views.account = Backbone.View.extend({
 		console.log(this);
 		$(this.el).html('<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
 				'<h2>我的资产</h2>'+
-				
+				'<ul>'+
+					'<li class="m_a_left"><p>盈利：'+
+						'</p><h4>'+
+							'<span>￥0</span>元'+
+						'</h4>'+
+						'<p></p>'+
+						'<p>亏损：'+
+						'</p><h4>'+
+							'<span id="reAmt">￥0.00</span>元'+
+						'</h4>'+
+						'<p></p>'+
+						'</li>'+
+					'<li class="m_a_center"><p>现持有价值：'+
+						'</p><h4>'+
+							'<span id="totalBal">￥0</span>元'+
+						'</h4>'+
+						'<p></p>'+
+						'<!-- <p>已认购金额：20,000.00 元</p> --></li>'+
+					'<li class="m_a_right"><a href="recharge?recharge=1">充值</a><a onclick="Prompt()">提现</a></li>'+
+				'</ul>'+
 			'</div>'+
 			
 
@@ -1171,7 +1189,30 @@ app.views.card = Backbone.View.extend({
 app.views.capitalDetail = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
-		$(this.el).html("资金记录")
+		$(this.el).empty();
+
+		$(this.el).html('<div id="con_funds_1">'+
+        '<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>项目名称</td>'+
+                    '<td>订单号</td>'+
+                    '<td>交易时间</td>'+
+                    '<td>交易类型</td>'+
+                    '<td>交易金额</td>'+
+                    '<td>交易状态</td>'+
+                  '</tr>'+
+                '</thead>'+
+            '</table>'+
+        '</div>'+
+        	'<div id="pagination">'+
+            	'<a id="prePage_1" href="javascript:void(0)" onclick="pageDown(1,1)">上一页</a>'+
+                	'<span id="currPage_1">1</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span id="totalPage_1">1</span>'+
+                '<a id="nextPage_1" href="javascript:void(0)" onclick="pageDown(2,1)">下一页</a>'+
+            '</div>'+
+        '</div>');
 	}
 	})
 /*红包记录*/
@@ -1180,52 +1221,294 @@ app.views.redPacketDetail = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		$(this.el).html("红包记录")
+		$(this.el).html('<div class="credit_lending">'+
+            '<h2>我的红包</h2>'+
+            '<div class="lending_table">'+
+            '<table width="100%" border="0" id="pro_table">'+
+                '<thead>'+
+                  '<tr>'+
+                  	'<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>发放日期</td>'+
+                    '<td>红包金额</td>'+
+                    '<td>红包类型</td>'+
+                    '<td>红包状态</td>'+
+                    '<td>消费日期</td>'+
+                  '</tr>'+
+                '</thead>'+
+               '<tbody><tr><td width="5%"></td><td>1</td><td>2015-05-14 23:25</td><td>10</td><td>注册红包</td><td class="lq_btn"><a href="javascript:void(0)" onclick="receiveRE(60001702)">领取</a></td><td></td></tr></tbody></table>'+
+               
+            '</div>'+
+            '<!-- 分页  -->'+
+          '<div id="pagination">'+
+            '<a id="prePage" href="javascript:void(0)" onclick="pageDown(1)">上一页</a>'+
+            '<span id="currPage">1</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span id="totalPage">1</span>'+
+            '<a id="nextPage" href="javascript:void(0)" onclick="pageDown(2)">下一页</a>'+
+          '</div>'+
+            '<div class="clear"></div>'+
+        '</div>')
 	}
 	})
 /*安全问题*/
 app.views.safeQusetion = Backbone.View.extend({
 	el:".mb_right",
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="account_security">'+
+            '<h2>温馨提示：您好，您的安全问题未设置，请填写以下信息进行设置</h2>'+
+            '<ul>'+
+                '<p>请在下面的下拉列表中选择问题，并在答案部分予以回答。<br>注意：回答安全问题是您修改手机号码，变更邮箱，找回密码和修改银行账号的必备验证程序，请妥善保存您的安全问题及答案，谢谢。</p>'+
+                '<li><h4>问题一：</h4>'+
+                    '<span>'+
+                       '<select id="question1" name="请选择">'+
+                           '<option>我的出生地在哪？</option>'+
+                           '<option>我的母亲叫什么？</option>'+
+                           '<option>我的星座是什么？</option>'+
+                           
+                       '</select>'+
+                     '</span>'+
+                '</li>'+
+                '<li><h4>答案一：</h4><span><input id="answer1" name="answer1" type="text"></span><i id="answer1Notice" class="ts"></i></li>'+
+                '<li><h4>问题二：</h4>'+
+                    '<span>'+
+                       '<select id="question2" name="请选择">'+
+                           '<option>我最喜欢的食物是什么？</option>'+
+                           '<option>我最喜欢的电影是什么？</option>'+
+                           '<option>我最喜欢的歌曲是什么？</option>'+
+                       '</select>'+
+                     '</span>'+
+                '</li>'+
+                '<li><h4>答案二：</h4><span><input id="answer2" name="answer2" type="text"></span><i id="answer2Notice" class="ts"></i></li>'+
+                '<a onclick="secQuesSubmit();" class="confirm_btn">提交更新</a>'+
+                '<!-- <div class="cancel_btn"><a href="#">取消</a></div> -->'+
+            '</ul>'+
+            '<div class="clear"></div>'+
+        '</div>')
+	}
 	})
 /*邮箱验证*/
 app.views.emailVerify = Backbone.View.extend({
 	el:".mb_right",
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="email_authentication">'+
+            '<h2>邮箱认证</h2>'+
+            '<ul>'+
+               '<h4>请输入您的邮箱地址:</h4>'+
+               '<li class="form-item">'+
+                 '<input type="text" value="" id="myEmail" class="shadow-none">'+
+                 '<i class="glyphicon glyphicon-envelope"></i>'+
+               '</li>'+
+               '<li id="mailNotice"></li>'+
+               '<li id="sendBtn" class="basics_btn"><a id="bindBtn" onclick="mailAuthSend()">绑定</a></li>'+
+               '<li id="mailLoginBtn" class="basics_btn" style="display:none"><a onclick="mailAuthSend()">登录邮箱</a></li>'+
+               '<div class="clear"></div>'+
+            '</ul>'+
+            
+        '</div>')
+	}
 	})
 /*修改手机*/
 app.views.setPhone = Backbone.View.extend({
 	el:".mb_right",
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="bankcard" style="position:relative;">'+
+	            '<h2>用户手机修改</h2>'+
+	            '<ul>'+
+	                '<li><h4>用户名:</h4>jiumogaoao86</li>'+
+	                '<li><h4>新手机号:</h4><span><input id="phoneNumber" name="phoneNumber" type="text" onfocus="phoneCheck();" onblur="phoneCheck();"></span><i id="phoneNumberNotice" class="in_notice" style="margin-top:145px;margin-left:290px;"></i></li>'+
+	                '<li>'+
+		                '<h4>输入验证码:</h4><span><input id="msgValidCode" name="msgValidCode" type="text" onfocus="msgValidCodeCheck();" onblur="msgValidCodeCheck();"></span><i id="msgValidNotice" class="in_notice" style="margin-top:190px;margin-left:290px;"></i>'+
+		                '<h4 class="yzm" style="position:absolute; right:205px; top:194px;width:150px;"><a id="btnSendmsg" href="javascript:void(0)" onclick="msgSendCheck()" style="width:150px; height:30px; line-height:30px; box-shadow:none;">[获取验证码]</a></h4>'+
+	                '</li>'+
+	                '<div class="bankcard_confirm"><a href="javascript:void(0)" onclick="submitCheck()">确&nbsp;&nbsp;认</a></div>'+
+	            '</ul>'+
+	            '<div class="clear"></div>'+
+	        '</div>')
+	}
 	})
 /*修改资料*/
 app.views.setDetail = Backbone.View.extend({
 	el:".mb_right",
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="bankcard">'+
+            '<h2>用户资料修改</h2>'+
+            '<form action="/user/updateUser" method="post" id="modifyUserForm" name="modifyUserForm">'+
+	            '<ul>'+
+	              '<li><h4>用户名:</h4>jiumogaoao86</li>'+
+	              '<li><h4>手机号:</h4>13692146343<a href="tel">[修改]</a></li>'+
+	              '<li><h4>邮箱:</h4><a href="mailAuthenticate">[绑定]</a></li>'+
+	              '<li><h4>真实姓名:</h4>'+
+	              '<span>'+
+		              '<span>'+
+		              	
+			              	'<input id="name" name="name" type="text" value="" onblur="modifyUserCheck()">'+
+		              	
+		              	
+		              '</span>'+
+	              '</span>'+
+	              '<i id="nameNotice" class="ts"></i></li>'+
+	              '<!-- '+
+	              '<li><h4>性别:</h4>'+
+	              '<span>'+
+	              	'<input type="radio" name="sex" value="0" checked="checked" onclick="doCheck(this.value);" />男'+
+	              	'<input type="radio" name="sex" value="1" onclick="doCheck(this.value);" />女'+
+	              '</span>'+
+	              '<i id="passwordNotice" class="ts"></i></li>'+
+	               '-->'+
+	              '<li><h4>紧急联系人:</h4><span><input id="emerName" name="emerName" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="emerNameNotice" class="ts"></i></li>'+
+	              '<li><h4>联系人手机号:</h4><span><input id="emerTel" name="emerTel" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="emerTelNotice" class="ts"></i></li>'+
+	              '<li><h4>居住地址:</h4><span><input id="address" name="address" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="addressNotice" class="ts"></i></li>'+
+	              '<li><h4>最高学历:</h4><span><input id="education" name="education" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="educationNotice" class="ts"></i></li>'+
+	              '<li><h4>毕业院校:</h4><span><input id="schoolName" name="schoolName" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="schoolNameNotice" class="ts"></i></li>'+
+	              '<li><h4>职位:</h4><span><input id="position" name="position" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="positionNotice" class="ts"></i></li>'+
+	              '<li><h4>所在公司:</h4><span><input id="userCorp" name="userCorp" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<i id="userCorpNotice" class="ts"></i></li>'+
+	              '<div class="bankcard_confirm"><a onclick="submitValid();">确&nbsp;&nbsp;认</a></div>'+
+	            '</ul>'+
+            '</form>'+
+            '<div class="clear"></div>'+
+        '</div>')
+	}
 	})
 /*修改密码*/
 app.views.setPassWord = Backbone.View.extend({
 	el:".mb_right",
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="bankcard">'+
+            '<h2>登录密码修改</h2>'+
+            '<form action="/user/modifypassword" method="post" id="pwdModifyForm"> '+
+            '<ul>'+
+                '<li><h4>用户名:</h4>jiumogaoao86</li>'+
+                '<li><h4>原密码:</h4><span><input id="password" name="password" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="passwordNotice" class="ts"></i></li>'+
+                '<li><h4>新密码:</h4><span><input id="newPassword" name="newPassword" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="newPasswordNotice" class="ts"></i></li>'+
+                '<li class="pw_ts"><h4>密码规则：</h4>8-16个字符的英文字母、符号和数字组合</li>'+
+                '<!--  <li><h4>密码强度:</h4><h5 class="pg_bar"><b id="" style="width:352px;"></b></h5></li>-->'+
+                '<li><h4>再次输入密码:</h4><span><input id="passagain" name="passagain" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="passagainNotice" class="ts"></i></li>'+
+                '<div class="bankcard_confirm"><a onclick="submitValid();">确&nbsp;&nbsp;认</a></div>'+
+            '</ul>'+
+            '</form>'+
+            '<div class="clear"></div>'+
+        '</div>')
+	}
 	})
 /*后台部分************************************************************************************/
 /*管理员管理*/
 app.views.adminManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>姓名</td>'+
+                    '<td>客户管理</td>'+
+                    '<td>管理员管理</td>'+
+                    '<td>公告管理</td>'+
+                    '<td>招聘管理</td>'+
+                    '<td>企业信息管理</td>'+
+                    '<td>产品管理</td>'+
+                    '<td>宣传管理</td>'+
+                    '<td>红包管理</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>')
+	}
 	})
 /*公告管理*/
 app.views.announcementManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>标题</td>'+
+                    '<td>描述</td>'+
+                    '<td>开始时间</td>'+
+                    '<td>结束时间</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>');
+	}
 	})
 /*客户管理*/
 app.views.clientManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>用户名</td>'+
+                    '<td>头像</td>'+
+                    '<td>住址</td>'+
+                    '<td>邮箱</td>'+
+                    '<td>姓名</td>'+
+                    '<td>邮箱</td>'+
+                    '<td>联系方式</td>'+
+                    '<td>联系电话</td>'+
+                    '<td>学历</td>'+
+                    '<td>学校</td>'+
+                    '<td>工作</td>'+
+                    '<td>公司</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>')
+	}
 	})
 /*客户详情*/
 app.views.clientDetail = Backbone.View.extend({
@@ -1237,24 +1520,156 @@ app.views.clientDetail = Backbone.View.extend({
 app.views.procedureManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>标题</td>'+
+                    '<td>副标题</td>'+
+                    '<td>图片</td>'+
+                    '<td>价格</td>'+
+                    '<td>原价</td>'+
+                    '<td>金额</td>'+
+                    '<td>比数</td>'+
+                    '<td>份数</td>'+
+                    '<td>期限</td>'+
+                    '<td>最大单位</td>'+
+                    '<td>最小单位</td>'+
+                    '<td>税费预算</td>'+
+                    '<td>面积</td>'+
+                    '<td>原单价</td>'+
+                    '<td>单价</td>'+
+                    '<td>开发商</td>'+
+                    '<td>地址</td>'+
+                    '<td>装修</td>'+
+                    '<td>物业类型</td>'+
+                    '<td>开始时间</td>'+
+                    '<td>建造时间</td>'+
+                    '<td>产权类型</td>'+
+                    '<td>租约</td>'+
+                    '<td>年收益率</td>'+
+                    '<td>增值</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>');
+	}
 	})
 /*招聘管理 公司资料管理*/
 app.views.recruitManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>标题</td>'+
+                    '<td>内容</td>'+
+                    '<td>开始时间</td>'+
+                    '<td>结束时间</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>')
+	}
 	})
 /*宣传管理*/
 app.views.promotionManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>页面</td>'+
+                    '<td>位置</td>'+
+                    '<td>内容</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>')
+	}
 	})
 
 /*红包管理*/
 app.views.redPacketManage = Backbone.View.extend({
 	el:".right",
 	data:{},
-	render:function(){}
+	render:function(){
+		$(this.el).html('<div class="right_table">'+
+            '<table id="table1" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>用户Id</td>'+
+                    '<td>金额</td>'+
+                    '<td>类型</td>'+
+                    '<td>发放时间</td>'+
+                    '<td>截止时间</td>'+
+                  '</tr>'+
+                '</thead>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                  '</tr>'+
+            '</table>'+
+        '</div>')
+	}
 });
