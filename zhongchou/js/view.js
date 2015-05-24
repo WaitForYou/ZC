@@ -1402,38 +1402,35 @@ app.views.adminManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data)
 		$(this.el).html('<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="tableadmin" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
                     '<td>姓名</td>'+
-                    '<td>客户管理</td>'+
-                    '<td>管理员管理</td>'+
-                    '<td>公告管理</td>'+
-                    '<td>招聘管理</td>'+
-                    '<td>企业信息管理</td>'+
-                    '<td>产品管理</td>'+
-                    '<td>宣传管理</td>'+
-                    '<td>红包管理</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
+                    //'<td>公告管理</td>'+
+                   // '<td>招聘管理</td>'+
+                    //'<td>企业信息管理</td>'+
+                   // '<td>产品管理</td>'+
+                   // '<td>宣传管理</td>'+
+                   // '<td>红包管理</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                  '</tr>'+
             '</table>'+
-        '</div>')
+        '</div>');
+        $.each(this.data,function(i,n){
+        	$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.userName+'</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>').appendTo($("#tableadmin"));
+        });
 	}
 	})
 /*公告管理*/
@@ -1441,28 +1438,33 @@ app.views.announcementManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data)
 		$(this.el).html('<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="tableannouncement" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
                     '<td>标题</td>'+
                     '<td>描述</td>'+
-                    '<td>开始时间</td>'+
-                    '<td>结束时间</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
+                    //'<td>开始时间</td>'+
+                    //'<td>结束时间</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                  '</tr>'+
             '</table>'+
         '</div>');
+        $.each(this.data,function(i,n){
+        	$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.title+'</td>'+
+                    '<td>'+n.message+'</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>').appendTo($("#tableannouncement"))
+        })
 	}
 	})
 /*客户管理*/
@@ -1470,44 +1472,41 @@ app.views.clientManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data)
 		$(this.el).html('<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="tableclient" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
                     '<td>用户名</td>'+
-                    '<td>头像</td>'+
-                    '<td>住址</td>'+
-                    '<td>邮箱</td>'+
-                    '<td>姓名</td>'+
-                    '<td>邮箱</td>'+
-                    '<td>联系方式</td>'+
-                    '<td>联系电话</td>'+
-                    '<td>学历</td>'+
-                    '<td>学校</td>'+
-                    '<td>工作</td>'+
-                    '<td>公司</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
+                    //'<td>头像</td>'+
+                    //'<td>住址</td>'+
+                    //'<td>邮箱</td>'+
+                    //'<td>姓名</td>'+
+                    //'<td>邮箱</td>'+
+                    //'<td>联系方式</td>'+
+                    //'<td>联系电话</td>'+
+                    //'<td>学历</td>'+
+                    //'<td>学校</td>'+
+                    //'<td>工作</td>'+
+                    //'<td>公司</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                  '</tr>'+
             '</table>'+
         '</div>')
+        $.each(this.data,function(i,n){
+        	$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.userName+'</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>').appendTo($("#tableclient"))
+        });
+		
 	}
 	})
 /*客户详情*/
@@ -1521,70 +1520,56 @@ app.views.procedureManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data);
 		$(this.el).html('<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="tableprocedure" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
                     '<td>标题</td>'+
-                    '<td>副标题</td>'+
-                    '<td>图片</td>'+
-                    '<td>价格</td>'+
-                    '<td>原价</td>'+
-                    '<td>金额</td>'+
-                    '<td>比数</td>'+
-                    '<td>份数</td>'+
-                    '<td>期限</td>'+
-                    '<td>最大单位</td>'+
-                    '<td>最小单位</td>'+
-                    '<td>税费预算</td>'+
-                    '<td>面积</td>'+
-                    '<td>原单价</td>'+
-                    '<td>单价</td>'+
-                    '<td>开发商</td>'+
-                    '<td>地址</td>'+
-                    '<td>装修</td>'+
-                    '<td>物业类型</td>'+
-                    '<td>开始时间</td>'+
-                    '<td>建造时间</td>'+
-                    '<td>产权类型</td>'+
-                    '<td>租约</td>'+
-                    '<td>年收益率</td>'+
-                    '<td>增值</td>'+
+                    '<td>描述</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
+                    //'<td>副标题</td>'+
+                    //'<td>图片</td>'+
+                    //'<td>价格</td>'+
+                    //'<td>原价</td>'+
+                    //'<td>金额</td>'+
+                    //'<td>比数</td>'+
+                    //'<td>份数</td>'+
+                    //'<td>期限</td>'+
+                    //'<td>最大单位</td>'+
+                    //'<td>最小单位</td>'+
+                    //'<td>税费预算</td>'+
+                    //'<td>面积</td>'+
+                    //'<td>原单价</td>'+
+                    //'<td>单价</td>'+
+                    //'<td>开发商</td>'+
+                    //'<td>地址</td>'+
+                    //'<td>装修</td>'+
+                    //'<td>物业类型</td>'+
+                    //'<td>开始时间</td>'+
+                    //'<td>建造时间</td>'+
+                    //'<td>产权类型</td>'+
+                    //'<td>租约</td>'+
+                    //'<td>年收益率</td>'+
+                    //'<td>增值</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                  '</tr>'+
+                
             '</table>'+
         '</div>');
+		$.each(this.data,function(i,n){
+			$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.title+'</td>'+
+                    '<td>'+n.subhead+'</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>').appendTo($("#tableprocedure"))
+		})
 	}
 	})
 /*招聘管理 公司资料管理*/
@@ -1592,28 +1577,33 @@ app.views.recruitManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data)
 		$(this.el).html('<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="tablerecruit" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
                     '<td>标题</td>'+
-                    '<td>内容</td>'+
-                    '<td>开始时间</td>'+
-                    '<td>结束时间</td>'+
+                    '<td>描述</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
+                    //'<td>开始时间</td>'+
+                    //'<td>结束时间</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                  '</tr>'+
             '</table>'+
-        '</div>')
+        '</div>');
+        $.each(this.data,function(i,n){
+        	$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.title+'</td>'+
+                    '<td>'+n.message+'</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>').appendTo($("#tablerecruit"));
+        })
 	}
 	})
 /*宣传管理*/
@@ -1621,6 +1611,7 @@ app.views.promotionManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data);
 		$(this.el).html('<div class="right_table">'+
             '<table id="table1" width="100%" border="0">'+
                 '<thead>'+
@@ -1629,15 +1620,217 @@ app.views.promotionManage = Backbone.View.extend({
                     '<td>编号</td>'+
                     '<td>页面</td>'+
                     '<td>位置</td>'+
-                    '<td>内容</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
                   '</tr>'+
                 '</thead>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
+                    '<td>001</td>'+
+                    '<td>首页</td>'+
+                    '<td>首页广告一</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>首页</td>'+
+                    '<td>首页广告二</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>首页</td>'+
+                    '<td>首页广告三</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>首页</td>'+
+                    '<td>首页饼状图</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>首页</td>'+
+                    '<td>首页波浪图</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>首页</td>'+
+                    '<td>首页雷达图</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>众筹步聚</td>'+
+                    '<td>众筹步聚一</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>众筹步聚</td>'+
+                    '<td>众筹步聚二</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>众筹步聚</td>'+
+                    '<td>众筹步聚三</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>众筹步聚</td>'+
+                    '<td>众筹步聚四</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>众筹步聚</td>'+
+                    '<td>众筹步聚五</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>常见问题</td>'+
+                    '<td>常见问题一</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>常见问题</td>'+
+                    '<td>常见问题二</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>常见问题</td>'+
+                    '<td>常见问题三</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>常见问题</td>'+
+                    '<td>常见问题四</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>常见问题</td>'+
+                    '<td>常见问题五</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>常见问题</td>'+
+                    '<td>常见问题六</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>领头大大</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>领头大大</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>中部小头像</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>中部小头像</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>中部小头像</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>中部小头像</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>中部小头像</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>底部专栏一</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>'+
+                '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>002</td>'+
+                    '<td>团队介绍</td>'+
+                    '<td>底部专栏二</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
                   '</tr>'+
             '</table>'+
         '</div>')
@@ -1649,27 +1842,30 @@ app.views.redPacketManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		console.log(this.data);
 		$(this.el).html('<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="tableredPacket" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
                     '<td>用户Id</td>'+
                     '<td>金额</td>'+
-                    '<td>类型</td>'+
-                    '<td>发放时间</td>'+
-                    '<td>截止时间</td>'+
+                    '<td width="5%">编辑</td>'+
+                    '<td width="5%">删除</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                  '</tr>'+
             '</table>'+
-        '</div>')
+        '</div>');
+        $.each(this.data,function(i,n){
+        	$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.userId+'</td>'+
+                    '<td>'+n.money+'</td>'+
+                    '<td width="5%"></td>'+
+                    '<td width="5%"></td>'+
+                  '</tr>').appendTo($("#tableredPacket"))
+        })
 	}
 });

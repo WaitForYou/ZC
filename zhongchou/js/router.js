@@ -595,7 +595,7 @@ app.objs.routeTable={
 		app.apis.getpromotion(data,function(promotion){
 			/*出页面*/
 			app.objs.promotionManageV.el=".mb_right";
-			app.objs.promotionManageV.data(promotion)
+			app.objs.promotionManageV.data=promotion;
 			app.objs.promotionManageV.render();
 			})
 		}
