@@ -1,4 +1,22 @@
 /*公共部分********************************************************************************/	
+function popOpen(fn,closeFn){
+	if(fn){
+		fn();
+		}
+		$("#pop").show();
+		$("#popClose").unbind("click").bind("click",function(){
+			if(closeFn){
+				popClose(closeFn);
+				}
+			});
+	}
+function popClose(fn){
+	if(fn){
+		fn();
+		}
+		$("#pop").hide();
+		$("#popMain").empty();
+	}
 /*头部*/
 app.views.head = Backbone.View.extend({
 	type:0,/*0普通，1空间,2管理*/
