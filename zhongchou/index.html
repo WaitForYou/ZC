@@ -90,7 +90,7 @@
     	
     </div>
     <div id="pop">
-    <div id="popClose">X</div>
+    <div id="popClose"></div>
     <div id="popMain"></div>
     </div>
     <div id="popBg"></div>
@@ -110,6 +110,16 @@
      $(document).ready(function(){   
         app.initialize();
       });
+	  $("#pop").css("left",($(window).width()-$("#pop").width())/2);
+		  $("#pop").css("top",($(window).height()-$("#pop").height())/2);
+		  $("#popBg").width($(window).width());
+		  $("#popBg").height($(window).height());
+	  $(window).on("resize",function(){
+		  $("#pop").css("left",($(window).width()-$("#pop").width())/2);
+		  $("#pop").css("top",($(window).height()-$("#pop").height())/2);
+		  $("#popBg").width($(window).width());
+		  $("#popBg").height($(window).height());
+		  });
     </script>
     </body>
 </html>

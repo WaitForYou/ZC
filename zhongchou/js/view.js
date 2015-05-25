@@ -1420,27 +1420,41 @@ app.views.adminManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
-		function templateFn(data,disable){
+		function templateFn(state,data){
 			var templateData={};
 			if(data){
-				templateData=$.extend(templateData,data);
+				templateData=data;
 				}
-		var templateState="";
-		if(disable){
-			templateState="disable";
+		var templateState="disable";
+		if(state){
+			templateState="";
 			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft"></div>'+
 				'<div class="templatePointRight"></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
-		templateDom.appendTo($("#"))
+		templateDom.appendTo($("#popMain"));
 			}
-		
-		function remove(){}
-		function show(){}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
@@ -1471,7 +1485,22 @@ app.views.adminManage = Backbone.View.extend({
                     '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tableadmin"));
 				newPoint.data("result",n);
+				newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
         });
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
+		
 	}
 	})
 /*公告管理*/
