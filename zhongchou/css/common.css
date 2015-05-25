@@ -2088,3 +2088,26 @@ iframe.twitter-share-button {
 	background-image:url(../images/close.png);
 	cursor:pointer;
 	}
+.templateTable{
+	margin:40px;
+	border-top:1px solid #666;
+	}
+.templatePoint{
+	border-left:1px solid #666;
+	border-right:1px solid #666;
+	border-bottom:1px solid #666}
+.templatePointLeft{
+	float:left;
+	width:220px;
+	padding-top:10px;
+	padding-bottom:10px;
+	text-align:center;
+	}
+.templatePointRight{
+	float:left;
+	width:597px;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-left:1px solid #666;
+	text-align:center;
+	}

@@ -1421,7 +1421,7 @@ app.views.adminManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		function templateFn(state,data){
-			var templateData={};
+			var templateData={admin: false,announcement: false,client: false,company: false,id: "001",product: false,promotion: false,recruit: false,redPacket: false,userName: "001"};
 			if(data){
 				templateData=data;
 				}
@@ -1432,8 +1432,13 @@ app.views.adminManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">用户名</div>'+
+				'<div class="templatePointRight">'+templateData.userName+'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
@@ -1509,10 +1514,41 @@ app.views.announcementManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data)
-		function add(){}
-		function edit(){}
-		function remove(){}
-		function show(){}
+		function templateFn(state,data){
+			var templateData={end: 0,id: "001",message: "中筹网金唐人：2015，房地产众筹怎么玩？",start: 0,title: "中筹网金唐人：2015，房地产众筹怎么玩？"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
@@ -1550,10 +1586,41 @@ app.views.clientManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data)
-		function add(){}
-		function edit(){}
-		function remove(){}
-		function show(){}
+		function templateFn(state,data){
+			var templateData={company: "你妹的",contacts: "sddfsf",contactsPhone: "34242",email: "dcghf@tgh.com",id: "001",image: "http://",job: "做你妹",name: "fdgh",phone: "6575798",place: "bb",record: "本科",type: 1,university: "你妹的学校",userName: "aa"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
@@ -1605,10 +1672,41 @@ app.views.procedureManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		function add(){}
-		function edit(){}
-		function remove(){}
-		function show(){}
+		function templateFn(state,data){
+			var templateData={UnitPrice: 9,area: 1223,buildTime: 1024,copy: 20,costPrice: 2000,costUnitPrice: 10,decorate: "一般",developer: "你妹",haveLease: 0,id: "001",image:["http://","http://"],maxTime: 10086,maxUnit: 200,minUnit: 1,money: 20000,more: 0,payed: 10000,payedCount: 10,place: "那个地址",price: 1000,propertyType: "公寓",rightType: "商业用房",stratTime: 0,subhead: "nnnn",tax: 8,title: "aa",yearReturn: "15%以上"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
@@ -1669,10 +1767,41 @@ app.views.recruitManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		function add(){}
-		function edit(){}
-		function remove(){}
-		function show(){}
+		function templateFn(state,data){
+			var templateData={end: 1008611,id: "002",message: "fkdjf",start: 0,title: "bhk"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
@@ -1710,10 +1839,41 @@ app.views.promotionManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		function add(){}
-		function edit(){}
-		function remove(){}
-		function show(){}
+		function templateFn(state,data){
+			var templateData={data: [],dsc: "从投前筛选、投后管理到获利退出，全方位为众筹人保驾护航。",dsc_1: "风险控制,小组由专业、稳健、实战经验丰富的房地产相关产业链专家组成",id: "004",name: "360°全方位风险控制"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
@@ -1947,10 +2107,41 @@ app.views.redPacketManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		function add(){}
-		function edit(){}
-		function remove(){}
-		function show(){}
+		function templateFn(state,data){
+			var templateData={end: 0,id: "001",money: 0,strat: 0,type: 0,userId: "001"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			var openfn=function(){new templateFn(2,target.dataResult)};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.dataResult)};
+			popOpen(openfn,function(){});
+			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="right_table">'+
