@@ -408,3 +408,18 @@ background: #ca5062;border-radius: 3px;box-shadow: 0 3px 0 0 #b23b4c;font-size: 
 .search_area h4 { display:block; float:left; width:80px; height:36px; line-height:30px; text-align:left; font-size:14px;}
 .search_area select { width:200px; height:30px; margin-bottom:0;outline:none; font-size:14px;}
 .search_area input {  width: 80px;height:30px; text-align: center;color: #fff;line-height: 30px;text-align: center;background:#4e7199;border-radius: 3px;font-size: 14px; border:none; margin-left:20px; outline:none;cursor:pointer; font-size:14px;}
+.tableButton{
+	width:24px;height:24px;
+	cursor:pointer;
+	}
+.tableButton.edit{
+	background-image:url(../images/edit.png)}
+.tableButton.remove{
+	background-image:url(../images/remove.png)}
+.addButton{
+	line-height:24px;
+	font-size:18px;
+	font-weight:bold;
+	cursor:pointer;
+	}
+	

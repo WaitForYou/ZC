@@ -1420,8 +1420,30 @@ app.views.adminManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
-		console.log(this.data)
-		$(this.el).html('<div class="right_table">'+
+		function templateFn(data,disable){
+			var templateData={};
+			if(data){
+				templateData=$.extend(templateData,data);
+				}
+		var templateState="";
+		if(disable){
+			templateState="disable";
+			};
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+		'</div>')
+		templateDom.appendTo($("#"))
+			}
+		
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="tableadmin" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1441,13 +1463,14 @@ app.views.adminManage = Backbone.View.extend({
             '</table>'+
         '</div>');
         $.each(this.data,function(i,n){
-        	$('<tr>'+
+        	var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
                     '<td>'+n.userName+'</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tableadmin"));
+				newPoint.data("result",n);
         });
 	}
 	})
@@ -1457,7 +1480,13 @@ app.views.announcementManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data)
-		$(this.el).html('<div class="right_table">'+
+		function add(){}
+		function edit(){}
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="tableannouncement" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1474,14 +1503,15 @@ app.views.announcementManage = Backbone.View.extend({
             '</table>'+
         '</div>');
         $.each(this.data,function(i,n){
-        	$('<tr>'+
+        	var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
                     '<td>'+n.title+'</td>'+
                     '<td>'+n.message+'</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
-                  '</tr>').appendTo($("#tableannouncement"))
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
+                  '</tr>').appendTo($("#tableannouncement"));
+				  newPoint.data("result",n);
         })
 	}
 	})
@@ -1491,7 +1521,13 @@ app.views.clientManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data)
-		$(this.el).html('<div class="right_table">'+
+		function add(){}
+		function edit(){}
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="tableclient" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1516,13 +1552,14 @@ app.views.clientManage = Backbone.View.extend({
             '</table>'+
         '</div>')
         $.each(this.data,function(i,n){
-        	$('<tr>'+
+        	var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
                     '<td>'+n.userName+'</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
-                  '</tr>').appendTo($("#tableclient"))
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
+                  '</tr>').appendTo($("#tableclient"));
+				  newPoint.data("result",n);
         });
 		
 	}
@@ -1539,7 +1576,13 @@ app.views.procedureManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		$(this.el).html('<div class="right_table">'+
+		function add(){}
+		function edit(){}
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="tableprocedure" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1579,14 +1622,15 @@ app.views.procedureManage = Backbone.View.extend({
             '</table>'+
         '</div>');
 		$.each(this.data,function(i,n){
-			$('<tr>'+
+			var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
                     '<td>'+n.title+'</td>'+
                     '<td>'+n.subhead+'</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
-                  '</tr>').appendTo($("#tableprocedure"))
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
+                  '</tr>').appendTo($("#tableprocedure"));
+				  newPoint.data("result",n);
 		})
 	}
 	})
@@ -1595,8 +1639,14 @@ app.views.recruitManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
-		console.log(this.data)
-		$(this.el).html('<div class="right_table">'+
+		console.log(this.data);
+		function add(){}
+		function edit(){}
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="tablerecruit" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1613,14 +1663,15 @@ app.views.recruitManage = Backbone.View.extend({
             '</table>'+
         '</div>');
         $.each(this.data,function(i,n){
-        	$('<tr>'+
+        	var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
                     '<td>'+n.title+'</td>'+
                     '<td>'+n.message+'</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tablerecruit"));
+				  newPoint.data("result",n);
         })
 	}
 	})
@@ -1630,7 +1681,13 @@ app.views.promotionManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		$(this.el).html('<div class="right_table">'+
+		function add(){}
+		function edit(){}
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="table1" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1647,208 +1704,208 @@ app.views.promotionManage = Backbone.View.extend({
                     '<td>001</td>'+
                     '<td>首页</td>'+
                     '<td>首页广告一</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>首页</td>'+
                     '<td>首页广告二</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>首页</td>'+
                     '<td>首页广告三</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>首页</td>'+
                     '<td>首页饼状图</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>首页</td>'+
                     '<td>首页波浪图</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>首页</td>'+
                     '<td>首页雷达图</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>众筹步聚</td>'+
                     '<td>众筹步聚一</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>众筹步聚</td>'+
                     '<td>众筹步聚二</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>众筹步聚</td>'+
                     '<td>众筹步聚三</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>众筹步聚</td>'+
                     '<td>众筹步聚四</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>众筹步聚</td>'+
                     '<td>众筹步聚五</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>常见问题</td>'+
                     '<td>常见问题一</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>常见问题</td>'+
                     '<td>常见问题二</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>常见问题</td>'+
                     '<td>常见问题三</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>常见问题</td>'+
                     '<td>常见问题四</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>常见问题</td>'+
                     '<td>常见问题五</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>常见问题</td>'+
                     '<td>常见问题六</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>领头大大</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>领头大大</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>中部小头像</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>中部小头像</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>中部小头像</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>中部小头像</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>中部小头像</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>底部专栏一</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
                 '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>002</td>'+
                     '<td>团队介绍</td>'+
                     '<td>底部专栏二</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>'+
             '</table>'+
         '</div>')
@@ -1861,7 +1918,13 @@ app.views.redPacketManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		$(this.el).html('<div class="right_table">'+
+		function add(){}
+		function edit(){}
+		function remove(){}
+		function show(){}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
             '<table id="tableredPacket" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -1876,14 +1939,15 @@ app.views.redPacketManage = Backbone.View.extend({
             '</table>'+
         '</div>');
         $.each(this.data,function(i,n){
-        	$('<tr>'+
+        	var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
                     '<td>'+n.userId+'</td>'+
                     '<td>'+n.money+'</td>'+
-                    '<td width="5%"></td>'+
-                    '<td width="5%"></td>'+
-                  '</tr>').appendTo($("#tableredPacket"))
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                    '<td width="5%"><div class="tableButton remove"></div></td>'+
+                  '</tr>').appendTo($("#tableredPacket"));
+				  newPoint.data("result",n);
         })
 	}
 });
