@@ -1421,7 +1421,19 @@ app.views.adminManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		function templateFn(state,data){
-			var templateData={admin: false,announcement: false,client: false,company: false,id: "001",product: false,promotion: false,recruit: false,redPacket: false,userName: "001"};
+			var templateData={
+				id: "001",
+				userName: "001",
+				admin: false,
+				client: false,
+				announcement: false,
+				company: false,
+				product: false,
+				promotion: false,
+				recruit: false,
+				redPacket: false
+				
+				};
 			if(data){
 				templateData=data;
 				}
@@ -1439,6 +1451,83 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">用户名</div>'+
 				'<div class="templatePointRight">'+templateData.userName+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">管理员管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">客户管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">公告管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">企业管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">产品管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">宣传管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">红包管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
@@ -1515,7 +1604,12 @@ app.views.announcementManage = Backbone.View.extend({
 	render:function(){
 		console.log(this.data)
 		function templateFn(state,data){
-			var templateData={end: 0,id: "001",message: "中筹网金唐人：2015，房地产众筹怎么玩？",start: 0,title: "中筹网金唐人：2015，房地产众筹怎么玩？"};
+			var templateData={
+				id: "001",
+				end: 0,
+				start: 0,
+				message: "中筹网金唐人：2015，房地产众筹怎么玩？",
+				title: "中筹网金唐人：2015，房地产众筹怎么玩？"};
 			if(data){
 				templateData=data;
 				}
@@ -1526,7 +1620,27 @@ app.views.announcementManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">标题</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">内容</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">开始时间</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">结束时间</div>'+
 				'<div class="templatePointRight"></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
@@ -1587,7 +1701,22 @@ app.views.clientManage = Backbone.View.extend({
 	render:function(){
 		console.log(this.data)
 		function templateFn(state,data){
-			var templateData={company: "你妹的",contacts: "sddfsf",contactsPhone: "34242",email: "dcghf@tgh.com",id: "001",image: "http://",job: "做你妹",name: "fdgh",phone: "6575798",place: "bb",record: "本科",type: 1,university: "你妹的学校",userName: "aa"};
+			var templateData={
+				id: "001",
+				userName: "aa",
+				image: "http://",
+				name: "fdgh",
+				company: "你妹的",
+				job: "做你妹",
+				contacts: "sddfsf",
+				contactsPhone: "34242",
+				email: "dcghf@tgh.com",
+				phone: "6575798",
+				place: "bb",
+				type: 1,
+				university: "你妹的学校",
+				record: "本科"
+				};
 			if(data){
 				templateData=data;
 				}
@@ -1598,7 +1727,72 @@ app.views.clientManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">用户名</div>'+
+				'<div class="templatePointRight">'+templateData.userName+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">头像</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">姓名</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">公司</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">工作</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">联系方式</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">联系电话</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">邮箱</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">手机</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">邮箱</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">住址</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">学校</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">专业</div>'+
 				'<div class="templatePointRight"></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
@@ -1673,7 +1867,34 @@ app.views.procedureManage = Backbone.View.extend({
 	render:function(){
 		console.log(this.data);
 		function templateFn(state,data){
-			var templateData={UnitPrice: 9,area: 1223,buildTime: 1024,copy: 20,costPrice: 2000,costUnitPrice: 10,decorate: "一般",developer: "你妹",haveLease: 0,id: "001",image:["http://","http://"],maxTime: 10086,maxUnit: 200,minUnit: 1,money: 20000,more: 0,payed: 10000,payedCount: 10,place: "那个地址",price: 1000,propertyType: "公寓",rightType: "商业用房",stratTime: 0,subhead: "nnnn",tax: 8,title: "aa",yearReturn: "15%以上"};
+			var templateData={
+				UnitPrice: 9,
+				area: 1223,
+				buildTime: 1024,
+				copy: 20,
+				costPrice: 2000,
+				costUnitPrice: 10,
+				decorate: "一般",
+				developer: "你妹",
+				haveLease: 0,
+				id: "001",
+				image:["http://","http://"],
+				maxTime: 10086,
+				maxUnit: 200,
+				minUnit: 1,
+				money: 20000,
+				more: 0,
+				payed: 10000,
+				payedCount: 10,
+				place: "那个地址",
+				price: 1000,
+				propertyType: "公寓",
+				rightType: "商业用房",
+				stratTime: 0,
+				subhead: "nnnn",
+				tax: 8,
+				title: "aa",
+				yearReturn: "15%以上"};
 			if(data){
 				templateData=data;
 				}
@@ -1684,7 +1905,163 @@ app.views.procedureManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">标题</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">副标</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">图片</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">价格</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">原价</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">金额</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">金额</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">已筹金额</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">众筹笔数</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">份数</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">持有限期</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">最小单位</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">最大单位</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">税费预算</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">面积</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">原单价</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">单价</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">开发商</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">地址</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">装修状况</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="3">无披房</option>'+
+						'<option value="1">豪华装修</option>'+
+						'<option value="2">简单专修</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">物业类型</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="2">产权房</option>'+
+						'<option value="1">无产权房</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">开始时间</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">建造时间</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">产权类型</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="2">产权房</option>'+
+						'<option value="1">无产权房</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">是否租约</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="2">否</option>'+
+						'<option value="1">是</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">年收益率</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">增值</div>'+
 				'<div class="templatePointRight"></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
@@ -1768,7 +2145,12 @@ app.views.recruitManage = Backbone.View.extend({
 	render:function(){
 		console.log(this.data);
 		function templateFn(state,data){
-			var templateData={end: 1008611,id: "002",message: "fkdjf",start: 0,title: "bhk"};
+			var templateData={
+				end: 1008611,
+				id: "002",
+				message: "fkdjf",
+				start: 0,
+				title: "bhk"};
 			if(data){
 				templateData=data;
 				}
@@ -1779,7 +2161,27 @@ app.views.recruitManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">标题</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">描述</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">开始时间</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">结束时间</div>'+
 				'<div class="templatePointRight"></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
@@ -2108,7 +2510,14 @@ app.views.redPacketManage = Backbone.View.extend({
 	render:function(){
 		console.log(this.data);
 		function templateFn(state,data){
-			var templateData={end: 0,id: "001",money: 0,strat: 0,type: 0,userId: "001"};
+			var templateData={
+				end: 0,
+				id: "001",
+				money: 0,
+				strat: 0,
+				type: 0,
+				userId: "001"
+				};
 			if(data){
 				templateData=data;
 				}
@@ -2119,8 +2528,38 @@ app.views.redPacketManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">账号</div>'+
+				'<div class="templatePointRight">'+templateData.userId+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">金额</div>'+
 				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">激活时间</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">截止时间</div>'+
+				'<div class="templatePointRight"></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">类型</div>'+
+				'<div class="templatePointRight">'+
+					'<select name="radius" id="radius">'+
+						'<option value="2">用户派发</option>'+
+						'<option value="1">系统派发</option>'+
+					'</select>'+
+				'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
