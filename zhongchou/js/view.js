@@ -1,9 +1,10 @@
 /*公共部分********************************************************************************/	
 function popOpen(fn,closeFn){
+	$("#pop").show();
 	if(fn){
 		fn();
 		}
-		$("#pop").show();
+		
 		$("#popClose").unbind("click").bind("click",function(){
 			if(closeFn){
 				popClose(closeFn);
@@ -1421,17 +1422,18 @@ app.views.adminManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		function templateFn(state,data){
+			console.log(data)
 			var templateData={
-				id: "001",
-				userName: "001",
-				admin: false,
-				client: false,
-				announcement: false,
-				company: false,
-				product: false,
-				promotion: false,
-				recruit: false,
-				redPacket: false
+				id: app.fns.uuid(),
+				userName: app.objs.user.get().userName,
+				admin: "0",
+				client: "0",
+				announcement: "0",
+				company: "0",
+				product: "0",
+				promotion: "0",
+				recruit: "0",
+				redPacket: "0"
 				
 				};
 			if(data){
@@ -1456,8 +1458,8 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">管理员管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="admin">'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1467,8 +1469,8 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">客户管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="client">'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1478,8 +1480,8 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">公告管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="announcement">'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1489,8 +1491,8 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">企业管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="company">'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1500,8 +1502,8 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">产品管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="product">'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1511,8 +1513,19 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">宣传管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="promotion">'+
+						'<option value="0">无权限</option>'+
+						'<option value="1">只读</option>'+
+						'<option value="2">修改</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">招聘管理</div>'+
+				'<div class="templatePointRight">'+
+					'<select to="recruit">'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1522,8 +1535,8 @@ app.views.adminManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">红包管理</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无权限</option>'+
+					'<select to="redPacket" readonly>'+
+						'<option value="0">无权限</option>'+
 						'<option value="1">只读</option>'+
 						'<option value="2">修改</option>'+
 					'</select>'+
@@ -1532,6 +1545,17 @@ app.views.adminManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
+		templateDom.find("select").each(function(){
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			});
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
@@ -1539,14 +1563,15 @@ app.views.adminManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -1602,14 +1627,16 @@ app.views.announcementManage = Backbone.View.extend({
 	el:".right",
 	data:{},
 	render:function(){
+		
 		console.log(this.data)
 		function templateFn(state,data){
+			var openTime=new Date().getTime();
 			var templateData={
-				id: "001",
-				end: 0,
-				start: 0,
-				message: "中筹网金唐人：2015，房地产众筹怎么玩？",
-				title: "中筹网金唐人：2015，房地产众筹怎么玩？"};
+				id: app.fns.uuid(),
+				end: new Date().getTime()+24*3600*1000,
+				start: new Date().getTime(),
+				message: "<h1>eee</h1>",
+				title: ""};
 			if(data){
 				templateData=data;
 				}
@@ -1626,41 +1653,73 @@ app.views.announcementManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">标题</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="title" formtype="simple" value="'+templateData.title+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">内容</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_message" to="message" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">开始时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="start" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">结束时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="end" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		templateDom.appendTo($("#popMain"));
+		templateDom.find("[formtype='html']").each(function(){
+			
+			var to = $(this).attr("to")
+			console.log($(this))
+			var ue = UE.getEditor($(this).attr("id"));
+			console.log("a")	
+			ue.addListener( 'ready', function( editor ) {
+				console.log("b")	
+     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
+ } );			
+		ue.addListener( 'afterSelectionChange', function( editor ) {
+     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
+ } );		
+			
+			});
+		
+		templateDom.find("[formtype='date']").each(
+			function(){
+				$(this).datepicker({
+					onSelect:function( event,ui ) {
+						templateData[$(this).attr("to")]=app.fns.d2t($(this).val());
+						}
+					}).datepicker("setDate", app.fns.t2d(templateData[$(this).attr("to")]));
+			}
+		)
+		templateDom.find("[formtype='simple']").each(
+			function(){$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})}
+		)
+		
 			}
 		function add(target){
 			var openfn=function(){new templateFn(1,null)};
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -1691,7 +1750,21 @@ app.views.announcementManage = Backbone.View.extend({
                     '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tableannouncement"));
 				  newPoint.data("result",n);
-        })
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
+        });
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
 	}
 	})
 /*客户管理*/
@@ -1702,8 +1775,8 @@ app.views.clientManage = Backbone.View.extend({
 		console.log(this.data)
 		function templateFn(state,data){
 			var templateData={
-				id: "001",
-				userName: "aa",
+				id: app.fns.uuid(),
+				userName: app.objs.user.get().userName,
 				image: "http://",
 				name: "fdgh",
 				company: "你妹的",
@@ -1743,61 +1816,61 @@ app.views.clientManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">姓名</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="name" formtype="simple" value="'+templateData.name+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">公司</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="company" formtype="simple" value="'+templateData.company+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">工作</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="job" formtype="simple" value="'+templateData.job+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">联系方式</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="contacts" formtype="simple" value="'+templateData.contacts+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">联系电话</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="contactsPhone" formtype="simple" value="'+templateData.contactsPhone+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">邮箱</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="email" formtype="simple" value="'+templateData.email+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">手机</div>'+
-				'<div class="templatePointRight"></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">邮箱</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="phone" formtype="simple" value="'+templateData.phone+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">住址</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="place" formtype="simple" value="'+templateData.place+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">学校</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="university" formtype="simple" value="'+templateData.university+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">专业</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="record" formtype="simple" value="'+templateData.record+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
+		templateDom.find("[formtype='simple']").each(
+			function(){$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})}
+		)
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
@@ -1805,14 +1878,15 @@ app.views.clientManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -1850,8 +1924,21 @@ app.views.clientManage = Backbone.View.extend({
                     '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tableclient"));
 				  newPoint.data("result",n);
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
         });
-		
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
 	}
 	})
 /*客户详情*/
@@ -1870,14 +1957,14 @@ app.views.procedureManage = Backbone.View.extend({
 			var templateData={
 				UnitPrice: 9,
 				area: 1223,
-				buildTime: 1024,
+				buildTime: new Date().getTime()+24*3600*1000,
 				copy: 20,
 				costPrice: 2000,
 				costUnitPrice: 10,
-				decorate: "一般",
+				decorate: "0",
 				developer: "你妹",
-				haveLease: 0,
-				id: "001",
+				haveLease: "0",
+				id: app.fns.uuid(),
 				image:["http://","http://"],
 				maxTime: 10086,
 				maxUnit: 200,
@@ -1888,9 +1975,9 @@ app.views.procedureManage = Backbone.View.extend({
 				payedCount: 10,
 				place: "那个地址",
 				price: 1000,
-				propertyType: "公寓",
-				rightType: "商业用房",
-				stratTime: 0,
+				propertyType: "0",
+				rightType: "0",
+				stratTime: new Date().getTime(),
 				subhead: "nnnn",
 				tax: 8,
 				title: "aa",
@@ -1911,12 +1998,12 @@ app.views.procedureManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">标题</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="title" formtype="simple" value="'+templateData.title+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">副标</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="subhead" formtype="simple" value="'+templateData.subhead+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
@@ -1926,89 +2013,84 @@ app.views.procedureManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">价格</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="price" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">原价</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="costPrice" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">金额</div>'+
-				'<div class="templatePointRight"></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">金额</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="money" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">已筹金额</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="payed" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">众筹笔数</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="payedCount" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">份数</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="copy" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">持有限期</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="maxTime" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">最小单位</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="minUnit" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">最大单位</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="maxUnit" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">税费预算</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="tax" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">面积</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="area" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">原单价</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="costUnitPrice" formtype="number"/></div></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">单价</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="UnitPrice" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">开发商</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="developer" formtype="simple" value="'+templateData.developer+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">地址</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="place" formtype="simple" value="'+templateData.place+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">装修状况</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="3">无披房</option>'+
+					'<select to="decorate">'+
+						'<option value="0">无披房</option>'+
 						'<option value="1">豪华装修</option>'+
 						'<option value="2">简单专修</option>'+
 					'</select>'+
@@ -2018,29 +2100,30 @@ app.views.procedureManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">物业类型</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="2">产权房</option>'+
-						'<option value="1">无产权房</option>'+
+					'<select to="propertyType">'+
+						'<option value="0">公寓</option>'+
+						'<option value="1">复式</option>'+
+						'<option value="2">豪宅</option>'+
 					'</select>'+
 				'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">开始时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="stratTime" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">建造时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="buildTim" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">产权类型</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="2">产权房</option>'+
-						'<option value="1">无产权房</option>'+
+					'<select to="rightType">'+
+						'<option value="0">商业用房</option>'+
+						'<option value="1">住宅用房</option>'+
 					'</select>'+
 				'</div>'+
 				'<div class="clear"></div>'+
@@ -2048,8 +2131,8 @@ app.views.procedureManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">是否租约</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="2">否</option>'+
+					'<select to="haveLease">'+
+						'<option value="0">否</option>'+
 						'<option value="1">是</option>'+
 					'</select>'+
 				'</div>'+
@@ -2057,16 +2140,49 @@ app.views.procedureManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">年收益率</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="yearReturn" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">增值</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="more" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
-		'</div>')
+		'</div>');
+		templateDom.find("[formtype='date']").each(
+			function(){
+				$(this).datepicker({
+					onSelect:function( event,ui ) {
+						templateData[$(this).attr("to")]=app.fns.d2t($(this).val());
+						}
+					}).datepicker("setDate", app.fns.t2d(templateData[$(this).attr("to")]));
+			}
+		)
+		templateDom.find("[formtype='simple']").each(
+			function(){$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})}
+		)
+		templateDom.find("[formtype='number']").each(
+			function(){
+				$(this).spinner({change:function(event,ui){
+				templateData[$(this).attr("to")]=$(this).spinner("value")
+				}}).spinner("value",templateData[$(this).attr("to")]);
+			
+			}
+		)
+		templateDom.find("select").each(function(){
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			});
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
@@ -2074,14 +2190,15 @@ app.views.procedureManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -2135,7 +2252,21 @@ app.views.procedureManage = Backbone.View.extend({
                     '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tableprocedure"));
 				  newPoint.data("result",n);
-		})
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
+		});
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
 	}
 	})
 /*招聘管理 公司资料管理*/
@@ -2145,11 +2276,12 @@ app.views.recruitManage = Backbone.View.extend({
 	render:function(){
 		console.log(this.data);
 		function templateFn(state,data){
+			var openTime=new Date().getTime();
 			var templateData={
-				end: 1008611,
-				id: "002",
+				end: new Date().getTime()+24*3600*1000,
+				id: app.fns.uuid(),
 				message: "fkdjf",
-				start: 0,
+				start: new Date().getTime(),
 				title: "bhk"};
 			if(data){
 				templateData=data;
@@ -2167,41 +2299,68 @@ app.views.recruitManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">标题</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="title" formtype="simple" value="'+templateData.title+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">描述</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_message" to="message" formtype="html" type="text/plain" style="height:250px;"></script></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">开始时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="start" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">结束时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="end" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		templateDom.appendTo($("#popMain"));
+		templateDom.find("[formtype='html']").each(function(){
+			var to = $(this).attr("to")
+			var ue = UE.getEditor($(this).attr("id"));
+			ue.addListener( 'ready', function( editor ) {	
+     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
+ } );			
+		ue.addListener( 'afterSelectionChange', function( editor ) {
+     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
+ } );		
+			
+			});
+		templateDom.find("[formtype='date']").each(
+			function(){
+				$(this).datepicker({
+					onSelect:function( event,ui ) {
+						templateData[$(this).attr("to")]=app.fns.d2t($(this).val());
+						}
+					}).datepicker("setDate", app.fns.t2d(templateData[$(this).attr("to")]));
+			}
+		)
+		templateDom.find("[formtype='simple']").each(
+			function(){$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})}
+		)
+		
 			}
 		function add(target){
 			var openfn=function(){new templateFn(1,null)};
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -2232,7 +2391,21 @@ app.views.recruitManage = Backbone.View.extend({
                     '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tablerecruit"));
 				  newPoint.data("result",n);
-        })
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
+        });
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
 	}
 	})
 /*宣传管理*/
@@ -2266,14 +2439,15 @@ app.views.promotionManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -2511,12 +2685,12 @@ app.views.redPacketManage = Backbone.View.extend({
 		console.log(this.data);
 		function templateFn(state,data){
 			var templateData={
-				end: 0,
-				id: "001",
+				end: new Date().getTime()+24*3600*1000,
+				id: app.fns.uuid(),
 				money: 0,
-				strat: 0,
-				type: 0,
-				userId: "001"
+				strat: new Date().getTime(),
+				type: "0",
+				userId: app.objs.user.get().userId
 				};
 			if(data){
 				templateData=data;
@@ -2539,31 +2713,59 @@ app.views.redPacketManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">金额</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="money" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">激活时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="strat" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">截止时间</div>'+
-				'<div class="templatePointRight"></div>'+
+				'<div class="templatePointRight"><input to="end" formtype="date"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">类型</div>'+
 				'<div class="templatePointRight">'+
-					'<select name="radius" id="radius">'+
-						'<option value="2">用户派发</option>'+
+					'<select to="type">'+
+						'<option value="0">用户派发</option>'+
 						'<option value="1">系统派发</option>'+
 					'</select>'+
 				'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
-		'</div>')
+		'</div>');
+		templateDom.find("[formtype='date']").each(
+			function(){
+				$(this).datepicker({
+					onSelect:function( event,ui ) {
+						templateData[$(this).attr("to")]=app.fns.d2t($(this).val());
+						}
+					}).datepicker("setDate", app.fns.t2d(templateData[$(this).attr("to")]));
+			}
+		)
+		templateDom.find("[formtype='number']").each(
+			function(){
+				$(this).spinner({change:function(event,ui){
+				templateData[$(this).attr("to")]=$(this).spinner("value")
+				}}).spinner("value",templateData[$(this).attr("to")]);
+			
+			}
+		)
+		templateDom.find("select").each(function(){
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			});
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
@@ -2571,14 +2773,15 @@ app.views.redPacketManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
-			var openfn=function(){new templateFn(2,target.dataResult)};
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
 			window.location.reload();
 			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.dataResult)};
+			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
 		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
@@ -2607,6 +2810,20 @@ app.views.redPacketManage = Backbone.View.extend({
                     '<td width="5%"><div class="tableButton remove"></div></td>'+
                   '</tr>').appendTo($("#tableredPacket"));
 				  newPoint.data("result",n);
-        })
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
+        });
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
 	}
 });
