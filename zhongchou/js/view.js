@@ -2465,48 +2465,388 @@ app.views.promotionManage = Backbone.View.extend({
 			};
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
-			'<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">标题</div>'+
-				'<div class="templatePointRight">数值</div>'+
+				'<div class="templateListLeft">标题</div>'+
+				'<div class="templateListCenter">数值</div>'+
+				'<div class="templateListRight">删除</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateFrame"></div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
-		$.each(templateData.data,function(i,n){
+		
+		templateDom.appendTo($("#popMain"));
+		function reflash(){
+			templateDom.find(".templateFrame").empty();
+			$.each(templateData.data,function(i,n){
 			var newpoint=$('<div class="templatePoint">'+
-				'<div class="templatePointLeft"><input to="name" formtype="simple" value="'+n.name+'"/></div>'+
-				'<div class="templatePointRight"><input to="value" formtype="number"/></div>'+
+				'<div class="templateListLeft"><input to="name" formtype="simple" value="'+n.name+'"/></div>'+
+				'<div class="templateListCenter"><input to="value" formtype="number"/></div>'+
+				'<div class="templateListRight" formtype="remove" to="data" num="'+i+'">删除</div>'+
 				'<div class="clear"></div>'+
-			'</div>').appendTo(templateDom.find(".templateFrame"))
+			'</div>').appendTo(templateDom.find(".templateFrame"));
+			
 			newpoint.data("result",n);
-			newpoint.find("[formtype='name']").each(function(){
+			newpoint.find("[formtype='simple']").each(function(){
 				$(this).unbind("change").bind("change",function(){
 					$(this).parents(".templatePoint").data("result").name=$(this).val();
 					})
 				})
-			
+			newpoint.find("[formtype='number']").each(
+			function(){
+				$(this).spinner({change:function(event,ui){
+				$(this).parents(".templatePoint").data("result").value=$(this).spinner("value")
+				}}).spinner("value",n.value);
+			}
+		)
+			newpoint.find("[formtype='remove']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].splice(Number($(this).attr("num")),1);
+					reflash();
+					})
+				})
 			})
+			}
+			$("[formtype='add']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].push({"name":"未命名","value":0});
+					reflash();
+					})
+				})
+			reflash();
+			}
+		/**********************************************/
+		templateArry.C=function(state,data){
+			var openTime=new Date().getTime();
+			var templateData={"id":"007","name":"众筹步聚","image":["images/step_01.jpg","images/step_02.jpg","images/step_03.jpg","images/step_04.jpg","images/step_05.jpg"],"dsc":"","job":"",group:"procedure"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
+				'<label for="mulipic'+openTime+'_to_images">'+
+					'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+					'<input type="file" id="mulipic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+				'</label>'+
+			'</form>'+
+			'<div class="templateFrame"></div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		
 		templateDom.appendTo($("#popMain"));
 		function reflash(){
+			templateDom.find(".templateFrame").empty();
+			$.each(templateData.image,function(i,n){
+			var newpoint=$('<div class="templateMuliPic">'+
+				'<img src="'+n+'"/>'+
+				'<div class="templateMuliPicRemove" num="'+i+'"></div>'+
+			'</div>').appendTo(templateDom.find(".templateFrame"))
 			
+			})
+			$('<div class="clear"></div>').appendTo(templateDom.find(".templateFrame"))
 			}
-		templateDom.find("[formtype='html']").each(function(){
-			var to = $(this).attr("to")
-			var ue = UE.getEditor($(this).attr("id"));
-			ue.addListener( 'ready', function( editor ) {	
-     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
- } );			
-		ue.addListener( 'afterSelectionChange', function( editor ) {
-     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
- } );		
+			$("[formtype='mulipic']").each(function(){
+				$(this).ajaxForm({
+			success:function(data){
+				console.log(data);
+			}
+		});
+				$(this).find("input").unbind("change").bind("change",function(){
+					var to=$(this).attr("to");
+					$(this).parents("form").ajaxSubmit({
+							success:function(data){
+								var data=JSON.parse(data);
+								if(data.state=="SUCCESS"){
+									console.log(templateData)
+									console.log(to)
+									console.log(templateData[to])
+									templateData[to].push(data.url);
+									reflash();
+									};
+						}
+					})
+				});
 			
+	
+				
 			});
-			}	
+			reflash();
+			}
+		/**********************************************/
+		templateArry.D=function(state,data){
+			var openTime=new Date().getTime();
+			var templateData={id:"008",
+					name:"常见问题",
+					dsc:"不说",
+					data:[
+								{"id":"012","name":"在中筹网金平台，需要多少钱才可以参与投资？","image":[""],"dsc":"中筹网金平台众筹者最低认购额度仅为100元人民币。中筹网金就是让普通大众能以较少金额，参与投资千万级别的房产项目，享受高端投资者才能享有的投资机会和收益。","job":"",group:"FAQS"},
+							{"id":"013","name":"整个众筹过程中，中筹网金承担什么角色？","image":[""],"dsc":"“中筹网金”为提供众筹信息的第三方平台，不参与众筹和资产运作。平台在项目交易过程中，仅作为项目众筹的交易平台，提供一个信息收集、呈现、及发布的角色，众筹者与房产开发商（或持有人）本着自愿的原则完成相关交易。","job":"",group:"FAQS"},
+							{"id":"014","name":"急用钱资金周转不过来，中途是否可以自由转让众筹份额？","image":[""],"dsc":"参与众筹者可在规定期限后，到平台即将上线的【转让中心】频道，进行项目众筹份额协议转让。最大限度地提高您的资金流动性，不必担心资金周转不过来。","job":"",group:"FAQS"},
+							{"id":"015","name":"房地产众筹，为什么会有如此高的收益空间？","image":[""],"dsc":"中筹网金平台的所有项目均是开发商直接申请进行众筹合作项目，获最低折扣的同时，通过网络平台简化链条，砍掉中介的佣金和银行贷款利率，所以会让项目众筹价格更低廉；成功众筹的项目，在持有期间会有机会参与项目的租金分红，升值后投票售出、转让，都会产生无限的收益空间。市场分析得出，房地产众筹项目的预期年化收益率达15%以上。 ","job":"",group:"FAQS"},
+							{"id":"016","name":"退出机制中，众筹的项目如何投票出售？","image":[""],"dsc":"众筹者成功众筹的项目，最长持有期限不超过12个月，是目前市面上最短“去化期限”的房地产众筹平台。 成功众筹的项目托管方-第三方资产管理公司可寻找到买家，参与众筹者可投票决定是否售出，一人一票制，参与众筹者投票超过51%即为通过，方可售出获得投资收益。","job":"",group:"FAQS"},
+							{"id":"017","name":"在交易环节，中筹网金如何保障众筹者的利益的？","image":[""],"dsc":"①平台众筹项目中所涉及的各个交易环节均严格依照法律政策规定，并经过平台风险控制小组严格把控；②众筹者所有资金全权托管于第三方托管账户（汇付天下），全程定向流入流出，并在个人中心更新资金明细；③众筹者和房产开发商双方会根据协议，项目全权由第三方资产管理公司管理，保障众筹的合法权益和利益。","job":"",group:"FAQS"}],group:"FAQS"};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="templatePoint">'+
+				'<div class="templateListLeft">标题</div>'+
+				'<div class="templateListCenter">描述</div>'+
+				'<div class="templateListRight">删除</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateFrame"></div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		
+		templateDom.appendTo($("#popMain"));
+		function reflash(){
+			templateDom.find(".templateFrame").empty();
+			$.each(templateData.data,function(i,n){
+			var newpoint=$('<div class="templatePoint">'+
+				'<div class="templateListLeft"><input formtype="simple" to="name" value="'+n.name+'"/></div>'+
+				'<div class="templateListCenter"><textarea formtype="simple" to="dsc">'+n.dsc+'</textarea></div>'+
+				'<div class="templateListRight" to="data" num="'+i+'" formtype="remove">删除</div>'+
+				'<div class="clear"></div>'+
+			'</div>').appendTo(templateDom.find(".templateFrame"))
+			newpoint.data("result",n)
+			newpoint.find("[formtype='simple']").each(function(){
+				$(this).unbind("change").bind("change",function(){
+					$(this).parents(".templatePoint").data("result")[$(this).attr("to")]=$(this).val();
+					})
+				})
+			newpoint.find("[formtype='remove']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].splice(Number($(this).attr("num")),1);
+					reflash();
+					})
+				})
+			})
+			$('<div class="clear"></div>').appendTo(templateDom.find(".templateFrame"))
+			}
+			templateDom.find("[formtype='add']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].push({"id":"017","name":"暂未填写","image":[""],"dsc":"暂未填写","job":"",group:"FAQS"});
+					reflash();
+					})
+				})
+			reflash();
+			}
+		/**********************************************/
+		templateArry.E=function(state,data){
+			var openTime=new Date().getTime();
+			var templateData={id:"010",
+					name:"风险控制小组",
+					dsc:"不说",
+					data:[
+							{"id":"032","name":"龚刚","image":["images/1111.jpg"],"dsc":"现任北京和天津的投资公司和基金公司的创始人及管理人。 二十二年国内及海外十多个国家房地产及金融投资和管理经验，美国通用电气资本公司全球地产特殊机会投资部的创始人， 国内最大私募股权基金鼎晖投资的地产基金创始合伙人。在国内，成功投资、开发和管理了多个从最南（三亚）到最北（哈尔滨）的地标及创新型项目， 任四十多家地产投资及开发公司、基金及管理公司的法人代表、董事长、执行董事等；在美洲、欧洲、亚洲等地投资并管理过上百亿美元的资产组合。","job":"风控组长",group:"009"},
+							{"id":"033","name":"周雪爽","image":["images/444.jpg"],"dsc":"现任上海华诚律师事务所合伙人。毕业于上海交通大学。周律师在金融、房地产、互联网等法律领域有着丰富的经验，他带领的律师团队从2004年开始服务建行、中行、光大、广发等多家商业银行，提供了超过4万笔的风险防控及不良资产处置法律服务。 周律师同时拥有深厚的互联网行业和企业法律服务背景，担任包括大型企业集团，新兴中小企业等多家企业常年法律顾问。","job":"法律法规",group:"009"},
+							{"id":"034","name":"谢猛虎","image":["images/5555.jpg"],"dsc":"现任上海中礁资产管理公司总经理。曾就职于上海某商业地产集团公司，长期从事商业类地产，工业地产等的投资咨询，代理，交易，运营，顾问等服务工作。专注于为银行，信托，基金，政府等部门进行房地产方面的全产业链服务。包括存量资 产，不良资产的盘活，处置，评估，融资等。负责资产交易风险控制，特殊投资机会的策略建议，资产管理和增值运营。","job":"资产管理",group:"009"},
+							{"id":"035","name":"李明","image":["images/c.jpg"],"dsc":"现任沪港国际咨询集团有限公司副总经理、上海璨石资产管理有限公司董事长。沪港国际咨询集团有限公司由上海沪港建设咨询、上海沪港金茂会计师事务所、上海沪港资产评估、上海沪港房地产估价、上海沪港项目投资咨询、上海建设审计进修学院等单位组建而成的集团型中介组织。有工程造价咨询甲级资质、招标代理甲级资质、工程咨询甲级资质、上海市政府采购招标甲级资质、司法审计等资质。","job":"评估咨询",group:"009"},
+							{"id":"036","name":"郑福泉","image":["images/d.jpg"],"dsc":"现任中瑞岳华税务师事务所合伙人。郑福泉先生毕业于上海外国语大学，现任上海财经大学兼职导师。郑福泉先生在国际知名事务所从事中国税务咨询超过10年，并曾任百安居中国税务总监。在税务合规性、税务审核、尽职调查、交易架构、投资、资金汇回、企业并购、公司上市、企业业务模式和税务审计风险防范等方面有着倍受认可的的工作业绩。","job":"税务管理",group:"009"}
+						],group:"team"
+					};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="templateFrame"></div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		
+		templateDom.appendTo($("#popMain"));
+		function reflash(){
+			templateDom.find(".templateFrame").empty();
+			$.each(templateData.data,function(i,n){
+			var newpoint=$('<div class="templatePoint">'+
+				'<div class="templatePointFormLeft">头像</div>'+
+				'<div class="templatePointFormRight">'+
+				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
+				'<label for="singlepic'+openTime+'_to_images">'+
+					'<div style="background-image:url('+n.image[0]+');width:100px;height:100px"></div>'+
+					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+				'</label>'+
+			'</form>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormLeft">姓名</div>'+
+				'<div class="templatePointFormRight"><input to="name" formtype="simple" value="'+n.name+'"/></div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormLeft">职务</div>'+
+				'<div class="templatePointFormRight"><input to="job" formtype="simple" value="'+n.job+'"/></div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormLeft">描述</div>'+
+				'<div class="templatePointFormRight"><textarea to="dsc" formtype="simple">'+n.dsc+'</textarea></div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormRemove" to="data" formtype="remove" num="'+i+'">删除</div>'+
+			'</div>').appendTo(templateDom.find(".templateFrame"))
+			newpoint.data("result",n)
+			newpoint.find("[formtype='simple']").each(function(){
+				$(this).unbind("change").bind("change",function(){
+					$(this).parents(".templatePoint").data("result")[$(this).attr("to")]=$(this).val();
+					})
+				})
+			newpoint.find("[formtype='remove']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].splice(Number($(this).attr("num")),1);
+					reflash();
+					})
+				})
+			newpoint.find("[formtype='singlepic']").each(function(){
+				$(this).ajaxForm({
+			success:function(data){
+				console.log(data);
+			}
+		});
+				$(this).find("input").unbind("change").bind("change",function(){
+					var to=$(this).attr("to");
+					var targetData=$(this).parents(".templatePoint").data("result")
+					$(this).parents("form").ajaxSubmit({
+							success:function(data){
+								var data=JSON.parse(data);
+								if(data.state=="SUCCESS"){
+									targetData[to]=[data.url];
+									reflash();
+									};
+						}
+					})
+				});
+			
+	
+				
+			});
+			})
+			$('<div class="clear"></div>').appendTo(templateDom.find(".templateFrame"))
+			}
+			templateDom.find("[formtype='add']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].push({"id":"036","name":"暂未填写","image":["http://"],"dsc":"暂未填写","job":"暂未填写",group:"009"});
+					reflash();
+					})
+				})
+			reflash();
+			}
+		/**********************************************/
+		templateArry.F=function(state,data){
+			var openTime=new Date().getTime();
+			var templateData={id:"011",
+					name:"底部专栏",
+					dsc:"不说",
+					data:[
+							{"id":"037","name":"马红漫","image":["images/mahongman_pic.png"],"dsc":"经济学博士，著名财经主持人、制片人、资深财经评论员、上海十大青年经济人物。 现为第一财经《财经关键词》、《头脑风暴》主持人，《财经夜行线》新闻主播，东方卫视《东方夜新闻》新闻评论员。长期担任《第一财经日报》、《环球时报》、《人民日报》、《解放日报》等国内知名平面媒体专栏作者与评论员工作。拥有丰富的高端财经论坛主持评论经验，担任博鳌亚洲论坛、上海浦东新年论坛、虹桥论坛、全国私人银行论坛等各类高端财经论坛活动评论工作。","job":"","title":"马博士学堂",group:"010"},
+							{"id":"038","name":"杨介生","image":["images/yangjiesheng_pic.png"],"dsc":'上海浙江商会执行副会长、上海温州商会名誉会长、上海锦丽斯投资集团有限公司董事长。 中共党员，上海市长宁区第十三届人大代表；上海市长宁区第十二届政协委员；上海温州商会第二届、第三届会长；温州市第八届、第九届政协委员；世界温州人联谊总会常务副会长。1998年获"上海十大杰出青年"提名，1998年获“温州改革开放风云人物”荣誉称号，1999年获上海市十大优秀青年企业家"金鹰奖"，2008年获评温州“改革开放30年在外风云温商30人”之一。',"job":"",group:"011",title:"荣誉顾问"}
+						],group:"team"
+					};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="templateFrame"></div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		
+		templateDom.appendTo($("#popMain"));
+		function reflash(){
+			templateDom.find(".templateFrame").empty();
+			$.each(templateData.data,function(i,n){
+			var newpoint=$('<div class="templatePoint">'+
+				'<div class="templatePointFormLeft">头像</div>'+
+				'<div class="templatePointFormRight">'+
+				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
+				'<label for="singlepic'+openTime+'_to_images">'+
+					'<div style="background-image:url('+n.image[0]+');width:100px;height:100px"></div>'+
+					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+				'</label>'+
+			'</form>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormLeft">姓名</div>'+
+				'<div class="templatePointFormRight"><input to="name" formtype="simple" value="'+n.name+'"/></div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormLeft">专栏名</div>'+
+				'<div class="templatePointFormRight"><input to="title" formtype="simple" value="'+n.title+'"/></div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormLeft">描述</div>'+
+				'<div class="templatePointFormRight"><textarea to="dsc" formtype="simple">'+n.dsc+'</textarea></div>'+
+				'<div class="clear"></div>'+
+				'<div class="templatePointFormRemove" to="data" formtype="remove" num="'+i+'">删除</div>'+
+			'</div>').appendTo(templateDom.find(".templateFrame"))
+			newpoint.data("result",n)
+			newpoint.find("[formtype='simple']").each(function(){
+				$(this).unbind("change").bind("change",function(){
+					$(this).parents(".templatePoint").data("result")[$(this).attr("to")]=$(this).val();
+					})
+				})
+			newpoint.find("[formtype='remove']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].splice(Number($(this).attr("num")),1);
+					reflash();
+					})
+				})
+			newpoint.find("[formtype='singlepic']").each(function(){
+				$(this).ajaxForm({
+			success:function(data){
+				console.log(data);
+			}
+		});
+				$(this).find("input").unbind("change").bind("change",function(){
+					var to=$(this).attr("to");
+					var targetData=$(this).parents(".templatePoint").data("result")
+					$(this).parents("form").ajaxSubmit({
+							success:function(data){
+								var data=JSON.parse(data);
+								if(data.state=="SUCCESS"){
+									targetData[to]=[data.url];
+									reflash();
+									};
+						}
+					})
+				});
+			
+	
+				
+			});
+			})
+			$('<div class="clear"></div>').appendTo(templateDom.find(".templateFrame"))
+			}
+			templateDom.find("[formtype='add']").each(function(){
+				$(this).unbind("click").bind("click",function(){
+					templateData[$(this).attr("to")].push({"id":"036","name":"暂未填写","image":["http://"],"dsc":"暂未填写","job":"暂未填写",group:"009"});
+					reflash();
+					})
+				})
+			reflash();
+			}		
 		/************************************************************************/
-		var fnArry={"001":"A","002":"A","003":"A","004":"B","005":"B","006":"B","007":"C","008":"D","009":"A","010":"E","011":"F","012":"E"}	
+		var fnArry={"001":"A","002":"A","003":"A","004":"B","005":"B","006":"B","007":"C","008":"D","009":"A","010":"E","011":"F","012":"A"}	
 		function edit(target){
 			var openfn=function(){new templateArry[fnArry[target.parents("tr").data("result").id]](2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
