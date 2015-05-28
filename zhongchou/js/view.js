@@ -2476,6 +2476,17 @@ app.views.promotionManage = Backbone.View.extend({
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		$.each(templateData.data,function(i,n){
+			var newpoint=$('<div class="templatePoint">'+
+				'<div class="templatePointLeft"><input to="name" formtype="simple" value="'+n.name+'"/></div>'+
+				'<div class="templatePointRight"><input to="value" formtype="number"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>').appendTo(templateDom.find(".templateFrame"))
+			newpoint.data("result",n);
+			newpoint.find("[formtype='name']").each(function(){
+				$(this).unbind("change").bind("change",function(){
+					$(this).parents(".templatePoint").data("result").name=$(this).val();
+					})
+				})
 			
 			})
 		templateDom.appendTo($("#popMain"));
