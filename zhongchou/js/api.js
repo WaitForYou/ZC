@@ -833,7 +833,6 @@ app.apis.getpromotion=function(data,fn,err){
 
 	
 	}
-
 /*修改宣传*/
 app.apis.editpromotion=function(data,fn,err){
 	var data = {

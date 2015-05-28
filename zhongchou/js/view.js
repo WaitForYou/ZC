@@ -2414,8 +2414,11 @@ app.views.promotionManage = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data);
-		function templateFn(state,data){
-			var templateData={data: [],dsc: "从投前筛选、投后管理到获利退出，全方位为众筹人保驾护航。",dsc_1: "风险控制,小组由专业、稳健、实战经验丰富的房地产相关产业链专家组成",id: "004",name: "360°全方位风险控制"};
+		var templateArry={};
+		/**********************************************/
+		templateArry.A=function(state,data){
+			var openTime=new Date().getTime();
+			var templateData={"id":"001","name":"广告位一","image":["http://"],"dsc":"","job":"",group:"index"};
 			if(data){
 				templateData=data;
 				}
@@ -2426,34 +2429,92 @@ app.views.promotionManage = Backbone.View.extend({
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft"></div>'+
-				'<div class="templatePointRight"></div>'+
-				'<div class="clear"></div>'+
+				'<script id="editor'+openTime+'_to_dsc" to="dsc" formtype="html" type="text/plain" style="height:250px;"></script>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		templateDom.appendTo($("#popMain"));
-			}
-		function add(target){
-			var openfn=function(){new templateFn(1,null)};
-			popOpen(openfn,function(){});
-			}
-		function edit(target){
+		templateDom.find("[formtype='html']").each(function(){
+			var to = $(this).attr("to")
+			var ue = UE.getEditor($(this).attr("id"));
+			ue.addListener( 'ready', function( editor ) {	
+     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
+ } );			
+		ue.addListener( 'afterSelectionChange', function( editor ) {
+     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
+ } );		
 			
-			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
+			});
+			}
+		/**********************************************/
+		templateArry.B=function(state,data){
+			var openTime=new Date().getTime();
+			var templateData={"id":"004","name":"饼状图","image":["http://"],"dsc":"","job":"",group:"index",data:[
+										{"name":"19岁以下","value":1},
+										{"name":"20-29岁以下","value":25},
+										{"name":"30-39岁以下","value":62},
+										{"name":"40-49岁以下","value":7},
+										{"name":"50岁以上","value":4},
+										]};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">标题</div>'+
+				'<div class="templatePointRight">数值</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateFrame"></div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>')
+		$.each(templateData.data,function(i,n){
+			
+			})
+		templateDom.appendTo($("#popMain"));
+		function reflash(){
+			
+			}
+		templateDom.find("[formtype='html']").each(function(){
+			var to = $(this).attr("to")
+			var ue = UE.getEditor($(this).attr("id"));
+			ue.addListener( 'ready', function( editor ) {	
+     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
+ } );			
+		ue.addListener( 'afterSelectionChange', function( editor ) {
+     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
+ } );		
+			
+			});
+			}	
+		/************************************************************************/
+		var fnArry={"001":"A","002":"A","003":"A","004":"B","005":"B","006":"B","007":"C","008":"D","009":"A","010":"E","011":"F","012":"E"}	
+		function edit(target){
+			var openfn=function(){new templateArry[fnArry[target.parents("tr").data("result").id]](2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
-		function remove(target){
-			window.location.reload();
-			}
 		function show(target){
-			var openfn=function(){new templateFn(0,target.data("result"))};
+			var openfn=function(){new templateArry[fnArry[target.data("result").id]](0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
-		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
-			'<div class="clear"></div>'+
+		var pageName={
+				"index":"首页",
+				"mode":"众筹模式",
+				"procedure":"众筹步聚",
+				"FAQS":"常见问题",
+				"team":"团队介绍",
+				"idea":"经营理念"
+			}
+		$(this.el).html(
 			'<div class="right_table">'+
-            '<table id="table1" width="100%" border="0">'+
+            '<table id="table1promotion" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
@@ -2461,219 +2522,29 @@ app.views.promotionManage = Backbone.View.extend({
                     '<td>页面</td>'+
                     '<td>位置</td>'+
                     '<td width="5%">编辑</td>'+
-                    '<td width="5%">删除</td>'+
                   '</tr>'+
                 '</thead>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>001</td>'+
-                    '<td>首页</td>'+
-                    '<td>首页广告一</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>首页</td>'+
-                    '<td>首页广告二</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>首页</td>'+
-                    '<td>首页广告三</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>首页</td>'+
-                    '<td>首页饼状图</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>首页</td>'+
-                    '<td>首页波浪图</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>首页</td>'+
-                    '<td>首页雷达图</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>众筹步聚</td>'+
-                    '<td>众筹步聚一</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>众筹步聚</td>'+
-                    '<td>众筹步聚二</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>众筹步聚</td>'+
-                    '<td>众筹步聚三</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>众筹步聚</td>'+
-                    '<td>众筹步聚四</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>众筹步聚</td>'+
-                    '<td>众筹步聚五</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>常见问题</td>'+
-                    '<td>常见问题一</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>常见问题</td>'+
-                    '<td>常见问题二</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>常见问题</td>'+
-                    '<td>常见问题三</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>常见问题</td>'+
-                    '<td>常见问题四</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>常见问题</td>'+
-                    '<td>常见问题五</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>常见问题</td>'+
-                    '<td>常见问题六</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>领头大大</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>领头大大</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>中部小头像</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>中部小头像</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>中部小头像</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>中部小头像</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>中部小头像</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>底部专栏一</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
-                '<tr>'+
-                    '<td width="5%"></td>'+
-                    '<td>002</td>'+
-                    '<td>团队介绍</td>'+
-                    '<td>底部专栏二</td>'+
-                    '<td width="5%"><div class="tableButton edit"></div></td>'+
-                    '<td width="5%"><div class="tableButton remove"></div></td>'+
-                  '</tr>'+
+                
             '</table>'+
         '</div>')
+		$.each(this.data,function(i,n){
+			var newPoint=$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+pageName[n.group]+'</td>'+
+                    '<td>'+n.name+'</td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                  '</tr>').appendTo($("#table1promotion"));
+			newPoint.data("result",n);
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+			})
+		
 	}
 	})
 

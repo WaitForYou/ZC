@@ -79,6 +79,7 @@ app.models.imageAndWord=Backbone.Model.extend({
 	defaults:{
 		"id":"",/*id*/
 		"name":"",/*名字*/
+		"title":"",/*标题*/
 		"image":"",/*头像*/
 		"dsc":"",/*描述*/
 		"job":"",/*职位*/
