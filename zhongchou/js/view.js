@@ -750,7 +750,10 @@ app.views.register = Backbone.View.extend({
 				  })
 			  });
 		registerElem.find("#registerSend").unbind("click").bind("click",function(){
-			
+			app.apis.register(templateData,function(){
+				alert("注册成功");
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
+				},function(){alert("err")});
 			})
 $("#agreement").click(function(){
    $(this).parents().toggleClass("agreementChxNoCheck");

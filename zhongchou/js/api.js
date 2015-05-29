@@ -309,28 +309,29 @@ app.apis.login=function(data,fn,err){
 	}
 /*注册*/
 app.apis.register=function(data,fn,err){
-	var data = {
-		"id":uuid(),/*id*/
-		"type":1,/*类型,1普通用户2管理用户*/
-		"userName":"用户名",/*用户名*/
-		"sex":"0",
-		"image":"http://",/*头像*/
-		"place":"地址",/*地址*/
-		"phone":"18239208903",/*手机*/
-		"email":"fhdj@email.com",/*邮箱*/
-		"name":"真实名",/*真实姓名*/
-		"contacts":"联系人",/*联系人*/
-		"contactsPhone":"2738948393",/*联系人电话*/
-		"record":"本科",/*学历*/
-		"university":"华农",/*毕业院校*/
-		"job":"这个职位",/*职位*/
-		"company":"公司",/*公司*/
-		"password":"123456"/*密码*/
-	}
+	
+	//var data = {
+	//	"id":uuid(),/*id*/
+	//	"type":1,/*类型,1普通用户2管理用户*/
+	//	"userName":"用户名",/*用户名*/
+	//	"sex":"0",
+	//	"image":"http://",/*头像*/
+	//	"place":"地址",/*地址*/
+	//	"phone":"18239208903",/*手机*/
+	//	"email":"fhdj@email.com",/*邮箱*/
+	//	"name":"真实名",/*真实姓名*/
+	//	"contacts":"联系人",/*联系人*/
+	//	"contactsPhone":"2738948393",/*联系人电话*/
+	//	"record":"本科",/*学历*/
+	//	"university":"华农",/*毕业院校*/
+	//	"job":"这个职位",/*职位*/
+	//	"company":"公司",/*公司*/
+	//	"password":"123456"/*密码*/
+	//}
 	var sendData = {
 		model:"client",
 		action:"register",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(registerReturn){
 		if(registerReturn && registerReturn.code){
