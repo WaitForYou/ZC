@@ -329,6 +329,7 @@ $('<div class="index_top">'
 	+'</div>'
 	+'<div class="clear"></div>'
 	+'</div>').appendTo($(this.el));
+			
 		   $(' <div id="topics">'
 			     +'<div class="inner" style=" height:30px;">'
 			       +' <span style=" display:block; float:left;"><img src="img/topics.png" alt=""></span>'
@@ -661,6 +662,24 @@ app.views.login = Backbone.View.extend({
 app.views.register = Backbone.View.extend({
 	el:".middle",
 	render:function(){
+		var templateData = {
+		"id":app.fns.uuid(),/*id*/
+		"type":1,/*类型,1普通用户2管理用户*/
+		"userName":"用户名",/*用户名*/
+		"image":"http://",/*头像*/
+		"place":"地址",/*地址*/
+		"phone":"18239208903",/*手机*/
+		"email":"fhdj@email.com",/*邮箱*/
+		"name":"真实名",/*真实姓名*/
+		"contacts":"联系人",/*联系人*/
+		"contactsPhone":"2738948393",/*联系人电话*/
+		"record":"本科",/*学历*/
+		"university":"华农",/*毕业院校*/
+		"job":"这个职位",/*职位*/
+		"company":"公司",/*公司*/
+		"password":"123456",/*密码*/
+		"password2":"123456"/*密码2*/
+	}
 		$(this.el).empty();
 		var registerElem=$('<div class="mainPanel calHeight">'
 		    +'<div class="main reg">'
@@ -674,29 +693,34 @@ app.views.register = Backbone.View.extend({
 		         +' <div class="reg_input_area">  '
 		             +'<ul class="regUl"> '
 		                +'<li> '
-		                   +'<div class="in_title">用户名/邮箱：<input type="hidden" name=""> </div>'
-		                   +'<span class="in_span"><label class="usernameIcon"> </label> <input type="text" placeholder="输入用户名/邮箱" id="userName" name="userName" onclick="txtFocus(this)" onblur="txtBlur(this);" onkeypress=""> </span>'
+		                   +'<div class="in_title">用户名：<input type="hidden" name=""> </div>'
+		                   +'<span class="in_span"><label class="usernameIcon"> </label> <input to="userName" formtype="simple" type="text" placeholder="输入用户名" id="userName" name="userName"/> </span>'
 		                   +'<span class="in_notice"></span>'
 		               +' </li> '
 		                +'<li>'
 		                   +' <div class="in_title">登陆密码：</div>'
-		                  +' <span class="in_span"> <label class="passwordIcon"> </label> <input type="password" placeholder="输入密码" id="userPass" name="password" onclick="passFocus(this)" onblur="passBlur(this)"> </span>'
+		                  +' <span class="in_span"> <label class="passwordIcon"> </label> <input type="password" to="password" formtype="simple" placeholder="输入密码" id="userPass" name="password"/> </span>'
 		                   +'<span class="in_notice"> </span>'
 		               +' </li> '
 		                +'<li> '
 		                +'<div class="in_title">重复密码：</div> '
-		                   +'<span class="in_span"> <label class="repeatPassIcon"> </label> <input type="password" placeholder="再次输入密码" id="checkPass" name="passwordConfirm" onclick="passFocus(this)" onblur="passBlur(this)"> </span>'
+		                   +'<span class="in_span"> <label class="repeatPassIcon"> </label> <input type="password" to="password2" formtype="simple" placeholder="再次输入密码" id="checkPass" name="passwordConfirm"> </span>'
 		                   +'<span class="in_notice"> </span>'
 		                +'</li>' 
+						+'<li> '
+		                   +'<div class="in_title">邮箱：<input type="hidden" name=""> </div>'
+		                   +'<span class="in_span"><label class="usernameIcon"> </label> <input type="text" placeholder="输入邮箱" formtype="simple" to="email" id="userName" name="userName"> </span>'
+		                   +'<span class="in_notice"></span>'
+		               +' </li> '
 		                +'<li> '
 		                   +'<div class="in_title">手机号码：</div>'
-		                   +'<span class="in_span"> <label class="emailIcon"> </label> <input type="text" placeholder="输入手机号码" id="phoneNumber" name="phoneNumber" onclick="phoneCheck()" onblur="phoneCheck()"> </span>'
+		                   +'<span class="in_span"> <label class="emailIcon"> </label> <input type="text" placeholder="输入手机号码" id="phoneNumber" name="phoneNumber" to="phone" formtype="simple"> </span>'
 		                   +'<span id="phoneNumberNotice" class="in_notice"> </span>'
 		                +'</li> '
 		                +'<li> '
 		        			+'<div class="in_title">短信验证码:</div> '
-		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode" onclick="msgValidCodeCheck()" onblur="msgValidCodeCheck()"> </span> '
-		                    +'<a id="btnSendmsg" onclick="msgSendCheck()" style="margin-left:15px;">获取验证码</a> '
+		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode"> </span> '
+		                    +'<a id="btnSendmsg" style="margin-left:15px;">获取验证码</a> '
 		                    +'<span id="msgValidNotice" class="in_notice"> </span> '
 		         		+'</li>'
 		               
@@ -710,20 +734,28 @@ app.views.register = Backbone.View.extend({
 		                   +'</span>'
 		                   +'<span id="agreeMentNotice" class="in_notice mt" style=" margin-top:-20px; margin-left:-140px;"></span>'
 		                +'</li>'
-		                 +'<li class="item"><input type="button" value="注　册" class="btnReg ml86" onclick="validRegForm()"></li> '
+		                 +'<li class="item"><input id="registerSend" type="button" value="注　册" class="btnReg ml86"/></li> '
 		            +'</ul> '
 		             +'<div class="clear"></div> '
 		          +'</div>'
 		     +' </form>'
 		    +'</div>'
 		  +'</div>').appendTo($(this.el));
+		  registerElem.find("[formtype='simple']").each(function(i,n){
+			  $(this).unbind("change").bind("change",function(){
+				  templateData[$(this).attr("to")]=$(this).val();
+				  })
+			  });
+		registerElem.find("#registerSend").unbind("click").bind("click",function(){
+			
+			})
 $("#agreement").click(function(){
    $(this).parents().toggleClass("agreementChxNoCheck");
 });
 	registerElem.find("#loginBtn").unbind("click").bind("click",function(){
 	    app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
 	})
-
+	
 	}
 	})
 /*众筹模式*/
@@ -839,11 +871,9 @@ app.views.procedure = Backbone.View.extend({
 	el:".middle",
 	data:{},
 	render:function(){
-
 		$(this.el).empty();
 		console.log(this.data);
 		var pageData = this.data[0];
-
 		app.fns.setSecondNav($(this.el),"众筹步聚");
 		    var newProcedure = $('<div class="cnc_step">'
 			   +'<div class="step_s1">'
@@ -1332,8 +1362,8 @@ app.views.setPhone = Backbone.View.extend({
 		$(this.el).html('<div class="bankcard" style="position:relative;">'+
 	            '<h2>用户手机修改</h2>'+
 	            '<ul>'+
-	                '<li><h4>用户名:</h4>jiumogaoao86</li>'+
-	                '<li><h4>新手机号:</h4><span><input id="phoneNumber" name="phoneNumber" type="text" onfocus="phoneCheck();" onblur="phoneCheck();"></span><i id="phoneNumberNotice" class="in_notice" style="margin-top:145px;margin-left:290px;"></i></li>'+
+	                '<li><h4>用户名:</h4>'+app.objs.user.get().userName+'</li>'+
+	                '<li><h4>新手机号:</h4><span><input id="phoneNumber" name="phoneNumber" type="text"/></span><i id="phoneNumberNotice" class="in_notice" style="margin-top:145px;margin-left:290px;"></i></li>'+
 	                '<li>'+
 		                '<h4>输入验证码:</h4><span><input id="msgValidCode" name="msgValidCode" type="text" onfocus="msgValidCodeCheck();" onblur="msgValidCodeCheck();"></span><i id="msgValidNotice" class="in_notice" style="margin-top:190px;margin-left:290px;"></i>'+
 		                '<h4 class="yzm" style="position:absolute; right:205px; top:194px;width:150px;"><a id="btnSendmsg" href="javascript:void(0)" onclick="msgSendCheck()" style="width:150px; height:30px; line-height:30px; box-shadow:none;">[获取验证码]</a></h4>'+
@@ -1348,71 +1378,99 @@ app.views.setPhone = Backbone.View.extend({
 app.views.setDetail = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
+		var templateData=this.data;
 		$(this.el).html('<div class="bankcard">'+
             '<h2>用户资料修改</h2>'+
             '<form action="/user/updateUser" method="post" id="modifyUserForm" name="modifyUserForm">'+
 	            '<ul>'+
-	              '<li><h4>用户名:</h4>jiumogaoao86</li>'+
+	              '<li><h4>用户名:</h4>'+app.objs.user.get().userName+'</li>'+
 	              '<li><h4>手机号:</h4>13692146343<a href="tel">[修改]</a></li>'+
 	              '<li><h4>邮箱:</h4><a href="mailAuthenticate">[绑定]</a></li>'+
 	              '<li><h4>真实姓名:</h4>'+
 	              '<span>'+
 		              '<span>'+
-		              	
-			              	'<input id="name" name="name" type="text" value="" onblur="modifyUserCheck()">'+
-		              	
-		              	
+			              	'<input id="name" name="name" formtype="simple" to="userName" type="text" value="'+templateData.userName+'">'+
 		              '</span>'+
 	              '</span>'+
 	              '<i id="nameNotice" class="ts"></i></li>'+
 	              '<!-- '+
 	              '<li><h4>性别:</h4>'+
 	              '<span>'+
-	              	'<input type="radio" name="sex" value="0" checked="checked" onclick="doCheck(this.value);" />男'+
-	              	'<input type="radio" name="sex" value="1" onclick="doCheck(this.value);" />女'+
+	              	'<select to="sex" formtype="select">'+
+						'<option value="0">女</option>'+
+						'<option value="1">男</option>'+
+					'</select>'+
 	              '</span>'+
 	              '<i id="passwordNotice" class="ts"></i></li>'+
 	               '-->'+
-	              '<li><h4>紧急联系人:</h4><span><input id="emerName" name="emerName" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>紧急联系人:</h4><span><input id="emerName" name="emerName" formtype="simple" type="text" to="contacts" value="'+templateData.contacts+'"></span>'+
 	              '<i id="emerNameNotice" class="ts"></i></li>'+
-	              '<li><h4>联系人手机号:</h4><span><input id="emerTel" name="emerTel" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>联系人手机号:</h4><span><input id="emerTel" name="emerTel" formtype="simple" type="text" to="contactsPhone" value="'+templateData.contactsPhone+'"></span>'+
 	              '<i id="emerTelNotice" class="ts"></i></li>'+
-	              '<li><h4>居住地址:</h4><span><input id="address" name="address" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>居住地址:</h4><span><input id="address" name="address" formtype="simple" type="text" to="place" value="'+templateData.place+'"></span>'+
 	              '<i id="addressNotice" class="ts"></i></li>'+
-	              '<li><h4>最高学历:</h4><span><input id="education" name="education" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>最高学历:</h4><span><input id="education" name="education" formtype="simple" type="text" to="record" value="'+templateData.record+'" ></span>'+
 	              '<i id="educationNotice" class="ts"></i></li>'+
-	              '<li><h4>毕业院校:</h4><span><input id="schoolName" name="schoolName" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>毕业院校:</h4><span><input id="schoolName" name="schoolName" formtype="simple" type="text" to="university" value="'+templateData.university+'" ></span>'+
 	              '<i id="schoolNameNotice" class="ts"></i></li>'+
-	              '<li><h4>职位:</h4><span><input id="position" name="position" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>职位:</h4><span><input id="position" name="position" formtype="simple" type="text" to="job" value="'+templateData.job+'"></span>'+
 	              '<i id="positionNotice" class="ts"></i></li>'+
-	              '<li><h4>所在公司:</h4><span><input id="userCorp" name="userCorp" type="text" value="" onblur="modifyUserCheck()"></span>'+
+	              '<li><h4>所在公司:</h4><span><input id="userCorp" name="userCorp" formtype="simple" type="text" to="company" value="'+templateData.company+'"></span>'+
 	              '<i id="userCorpNotice" class="ts"></i></li>'+
-	              '<div class="bankcard_confirm"><a onclick="submitValid();">确&nbsp;&nbsp;认</a></div>'+
+	              '<div class="bankcard_confirm"><a">确&nbsp;&nbsp;认</a></div>'+
 	            '</ul>'+
             '</form>'+
             '<div class="clear"></div>'+
         '</div>')
+		$(this.el).find("[ formtype='simple']").each(function(){
+			$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})
+			})
+		$(this.el).find("[ formtype='select']").each(function(){
+			
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			})
 	}
 	})
 /*修改密码*/
 app.views.setPassWord = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
+		templateData={
+				id:app.objs.user.get().id,/*用户id*/
+				oldKey:"",/*旧密码*/
+				newKey:"",/*新密码*/
+				newKey2:""/*新密码*/
+				}
 		$(this.el).html('<div class="bankcard">'+
             '<h2>登录密码修改</h2>'+
             '<form action="/user/modifypassword" method="post" id="pwdModifyForm"> '+
             '<ul>'+
-                '<li><h4>用户名:</h4>jiumogaoao86</li>'+
-                '<li><h4>原密码:</h4><span><input id="password" name="password" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="passwordNotice" class="ts"></i></li>'+
-                '<li><h4>新密码:</h4><span><input id="newPassword" name="newPassword" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="newPasswordNotice" class="ts"></i></li>'+
+                '<li><h4>用户名:</h4>'+app.objs.user.get().userName+'</li>'+
+                '<li><h4>原密码:</h4><span><input id="password" name="password" to="oldKey" formtype="simple" type="password"></span><i id="passwordNotice" class="ts"></i></li>'+
+                '<li><h4>新密码:</h4><span><input id="newPassword" name="newPassword" to="newKey" formtype="simple" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="newPasswordNotice" class="ts"></i></li>'+
                 '<li class="pw_ts"><h4>密码规则：</h4>8-16个字符的英文字母、符号和数字组合</li>'+
                 '<!--  <li><h4>密码强度:</h4><h5 class="pg_bar"><b id="" style="width:352px;"></b></h5></li>-->'+
-                '<li><h4>再次输入密码:</h4><span><input id="passagain" name="passagain" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="passagainNotice" class="ts"></i></li>'+
+                '<li><h4>再次输入密码:</h4><span><input id="passagain" to="newKey2" formtype="simple" name="passagain" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="passagainNotice" class="ts"></i></li>'+
                 '<div class="bankcard_confirm"><a onclick="submitValid();">确&nbsp;&nbsp;认</a></div>'+
             '</ul>'+
             '</form>'+
             '<div class="clear"></div>'+
         '</div>')
+		$(this.el).find("[formtype='simple']").each(function(){
+			$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})
+			})
 	}
 	})
 /*后台部分************************************************************************************/

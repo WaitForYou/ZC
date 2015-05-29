@@ -313,6 +313,7 @@ app.apis.register=function(data,fn,err){
 		"id":uuid(),/*id*/
 		"type":1,/*类型,1普通用户2管理用户*/
 		"userName":"用户名",/*用户名*/
+		"sex":"0",
 		"image":"http://",/*头像*/
 		"place":"地址",/*地址*/
 		"phone":"18239208903",/*手机*/

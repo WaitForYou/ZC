@@ -15,8 +15,14 @@ app.objs.routeTable={
 						console.log(promotion);
 						console.log(announcement);
 						console.log(product);
+						var promoArry=[];
+						$.each(promotion,function(i,n){
+							if(n.group=="index"){
+								promoArry.push(n);
+								}
+							})
 						app.objs.indexV.data = {
-							promotion : promotion.index,
+							promotion : promoArry,
 							announcement : announcement,
 							product : product
 							}
@@ -71,7 +77,13 @@ app.objs.routeTable={
 				/*获取宣传*/
 				app.apis.getpromotion(data,function(promotion){
 					/*出页面*/
-					app.objs.procedureV.data = promotion.procedure
+					var promoArry=[];
+						$.each(promotion,function(i,n){
+							if(n.group=="procedure"){
+								promoArry.push(n);
+								}
+							})
+					app.objs.procedureV.data = promoArry
 					app.objs.procedureV.render();
 					});
 				}
@@ -83,7 +95,13 @@ app.objs.routeTable={
 			/*获取宣传*/
 			app.apis.getpromotion(data,function(promotion){
 				/*出页面*/
-				app.objs.FAQSV.data=promotion.FAQS
+				var promoArry=[];
+						$.each(promotion,function(i,n){
+							if(n.group=="FAQS"){
+								promoArry.push(n);
+								}
+							})
+				app.objs.FAQSV.data=promoArry
 			app.objs.FAQSV.render();
 				});
 			}
@@ -101,9 +119,19 @@ app.objs.routeTable={
 						/*获取公司信息*/
 						app.apis.getcompany(data,function(company){
 							/*出页面*/
+							var promoArry=[];
+							var promoArryI=[];
+						$.each(promotion,function(i,n){
+							if(n.group=="team"){
+								promoArry.push(n);
+								}
+							if(n.group=="idea"){
+								promoArryI.push(n);
+								}
+							})
 						app.objs.aboutV.data={
-							team:promotion.team,
-							idea:promotion.idea,
+							team:promoArry,
+							idea:promoArryI,
 							announcement:announcement,
 							recruit:recruit,
 							company:company
@@ -456,6 +484,7 @@ app.objs.routeTable={
 					app.apis.getSafeQusetion(data,function(SafeQusetion){
 						/*出页面*/
 						app.objs.safeQusetionV.el=".mb_right";
+						app.objs.safeQusetionV.data=SafeQusetion;
 						app.objs.safeQusetionV.render();
 						})
 					}
@@ -466,7 +495,7 @@ app.objs.routeTable={
 					fn:function(data){
 					/*出页面*/
 					app.objs.emailVerifyV.el=".mb_right";
-					app.objs.emailVerifyV.data=app.objs.user.set();
+					app.objs.emailVerifyV.data=app.objs.user.get();
 					app.objs.emailVerifyV.render();
 					}
 		},
@@ -476,7 +505,7 @@ app.objs.routeTable={
 				fn:function(data){
 				/*出页面*/
 				app.objs.setPhoneV.el=".mb_right";
-				app.objs.setPhoneV.data=app.objs.user.set();
+				app.objs.setPhoneV.data=app.objs.user.get();
 				app.objs.setPhoneV.render();
 				}
 		},
@@ -486,7 +515,7 @@ app.objs.routeTable={
 				fn:function(data){
 				/*出页面*/
 				app.objs.setDetailV.el=".mb_right";
-				app.objs.setDetailV.data=app.objs.user.set();
+				app.objs.setDetailV.data=app.objs.user.get();
 				app.objs.setDetailV.render();
 				}
 		},
