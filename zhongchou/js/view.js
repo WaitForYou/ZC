@@ -360,20 +360,28 @@ $('<div class="index_top">'
 		          demo.onmouseout=function() {MyMar=setInterval(Marquee,speed);};  
               }
        */
+	   var promoObj=_.indexBy(this.data.promotion, 'id');
+	   console.log(promoObj);
+	   $(".index_promo_1").html(promoObj["001"].dsc)
+	   $(".index_promo_2").html(promoObj["002"].dsc)
+	   $(".index_promo_3").html(promoObj["003"].dsc)
+	   var nameArry5=[];
+	   var valueArry5=[];
+	   $.each(promoObj["005"].data,function(i,n){
+		   nameArry5.push(n.name)
+		   valueArry5.push(n.value)
+		   })
+	   var nameArry6=[];
+	   var valueArry6=[];
+	   $.each(promoObj["006"].data,function(i,n){
+		   nameArry6.push(n.name)
+		   valueArry6.push(n.value)
+		   })
+		
        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 		var lineChartData = {
-			labels : ["January","February","March","April","May","June","July"],
+			labels : nameArry6,
 			datasets : [
-				{
-					label: "My First dataset",
-					fillColor : "rgba(220,220,220,0.2)",
-					strokeColor : "rgba(220,220,220,1)",
-					pointColor : "rgba(220,220,220,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(220,220,220,1)",
-					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-				},
 				{
 					label: "My Second dataset",
 					fillColor : "rgba(151,187,205,0.2)",
@@ -382,7 +390,7 @@ $('<div class="index_top">'
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+					data : valueArry6
 				}
 			]
 
@@ -392,7 +400,11 @@ $('<div class="index_top">'
 		window.myLine = new Chart(ctx).Line(lineChartData, {
 			responsive: true
 		})
-
+var colorArry=[{color:"#cc3333",highlight: "#cc6666"},{color:"#cc33cc",highlight: "#cc66cc"},{color:"#3333cc",highlight: "#6666cc"},{color:"#33cccc",highlight: "#66cccc"},{color:"#33cc33",highlight: "#66cc66"},{color:"#cccc33",highlight: "#cccc66"}]
+$.each(promoObj["004"].data,function(i,n){
+	n=$.extend(n,colorArry[i%5]);
+	n.label=n.name;
+	})
 var pieData = [
 				{
 					value: 300,
@@ -428,22 +440,13 @@ var pieData = [
 			];
 
 			var ctx1 = document.getElementById("canvar_1").getContext("2d");
-				window.myPie = new Chart(ctx1).Pie(pieData);
+				window.myPie = new Chart(ctx1).Pie(promoObj["004"].data);
 				$("#canvar_1").width(160);
 				$("#canvar_1").height(125);
 	var radarChartData = {
-		labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+		labels: nameArry5,
 		datasets: [
-			{
-				label: "My First dataset",
-				fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(220,220,220,1)",
-				data: [65,59,90,81,56,55,40]
-			},
+			
 			{
 				label: "My Second dataset",
 				fillColor: "rgba(151,187,205,0.2)",
@@ -452,7 +455,7 @@ var pieData = [
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(151,187,205,1)",
-				data: [28,48,40,19,96,27,100]
+				data: valueArry5
 			}
 		]
 	};
@@ -877,21 +880,17 @@ app.views.procedure = Backbone.View.extend({
 		app.fns.setSecondNav($(this.el),"众筹步聚");
 		    var newProcedure = $('<div class="cnc_step">'
 			   +'<div class="step_s1">'
-					+'<img src="'+pageData.data[0].image+'">' 
+					+'<img src="images/greenland_reserve.jpg">' 
 			   +'</div>'
 			   +'<div class="step_list">'
 			       +'<ul>'
 			       +'</ul>'
 			   +'</div>'
 			+'<div class="clear" style=" "></div>'
-			   +'<br>'
-		      +'<p class="text-center" style=" ">'
-		        +'<a href="https://www.cncrowd.com:443/declare"><img class="oc" src="/img/start/btn_sm.png" alt=""></a>'
-		      +'</p>'
 			+'</div>').appendTo($(this.el));
-		$.each(this.data[1].data,function(index,value){ 
+		$.each(this.data[0].image,function(index,value){ 
           // if(index>0){ 
-             $('<li><img src="'+value.image+'"></li>').appendTo(newProcedure.find("ul"));
+             $('<li><img src="'+value+'"></li>').appendTo(newProcedure.find("ul"));
           // }
 		});
 	}
@@ -958,11 +957,13 @@ app.views.about = Backbone.View.extend({
           $(".tabCompany").hide();
           $("#con_"+$(this).attr("v")).show();
 		});
-    $('<div class="team_introbox1"><img alt="" src="'+this.data.team[0].data[0].image+'"></div>').appendTo($("#con_company_1"));
+	var teamObj=_.indexBy(this.data.team,"id");
+	console.log(teamObj)
+    $('<div class="team_introbox1">'+teamObj["009"].dsc+'</div>').appendTo($("#con_company_1"));
     $('<div class="team_introbox3"></div><div class="clear"></div>').appendTo($("#con_company_1"));
-    $.each(this.data.team[1].data,function(index,value){ 
+    $.each(teamObj["010"].data,function(index,value){ 
    	 var fengxian_team = $('<div class="fengxian_team mr_40">'
-             +'<h2><img src="'+value.image+'"></h2>'
+             +'<h2><img src="'+value.image[0]+'"></h2>'
              +'<h3>'+value.name+'</h3>'
              +'<h4>'+value.job+'</h4>'
              +'<p>'+value.dsc+'</p>'
@@ -975,9 +976,9 @@ app.views.about = Backbone.View.extend({
    });
    var team_introbox3 = $('<div class="team_introbox3"></div>').after('.tab_3');
    /********************/
-   $.each(this.data.team[2].data,function(index,value){ 
+   $.each(teamObj["011"].data,function(index,value){ 
       var elem = $('<div class="team_introbox2">'
-      	 +'<h1>'+that.data.team[2].name+'</h1>'
+      	 +'<h1>'+value.title+'</h1>'
         +'<div class="leader_intro2">'
 	    +'<h2>'+value.name+'<span>'+value.job+'</span></h2>'
 	    +'<p>'+value.dsc+'</p>'
@@ -986,17 +987,7 @@ app.views.about = Backbone.View.extend({
     +'</div>').appendTo($("#con_company_1"));
       elem.data("data",value);
    });
-   $.each(this.data.team[3].data,function(index,value){ 
-      var elem = $('<div class="team_introbox2">'
-      	 +'<h1>'+that.data.team[3].name+'</h1>'
-        +'<div class="leader_intro2">'
-	    +'<h2>'+value.name+'<span>'+value.job+'</span></h2>'
-	    +'<p>'+value.dsc+'</p>'
-	+'<img alt="" src="'+value.image+'">'
-        +'</div>'
-    +'</div>').appendTo($("#con_company_1"));
-      elem.data("data",value);
-   });
+
    var tableElem=$('<div class="conts cf seminar">'
 		    +'<div class="contMain">'
 		      +'<section class="wrap mgn-btm">'
@@ -1016,21 +1007,7 @@ app.views.about = Backbone.View.extend({
    $('<div class="conts cf seminar">'
 			+'<div class="contMain">'
 				+'<div>'
-					+'<div class="wrap">'
-						+'<br>'
-						+'<p class="box text-center">'
-							+'<img alt="" src="'+this.data.idea[0].data[0].image+'">'
-						+'</p>'
-					+'</div>'
-					+'<div class="wrap mgn-btm">'
-						+'<p class="business_detail">'+this.data.idea[0].data[0].title+'</p>'
-						+'<p class="business_detail">'+this.data.idea[0].data[0].title_0+'</p>'
-						+'<br>'
-						+'<p class="business_detail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+this.data.idea[0].data[0].dsc+'</p>'
-						+'<br>'
-						+'<p class="text text-right">'+this.data.idea[0].data[0].company+'</p>'
-						+'<p class="text text-right">'+this.data.idea[0].data[0].time+'</p>'
-					+'</div>'
+					+this.data.idea[0].dsc
 				+'</div>'
 			+'</div>'
 		+'</div>').appendTo($("#con_company_2"));
