@@ -2292,6 +2292,7 @@ app.views.procedureManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>');
+		
 		templateDom.find("[formtype='date']").each(
 			function(){
 				$(this).datepicker({
@@ -2325,6 +2326,22 @@ app.views.procedureManage = Backbone.View.extend({
 				$(this).selectmenu(templateState);
 				}	
 			});
+		templateDom.find(".templateSend").unbind("click").bind("click",function(){
+			app.apis.addProduct(templateData,function(){
+				alert("添加成功")
+				window.location.reload();
+				},function(){
+					alert("添加失败")
+					})
+			})
+		templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.editProduct(templateData,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
@@ -2337,7 +2354,13 @@ app.views.procedureManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
-			window.location.reload();
+			app.apis.removeProduct(target.parents("tr").data("result").id,function(){
+				alert("删除成功")
+				window.location.reload();
+				},function(){
+					alert("删除失败")
+					})
+			
 			}
 		function show(target){
 			var openfn=function(){new templateFn(0,target.data("result"))};
@@ -2414,17 +2437,19 @@ app.views.procedureManage = Backbone.View.extend({
 /*招聘管理 公司资料管理*/
 app.views.recruitManage = Backbone.View.extend({
 	el:".right",
+	type:0,
 	data:{},
 	render:function(){
+		var that=this;
 		console.log(this.data);
 		function templateFn(state,data){
 			var openTime=new Date().getTime();
 			var templateData={
 				end: new Date().getTime()+24*3600*1000,
 				id: app.fns.uuid(),
-				message: "fkdjf",
+				message: "",
 				start: new Date().getTime(),
-				title: "bhk"};
+				title: ""};
 			if(data){
 				templateData=data;
 				}
@@ -2487,7 +2512,44 @@ app.views.recruitManage = Backbone.View.extend({
 				templateData[$(this).attr("to")]=$(this).val();
 				})}
 		)
-		
+		if(that.type==0){
+				templateDom.find(".templateSend").unbind("click").bind("click",function(){
+			
+			app.apis.addrecruit(templateData,function(){
+				alert("创建成功")
+				window.location.reload();
+				},function(){
+					alert("创建失败")
+					})
+			})
+			templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+				app.apis.editrecruit(templateData,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+				})
+				}
+		if(that.type==1){
+				templateDom.find(".templateSend").unbind("click").bind("click",function(){
+			
+			app.apis.addcompany(templateData,function(){
+				alert("创建成功")
+				window.location.reload();
+				},function(){
+					alert("创建失败")
+					})
+			})
+			templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+				app.apis.editcompany(templateData,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+				})
+				}
 			}
 		function add(target){
 			var openfn=function(){new templateFn(1,null)};
@@ -2499,7 +2561,23 @@ app.views.recruitManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
-			window.location.reload();
+			if(that.type==0){
+				app.apis.removerecruit(target.parents("tr").data("result").id,function(){
+				alert("删除成功")
+				window.location.reload();
+				},function(){
+					alert("删除失败")
+					})
+				}
+			if(that.type==1){
+				app.apis.removecompany(target.parents("tr").data("result").id,function(){
+				alert("删除成功")
+				window.location.reload();
+				},function(){
+					alert("删除失败")
+					})
+				}
+			
 			}
 		function show(target){
 			var openfn=function(){new templateFn(0,target.data("result"))};

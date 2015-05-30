@@ -24,38 +24,11 @@ app.apis.getProduct=function(data,fn,err){
 	}
 /*添加商品*/
 app.apis.addProduct=function(data,fn,err){
-	
-	var data = {"id":uuid(),/*id*/
-				"title":"aa",/*标题*/
-				"subhead":"nnnn",/*副标题*/
-				"image":["http://","http://"],/*图片*/
-				"price":1000,/*价格*/
-				"costPrice":2000,/*原价*/
-				"money":20000,/*金额*/
-				"payed":10000,/*以筹金额*/
-				"payedCount":10,/*众筹笔数*/
-				"copy":20,/*份数*/
-				"maxTime":10086,/*持有期限*/
-				"minUnit":1,/*最小单位*/
-				"maxUnit":200,/*最大单位*/
-				"tax":8,/*税费预算*/
-				"area":1223,/*面积*/
-				"costUnitPrice":10,/*原单价*/
-				"UnitPrice":9,/*单价*/
-				"developer":"你妹",/*开发商*/
-				"place":"那个地址",/*地址*/
-				"decorate":"一般",/*装修状况*/
-				"propertyType":"公寓",/*物业类型*/
-				"stratTime":0,/*开始时间*/
-				"buildTime":1024,/*建造时间*/
-				"rightType":"商业用房",/*产权类型*/
-				"haveLease":0,/*有否租约*/
-				"yearReturn":"15%以上"/*年收益率*/
-			}
+	console.log(data)
 	var sendData = {
 		model:"product",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
@@ -67,37 +40,11 @@ app.apis.addProduct=function(data,fn,err){
 	}
 /*修改商品*/
 app.apis.editProduct=function(data,fn,err){
-	var data = {"id":"38u3",/*id*/
-				"title":"aa",/*标题*/
-				"subhead":"nnnn",/*副标题*/
-				"image":["http://","http://"],/*图片*/
-				"price":1000,/*价格*/
-				"costPrice":2000,/*原价*/
-				"money":20000,/*金额*/
-				"payed":10000,/*以筹金额*/
-				"payedCount":10,/*众筹笔数*/
-				"copy":20,/*份数*/
-				"maxTime":10086,/*持有期限*/
-				"minUnit":1,/*最小单位*/
-				"maxUnit":200,/*最大单位*/
-				"tax":8,/*税费预算*/
-				"area":1223,/*面积*/
-				"costUnitPrice":10,/*原单价*/
-				"UnitPrice":9,/*单价*/
-				"developer":"你妹",/*开发商*/
-				"place":"那个地址",/*地址*/
-				"decorate":"一般",/*装修状况*/
-				"propertyType":"公寓",/*物业类型*/
-				"stratTime":0,/*开始时间*/
-				"buildTime":1024,/*建造时间*/
-				"rightType":"商业用房",/*产权类型*/
-				"haveLease":0,/*有否租约*/
-				"yearReturn":"15%以上"/*年收益率*/
-			}
+	console.log(data)
 	var sendData = {
 		model:"product",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn&&editReturn.code){
@@ -110,7 +57,7 @@ app.apis.editProduct=function(data,fn,err){
 	}
 /*删除商品*/
 app.apis.removeProduct=function(data,fn,err){
-	var data = "ddssfs"/*商品id*/
+	
 	var sendData = {
 		model:"product",
 		action:"remove",
@@ -118,7 +65,7 @@ app.apis.removeProduct=function(data,fn,err){
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
 		if(removeReturn && (removeReturn.code = 1)){
-			fn(removeReturn.data);
+			fn();
 		}else{
 			err();
 		}
@@ -152,26 +99,11 @@ app.apis.getClient=function(data,fn,err){
 	}
 /*添加客户*/
 app.apis.addClient=function(data,fn,err){
-	var data = {
-		"id":uuid(),/*id*/
-		"type":1,/*类型,1普通用户2管理用户*/
-		"userName":"用户名",/*用户名*/
-		"image":"http://",/*头像*/
-		"place":"地址",/*地址*/
-		"phone":"18239208903",/*手机*/
-		"email":"fhdj@email.com",/*邮箱*/
-		"name":"真实名",/*真实姓名*/
-		"contacts":"联系人",/*联系人*/
-		"contactsPhone":"2738948393",/*联系人电话*/
-		"record":"本科",/*学历*/
-		"university":"华农",/*毕业院校*/
-		"job":"这个职位",/*职位*/
-		"company":"公司"/*公司*/
-	}
+	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
@@ -635,21 +567,15 @@ app.apis.getrecruit=function(data,fn,err){
 	}
 /*添加招聘*/
 app.apis.addrecruit=function(data,fn,err){
-	var data = {
-		"id":uuid(),/*id*/
-		"title":"dssfs",/*标题*/
-		"message":"sfsfs",/*内容*/
-		"start":0,/*生效时间*/
-		"end":0/*结束时间*/
-		}
+console.log(data)
 		var sendData = {
 		model:"recruit",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
-		fn(addReturn.data)
+		fn()
 	}else{
 		err()
 	}
@@ -658,21 +584,15 @@ app.apis.addrecruit=function(data,fn,err){
 	}
 /*修改招聘*/
 app.apis.editrecruit=function(data,fn,err){
-	var data = {
-		"id":"errdgd",/*id*/
-		"title":"dssfs",/*标题*/
-		"message":"sfsfs",/*内容*/
-		"start":0,/*生效时间*/
-		"end":0/*结束时间*/
-		}
+	console.log(data)
 		var sendData = {
 		model:"recruit",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
-		fn(editReturn.data)
+		fn()
 	}else{
 		err()
 	}
@@ -681,7 +601,7 @@ app.apis.editrecruit=function(data,fn,err){
 	}
 /*删除招聘*/
 app.apis.removerecruit=function(data,fn,err){
-	var data = "dsfsg"/*招聘id*/
+	
 	var sendData = {
 		model:"recruit",
 		action:"remove",
@@ -689,7 +609,7 @@ app.apis.removerecruit=function(data,fn,err){
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
-		fn(removeReturn.data)
+		fn()
 	}else{
 		err()
 	}
@@ -724,17 +644,11 @@ app.apis.getcompany=function(data,fn,err){
 	}
 /*添加企业资料*/
 app.apis.addcompany=function(data,fn,err){
-	var data={
-		"id":uuid(),/*id*/
-		"title":"erree",/*标题*/
-		"message":"erreer",/*内容*/
-		"start":0,/*生效时间*/
-		"end":0/*结束时间*/
-		}
+
 	var sendData = {
 		model:"company",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
@@ -747,17 +661,11 @@ app.apis.addcompany=function(data,fn,err){
 	}
 /*修改企业资料*/
 app.apis.editcompany=function(data,fn,err){
-	var data={
-		"id":"dsfs",/*id*/
-		"title":"erree",/*标题*/
-		"message":"erreer",/*内容*/
-		"start":0,/*生效时间*/
-		"end":0/*结束时间*/
-		}
+
 	var sendData = {
 		model:"company",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
@@ -770,7 +678,7 @@ app.apis.editcompany=function(data,fn,err){
 	}
 /*删除企业资料*/
 app.apis.removecompany=function(data,fn,err){
-	var data="dfsf"/*资料id*/
+
 	var sendData = {
 		model:"company",
 		action:"remove",

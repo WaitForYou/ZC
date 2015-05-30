@@ -599,6 +599,7 @@ app.objs.routeTable={
 			/*出页面*/
 			app.objs.recruitManageV.el=".mb_right";
 			app.objs.recruitManageV.data=recruit;
+			app.objs.recruitManageV.type=0;
 			app.objs.recruitManageV.render();
 			})
 		}
@@ -612,6 +613,7 @@ app.objs.routeTable={
 			/*出页面*/
 			app.objs.companyManageV.el=".mb_right";
 			app.objs.companyManageV.data=company;
+			app.objs.recruitManageV.type=1;
 			app.objs.companyManageV.render();
 			})	
 		}
