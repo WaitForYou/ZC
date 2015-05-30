@@ -5,20 +5,7 @@ app.objs.uploadOk = [];
 (function(objs){
 
 	/*用户信息*/
-	var userMessage={"id":"",/*id*/
-		"type":1,/*类型,1普通用户2管理用户*/
-		"userName":"",/*用户名*/
-		"image":"",/*头像*/
-		"place":"",/*地址*/
-		"phone":"",/*手机*/
-		"email":"",/*邮箱*/
-		"name":"",/*真实姓名*/
-		"contacts":"",/*联系人*/
-		"contactsPhone":"",/*联系人电话*/
-		"record":"",/*学历*/
-		"university":"",/*毕业院校*/
-		"job":"",/*职位*/
-		"company":""/*公司*/};
+	var userMessage=null;
 	/*商品信息*/
 	var product = null;
 	/*客户列表*/
@@ -40,6 +27,9 @@ app.objs.uploadOk = [];
 /***************************************************************************/	
 objs.user={}
 	objs.user.get = function(){
+		if(!userMessage&&$.cookie("zc_user")){
+			userMessage=JSON.parse($.cookie("zc_user"));
+			}
 		return	userMessage
 		}
 	objs.user.set = function(data){

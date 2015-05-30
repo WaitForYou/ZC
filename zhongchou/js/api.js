@@ -184,26 +184,27 @@ app.apis.addClient=function(data,fn,err){
 	}
 /*修改客户*/
 app.apis.editClient=function(data,fn,err){
-	var data = {
-		"id":"24253",/*id*/
-		"type":1,/*类型,1普通用户2管理用户*/
-		"userName":"用户名",/*用户名*/
-		"image":"http://",/*头像*/
-		"place":"地址",/*地址*/
-		"phone":"18239208903",/*手机*/
-		"email":"fhdj@email.com",/*邮箱*/
-		"name":"真实名",/*真实姓名*/
-		"contacts":"联系人",/*联系人*/
-		"contactsPhone":"2738948393",/*联系人电话*/
-		"record":"本科",/*学历*/
-		"university":"华农",/*毕业院校*/
-		"job":"这个职位",/*职位*/
-		"company":"公司"/*公司*/
-	}
+	//var data = {
+	//	"id":"24253",/*id*/
+	//	"type":1,/*类型,1普通用户2管理用户*/
+	//	"userName":"用户名",/*用户名*/
+	//	"image":"http://",/*头像*/
+	//	"place":"地址",/*地址*/
+	//	"phone":"18239208903",/*手机*/
+	//	"email":"fhdj@email.com",/*邮箱*/
+	//	"name":"真实名",/*真实姓名*/
+	//	"contacts":"联系人",/*联系人*/
+	//	"contactsPhone":"2738948393",/*联系人电话*/
+	//	"record":"本科",/*学历*/
+	//	"university":"华农",/*毕业院校*/
+	//	"job":"这个职位",/*职位*/
+	//	"company":"公司"/*公司*/
+	//}
+	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
@@ -287,17 +288,19 @@ app.apis.checkEmail=function(data,fn,err){
 	}
 /*登录*/
 app.apis.login=function(data,fn,err){
-	var data = {"userName":"aa",/*登录名/手机/邮箱*/
-				"passWord":"djisk"}/*密码*/
+	//var data = {"userName":"aa",/*登录名/手机/邮箱*/
+				//"passWord":"djisk"}/*密码*/
 	var sendData = {
 		model:"client",
 		action:"login",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(loginReturn){
 		if(loginReturn && loginReturn.code && loginReturn.code != 0){
 		if(loginReturn.code == 1){
-			app.objs.user.set(loginReturn.data)
+			var userSting=JSON.stringify(loginReturn.data[0]);
+			$.cookie("zc_user",userSting,{expires:0.5});
+			app.objs.user.set(loginReturn.data[0])
 			}
 		fn(app.objs.user.get())
 		}else{
@@ -474,27 +477,19 @@ app.apis.getAdmin=function(data,fn,err){
 	}
 /*添加管理员*/
 app.apis.addAdmin=function(data,fn,err){
-	var data = {
-		"id":uuid(),/*id*/
-		"userName":"sfdffgdgdgd",/*帐号*/
-		"type":2,/*类型,1普通用户2管理用户*/
-		"client":false,/*用户管理*/
-		"admin":false,/*管理员管理*/
-		"announcement":false,/*公告管理*/
-		"recruit":false,/*招聘管理*/
-		"company":false,/*企业信息管理*/
-		"product":false,/*商品管理*/
-		"promotion":false,/*宣传管理*/
-		"redPacket":false/*红包管理*/
-		}
+	//var data = {
+		//"id":uuid(),/*id*/
+		//"userName":"sfdffgdgdgd",/*帐号*/
+		//}
+	console.log(data);
 	var sendData = {
 		model:"admin",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
-			fn(addReturn.data)
+			fn()
 		}else{
 			err()
 		}
@@ -503,27 +498,15 @@ app.apis.addAdmin=function(data,fn,err){
 	}
 /*修改管理员*/
 app.apis.editAdmin=function(data,fn,err){
-	var data = {
-		"id":"fssfs",/*id*/
-		"userName":"sfdffgdgdgd",/*帐号*/
-		"type":2,/*类型,1普通用户2管理用户*/
-		"client":false,/*用户管理*/
-		"admin":false,/*管理员管理*/
-		"announcement":false,/*公告管理*/
-		"recruit":false,/*招聘管理*/
-		"company":false,/*企业信息管理*/
-		"product":false,/*商品管理*/
-		"promotion":false,/*宣传管理*/
-		"redPacket":false/*红包管理*/
-		}
+	console.log(data)
 	var sendData = {
 		model:"admin",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
-			fn(editReturn.data)
+			fn()
 		}else{
 			err()
 		}
@@ -532,7 +515,7 @@ app.apis.editAdmin=function(data,fn,err){
 	}
 /*删除管理员*/
 app.apis.removeAdmin=function(data,fn,err){
-	var data = "ddgdgd"/*管理员id*/
+	//var data = "ddgdgd"/*管理员id*/
 	var sendData = {
 		model:"admin",
 		action:"remove",

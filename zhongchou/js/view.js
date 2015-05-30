@@ -27,17 +27,31 @@ app.views.head = Backbone.View.extend({
 	nav:[{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
 	render:function(){
 		var buttonKey ;
+		var buttonArry;
 		if(this.type==0){
 			if(app.objs.user.get() && app.objs.user.get().id){
 					buttonKey = 1
+					if(app.objs.user.get().type==1){
+						buttonArry=[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}];
+						}else{
+							buttonArry=[{id:"zone",name:"用户中心"},{id:"admin",name:"管理中心"},{id:"out",name:"退出"}];
+							}
 					}else{
-						buttonKey = 0
+						buttonKey = 0;
+						buttonArry=[{id:"login",name:"登陆"},{id:"register",name:"注册"}];
 						}
-			}else{
+			}else if(this.type==1){
 				buttonKey=2
-				}
+				if(app.objs.user.get().type==1){
+						buttonArry=[{id:"out",name:"退出"}];
+						}else{
+							buttonArry=[{id:"admin",name:"管理中心"},{id:"out",name:"退出"}];
+							}
+				}else{
+					buttonArry=[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}];
+					}
 			var buttonHtml="";
-			$.each(this.button[buttonKey],function(i,n){
+			$.each(buttonArry,function(i,n){
 				buttonHtml += "<div id='"+n.id+"' class='btn-s1 btn-1b'>"+n.name+"</div>"
 				})
 			var navFirst="";
@@ -57,15 +71,15 @@ app.views.head = Backbone.View.extend({
 				})
 			})
 			$("#zone").unbind("click").bind("click",function(){
-				if(app.obs.user.get().type==1){
+
 					app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
-					}
-				if(app.obs.user.get().type==2){
-					app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
-					}
+				})
+			$("#admin").unbind("click").bind("click",function(){
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=adminManage",{trigger: true});
 				})
 			$("#out").unbind("click").bind("click",function(){
 				app.objs.user.set(null);
+				$.cookie('zc_user', '', { expires: -1 }); // 删除 cookie
 				app.objs.product.set(null);
 				app.objs.client.set(null);
 				app.objs.admin.set(null);
@@ -644,7 +658,9 @@ app.views.login = Backbone.View.extend({
 				"passWord":loginElem.find("#userPass").val()}/*密码*/
 	app.apis.login(data,function(data){
 		app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
-	},function(error){});
+	},function(error){
+		alert("账号或密码错误")
+		});
 		
 	})
     loginElem.find("#userName").blur(function(){
@@ -668,20 +684,21 @@ app.views.register = Backbone.View.extend({
 		var templateData = {
 		"id":app.fns.uuid(),/*id*/
 		"type":1,/*类型,1普通用户2管理用户*/
-		"userName":"用户名",/*用户名*/
-		"image":"http://",/*头像*/
-		"place":"地址",/*地址*/
-		"phone":"18239208903",/*手机*/
-		"email":"fhdj@email.com",/*邮箱*/
-		"name":"真实名",/*真实姓名*/
-		"contacts":"联系人",/*联系人*/
-		"contactsPhone":"2738948393",/*联系人电话*/
-		"record":"本科",/*学历*/
-		"university":"华农",/*毕业院校*/
-		"job":"这个职位",/*职位*/
-		"company":"公司",/*公司*/
-		"password":"123456",/*密码*/
-		"password2":"123456"/*密码2*/
+		"userName":"",/*用户名*/
+		"image":"",/*头像*/
+		"sex":"",/*性别*/
+		"place":"",/*地址*/
+		"phone":"",/*手机*/
+		"email":"",/*邮箱*/
+		"name":"",/*真实姓名*/
+		"contacts":"",/*联系人*/
+		"contactsPhone":"",/*联系人电话*/
+		"record":"",/*学历*/
+		"university":"",/*毕业院校*/
+		"job":"",/*职位*/
+		"company":"",/*公司*/
+		"password":"",
+		"password2":"",
 	}
 		$(this.el).empty();
 		var registerElem=$('<div class="mainPanel calHeight">'
@@ -1358,18 +1375,19 @@ app.views.setPhone = Backbone.View.extend({
 app.views.setDetail = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
-		var templateData=this.data;
+		console.log(this.data)
+		var templateData=$.extend({},this.data);
 		$(this.el).html('<div class="bankcard">'+
             '<h2>用户资料修改</h2>'+
             '<form action="/user/updateUser" method="post" id="modifyUserForm" name="modifyUserForm">'+
 	            '<ul>'+
-	              '<li><h4>用户名:</h4>'+app.objs.user.get().userName+'</li>'+
+	              '<li><h4>用户名:</h4>'+templateData.userName+'</li>'+
 	              '<li><h4>手机号:</h4>13692146343<a href="tel">[修改]</a></li>'+
 	              '<li><h4>邮箱:</h4><a href="mailAuthenticate">[绑定]</a></li>'+
 	              '<li><h4>真实姓名:</h4>'+
 	              '<span>'+
 		              '<span>'+
-			              	'<input id="name" name="name" formtype="simple" to="userName" type="text" value="'+templateData.userName+'">'+
+			              	'<input id="name" name="name" formtype="simple" to="name" type="text" value="'+templateData.name+'">'+
 		              '</span>'+
 	              '</span>'+
 	              '<i id="nameNotice" class="ts"></i></li>'+
@@ -1419,6 +1437,15 @@ app.views.setDetail = Backbone.View.extend({
 				$(this).selectmenu(templateState);
 				}	
 			})
+			$(this.el).find(".bankcard_confirm").unbind("click").bind("click",function(){
+				app.apis.editClient(templateData,function(){
+					alert("修改成功");
+					var userSting=JSON.stringify(templateData);
+					$.cookie("zc_user",userSting,{expires:0.5});
+					},function(){
+					alert("修改失败")
+					});
+				})
 	}
 	})
 /*修改密码*/
@@ -1583,6 +1610,14 @@ app.views.adminManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
+		templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.editAdmin(templateData,function(){
+				alert("修改成功");
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
 		templateDom.find("select").each(function(){
 			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
 			$(this).selectmenu({
@@ -1597,7 +1632,36 @@ app.views.adminManage = Backbone.View.extend({
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
-			var openfn=function(){new templateFn(1,null)};
+			function addTemplateFn(){
+				var templateData={
+					id: app.fns.uuid(),
+					userName: "",
+					type:2
+				};
+				var templateDom=$('<div class="templateTable">'+
+									'<div class="templatePoint">'+
+									'<div class="templatePointLeft">用户名</div>'+
+									'<div class="templatePointRight"><input to="userName" formtype="simple"></div>'+
+									'<div class="clear"></div>'+
+									'</div>'+
+									'<div class="templateButton"><div class="templateSend">创建</div></div>'+
+								'</div>')
+				templateDom.find("[formtype='simple']").each(function(){
+					$(this).unbind("change").bind("change",function(){
+						templateData[$(this).attr("to")]=$(this).val();
+						})
+					})
+				templateDom.find(".templateSend").unbind("click").bind("click",function(){
+					app.apis.addAdmin(templateData,function(){
+						alert("创建成功")
+						window.location.reload();
+						},function(){
+							alert("创建失败")
+							})
+					})
+				templateDom.appendTo($("#popMain"));
+				}
+			var openfn=function(){new addTemplateFn()};
 			popOpen(openfn,function(){});
 			}
 		function edit(target){
@@ -1606,7 +1670,13 @@ app.views.adminManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
-			window.location.reload();
+			app.apis.removeAdmin(target.parents("tr").data("result").id,function(){
+				alert("删除成功")
+				window.location.reload();
+				},function(){
+					alert("删除失败")
+					})
+			
 			}
 		function show(target){
 			var openfn=function(){new templateFn(0,target.data("result"))};
@@ -1620,7 +1690,7 @@ app.views.adminManage = Backbone.View.extend({
                   '<tr>'+
                     '<td width="5%"></td>'+
                     '<td>编号</td>'+
-                    '<td>姓名</td>'+
+                    '<td>用户名</td>'+
                     '<td width="5%">编辑</td>'+
                     '<td width="5%">删除</td>'+
                     //'<td>公告管理</td>'+
@@ -1633,7 +1703,8 @@ app.views.adminManage = Backbone.View.extend({
                 '</thead>'+
             '</table>'+
         '</div>');
-        $.each(this.data,function(i,n){
+		if(this.data){
+			$.each(this.data,function(i,n){
         	var newPoint=$('<tr>'+
                     '<td width="5%"></td>'+
                     '<td>'+n.id+'</td>'+
@@ -1654,6 +1725,8 @@ app.views.adminManage = Backbone.View.extend({
 					remove($(this));
 					});
         });
+			}
+
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
