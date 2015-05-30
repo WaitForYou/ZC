@@ -1746,7 +1746,7 @@ app.views.announcementManage = Backbone.View.extend({
 				id: app.fns.uuid(),
 				end: new Date().getTime()+24*3600*1000,
 				start: new Date().getTime(),
-				message: "<h1>eee</h1>",
+				message: "",
 				title: ""};
 			if(data){
 				templateData=data;
@@ -1815,7 +1815,22 @@ app.views.announcementManage = Backbone.View.extend({
 				templateData[$(this).attr("to")]=$(this).val();
 				})}
 		)
-		
+		templateDom.find(".templateSend").unbind("click").bind("click",function(){
+			app.apis.addannouncement(templateData,function(){
+				alert("添加成功")
+				window.location.reload();
+				},function(){
+					alert("添加失败")
+					})
+			})
+		templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.editannouncement(templateData,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
 			}
 		function add(target){
 			var openfn=function(){new templateFn(1,null)};
@@ -1827,7 +1842,12 @@ app.views.announcementManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
-			window.location.reload();
+			app.apis.removeannouncement(target.parents("tr").data("result").id,function(){
+				alert("删除成功")
+				window.location.reload();
+				},function(){
+					alert("删除失败")
+					})
 			}
 		function show(target){
 			var openfn=function(){new templateFn(0,target.data("result"))};
@@ -1888,18 +1908,18 @@ app.views.clientManage = Backbone.View.extend({
 			var templateData={
 				id: app.fns.uuid(),
 				userName: app.objs.user.get().userName,
-				image: "http://",
-				name: "fdgh",
-				company: "你妹的",
-				job: "做你妹",
-				contacts: "sddfsf",
-				contactsPhone: "34242",
-				email: "dcghf@tgh.com",
-				phone: "6575798",
-				place: "bb",
+				image: "",
+				name: "",
+				company: "",
+				job: "",
+				contacts: "",
+				contactsPhone: "",
+				email: "",
+				phone: "",
+				place: "",
 				type: 1,
-				university: "你妹的学校",
-				record: "本科"
+				university: "",
+				record: ""
 				};
 			if(data){
 				templateData=data;
@@ -1982,6 +2002,14 @@ app.views.clientManage = Backbone.View.extend({
 				templateData[$(this).attr("to")]=$(this).val();
 				})}
 		)
+		templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.editClient(templateData,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			});
 		templateDom.appendTo($("#popMain"));
 			}
 		function add(target){
@@ -1994,15 +2022,18 @@ app.views.clientManage = Backbone.View.extend({
 			popOpen(openfn,function(){});
 			};
 		function remove(target){
-			window.location.reload();
+			app.apis.removeClient(target.parents("tr").data("result").id,function(){
+				alert("删除成功")
+				window.location.reload();
+				},function(){
+					alert("删除失败")
+					})
 			}
 		function show(target){
 			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
-		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
-			'<div class="clear"></div>'+
-			'<div class="right_table">'+
+		$(this.el).html('<div class="right_table">'+
             '<table id="tableclient" width="100%" border="0">'+
                 '<thead>'+
                   '<tr>'+
@@ -2066,33 +2097,33 @@ app.views.procedureManage = Backbone.View.extend({
 		console.log(this.data);
 		function templateFn(state,data){
 			var templateData={
-				UnitPrice: 9,
-				area: 1223,
+				UnitPrice: 0,
+				area: 0,
 				buildTime: new Date().getTime()+24*3600*1000,
-				copy: 20,
-				costPrice: 2000,
-				costUnitPrice: 10,
+				copy: 0,
+				costPrice: 0,
+				costUnitPrice: 0,
 				decorate: "0",
-				developer: "你妹",
+				developer: "",
 				haveLease: "0",
 				id: app.fns.uuid(),
-				image:["http://","http://"],
-				maxTime: 10086,
-				maxUnit: 200,
-				minUnit: 1,
-				money: 20000,
+				image:[],
+				maxTime: 0,
+				maxUnit: 1,
+				minUnit: 0,
+				money: 0,
 				more: 0,
-				payed: 10000,
-				payedCount: 10,
-				place: "那个地址",
-				price: 1000,
+				payed: 0,
+				payedCount: 0,
+				place: "",
+				price: 0,
 				propertyType: "0",
 				rightType: "0",
 				stratTime: new Date().getTime(),
 				subhead: "nnnn",
-				tax: 8,
-				title: "aa",
-				yearReturn: "15%以上"};
+				tax: 0,
+				title: " ",
+				yearReturn: ""};
 			if(data){
 				templateData=data;
 				}

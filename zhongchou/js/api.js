@@ -217,7 +217,8 @@ app.apis.editClient=function(data,fn,err){
 	}
 /*删除客户*/
 app.apis.removeClient=function(data,fn,err){
-	var data = "eeerf"/*客户id*/
+	//var data = "eeerf"/*客户id*/
+	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"remove",
@@ -556,21 +557,15 @@ app.apis.getannouncement=function(data,fn,err){
 	}
 /*添加公告*/
 app.apis.addannouncement=function(data,fn,err){
-	var data={
-		"id":uuid(),/*id*/
-		"title":"eee",/*标题*/
-		"message":"rewr",/*内容*/
-		"start":0,/*生效时间*/
-		"end":0/*结束时间*/
-		}
+	console.log(data)
 		var sendData = {
 		model:"announcement",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
-		fn(addReturn.data)
+		fn()
 	}else{
 		err()
 	}
@@ -579,21 +574,15 @@ app.apis.addannouncement=function(data,fn,err){
 	}
 /*修改公告*/
 app.apis.editannouncement=function(data,fn,err){
-	var data={
-		"id":"sfs",/*id*/
-		"title":"eee",/*标题*/
-		"message":"rewr",/*内容*/
-		"start":0,/*生效时间*/
-		"end":0/*结束时间*/
-		}
+	console.log(data)
 		var sendData = {
 		model:"announcement",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
-		fn(editReturn.data)
+		fn()
 	}else{
 		err()
 	}
@@ -602,7 +591,8 @@ app.apis.editannouncement=function(data,fn,err){
 	}
 /*删除公告*/
 app.apis.removeannouncement=function(data,fn,err){
-	var data="ehdjk"/*id*/
+	//var data="ehdjk"/*id*/
+	console.log(data)
 	var sendData = {
 		model:"announcement",
 		action:"remove",
@@ -610,7 +600,7 @@ app.apis.removeannouncement=function(data,fn,err){
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
-		fn(removeReturn.data)
+		fn()
 	}else{
 		err()
 	}
