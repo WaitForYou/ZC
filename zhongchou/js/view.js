@@ -842,9 +842,9 @@ app.views.product = Backbone.View.extend({
 
 		var navElem = $('<div id="product_tab" class="product">'
 		    +'<ul id="tab" class="clearfix">'
-		      +'<li id="products1"  v="end_product" class="hover select">火爆众筹中</li>'
+		      +'<li id="products1"  v="on_product" class="hover select">火爆众筹中</li>'
 		      +'<li id="products2"  v="noStart_product" class="">即将开始众筹</li>'
-		      +'<li id="products3"  v="on_product" class="">众筹结束</li>'
+		      +'<li id="products3"  v="end_product" class="">众筹结束</li>'
 		    +'</ul>'
 		    +'<div id="con_products_1" class="products-lst" style="display: none;">'
 		    +'<ul>').appendTo($(that.el));
@@ -854,9 +854,9 @@ app.views.product = Backbone.View.extend({
           $(".products-lst").hide();
           $("#"+$(this).attr("v")).show();
 		});
-		$('<div id="end_product" class="products-lst"></div>'
+		$('<div id="end_product" class="products-lst" style="display: none;"></div>'
          +'<div id="noStart_product" class="products-lst" style="display: none;"></div>'
-         +'<div id="on_product" class="products-lst" style="display: none;"></div>').appendTo($(that.el));
+         +'<div id="on_product" class="products-lst"></div>').appendTo($(that.el));
 		$.each(this.data,function(i,n){
 			$.each(n,function(index,value){
 			     var newProduct = $('<div class="project_intro">'
@@ -893,7 +893,7 @@ app.views.product = Backbone.View.extend({
 
 			newProduct.unbind("click").bind("click",function(){
 				app.objs.productDetailV.data = $(this).data("product");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=productDetail",{trigger: true});
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=productDetail&id="+$(this).data("product").id,{trigger: true});
 
 				app.apis.buy({},this.render(),function(){})
 			});
