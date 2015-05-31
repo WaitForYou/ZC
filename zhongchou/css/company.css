@@ -1,6 +1,6 @@
 #company_tab #tab {
 	margin-bottom: 20px;
-	border-bottom: solid 5px #ca5062;
+	border-bottom: solid 5px #198eca;
 	width: 980px;
 	margin: 20px auto;
 }
@@ -19,13 +19,13 @@
 }
 #company_tab #tab li.hover {
 	width: 195px;
-	background: #ca5062;
+	background: #198eca;
 }
 #company_tab #tab li.last {
 	margin-right : 0px;
 }
 #company_tab #tab li:hover {
-	background: #ca5062;
+	background: #198eca;
 }
 #company_tab .disnon {
 	display: none;

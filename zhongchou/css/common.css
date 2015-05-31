@@ -2117,7 +2117,7 @@ iframe.twitter-share-button {
   padding-left: 10px;
 	}
 
-.btn_1,.templateSend{
+.btn_1,.templateSend,.templateEdit{
 	text-align: center;
 	background: #1e7bbb;
 	width: 90px;
@@ -2130,6 +2130,95 @@ iframe.twitter-share-button {
 	font-weight: bold;
 	color: #fff;
 }
-.btn_1:hover,.templateSend:hover,.addButton:hover{
+.btn_1:hover,.templateSend:hover,.addButton:hover .templateEdit:hover{
 	opacity: 0.8;
+}
+.CJWT .addButton{
+   margin: 10px;
+   margin-left: 0;
+   display: inline-block;
+}
+.CJWT .templateListLeft,.CJWT .templateListCenter,.CJWT .templateListRight{
+  display: inline-block;
+}
+.CJWT .templateListLeft{
+  width: 300px
+}
+.CJWT .templateListCenter{
+  width: 400px
+}
+.CJWT .templateListRight{
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.CJWT .templateListRight:hover{
+  color: #198eca;
+}
+.templatePoint.CJWTTitle{
+  background: #eee;
+  border: none;
+  line-height: 30px
+ font-size:14px;
+  font-weight: bold;
+  border: 1px solid #d2d2d2;
+  border-bottom: none;
+}
+.templatePoint.CJWTTitle div{
+	line-height: 30px;
+}
+.CJWT input, .CJWT textarea, .CJWT select{
+   outline: none;
+   width: 100%;
+   height: 100%;
+}
+.CJWTtemplateFrame .templatePoint:first-child,.FLXZ .templatePoint:first-child{
+   border: 1px solid #d2d2d2;
+}
+.CJWT.templateTable{
+  border: none;
+}
+.CJWT_0{
+	border: none;
+}
+.CJWT .templateListCenter span,.FLXZ .templateListCenter span{
+   width: 100%;
+}
+.FLXZ .templatePointFormLeft,.FLXZ .templatePointFormRight{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	margin-bottom:10px;
+}
+.FLXZ input{
+	height: 100%;
+	border: 1px solid #eee;
+}
+.FLXZ .templatePointFormLeft{
+   width: 100px;
+     float: left;
+     font-weight: bold;;
+     font-size: 14px;
+}
+.FLXZ .templatePointFormRight{
+   width: 700px;
+}
+.FLXZ .templatePoint{
+  margin: 10px auto;
+  border:1px solid #d2d2d2;
+  position: relative;
+  padding: 10px 0;
+}
+
+.FLXZ .templatePointFormRemove{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: url("../images/remove.png") center no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.FLXZtemplateFrame{
+	padding-bottom: 10px;
 }

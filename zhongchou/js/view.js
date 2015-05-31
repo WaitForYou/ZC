@@ -2658,7 +2658,7 @@ app.views.procedureManage = Backbone.View.extend({
 				'<div class="templatePointRight">'+
 					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
 						'<label for="mulipic'+openTime+'_to_image">'+
-							'<div style="background-image:url(images/addfile.png); width:80px;height:80px"></div>'+
+							'<div style="background-image:url(images/addfile.png); width:80px;height:80px" class="addFile"></div>'+
 							'<input type="file" id="mulipic'+openTime+'_to_image" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 						'</label>'+
 					'</form>'+
@@ -2671,7 +2671,7 @@ app.views.procedureManage = Backbone.View.extend({
 				'<div class="templatePointRight">'+
 					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
 						'<label for="mulipic'+openTime+'_to_imageH">'+
-							'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+							'<div class="addFile" style="background-image:url(images/addfile.png);width:80px;height:80px"></div>'+
 							'<input type="file" id="mulipic'+openTime+'_to_imageH" to="imageH" name="upfile" style="width:0px;height:0px;"></input>'+
 						'</label>'+
 					'</form>'+
@@ -2684,7 +2684,7 @@ app.views.procedureManage = Backbone.View.extend({
 				'<div class="templatePointRight">'+
 					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
 						'<label for="mulipic'+openTime+'_to_imageA">'+
-							'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+							'<div class="addFile" style="background-image:url(images/addfile.png);width:80px;height:80px"></div>'+
 							'<input type="file" id="mulipic'+openTime+'_to_imageA" to="imageA" name="upfile" style="width:0px;height:0px;"></input>'+
 						'</label>'+
 					'</form>'+
@@ -3475,16 +3475,16 @@ app.views.promotionManage = Backbone.View.extend({
 			templateState="";
 			};
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
-		var templateDom=$('<div class="templateTable">'+
+		var templateDom=$('<div class="templateTable CJWT">'+
 			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
-			'<div class="templatePoint">'+
+			'<div class="templatePoint CJWTTitle">'+
 				'<div class="templateListLeft">标题</div>'+
 				'<div class="templateListCenter">数值</div>'+
 				'<div class="templateListRight">删除</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
-			'<div class="templateFrame"></div>'+
+			'<div class="templateFrame CJWTtemplateFrame"></div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		
@@ -3548,10 +3548,10 @@ app.views.promotionManage = Backbone.View.extend({
 			templateState="";
 			};
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
-		var templateDom=$('<div class="templateTable">'+
+		var templateDom=$('<div class="templateTable CJWT_0">'+
 			'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
 				'<label for="mulipic'+openTime+'_to_images">'+
-					'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+					'<div class="addFile" style="background-image:url(images/addfile.png);width:80px;height:80px"></div>'+
 					'<input type="file" id="mulipic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
@@ -3621,16 +3621,16 @@ app.views.promotionManage = Backbone.View.extend({
 			templateState="";
 			};
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
-		var templateDom=$('<div class="templateTable">'+
+		var templateDom=$('<div class="templateTable CJWT">'+
 			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
-			'<div class="templatePoint">'+
+			'<div class="templatePoint CJWTTitle">'+
 				'<div class="templateListLeft">标题</div>'+
 				'<div class="templateListCenter">描述</div>'+
 				'<div class="templateListRight">删除</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
-			'<div class="templateFrame"></div>'+
+			'<div class="templateFrame CJWTtemplateFrame"></div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		
@@ -3691,11 +3691,12 @@ app.views.promotionManage = Backbone.View.extend({
 			templateState="";
 			};
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
-		var templateDom=$('<div class="templateTable">'+
+		var templateDom=$('<div class="templateTable CJWT_0 FLXZ">'+
 			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
-			'<div class="templateFrame"></div>'+
+			'<div class="templateFrame FLXZtemplateFrame"></div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+
 		'</div>')
 		
 		templateDom.appendTo($("#popMain"));
@@ -3707,7 +3708,7 @@ app.views.promotionManage = Backbone.View.extend({
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
 				'<label for="singlepic'+openTime+'_to_images">'+
-					'<div style="background-image:url('+n.image[0]+');width:100px;height:100px"></div>'+
+					'<div class="addFile" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
 					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
@@ -3722,9 +3723,10 @@ app.views.promotionManage = Backbone.View.extend({
 				'<div class="templatePointFormLeft">描述</div>'+
 				'<div class="templatePointFormRight"><textarea to="dsc" formtype="simple">'+n.dsc+'</textarea></div>'+
 				'<div class="clear"></div>'+
-				'<div class="templatePointFormRemove" to="data" formtype="remove" num="'+i+'">删除</div>'+
+				'<div class="templatePointFormRemove" to="data" formtype="remove" num="'+i+'"></div>'+
+				'<div class="clear"></div>'+
 			'</div>').appendTo(templateDom.find(".templateFrame"))
-			newpoint.data("result",n)
+			newpoint.data("result",n);
 			newpoint.find("[formtype='simple']").each(function(){
 				$(this).unbind("change").bind("change",function(){
 					$(this).parents(".templatePoint").data("result")[$(this).attr("to")]=$(this).val();
@@ -3794,10 +3796,10 @@ app.views.promotionManage = Backbone.View.extend({
 			templateState="";
 			};
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
-		var templateDom=$('<div class="templateTable">'+
+		var templateDom=$('<div class="templateTable CJWT_0 FLXZ">'+
 			'<div class="addButton" formtype="add" to="data"><img src="images/add.png"/> 添加</div>'+
 			'<div class="clear"></div>'+
-			'<div class="templateFrame"></div>'+
+			'<div class="templateFrame FLXZtemplateFrame"></div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>')
 		
@@ -3810,7 +3812,7 @@ app.views.promotionManage = Backbone.View.extend({
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
 				'<label for="singlepic'+openTime+'_to_images">'+
-					'<div style="background-image:url('+n.image[0]+');width:100px;height:100px"></div>'+
+					'<div class="addFile" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
 					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
@@ -3825,7 +3827,7 @@ app.views.promotionManage = Backbone.View.extend({
 				'<div class="templatePointFormLeft">描述</div>'+
 				'<div class="templatePointFormRight"><textarea to="dsc" formtype="simple">'+n.dsc+'</textarea></div>'+
 				'<div class="clear"></div>'+
-				'<div class="templatePointFormRemove" to="data" formtype="remove" num="'+i+'">删除</div>'+
+				'<div class="templatePointFormRemove" to="data" formtype="remove" num="'+i+'"></div>'+
 			'</div>').appendTo(templateDom.find(".templateFrame"))
 			newpoint.data("result",n)
 			newpoint.find("[formtype='simple']").each(function(){

@@ -51,7 +51,7 @@
 .bankcard h2 { width:683px; height:60px; line-height:60px; background:#efefef; font-size:18px; padding-left:20px; font-weight:bold;border-bottom:1px solid #c8c8c8; }
 .bankcard ul { display:block; float:left;width:633px; padding:35px 35px 60px 35px;}
 .bankcard ul li { display:block; float:left; width:633px; height:33px; line-height:33px; font-size:14px; margin-bottom:15px; }
-.bankcard ul li a,.bankcard ul li a:visited { color:#ff4646; padding-left:30px;}
+.bankcard ul li a,.bankcard ul li a:visited { color:#368eba; padding-left:30px;}
 .bankcard ul li a:hover { text-decoration:underline;}
 .bankcard ul li h4 { display:block; float:left; width:100px; height:33px;}
 .bankcard ul li span { display:block; float:left;width:350px; height:33px; border:1px solid #ccc; background:#efefef;}
@@ -67,7 +67,7 @@
 .certification ul li span { display:block; float:left;width:350px; height:33px; border:1px solid #ccc; background:#efefef;}
 .certification ul li input { width:328px; height:24px; line-height:20px; background:#efefef; outline:medium; border:none; margin-left:10px; }
 .certification ul li select { width:330px; height:30px; line-height:30px; background:#efefef; outline:medium; border:none; margin-left:10px; }
-.certification a, .certification a:visited { display:block; float:left; margin-left:100px; margin-top:15px; width:150px; height:35px; line-height:35px; background:#ff4646; border-radius:3px; box-shadow:0 3px 0 0 #bc0a0a; text-align:center; color:#fff;}
+.certification a, .certification a:visited { display:block; float:left; margin-left:100px; margin-top:15px; width:150px; height:35px; line-height:35px; background:#368eba; border-radius:3px; box-shadow:0 3px 0 0 #bc0a0a; text-align:center; color:#fff;}
 .certification a:hover { background:#eb2a2a;}
 .certification a:active { background:#cf1717;}
 
@@ -123,7 +123,7 @@
 .recharge ul li h5 {display:block; float:left; width:170px; height:50px; line-height:50px; text-align:right;}
 .recharge ul li span { height:50px; line-height:50px; margin:0 10px;}
 .recharge ul li span input { width:180px; height:34px; border:1px solid #ccc;}
-.recharge a, .recharge a:visited { display:block; float:left; margin-left:250px; margin-top:15px; width:150px; height:35px; line-height:35px; background:#ff4646; border-radius:3px; box-shadow:0 3px 0 0 #bc0a0a; text-align:center; color:#fff;}
+.recharge a, .recharge a:visited { display:block; float:left; margin-left:250px; margin-top:15px; width:150px; height:35px; line-height:35px; background:#368eba; border-radius:3px; box-shadow:0 3px 0 0 #bc0a0a; text-align:center; color:#fff;}
 .recharge a:hover { background:#eb2a2a;}
 .recharge a:active { background:#cf1717;}
 
