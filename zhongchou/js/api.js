@@ -630,8 +630,10 @@ app.apis.getcompany=function(data,fn,err){
 		if(companyReturn && companyReturn.code && companyReturn.code !=0){
 			if(companyReturn.code == 1){
 				app.objs.companyTime = companyReturn.time
+				
 				app.objs.company.set(companyReturn.data)
 				}
+				
 			fn(app.objs.company.get());
 			}else{
 				alert("获取企业资料失败")
@@ -718,24 +720,15 @@ app.apis.getpromotion=function(data,fn,err){
 	}
 /*修改宣传*/
 app.apis.editpromotion=function(data,fn,err){
-	var data = {
-		page:"index",/*所在页面*/
-		data:[{id:"001",/*组id*/
-						title:"首页大图",/*组名*/
-						dsc:"不说",/*组描述*/
-						data:[
-								{"id":"001","name":"","image":"http://","dsc":"","job":"",group:"001"}/*单个的*/
-							]
-						}] 
-	}
+
 	var sendData = {
 		model:"promotion",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
-			fn(editReturn.data)
+			fn()
 		}else{
 			err() 
 		}
@@ -785,22 +778,15 @@ app.apis.getRedPacket=function(data,fn,err){
 	}
 /*发红包*/
 app.apis.addRedPacket=function(data,fn,err){
-	var data = {
-		"id":uuid(),/*id*/
-		"userId":"sfsgsf",/*用户id*/
-		"money":0,/*金额*/
-		"type":0,/*类型*/
-		"strat":0,/*发放日期*/
-		"end":0/*消费日期*/
-		}
+	console.log(data)
 	var sendData = {
 		model:"redPacket",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
 		if(addReturn&&addReturn.code){
-		fn(addReturn.data)
+		fn()
 	}else{
 		err()
 	}

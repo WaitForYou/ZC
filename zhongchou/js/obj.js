@@ -110,10 +110,10 @@ objs.company = {}
 objs.promotion = {}
 	
 	objs.promotion.get = function(){
-		return company
+		return promotion
 	}
 	objs.promotion.set = function(data){
-		company = data;
+		promotion = data;
 		}
 /***************************************************************************/		
 
@@ -168,7 +168,7 @@ app.objs.clientManageV = new app.views.clientManage();
 app.objs.clientDetailV = new app.views.clientDetail();
 app.objs.procedureManageV = new app.views.procedureManage();
 app.objs.recruitManageV = new app.views.recruitManage();
-app.objs.companyManageV = new app.views.recruitManage();
+app.objs.companyManageV = new app.views.companyManage();
 app.objs.promotionManageV = new app.views.promotionManage();
 app.objs.loginV = new app.views.login();
 app.objs.registerV = new app.views.register();
