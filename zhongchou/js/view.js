@@ -1026,10 +1026,13 @@ app.views.about = Backbone.View.extend({
 			      +'</section>'
 			    +'</div>'
 			  +'</div>').appendTo($("#con_company_5"));
-   $.each(this.data.company,function(index,value){ 
+	if(this.data.company){
+		 $.each(this.data.company,function(index,value){ 
       var elem = $('<tr><th class="little"><span>'+value.title+'</span></th><td>'+value.message+'</td></tr>').appendTo(tableElem.find("tbody"));
       elem.data("data",value);
    });
+		}
+  
     
    /****经营理念*****/
    $('<div class="conts cf seminar">'
@@ -1052,7 +1055,8 @@ app.views.about = Backbone.View.extend({
 		+'</section>'
 	+'</div>'
 +'</div>').appendTo($("#con_company_3"));
- $.each(this.data.announcement,function(index,value){ 
+if(this.data.announcement){
+	 $.each(this.data.announcement,function(index,value){ 
   var elem=$('<li><p><strong>'+value.start+' &nbsp; </strong><a href="">'+value.message+'</a></p></li>').appendTo(gongGaoElem.find("ul"));
 	// newAn.data("an",n);
 	elem.data("data",value);
@@ -1061,6 +1065,8 @@ app.views.about = Backbone.View.extend({
 		app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
 	});
   }); 
+	}
+
    var tableElem=$('<div class="conts cf seminar">'
 		    +'<div class="contMain">'
 		      +'<section class="wrap mgn-btm">'
@@ -1071,11 +1077,14 @@ app.views.about = Backbone.View.extend({
 			      +'</section>'
 			    +'</div>'
 			  +'</div>').appendTo($("#con_company_4"));
-   $.each(this.data.company,function(index,value){ 
+	if(this.data.company){
+		$.each(this.data.company,function(index,value){ 
       var elem = $('<tr><th class="little"><span>'+value.title+'</span></th><td></td></tr>').appendTo(tableElem.find("tbody"));
       elem.find("td").html(value.message);
       elem.data("data",value);
    });
+		}
+   
 			// <div class="uc_pagnation" id="uc_pagnation">
    //               <a href="javascript: gotoPage(1)">首页</a>                
    //               <a href="javascript: gotoPage(1-1)" class="page-prev"></a>                                 
@@ -1110,6 +1119,10 @@ app.views.productDetail = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data)
+		var decorateArry=["无披房","豪华装修","简单装修"];
+		var propertyTypeArry=["公寓","复式","豪宅"];
+		var rightTypeArry=["商业用房","住在用房"];
+		var haveLeaseArry=["否","是"];
 		$(this.el).html('<div class="topic-path">'+
     '<div class="inner clearfix">'+
         '<div class="topics-text">'+
@@ -1121,7 +1134,7 @@ app.views.productDetail = Backbone.View.extend({
                 '<a href="/items">'+
                    '投资项目'+
                 '</a>'+
-                '&gt; <a href="#">中筹三期I-中环SOHO未来</a>'+
+                '&gt; <a href="#">'+this.data.title+'-'+this.data.subhead+'</a>'+
             '</p>'+
         '</div>'+
     '</div>'+
@@ -1131,7 +1144,7 @@ app.views.productDetail = Backbone.View.extend({
         '<div class="top-wrap-in">'+
             '<div class="top-wrap-inner2">'+
                 '<h2>'+
-                    '中筹三期I-中环SOHO未来'+
+                    this.data.title+'-'+this.data.subhead+
                 '</h2>'+
                   '<div class="clear">'+
                 '</div>'+
@@ -1159,8 +1172,7 @@ app.views.productDetail = Backbone.View.extend({
                       '<input type="hidden" id="reAmt" name="reAmt" value="0">'+
                       '<input type="hidden" id="reUuid" name="reUuid">'+
                       '<li class="input_amount_ts" id="crowdNotice" style="display: none;"></li>'+
-                      '<li class="input_amount_2">众筹金额：<span id="crowdAmt">1000.00</span>元</li>'+
-                      '<li class="input_amount_2">可用余额：<span id="valAmt">0.00</span>元<a href="/user/recharge">[充值]</a></li>'+
+                      '<li class="input_amount_2">众筹金额：<span id="crowdAmt">'+this.data.money+'</span>元</li>'+
                       '<li class="input_amount_2" id="redEnvelopeLi" style="display:none">可用红包：<span id="reAmtVal"></span>元&nbsp;&nbsp;&nbsp;立即使用？<input type="checkbox" id="useREFlag" style="width:16px;height:16px; margin-top:-2px;"></li>'+
                       '<li class="pl_buy_btn"><a id="crowdBtn">众筹结束</a></li>'+
                       '<li class="pl_progress"><b style="width:88.57%;"></b><h6>已众筹：88.57%</h6></li>'+
@@ -1170,14 +1182,14 @@ app.views.productDetail = Backbone.View.extend({
               
               '<div class="pl_detail_contain">'+
                  '<ul>'+
-                     '<li><h4>已众筹金额</h4><span>￥824,100.00</span></li>'+
-                     '<li><h4>众筹金额</h4><span>￥930,500.00</span></li>'+
-                     '<li><h4>众筹笔数</h4><span>165笔</span></li>'+
-                     '<li><h4>预期年化收益率</h4><span>15%以上</span></li>'+
-                     '<li><h4>最小单位</h4><span id="crowSmallest">￥100元/份</span></li>'+
-                     '<li><h4>最大单位</h4><span>465份（总额的5%）</span></li>'+
-                     '<li><h4>总份数</h4><span>9,305份</span></li>'+
-                      '<li><h4>剩余份数</h4><span>1,064份 </span></li>'+
+                     '<li><h4>已众筹金额</h4><span>￥'+this.data.payed+'</span></li>'+
+                     '<li><h4>众筹金额</h4><span>￥'+this.data.money+'</span></li>'+
+                     '<li><h4>众筹笔数</h4><span>'+this.data.copy+'笔</span></li>'+
+                     '<li><h4>预期年化收益率</h4><span>'+this.data.yearReturn+'</span></li>'+
+                     '<li><h4>最小单位</h4><span id="crowSmallest">￥'+this.data.minUnit+'元/份</span></li>'+
+                     '<li><h4>最大单位</h4><span>'+this.data.maxUnit+'份（总额的5%）</span></li>'+
+                     '<li><h4>总份数</h4><span>'+this.data.copy+'份</span></li>'+
+                      '<li><h4>剩余份数</h4><span>'+(this.data.copy-this.data.payedCount)+'份 </span></li>'+
                  '</ul>'+
                  '<div class="clear"></div>'+
               '</div>'+
@@ -1199,23 +1211,17 @@ app.views.productDetail = Backbone.View.extend({
                 '<div id="Tab3">'+
                     '<div class="Menubox3">'+
                         '<ul>'+
-                            '<li id="three1" onclick="setTab(\'three\',1,6)" class="hover">'+
+                            '<li id="three1" class="hover">'+
                                 '项目介绍'+
                             '</li>'+
-                            '<li id="three5" onclick="setTab(\'three\',5,6)">'+
+                            '<li id="three5">'+
                                '图片集锦'+
                             '</li>'+
-                            '<li id="three2" onclick="setTab(\'three\',2,6)">'+
+                            '<li id="three2">'+
                                 '价格走势'+
                             '</li>'+
-                            '<li id="three4" onclick="setTab(\'three\',4,6)" style="display:none;">'+
-                                '众筹明细'+
-                            '</li>'+
-                            '<li id="three3" onclick="setTab(\'three\',3,6)" style="margin-right:0px;">'+
+                            '<li id="three3" style="margin-right:0px;">'+
                                 '专业投资建议'+
-                            '</li>'+
-                            '<li id="three6" onclick="setTab(\'three\',6,6)" style="display:none;">'+
-                                '转让份额'+
                             '</li>'+
                         '</ul>'+
                     '</div>'+
@@ -1232,15 +1238,15 @@ app.views.productDetail = Backbone.View.extend({
                                                 '项目名称：'+
                                             '</td>'+
                                             '<td>'+
-                                                '中筹三期I-中环SOHO未来'+
+                                                this.data.title+'-'+this.data.subhead+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
                                             '<td align="right">'+
-                                                '项目原价：'+
+                                                this.data.costPrice+'项目原价：'+
                                             '</td>'+
                                             '<td>'+
-                                                '1,276,841.00元'+
+                                                '元'+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1249,7 +1255,7 @@ app.views.productDetail = Backbone.View.extend({
                                             '</td>'+
                                             
 	                                            '<td>'+
-	                                                '921,314.00元 '+
+	                                                this.data.price+'元 '+
 	                                            '</td>'+
 	                                        
 	                                        
@@ -1260,7 +1266,7 @@ app.views.productDetail = Backbone.View.extend({
                                                 '众筹金额：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 930,500.00元'+
+                                               this.data.money+'元'+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1268,7 +1274,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 众筹份数：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 9,305份'+
+                                               this.data.copy+'份'+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1276,7 +1282,7 @@ app.views.productDetail = Backbone.View.extend({
                                                 '持有期限不超过：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 12个月'+
+                                               this.data.maxTime+'个月'+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1284,7 +1290,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 众筹最小单位：'+
                                             '</td>'+
                                             '<td>'+
-                                                '100.00 元'+
+                                                this.data.minUnit+'元'+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1292,7 +1298,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 税费预算：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 项目售出后另行计算'+
+                                               this.data.tax+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1300,7 +1306,7 @@ app.views.productDetail = Backbone.View.extend({
                                                 '建筑面积：'+
                                            ' </td>'+
                                             '<td>'+
-                                               ' 54.56平米'+
+                                               this.data.area+'平米'+
                                                 
                                             '</td>'+
                                         '</tr>'+
@@ -1310,7 +1316,7 @@ app.views.productDetail = Backbone.View.extend({
                                             '</td>'+
                                             
 	                                            '<td>'+
-	                                               ' 23,402.51元/平米 '+
+	                                               this.data.costUnitPrice+'元/平米 '+
 	                                            '</td>'+
 	                                        
 	                                        
@@ -1322,7 +1328,7 @@ app.views.productDetail = Backbone.View.extend({
                                             '</td>'+
                                             
 	                                           ' <td>'+
-	                                              ' 16,886.25元/平米 '+
+	                                               this.data.UnitPrice+'元/平米 '+
 	                                           ' </td>'+
 	                                        
 	                                        
@@ -1333,7 +1339,7 @@ app.views.productDetail = Backbone.View.extend({
                                                 '开发商：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 上海宝建集团宝山市政房地产开发有限公司'+
+                                               this.data.developer+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1341,7 +1347,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 物业地址：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 上海市宝山区逸仙路3438号（近3号线淞发路站）'+
+                                               this.data.place+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1349,7 +1355,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 装修状况：'+
                                            ' </td>'+
                                            ' <td>'+
-                                               ' 精装修'+
+                                               decorateArry[this.data.decorate]+
                                             '</td>'+
                                        ' </tr>'+
                                        ' <tr>'+
@@ -1357,7 +1363,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 物业类别：'+
                                             '</td>'+
                                            ' <td>'+
-                                               '商住公寓'+
+                                               propertyTypeArry[this.data.propertyType]+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1365,7 +1371,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 开盘时间：'+
                                            ' </td>'+
                                             '<td>'+
-                                               ' 2014年9月30日 '+
+                                               app.fns.t2d(this.data.stratTime)+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1373,7 +1379,7 @@ app.views.productDetail = Backbone.View.extend({
                                                ' 建造时间：'+
                                             '</td>'+
                                             '<td>'+
-                                               ' 2010年8月18日'+
+                                               app.fns.t2d(this.data.buildTime)+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1381,7 +1387,7 @@ app.views.productDetail = Backbone.View.extend({
                                                 '产权类型：'+
                                             '</td>'+
                                             '<td>'+
-                                                '商业用房'+
+                                                rightTypeArry[this.data.rightType]+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1389,7 +1395,7 @@ app.views.productDetail = Backbone.View.extend({
                                                 '是否有租约：'+
                                             '</td>'+
                                             '<td>'+
-                                                '无'+
+                                                haveLeaseArry[this.data.haveLease]+
                                             '</td>'+
                                         '</tr>'+
                                     '</tbody>'+
@@ -1399,176 +1405,36 @@ app.views.productDetail = Backbone.View.extend({
                                 '<h3>'+
                                     '项目简介'+
                                ' </h3>'+
-                                '<p>'+
-                                    '</p><p>'+
-	'<img src="/project/images/20150127/1422370849642252.jpg" alt=""> '+
-'</p>'+
-'<p>'+
-	'<br>'+
-'</p>'+
-'<p>'+
-	'<br>'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>项目介绍：中环SOHO未来</strong> '+
-'</p>'+
-'<p class="p0" style="text-indent:20.0000pt;text-align:justify;vertical-align:;">'+
-	'<strong>中环SOHO未来地处宝山区松南板块逸仙路3438号张华路路口，淞发路与军工路之间，距离地铁三号线淞发路站仅有100米。</strong> '+
-'</p>'+
-'<p class="p0" style="text-indent:20.0000pt;text-align:justify;vertical-align:;">'+
-	'<strong>宝山区位于上海市北部。东北濒长江，东临黄浦江，南与杨浦、虹口、闸北、普陀四大中心城区毗连，西与嘉定区交界，西北隅与江苏省太仓市为邻，横贯中部的蕰藻浜将全区分成南北两部，吴淞大桥、江杨路大桥、蕰川路大桥、沪太路大桥横跨其上，是扼守上海的北大门。宝山区是国家重要的钢铁生产基地、港口集装箱生产和出口基地，根据上海十二五规划上海四大主体功能区中，宝山区被列为中心城功能延伸区和拓展区。</strong> '+
-'</p>'+
-'<p class="p0" style="text-indent:20.0000pt;text-align:justify;vertical-align:;">'+
-	'<strong>&nbsp;淞南因地处吴淞南部而得名，淞南板块位于上海市北部、宝山区东南部，属于中外环间范围。整个淞南板块，东临新江湾城，南与五角场镇、高境镇毗邻，西以泗塘河为界与张庙街道为邻，北靠蕰藻浜与杨行镇、吴淞街道接壤，这个靠近虹口、杨浦的宝山区板块，总面积为13.65平方公里，距离市中心仅有5公里的路程，也是宝山区最靠近市中心的一个板块。</strong> '+
-'</p>'+
-'<p class="p0" style="text-indent:20.0000pt;text-align:justify;vertical-align:;">'+
-	'<strong>淞南板块作为宝山区重点发展居住区之一，是个典型的人口导入区。轨道交通3号线吸引了市中心的居民（虹口区、杨浦区占大多数），同样也吸引了不少新上海人。淞南自1993年开始全面开发至今，以交通便捷、配套齐全、发展成熟等优势成为上海北翼范围内炙手可热的购房板块。</strong>'+ 
-'</p>'+
-'<p class="p0">'+
-	'&nbsp;'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【装修标准】：</strong> '+
-'</p>'+
-'<p class="p0">'+
-	'分户门：木质门'+
-'</p>'+
-'<p class="p0">'+
-	'电梯：东芝'+
-'</p>'+
-'<p class="p0">'+
-	'窗：LOW-E&nbsp;中空隔音保温玻璃'+
-'</p>'+
-'<p class="p0">'+
-	'窗框材质：铝合金'+
-'</p>'+
-'<p class="p0">'+
-	'空调：美的分体式空调'+
-'</p>'+
-'<p class="p0">'+
-	'热水器：阿里斯顿&nbsp;容量：50升'+
-'</p>'+
-'<p class="p0">'+
-	'浴霸：奥普浴霸'+
-'</p>'+
-'<p class="p0">'+
-	'地板：汇丽'+
-'</p>'+
-'<p class="p0">'+
-	'墙面涂料：多乐士'+
-'</p>'+
-'<p class="p0">'+
-	'水斗：柔美'+
-'</p>'+
-'<p class="p0">'+
-	'脱排油烟机：SIMELE'+
-'</p>'+
-'<p class="p0">'+
-	'水龙头：2只&nbsp;TOTO'+
-'</p>'+
-'<p class="p0">'+
-	'坐便器：TOTO'+
-'</p>'+
-'<p class="p0">'+
-	'喷淋：TOTO'+
-'</p>'+
-'<p class="p0">'+
-	'洗脸盆：TOTO'+
-'</p>'+
-'<p class="p0">'+
-	'层高：商铺5米，SOHO&nbsp;3.5米'+
-'</p>'+
-'<p class="p0">'+
-	'阳台：内阳台'+
-'</p>'+
-'<p class="p0">'+
-	'煤气：没有煤气和天然气管道，但是可以使用电磁炉'+
-'</p>'+
-'<p class="p0">'+
-	'交付标准：硬装修固定装修为房屋交付标准，样板房内的软装修装饰家居非交付标准'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【生活配套】：</strong>联华超市、迪亚天天、逸兴菜园、淞南公园、将引进民生银行'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【交通配套】：</strong>距离3号线淞发路站100米、公交线路有159路、160路、726路、728路、849路、51路、116路、1211路等多条线路'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【教育配套】：</strong>小区内规划包括淞南中心幼儿园（一级幼儿园）、依乐新天地幼儿园、长江路小学、上海市淞南中心学校、吴淞二中'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【医疗配套】：</strong>淞南地段医院，一级甲等医院'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【综合商业】：</strong>祥腾生活广场、淞南购物中心（包含世纪联华）、海尚财富街区、淞南小五角场（包含美饰美家建材）、建配龙（包含永乐家电）'+
-'</p>'+
-'<p>'+
-	'<br>'+
-'</p>'+
-                                '<p></p>'+
-                            '</div>'+
-                            '<div class="tt kfsxx">'+
-                                '<h3>'+
-                                   ' 开发商信息'+
-                                '</h3>'+
-                                '<p>'+
-                                    '</p><p>'+
-	'<img src="/project/images/20150127/1422370951749924.png" alt=""> '+
-'</p>'+
-'<p>'+
-	'<br>'+
-'</p>'+
-'<p class="p0">'+
-	'<strong>【宝建集团】</strong> '+
-'</p>'+
-'<p class="p0" style="text-indent:20.0000pt;text-align:justify;vertical-align:;">'+
-	'上海宝建(集团)有限公司，成立于1995年10月，是宝山区国资委100%控股的国有企业。公司的经营理念是“以品牌树形象，以质量立信誉，以市场和管理求效益”。集团的主营业务涉及建筑施工、建筑装潢、市政建设、绿化施工和绿化养护、动拆迁和土地征收、房地产开发、物业管理等。'+
-'</p>'+
-'<p class="p0" style="text-indent:20.0000pt;text-align:justify;vertical-align:;">'+
-	'目前，集团公司拥有房屋建筑施工总承包、市政工程总承包、房屋装修施工壹级资质，注册资金壹亿元人民币。集团本部主要从事房屋建筑、市政工程和装饰装修工程的施工。公司在激烈的市场竞争中，发挥集团公司的整体优势，开拓进取，不断扩大经营范围，先后总承包的经典工程有宝山区政府、宝山区邮轮港码头工程、宝山区委党校、上海市公安局宝山分局指挥中心工程、逸仙高架和地面道路、殷高西路道路工程、中星海上名豪苑二期商品房等工程、石洞口电厂、逸仙路高架、外环线二期、外环线越江隧道、共和新路高架、轨道交通M1、M3、M7线等，绿化工程主要有临港新城滴水湖景观、炮台湾湿地公园、牡丹江路沿街绿化景观、上海大学绿化等工程。在上述项目中，集团公司以创优达标为己任，强化管理，精心施工，先后多次获得市“白玉兰”奖、市“浦江杯”奖、市优质结构金奖、市优质工程奖、市重大工程指挥部道路示范工程奖、国家建设工程施工质量银质奖、国家市政金杯奖、上海市优美绿地景点“白玉兰”杯、市绿化工程质量金奖等，同时还被评为“四星级诚信创建企业”和“上海市守合同重信用AAA企业”。'+
-'</p>'+
-'<p>'+
-	'<br>'+
-'</p>'+
+								'<p></p>'+
+								this.data.dsc+
                                 '<p></p>'+
                             '</div>'+
                         '</div>'+
 						'<div id="con_three_2" style="display:none">'+
 						    '<div class="tt">'+
 						      '<h3>历史价格走势</h3><br><br>'+
-						      '（价格：元／平房米）'+
-						       '<div class="jgzs">'+
-						            '<img src="/img/products/product_03/qwt_1.jpg">'+
-						       '</div>'+
-						      '（数据来源：搜房网）'+
+						      this.data.action+
+							  '<p></p>'+	
 						   '</div>'+
 						'</div>'+
 						'<div id="con_three_3" style="display:none;">'+
 						     '<div class="tt jbxx">'+
 						           '<h3>相关法律</h3>'+
-						          '<p style="font-size:14px;font-weight:bold; text-indent:24px; line-height:24px; padding:15px;">'+
-							   '该房产证照齐全，交易结构和产权法律清晰。'+
-						          	'</p><p><img src="/img/products/product_03/cqz_1.jpg"></p><br>'+
-						                '<p><img src="/img/products/product_03/cqz_2.jpg"></p><br>'+
-						                '<p><img src="/img/products/product_03/yyzz_1.jpg"></p><br>'+
+								   '<p></p>'+	
+						          this.data.low+
 						          '<p></p>'+
 						          '<h3>资产管理</h3>'+
-						          '<p style="font-size:14px;font-weight:bold; text-indent:24px; line-height:24px; padding:15px;">'+
-						            ' 中礁资产管理（上海）有限公司将为众筹人代为持有和管理该资产。'+
-						             '<img src="/img/products/12.jpg"><br>'+
-						         ' </p>'+
+								  '<p></p>'+	
+						          this.data.manager+
+								  '<p></p>'+
 									'<h3>资产评估</h3>'+
-									'<p style="font-size:14px;font-weight:bold; text-indent:24px; line-height:24px; padding:15px;">'+
-									       ' 中礁资产管理（上海）有限公司将为众筹人代为持有和管理该资产。'+
-										'<img src="/img/products/product_03/pg.jpg">'+
-									      ' <br>'+
-									'</p>'+						          
+									'<p></p>'+	
+									this.data.review+
+									'<p></p>'+					          
 						          '<h3>综合建议</h3>'+
-						          '<p style="font-size:14px;font-weight:bold; text-indent:24px; line-height:24px; padding:15px;">'+
-						          '该房产位于上海市区近中环线，地铁三号线淞发路站出口，精装修小户型公寓，周边配套成熟交通方便，众筹单价每平米一万六千多仅为市场价格的七折多点，属于不受当地限购的小户型公寓产品，流动性好，开发商为当地国企背景，资产法律及权属清晰，可期优良回报。'+
-						          '<span style=" color:#888;">专业提示：任何投资都有风险，众筹人/投资人需认真考虑谨慎决策。</span>'+
-						          '<br>'+
-						          '</p>'+
+								  '<p></p>'+	
+								  this.data.suggest+
+						          '<p></p>'+	
 						      '</div>'+
 						'</div>'+
                         '<div id="con_three_4" style="display:none">'+
@@ -1595,18 +1461,12 @@ app.views.productDetail = Backbone.View.extend({
                         '</div>'+
 						'<div id="con_three_5" style="display:none;">'+
 						  ' <h3>实景图</h3><br>'+
-						   '<p><img src="/img/products/product_03/hw_1.jpg"></p><br>'+
-						   '<p><img src="/img/products/product_03/hw_2.jpg"></p><br>'+
-						   '<p><img src="/img/products/product_03/hw_3.jpg"></p><br>'+
-						   '<p><img src="/img/products/product_03/sjt_1.jpg"></p><br>'+
-						   '<p><img src="/img/products/product_03/sjt_2.jpg"></p><br>'+
-						   '<p><img src="/img/products/product_03/sjt_3.jpg"></p><br>'+
-						   '<p><img src="/img/products/product_03/sjt_4.jpg"></p><br>'+
+						   '<div id="shijintu"></div>'+
 						   '<p><br></p>'+
 						   '<h3>户型图</h3><br>'+
-						   '<p><img src="/img/products/product_03/hxt.jpg"></p>'+
+						   '<div id="huxingtu"></div>'+
 						   '<h3>区位图</h3><br>'+
-						   '<p><img src="/img/products/product_03/qwt.jpg"></p>'+
+						   '<div id="quweitu"></div>'+
 						'</div>'+
                         '<div id="con_three_6" style="display:none">'+
                         '<div class="tt jbxx">'+
@@ -1718,6 +1578,15 @@ app.views.productDetail = Backbone.View.extend({
        ' </div>'+
     '</div>'+
 '</div>')
+$.each(this.data.image,function(i,n){
+	$('<p><img src="'+n+'"/></p>').appendTo($("#shijintu"))
+	})
+$.each(this.data.imageH,function(i,n){
+	$('<p><img src="'+n+'"/></p>').appendTo($("#huxingtu"))
+	})
+$.each(this.data.imageA,function(i,n){
+	$('<p><img src="'+n+'"/></p>').appendTo($("#quweitu"))
+	})
 	}
 	})
 /*公告详情*/
@@ -2730,6 +2599,8 @@ app.views.procedureManage = Backbone.View.extend({
 				haveLease: "0",
 				id: app.fns.uuid(),
 				image:[],
+				imageH:[],/*户型图*/
+				imageA:[],/*区位图*/
 				maxTime: 0,
 				maxUnit: 1,
 				minUnit: 0,
@@ -2745,7 +2616,15 @@ app.views.procedureManage = Backbone.View.extend({
 				subhead: "",
 				tax: 0,
 				title: " ",
-				yearReturn: ""};
+				yearReturn: "",
+				"more":0,
+				"dsc":"",//简介
+				"low":"",//法律
+				"action":"",//房价走势
+				"manager":"",//资产管理
+				"review":"",//资产评估
+				"suggest":""//综合建议
+				};
 			if(data){
 				templateData=data;
 				}
@@ -2771,7 +2650,7 @@ app.views.procedureManage = Backbone.View.extend({
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">图片</div>'+
+				'<div class="templatePointLeft">实景图片</div>'+
 				'<div class="templatePointRight">'+
 					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
 						'<label for="mulipic'+openTime+'_to_image">'+
@@ -2779,7 +2658,33 @@ app.views.procedureManage = Backbone.View.extend({
 							'<input type="file" id="mulipic'+openTime+'_to_image" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 						'</label>'+
 					'</form>'+
-					'<div class="templateFrame"></div>'+
+					'<div class="templateFrame" formtype="picFrame" to="image"></div>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">户型图</div>'+
+				'<div class="templatePointRight">'+
+					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
+						'<label for="mulipic'+openTime+'_to_imageH">'+
+							'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+							'<input type="file" id="mulipic'+openTime+'_to_imageH" to="imageH" name="upfile" style="width:0px;height:0px;"></input>'+
+						'</label>'+
+					'</form>'+
+					'<div class="templateFrame" formtype="picFrame" to="imageH"></div>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">区位图</div>'+
+				'<div class="templatePointRight">'+
+					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
+						'<label for="mulipic'+openTime+'_to_imageA">'+
+							'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+							'<input type="file" id="mulipic'+openTime+'_to_imageA" to="imageA" name="upfile" style="width:0px;height:0px;"></input>'+
+						'</label>'+
+					'</form>'+
+					'<div class="templateFrame" formtype="picFrame" to="imageA"></div>'+
 				'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
@@ -2920,6 +2825,36 @@ app.views.procedureManage = Backbone.View.extend({
 				'<div class="templatePointRight"><input to="more" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">简介</div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_dsc" to="dsc" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">相关法律</div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_low" to="low" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">房价走势</div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_action" to="action" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">资产管理</div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_manager" to="manager" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">资产评估</div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_review" to="review" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">综合建议</div>'+
+				'<div class="templatePointRight"><script id="editor'+openTime+'_to_suggest" to="suggest" formtype="html" type="text/plain" style="width:570px;height:250px;"></script></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>');
 		
@@ -2972,14 +2907,40 @@ app.views.procedureManage = Backbone.View.extend({
 					alert("修改失败")
 					})
 			})
+		templateDom.find("[formtype='html']").each(function(){
+			
+			var to = $(this).attr("to")
+			console.log($(this))
+			var ue = UE.getEditor($(this).attr("id"));
+			console.log("a")	
+			ue.addListener( 'ready', function( editor ) {
+				console.log("b")	
+     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
+ } );			
+		ue.addListener( 'afterSelectionChange', function( editor ) {
+     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
+ } );		
+			
+			});
 			function reflash(){
 			templateDom.find(".templateFrame").empty();
 			$.each(templateData.image,function(i,n){
 			var newpoint=$('<div class="templateMuliPic">'+
 				'<img src="'+n+'"/>'+
 				'<div class="templateMuliPicRemove" num="'+i+'"></div>'+
-			'</div>').appendTo(templateDom.find(".templateFrame"))
-			
+			'</div>').appendTo(templateDom.find("[formtype='picFrame'][to='image']"))
+			})
+			$.each(templateData.imageH,function(i,n){
+			var newpoint=$('<div class="templateMuliPic">'+
+				'<img src="'+n+'"/>'+
+				'<div class="templateMuliPicRemove" num="'+i+'"></div>'+
+			'</div>').appendTo(templateDom.find("[formtype='picFrame'][to='imageH']"))
+			})
+			$.each(templateData.imageA,function(i,n){
+			var newpoint=$('<div class="templateMuliPic">'+
+				'<img src="'+n+'"/>'+
+				'<div class="templateMuliPicRemove" num="'+i+'"></div>'+
+			'</div>').appendTo(templateDom.find("[formtype='picFrame'][to='imageA']"))
 			})
 			$('<div class="clear"></div>').appendTo(templateDom.find(".templateFrame"))
 			}

@@ -148,7 +148,16 @@ app.objs.routeTable={
 					type:0,
 					fn:function(data){
 					/*出页面*/
-					app.objs.productDetailV.render();
+					app.apis.getProduct(null,function(dataA){
+						var dataA=_.indexBy(dataA,"id")
+						if(dataA[data.id]){
+							app.objs.productDetailV.data=dataA[data.id];
+							app.objs.productDetailV.render();
+							}
+						},function(){
+							alert("获取商品出错")
+							})
+					
 					}
 		},
 	/*公告详情*/
