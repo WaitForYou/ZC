@@ -2911,21 +2911,7 @@ app.views.procedureManage = Backbone.View.extend({
 					alert("修改失败")
 					})
 			})
-		templateDom.find("[formtype='html']").each(function(){
-			
-			var to = $(this).attr("to")
-			console.log($(this))
-			var ue = UE.getEditor($(this).attr("id"));
-			console.log("a")	
-			ue.addListener( 'ready', function( editor ) {
-				console.log("b")	
-     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
- } );			
-		ue.addListener( 'afterSelectionChange', function( editor ) {
-     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
- } );		
-			
-			});
+
 			function reflash(){
 			templateDom.find(".templateFrame").empty();
 			$.each(templateData.image,function(i,n){
@@ -2976,6 +2962,21 @@ app.views.procedureManage = Backbone.View.extend({
 		
 		templateDom.appendTo($("#popMain"));
 		reflash();
+				templateDom.find("[formtype='html']").each(function(){
+			
+			var to = $(this).attr("to")
+			console.log($(this))
+			var ue = UE.getEditor($(this).attr("id"));
+			console.log("a")	
+			ue.addListener( 'ready', function( editor ) {
+				console.log("b")	
+     			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
+ } );			
+		ue.addListener( 'afterSelectionChange', function( editor ) {
+     			templateData[to]=ue.getContent(); //编辑器家在完成后，让编辑器拿到焦点
+ } );		
+			
+			});
 			}
 		function add(target){
 			var openfn=function(){new templateFn(1,null)};
