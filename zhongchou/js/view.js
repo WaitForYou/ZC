@@ -343,7 +343,6 @@ $('<div class="index_top">'
 	+'</div>'
 	+'<div class="clear"></div>'
 	+'</div>').appendTo($(this.el));
-			
 		   $(' <div id="topics">'
 			     +'<div class="inner" style=" height:30px;">'
 			       +' <span style=" display:block; float:left;"><img src="img/topics.png" alt=""></span>'
@@ -479,7 +478,8 @@ var pieData = [
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this;
 		//公告
-		$.each(this.data.announcement,function(i,n){
+		if(this.data.announcement){
+			$.each(this.data.announcement,function(i,n){
 			var newAn=$('<div class="caption">'+n.title+'</div>').appendTo($("#slides").children(".slides_container"));
 			newAn.data("an",n);
 
@@ -488,6 +488,8 @@ var pieData = [
 				app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
 			});
 		});
+			}
+		
 		$(function(){
               $('#slides').slides({
                 preload: true,
@@ -527,7 +529,8 @@ var pieData = [
          //$('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
 		introducePicElem.data("data",this.data.promotion.introducePic);*/
 		//产品
-        $.each(this.data.product,function(i,value){
+		if(this.data.product){
+			$.each(this.data.product,function(i,value){
             var newElem = $('<div class="project_intro">'
 	          +'<div class="left">'
 	             +'<span class="intro_pic"><a href="/items/30093164">'
@@ -558,6 +561,8 @@ var pieData = [
 	      +'</div>').appendTo($(".project_area"));
 
         });
+			}
+        
         //----start人物介绍
         // console.log(this.data.promotion) alert();
         /*
@@ -2127,7 +2132,7 @@ app.views.procedureManage = Backbone.View.extend({
 				propertyType: "0",
 				rightType: "0",
 				stratTime: new Date().getTime(),
-				subhead: "nnnn",
+				subhead: "",
 				tax: 0,
 				title: " ",
 				yearReturn: ""};
