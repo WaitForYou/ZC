@@ -1215,22 +1215,22 @@ app.views.productDetail = Backbone.View.extend({
                 '<div id="Tab3">'+
                     '<div class="Menubox3">'+
                         '<ul>'+
-                            '<li id="three1" class="hover">'+
+                            '<li id="three1" num="1" class="threebutton hover">'+
                                 '项目介绍'+
                             '</li>'+
-                            '<li id="three5">'+
+                            '<li id="three5" class="threebutton" num="5">'+
                                '图片集锦'+
                             '</li>'+
-                            '<li id="three2">'+
+                            '<li id="three2" class="threebutton" num="2">'+
                                 '价格走势'+
                             '</li>'+
-                            '<li id="three3" style="margin-right:0px;">'+
+                            '<li id="three3" class="threebutton" num="3" style="margin-right:0px;">'+
                                 '专业投资建议'+
                             '</li>'+
                         '</ul>'+
                     '</div>'+
                     '<div class="Contentbox3">'+
-                        '<div id="con_three_1">'+
+                        '<div id="con_three_1" class="con_three">'+
                             '<div class="tt jbxx">'+
                                 '<h3>'+
                                     '基本信息'+
@@ -1414,14 +1414,14 @@ app.views.productDetail = Backbone.View.extend({
                                 '<p></p>'+
                             '</div>'+
                         '</div>'+
-						'<div id="con_three_2" style="display:none">'+
+						'<div id="con_three_2" class="con_three" style="display:none">'+
 						    '<div class="tt">'+
 						      '<h3>历史价格走势</h3><br><br>'+
 						      this.data.action+
 							  '<p></p>'+	
 						   '</div>'+
 						'</div>'+
-						'<div id="con_three_3" style="display:none;">'+
+						'<div id="con_three_3" class="con_three" style="display:none;">'+
 						     '<div class="tt jbxx">'+
 						           '<h3>相关法律</h3>'+
 								   '<p></p>'+	
@@ -1441,7 +1441,7 @@ app.views.productDetail = Backbone.View.extend({
 						          '<p></p>'+	
 						      '</div>'+
 						'</div>'+
-                        '<div id="con_three_4" style="display:none">'+
+                        '<div id="con_three_4" class="con_three" style="display:none">'+
                           '<div class="tt detail">'+
                             '<h3> 众筹明细</h3>'+
                             '<table id="orderListTable" width="100%" border="0" cellspacing="0" cellpadding="0">'+
@@ -1463,7 +1463,7 @@ app.views.productDetail = Backbone.View.extend({
                             '</div>'+
                           '</div>'+
                         '</div>'+
-						'<div id="con_three_5" style="display:none;">'+
+						'<div id="con_three_5" class="con_three" style="display:none;">'+
 						  ' <h3>实景图</h3><br>'+
 						   '<div id="shijintu"></div>'+
 						   '<p><br></p>'+
@@ -1472,14 +1472,14 @@ app.views.productDetail = Backbone.View.extend({
 						   '<h3>区位图</h3><br>'+
 						   '<div id="quweitu"></div>'+
 						'</div>'+
-                        '<div id="con_three_6" style="display:none">'+
+                        '<div id="con_three_6" class="con_three" style="display:none">'+
                         '<div class="tt jbxx">'+
     '<h3>转让份额</h3>'+
     '<p style="font-size:14px;font-weight:bold; text-indent:24px; line-height:24px; padding:15px;">封闭期：份额转让在筹满结束后60天开通转让通道。<br></p>'+
  '</div>'+
                         
                         '</div>'+
-                        '<div id="con_three_7" style="display:none">'+
+                        '<div id="con_three_7" class="con_three" style="display:none">'+
                             '<div class="tt">'+
                                 '<h3>'+
                                    ' 周边租金走势图'+
@@ -1528,7 +1528,7 @@ app.views.productDetail = Backbone.View.extend({
                                ' </div>'+
                             '</div>'+
                         '</div>'+
-                        '<div id="con_three_8" style="display:none">'+
+                        '<div id="con_three_8" class="con_three" style="display:none">'+
                            ' <div class="tt tp">'+
                                ' <h3>'+
                                    ' 投票'+
@@ -1564,24 +1564,23 @@ app.views.productDetail = Backbone.View.extend({
       '</div>'+
      ' <div class="modal-body center-block">'+
         '<a href="/flowplayer/daoshang.flv" style="display:block;width:500px;height:300px;" id="player1"><object width="100%" height="100%" id="player1_api" name="player1_api" data="/flowplayer/flowplayer-3.2.18.swf" type="application/x-shockwave-flash"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="quality" value="high"><param name="bgcolor" value="#000000"><param name="flashvars" value="config={&quot;clip&quot;:{&quot;autoPlay&quot;:false,&quot;autoBuffering&quot;:true,&quot;url&quot;:&quot;/flowplayer/daoshang.flv&quot;},&quot;playerId&quot;:&quot;player1&quot;,&quot;playlist&quot;:[{&quot;autoPlay&quot;:false,&quot;autoBuffering&quot;:true,&quot;url&quot;:&quot;/flowplayer/daoshang.flv&quot;}]}"></object></a>'+
-       ' <script>'+
-          'var f = flowplayer("player1", "/flowplayer/flowplayer-3.2.18.swf", {'+
-        	   ' clip: {'+
-        	   '     autoPlay: false,'+
-        	   '     autoBuffering: true '+
-        	  '  }'+
-         ' });'+
-         ' $("#video-modal1").on(\'click\', function(){'+
-          	' $f(0).stop();'+
-          '  });'+
-       ' </script>'+
+       
 
      ' </div>'+
       
    ' </div>'+
        ' </div>'+
     '</div>'+
-'</div>')
+'</div>');
+
+$(".Menubox3 li").each(function(){
+	$(this).unbind("click").bind("click",function(){
+		$(".threebutton").removeClass("hover");
+		$(this).addClass("hover");
+		$(".con_three").hide();
+		$("#con_three_"+$(this).attr("num")).show();
+		})
+	})
 $.each(this.data.image,function(i,n){
 	$('<p><img src="'+n+'"/></p>').appendTo($("#shijintu"))
 	})
