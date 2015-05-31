@@ -252,7 +252,7 @@
 	width: 50%;
 }
 .products #sideMenu .simulation-table2 td {
-	color: #ca5062;
+	color: #368eba;
 	font-size: 22px;
 	padding: 10px;
 	text-align: right;
@@ -344,7 +344,7 @@
 	background:rgba(255, 255, 255, 0.8);
 }
 .products .remaining-text span{
-	color: #ca5062;
+	color: #368eba;
 }
 .products .cont-inner-text {
 	margin: 20px 0;
@@ -360,7 +360,7 @@
 }
 .products .cont-box .title {
 	margin-bottom: 25px;
-	color: #ca5062;
+	color: #368eba;
 	line-height: 1.4;
 	font-size: 182%;
 }
@@ -369,7 +369,7 @@
 	padding: 15px;
 	color: #ffffff;
 	font-size: 114%;
-	background-color: #ca5062;
+	background-color: #368eba;
 }
 .products .cont-box .title-reason {
 	margin-bottom: 25px;
@@ -382,7 +382,7 @@
 }
 .products .cont-box .question {
 	margin-bottom: 20px;
-	color: #ca5062;
+	color: #368eba;
 	font-size: 114%;
 	font-weight: bold;
 }
@@ -479,7 +479,7 @@
 .Menubox3 {
     overflow: hidden;
     zoom: 1;
-    border-bottom: 5px solid #ca5062;
+    border-bottom: 5px solid #368eba;
     width:647px;
 }
 .Menubox3 li {
@@ -510,7 +510,7 @@
     /*color: #b50029;*/
     font-family: "微软雅黑", "黑体", Arial, Helvetica, sans-serif;
     cursor: pointer;
-    background: #ca5062;
+    background: #368eba;
 }
 .Contentbox3 {
     clear: both;
@@ -563,10 +563,10 @@
     width:200px;
     height: 36px;
     line-height: 36px;
-    color: #ca5062;
+    color: #368eba;
     font-size: 16px;
     font-family: "微软雅黑", "黑体", Arial, Helvetica, sans-serif;
-    border-bottom: #ca5062 2px solid;
+    border-bottom: #368eba 2px solid;
 }
 /* 价格走势中的图片居中*/
 .jgzs {

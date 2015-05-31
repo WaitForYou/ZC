@@ -45,7 +45,7 @@ a {
 	text-decoration: none;
 }
 a:link, a:visited {
-	color: ##ca5062;
+	color: ##198cea;
 }
 a:hover {
 	color:#e84a5f;
@@ -95,7 +95,7 @@ a:hover {
 
 #header {
     background: url("../img/header-bg.png") no-repeat scroll center top rgba(0, 0, 0, 0);
-    border-bottom: 1px solid #dd0120;
+    border-bottom: 1px solid #368eba;
 }
 
 
@@ -166,7 +166,7 @@ a:hover {
 /*head end*/
 
 /*.topic-path {
-	border-bottom: 1px dotted #dd0120;
+	border-bottom: 1px dotted #368eba;
 	height: 30px;
 	line-height: 30px;
 	margin-bottom: 20px;
@@ -183,7 +183,7 @@ a:hover {
 
 /*面包屑*/
 .top-wrap {
- border-bottom: 1px solid #dd0120;
+ border-bottom: 1px solid #368eba;
  padding:10px 0 10px 10px;
  width: 100%;
 }
@@ -231,7 +231,7 @@ a:hover {
 	padding-left:32px;
 	height:30px;
 	line-height:30px;
-	color:#ca5062;
+	color:#198cea;
 	width:150px;
 	margin-bottom: 20px;
 }
@@ -258,7 +258,7 @@ a:hover {
 	color:#222;
 }
 .navItem.currItem {
-	border-left:5px solid #ca5062;
+	border-left:5px solid #198cea;
 	color:#222;
 }
 .wyjiechu {
@@ -301,7 +301,7 @@ a:hover {
 	font-weight: 500;
 }
 .fcbt {
-	color: #ca5062;
+	color: #198cea;
 }
 
 .safety {
@@ -320,7 +320,7 @@ a:hover {
 .Menubox3 {
 	overflow: hidden;
 	zoom: 1;
-	border-bottom: 5px solid #ca5062;
+	border-bottom: 5px solid #198cea;
 	width:647px;
 }
 .Menubox3 li {
@@ -351,7 +351,7 @@ a:hover {
 	/*color: #b50029;*/
 	font-family: "微软雅黑", "黑体", Arial, Helvetica, sans-serif;
 	cursor: pointer;
-	background: #ca5062;
+	background: #198cea;
 }
 
 .Contentbox3 {
@@ -771,7 +771,7 @@ h3.gray_title {font-size:14px; border-radius:3px; float:left; height:30px; line-
 h3.gray_tab {padding: 0; font-size:14px; border-radius:3px; float:left; height:40px; line-height:40px; width:680px; margin-top:30px; padding-left:10px; background:#f3f3f3;}
 .tabItem {float:left; height:24px; line-height:24px; padding:0 5px; border-radius:4px; margin:8px 10px; cursor:pointer;}
 .tabItem a:hover {color:#444;}
-.currentItem {background:#ca5062; color:#fff;}
+.currentItem {background:#198cea; color:#fff;}
 .currentItem a {color:#fff;}
 .currentItem a:hover {color:#fff;}
 .dataTbl {width:690px; border-collapse:collapse; border-top:1px solid #cdcdcd;}

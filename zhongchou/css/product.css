@@ -86,7 +86,7 @@
     font-weight: bold;
 }
 .project .note {
-    color: #ca5062;
+    color: #198cea;
     font-size: 12px;
     margin-top: 25px;
 }
@@ -243,7 +243,7 @@ background: linear-gradient(to bottom, #2562bc 0%, #2562bc 50%, #134da2 50%, #13
 }
 
 .simulation-table2 td {
-    color: #ca5062;
+    color: #198cea;
     font-size: 22px;
     padding: 10px;
     text-align: right;
@@ -448,7 +448,7 @@ dl.simulation-text-wrap-in dd {
 .Menubox3 {
     overflow: hidden;
     zoom: 1;
-    border-bottom: 5px solid #ca5062;
+    border-bottom: 5px solid #198cea;
     width:647px;
 }
 .Menubox3 li {
@@ -479,7 +479,7 @@ dl.simulation-text-wrap-in dd {
     /*color: #b50029;*/
     font-family: "閻庣敻鍋婇崰娑㈡嫃鐎ｎ喗鈷栭柛娑橆嚟閹凤拷", "婵帗绋掗崹宕囩礊閿燂拷", Arial, Helvetica, sans-serif;
     cursor: pointer;
-    background: #ca5062;
+    background: #198cea;
 }
 .Contentbox3 {
     clear: both;
@@ -532,10 +532,10 @@ dl.simulation-text-wrap-in dd {
     width:200px;
     height: 36px;
     line-height: 36px;
-    color: #ca5062;
+    color: #198cea;
     font-size: 16px;
     font-family: "閻庣敻鍋婇崰娑㈡嫃鐎ｎ喗鈷栭柛娑橆嚟閹凤拷", "婵帗绋掗崹宕囩礊閿燂拷", Arial, Helvetica, sans-serif;
-    border-bottom: #ca5062 2px solid;
+    border-bottom: #198cea 2px solid;
 }
 /* 婵炲濞�弨閬嶆偋閸濄儲灏庨柡澶婄仢閳笺垹鈽夐幙鍐ㄥ箻婵炲牊鍨垮畷鍫曞礈瑜嶉。濠氭倶閻愬弶鍣搁柤纰夋嫹*/
 .jgzs {
@@ -719,7 +719,7 @@ dl.simulation-text-wrap-in dd {
 /*产品详情*/
 .prodect_left_detail { width:340px; height:auto; display:block; float:left;}
 .pl_buy { width:338px; border:1px solid #d0d0d0; }
-.pl_buy h4 { height:45px; line-height:45px; text-align:center; color:#ca5062; border-top:3px solid #ca5062; padding-bottom:10px;font-size:16px;}
+.pl_buy h4 { height:45px; line-height:45px; text-align:center; color:#198cea; border-top:3px solid #198cea; padding-bottom:10px;font-size:16px;}
 .pl_buy h4 span { padding:0 2px; font-weight:bold;}
 
 .input_amount { padding:0 19px;height:36px; font-size:16px; color:#444; line-height:36px; margin-bottom:10px;}
@@ -730,14 +730,14 @@ dl.simulation-text-wrap-in dd {
 padding: 0 19px 0 110px;
 height: 20px;
 font-size: 14px;
-color: #ca5062;
+color: #198cea;
 line-height: 20px;
 }
 
 
 .input_amount_2 { padding:0 19px;height:30px; font-size:16px; color:#444; line-height:30px;}
-.input_amount_2 span { padding:0 10px;color:#ca5062; font-weight:bold;}
-.input_amount_2 a,.input_amount_2 a:visited { margin-left:15px;color:#ca5062;}
+.input_amount_2 span { padding:0 10px;color:#198cea; font-weight:bold;}
+.input_amount_2 a,.input_amount_2 a:visited { margin-left:15px;color:#198cea;}
 .input_amount_2 a:hover { text-decoration:underline;}
 
 
