@@ -34,7 +34,7 @@
 .nav_03 { background:url(../img/uc/nav_03_icon.png) center no-repeat;}
 .nav_04 { background:url(../img/uc/nav_04_icon.png) center no-repeat;}
 
-.mb_right {float:left; width:705px; height:auto; padding:35px 35px 0 35px;}
+.mb_right {float:left; width:705px; height:auto; padding:10px 10px 0 35px;}
 .right_nav { width:705px; height:55px; border-bottom:3px solid #000;}
 .right_nav ul li { width:167px; height:55px; display:block; float:left; margin-right:3px; background:#efefef; font-size:18px; line-height:55px; text-align:center; font-weight:bold;}
 .right_nav .hover { background:#29343b; color:#fff;}
@@ -49,7 +49,7 @@
 /*�û������޸�*/
 .bankcard { width:703px; height:auto; border:1px solid #c8c8c8; }
 .bankcard h2 { width:683px; height:60px; line-height:60px; background:#efefef; font-size:18px; padding-left:20px; font-weight:bold;border-bottom:1px solid #c8c8c8; }
-.bankcard ul { display:block; float:left;width:633px; padding:35px 35px 60px 35px;}
+.bankcard ul { display:block; float:left;width:633px; padding:10px 35px 5px 35px;}
 .bankcard ul li { display:block; float:left; width:633px; height:33px; line-height:33px; font-size:14px; margin-bottom:15px; }
 .bankcard ul li a,.bankcard ul li a:visited { color:#368eba; padding-left:30px;}
 .bankcard ul li a:hover { text-decoration:underline;}

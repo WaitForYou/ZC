@@ -2117,7 +2117,7 @@ iframe.twitter-share-button {
   padding-left: 10px;
 	}
 
-.btn_1,.templateSend,.templateEdit{
+.btn_1,.templateSend,.templateEdit,.bankcard_confirm a{
 	text-align: center;
 	background: #1e7bbb;
 	width: 90px;
@@ -2129,6 +2129,7 @@ iframe.twitter-share-button {
 	margin: 10px 0;
 	font-weight: bold;
 	color: #fff;
+	display: inline-block;
 }
 .btn_1:hover,.templateSend:hover,.addButton:hover .templateEdit:hover{
 	opacity: 0.8;

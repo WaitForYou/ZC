@@ -1902,7 +1902,7 @@ app.views.setDetail = Backbone.View.extend({
 	              '<i id="positionNotice" class="ts"></i></li>'+
 	              '<li><h4>所在公司:</h4><span><input id="userCorp" name="userCorp" formtype="simple" type="text" to="company" value="'+templateData.company+'"></span>'+
 	              '<i id="userCorpNotice" class="ts"></i></li>'+
-	              '<div class="bankcard_confirm"><a">确&nbsp;&nbsp;认</a></div>'+
+	              '<div class="bankcard_confirm"><a>确&nbsp;&nbsp;认</a></div>'+
 	            '</ul>'+
             '</form>'+
             '<div class="clear"></div>'+
