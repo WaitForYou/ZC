@@ -1,7 +1,7 @@
 .reg_input_area {display:block; width:650px;height:auto; margin:5px auto;font-size:14px;}
 .reg_input_area  li { width:550px;height:60px;  text-align:left; float:left;}
-.reg_input_area a,.login_input_area a:visited {color:#cb5062; font-size:14px;} 
-.reg_input_area a:hover {color:#cb5062; text-decoration:underline;}
+.reg_input_area a,.login_input_area a:visited {color:#198eca; font-size:14px;} 
+.reg_input_area a:hover {color:#198eca; text-decoration:underline;}
 
 .regUl {width:550px;font-size:14px;}
 .regUl li {height:60px; line-height:60px; width:100%; text-align:left; position:relative;}

@@ -1,6 +1,6 @@
 #product_tab #tab {
 	margin-bottom: 20px;
-	border-bottom: solid 5px #ca5062;
+	border-bottom: solid 5px #198eca;
 	width: 980px;
 	margin: 20px auto;
 }
@@ -18,13 +18,14 @@
 }
 #product_tab #tab li.hover {
 	width: 327px;
-	background: #ca5062;
+	background: #198eca;
 }
 #product_tab #tab li.last {
 	margin-right : 0px;
 }
 #product_tab #tab li:hover {
-	background: #ca5062;
+	background: #198eca;
+    opacity: 0.8;
 }
 #product_tab .disnon {
 	display: none;

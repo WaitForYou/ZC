@@ -379,7 +379,7 @@ a {
 
 .project_intro .right { width:475px; height:255px; float:left; position:relative;}
 .project_intro .right .r01 { width:475px; height:40px; line-height:40px; display:block; font-size:14px; margin-bottom:10px;}
-.project_intro .right .r01 h4 { display:block; float:left; width:275px; height:40px; line-height:40px; font-size:18px;  color:#d04a5e;}
+.project_intro .right .r01 h4 { display:block; float:left; width:275px; height:40px; line-height:40px; font-size:18px;  color:#198eca;}
 .project_intro .right .r01 h4 span { font-size:24px;}
 .project_intro .right .r01 h3 { display:block; float:left; width:275px; height:40px; line-height:40px; font-size:18px;  color:#888;}
 .project_intro .right .r01 h3 span { font-size:24px;}
@@ -457,11 +457,11 @@ font-size: 20px; color: #7f778e; text-align: center;line-height: 33px; text-deco
 
 
 /*footer area*/
-.footer_area { width:100%; height:auto; border-top:10px solid #da0033; background:#000; margin-top:20px;}
+.footer_area { width:100%; height:auto; border-top:10px solid #198bca; background:#000; margin-top:20px;}
 .footer { width:980px; height:auto; margin:0 auto; padding:50px 0; position:relative;}
 .footer h1 { text-align:center; color:#fff; font-size:24px; letter-spacing:10px; height:40px; line-height:40px;}
-.footer h2 { text-align:center; color:#d7222a; font-size:16px; letter-spacing:7px; height:40px; line-height:40px;}
-.footer h2 i { display:block; float:left; width:360px; height:1px; background:#610f13; margin-top:20px;}
+.footer h2 { text-align:center; color:#198eca; font-size:16px; letter-spacing:7px; height:40px; line-height:40px;}
+.footer h2 i { display:block; float:left; width:360px; height:1px; background:#198eca; margin-top:20px;}
 .footer h2 span { display:block; float:left; width:260px; }
 .footer h3 { height:44px; background: url(../img/footer_logo.png) top no-repeat; color:#d7222a; padding-top:61px; text-align:center;}
 .footer h3 a,.footer h3 a:visited { height:44px; line-height:44px; color:#d7222a; padding:0 15px; font-size:14px;}
@@ -612,7 +612,7 @@ background: url(../img/header-text.png) no-repeat left;}
 
 .btn-1b:hover,
 .btn-1b:active {
-	color: #dd0120;
+	color: #198eca;
 	background: #fff;
 	opacity: 1;
 	-ms-filter: alpha(opacity=100);

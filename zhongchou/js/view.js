@@ -258,8 +258,12 @@ app.views.middle = Backbone.View.extend({
 		$.each(this.page,function(i,n){
 			$("#"+n).unbind("click").bind("click",function(){
 			    app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n,{trigger: true});
+			    $(this).parent().children().removeClass('hover');
+			    $("#tabs_menu").find("li").removeClass('hover');
+			    $(this).addClass("hover");
 			})
 		});
+		$("#adminManage").trigger("click");
 		}
 	})
 /*首页*/
@@ -2654,7 +2658,7 @@ app.views.procedureManage = Backbone.View.extend({
 				'<div class="templatePointRight">'+
 					'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="mulipic">'+
 						'<label for="mulipic'+openTime+'_to_image">'+
-							'<div style="background-color:#E30A0D;width:100px;height:100px"></div>'+
+							'<div style="background-image:url(images/addfile.png); width:80px;height:80px"></div>'+
 							'<input type="file" id="mulipic'+openTime+'_to_image" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 						'</label>'+
 					'</form>'+
@@ -2745,7 +2749,7 @@ app.views.procedureManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">原单价</div>'+
-				'<div class="templatePointRight"><input to="costUnitPrice" formtype="number"/></div></div>'+
+				'<div class="templatePointRight"><input to="costUnitPrice" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
@@ -3104,7 +3108,7 @@ app.views.recruitManage = Backbone.View.extend({
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">描述</div>'+
-				'<div class="templatePointRight"><script id="editor'+openTime+'_to_message" to="message" formtype="html" type="text/plain" style="height:250px;"></script></div>'+
+				'<div class="templatePointRight" style="padding-left:10px;width:577px;"><script id="editor'+openTime+'_to_message" to="message" formtype="html" type="text/plain" style="height:250px;"></script></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+

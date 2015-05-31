@@ -399,7 +399,9 @@ app.objs.routeTable={
 	var container1 = document.getElementById("vCode1");
     var code1 = new vCode(container1);
     document.getElementById("code1").addEventListener("blur", function () {
-        alert(code1.verify(document.getElementById("code1").value));
+          if(!code1.verify(document.getElementById("code1").value)){
+               alert("验证码错误！");
+          }
     }, false);
     $("#refreshBtn").click(function(){
      $("#vCode1").click();

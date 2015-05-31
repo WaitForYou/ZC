@@ -27,17 +27,17 @@ a {
 /* common
 ***************************************/
 ::selection {
-	background: #ff7074; /* Safari */
+	background: #58b3e1; /* Safari */
 }
 ::-moz-selection {
-	background: #ff7074; /* Firefox */
+	background: #58b3e1; /* Firefox */
 }
 .box {
 	margin-bottom: 20px;
 }
 .note {
 	margin-top: 25px;
-	color: #ca5062;
+	color: #198eca;
 	font-size: 12px;
 }
 .wrap {
@@ -182,7 +182,7 @@ a {
 	text-align: right;
 }
 .notice {
-	color: #ca5062;
+	color: #198eca;
 }
 /* container
 ***************************************/
@@ -197,7 +197,7 @@ a {
 	position: relative;
 	min-width: 1101px;
 	background: url(../img/common/header-bg.png) no-repeat top center;
-	border-bottom: solid 4px #aa380c;
+	border-bottom: solid 4px #198eca;
 }
 #header .inner {
 	position: relative;
@@ -371,7 +371,7 @@ a {
 	background: url(../img/w_2.png) no-repeat center center #ffffff;
 	display: none;
 	border-radius: 6px;
-	box-shadow: 0 0 4px #666;
+	box-shadow: 0 0 4px #d2d2d2;
 }
 #header #qrcode .qrcode_body.on{
 	display: block;
@@ -382,7 +382,7 @@ a {
 	min-width: 980px;
 	height: 30px;
 	line-height: 30px;
-	border-bottom: dotted 1px #dd0120;
+	border-bottom: dotted 1px #2b7cb9;
 	text-align: left;
 }
 .topic-path .inner {
@@ -507,7 +507,7 @@ a {
 	width: 180px;
 }
 #sitemap .link li a {
-	color: #ca5062;
+	color: #198eca;
 	font-size: 12px;
 }
 #sitemap .facebook {
@@ -1875,7 +1875,7 @@ iframe.twitter-share-button {
 ***************************************/
 .systemrequirements .title {
 	margin-bottom: 25px;
-	color: #ca5062;
+	color: #198eca;
 	line-height: 1.4;
 	font-size: 182%;
 	font-weight: normal;
@@ -2055,10 +2055,10 @@ iframe.twitter-share-button {
 	height: 121px;
 }
 .choose_role {width:880px; height:auto;_height:150px; min-height:300px; border:1px solid #c8c8c8; margin-bottom:30px;margin:0 auto; border-radius:5px; margin-top:20px; background:#fff;}
-.choose_role h2 { background: #f2f3f4; height:50px; line-height:50px;  font-size:18px; color:#444; text-align:center;border-top:5px solid #ca5062; border-radius:5px 5px 0 0;border-bottom: 1px solid #c8c8c8;}
+.choose_role h2 { background: #f2f3f4; height:50px; line-height:50px;  font-size:18px; color:#444; text-align:center;border-top:5px solid #198eca; border-radius:5px 5px 0 0;border-bottom: 1px solid #c8c8c8;}
 
-#pagination { display:block; height:40px; line-height:40px; margin:10px 0; text-align:center; font-size:14px; color:#ca5062;}
-#pagination a,#pagination a:visited { margin: 0 10px; padding:3px 7px; color:#fff; width:80px; height:24px; line-height:24px; background:#ca5062; border-radius:3px;}
+#pagination { display:block; height:40px; line-height:40px; margin:10px 0; text-align:center; font-size:14px; color:#198eca;}
+#pagination a,#pagination a:visited { margin: 0 10px; padding:3px 7px; color:#fff; width:80px; height:24px; line-height:24px; background:#198eca; border-radius:3px;}
 #popBg{
 	position:fixed;
 	top:0px;
@@ -2076,7 +2076,7 @@ iframe.twitter-share-button {
 	overflow:auto;
 	width:900px;
 	z-index:100;
-	box-shadow:3px 3px 3px rgba(0,0,0,0.3);
+	box-shadow:0px 0px 11px rgba(0,0,0,0.3);
 	border-radius:10px;
 	display:none;}
 #popClose{
@@ -2089,25 +2089,47 @@ iframe.twitter-share-button {
 	cursor:pointer;
 	}
 .templateTable{
-	margin:40px;
-	border-top:1px solid #666;
+	margin:40px auto;
+	border-top:1px solid #d2d2d2;
+	width: 820px;
 	}
 .templatePoint{
-	border-left:1px solid #666;
-	border-right:1px solid #666;
-	border-bottom:1px solid #666}
+	border-left:1px solid #d2d2d2;
+	border-right:1px solid #d2d2d2;
+	border-bottom:1px solid #d2d2d2}
 .templatePointLeft{
 	float:left;
 	width:220px;
 	padding-top:10px;
 	padding-bottom:10px;
 	text-align:center;
+	color: #434343;
+	font-weight: bold;
 	}
 .templatePointRight{
-	float:left;
-	width:597px;
-	padding-top:10px;
-	padding-bottom:10px;
-	border-left:1px solid #666;
-	text-align:center;
+  text-align: left;
+  float: left;
+  width: 587px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-left: 1px solid #d2d2d2;
+  /* text-align: center; */
+  padding-left: 10px;
 	}
+
+.btn_1,.templateSend{
+	text-align: center;
+	background: #1e7bbb;
+	width: 90px;
+	height: 30px;
+	border-radius: 6px;
+	font-size: 14px;
+	line-height: 30px;
+	cursor: pointer;
+	margin: 10px 0;
+	font-weight: bold;
+	color: #fff;
+}
+.btn_1:hover,.templateSend:hover,.addButton:hover{
+	opacity: 0.8;
+}

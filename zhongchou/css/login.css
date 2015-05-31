@@ -17,8 +17,8 @@ button, input {
 .login_input_area  li .h50 {height:50px;margin-top: 20px;}
 .login_input_area  li .h30 {height:30px;}
 .login_input_area  .mt100 {margin-top:0;}
-.login_input_area a,.login_input_area a:visited {color:#cb5062;} 
-.login_input_area a:hover {color:#cb5062; text-decoration:underline;}
+.login_input_area a,.login_input_area a:visited {color:#198eca;} 
+.login_input_area a:hover {color:#198eca; text-decoration:underline;}
 
 
 .login_span {width:400px; float:left; background:url(../img/login_gray.png)  no-repeat -1px -1px; height:48px; margin-left:0;}
