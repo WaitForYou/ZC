@@ -693,6 +693,10 @@ app.views.login = Backbone.View.extend({
 app.views.register = Backbone.View.extend({
 	el:".middle",
 	render:function(){
+		var code="";
+		var userCheck=false;
+		var phoneCheck=false;
+		var emailCheck=false;
 		var templateData = {
 		"id":app.fns.uuid(),/*id*/
 		"type":1,/*类型,1普通用户2管理用户*/
@@ -711,6 +715,7 @@ app.views.register = Backbone.View.extend({
 		"company":"",/*公司*/
 		"password":"",
 		"password2":"",
+		"code":""/*验证码*/
 	}
 		$(this.el).empty();
 		var registerElem=$('<div class="mainPanel calHeight">'
@@ -751,7 +756,7 @@ app.views.register = Backbone.View.extend({
 		                +'</li> '
 		                +'<li> '
 		        			+'<div class="in_title">短信验证码:</div> '
-		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode"> </span> '
+		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode" to="code"> </span> '
 		                    +'<a id="btnSendmsg" style="margin-left:15px;">获取验证码</a> '
 		                    +'<span id="msgValidNotice" class="in_notice"> </span> '
 		         		+'</li>'
@@ -773,12 +778,74 @@ app.views.register = Backbone.View.extend({
 		     +' </form>'
 		    +'</div>'
 		  +'</div>').appendTo($(this.el));
+		  var getcodeTime;
+		  function getcode(){
+			  registerElem.find("#btnSendmsg").html("获取验证码");
+			  registerElem.find("#btnSendmsg").unbind("click").bind("click",function(){
+			  app.apis.getBindCode({"phone":$(this).parents("form").find("[to='phone']").val()},function(data){
+				  code=data;
+				  var totalTime=60
+				  getcodeTime=setInterval(function(){
+					  $("#btnSendmsg").html(totalTime+"秒后可重新发送验证码")
+					  totalTime--;
+					  if(totalTime==0){
+						  clearInterval(getcodeTime);
+						  getcode();
+						  }
+					  },1000)
+				  registerElem.find("#btnSendmsg")
+				  },function(){
+					  alert("发送失败，请检查手机号是否有效")
+					  })
+			  }) 
+			  }
+		 
+		  registerElem.find("[to='userName']").unbind(change).bind(change,function(){
+			  app.api.checkUser($(this).val(),function(){
+				  userCheck=true;
+				  },function(){
+					  userCheck=false;
+					  alert("账号已注册")
+					  })
+			  });
+		  registerElem.find("[to='email']").unbind(change).bind(change,function(){
+			  app.apis.checkEmail($(this).val(),function(){
+				  emailCheck=ture;
+				  },function(){
+					  emailCheck=false;
+					  alert("邮箱已注册")
+					  })
+			  });
+		registerElem.find("[to='phone']").unbind(change).bind(change,function(){
+			  app.apis.checkEmail($(this).val(),function(){
+				  phoneCheck=ture;
+				  },function(){
+					  phoneCheck=false;
+					  alert("手机已注册")
+					  })
+			  });
 		  registerElem.find("[formtype='simple']").each(function(i,n){
 			  $(this).unbind("change").bind("change",function(){
 				  templateData[$(this).attr("to")]=$(this).val();
 				  })
 			  });
 		registerElem.find("#registerSend").unbind("click").bind("click",function(){
+			if(!userCheck){
+				alert("请填写唯一的用户名")
+				return false;
+				}
+			if(!phoneCheck){
+				alert("请填写唯一的手机号")
+				return false;
+				}
+			if(!emailCheck){
+				alert("请填写唯一的邮箱")
+				return false;
+				}
+			if(!code||code!=templateData.code){
+				alert("请填写正确验证码")
+				return false;
+				}
 			app.apis.register(templateData,function(){
 				alert("注册成功");
 				app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});

@@ -316,6 +316,7 @@ app.apis.getBind=function(data,fn,err){
 	});
 	
 	}
+/*获取验证吗*/
 app.apis.getBindCode=function(data,fn,err){
 	data={"type":"email","id":""}
 	var sendData = {
