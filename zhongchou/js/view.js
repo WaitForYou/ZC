@@ -782,7 +782,7 @@ app.views.register = Backbone.View.extend({
 		  function getcode(){
 			  registerElem.find("#btnSendmsg").html("获取验证码");
 			  registerElem.find("#btnSendmsg").unbind("click").bind("click",function(){
-			  app.apis.getBindCode({"phone":$(this).parents("form").find("[to='phone']").val()},function(data){
+			  app.apis.getBindCode({"type":"phone",number:$(this).parents("form").find("[to='phone']").val()},function(data){
 				  code=data;
 				  var totalTime=60
 				  getcodeTime=setInterval(function(){
@@ -799,35 +799,35 @@ app.views.register = Backbone.View.extend({
 					  })
 			  }) 
 			  }
-		 
-		  registerElem.find("[to='userName']").unbind(change).bind(change,function(){
-			  app.api.checkUser($(this).val(),function(){
+		  
+		  registerElem.find("[formtype='simple']").each(function(i,n){
+			  $(this).unbind("change").bind("change",function(){
+				  templateData[$(this).attr("to")]=$(this).val();
+				  })
+			  });
+		registerElem.find("[to='userName']").on("change",function(){debugger;
+			  app.apis.checkUser($(this).val(),function(){
 				  userCheck=true;
 				  },function(){
 					  userCheck=false;
 					  alert("账号已注册")
 					  })
 			  });
-		  registerElem.find("[to='email']").unbind(change).bind(change,function(){
+		  registerElem.find("[to='email']").on("change",function(){
 			  app.apis.checkEmail($(this).val(),function(){
-				  emailCheck=ture;
+				  emailCheck=true;
 				  },function(){
 					  emailCheck=false;
 					  alert("邮箱已注册")
 					  })
 			  });
-		registerElem.find("[to='phone']").unbind(change).bind(change,function(){
-			  app.apis.checkEmail($(this).val(),function(){
-				  phoneCheck=ture;
+		registerElem.find("[to='phone']").on("change",function(){
+			  app.apis.checkPhone($(this).val(),function(){
+				  phoneCheck=true;
 				  },function(){
 					  phoneCheck=false;
 					  alert("手机已注册")
 					  })
-			  });
-		  registerElem.find("[formtype='simple']").each(function(i,n){
-			  $(this).unbind("change").bind("change",function(){
-				  templateData[$(this).attr("to")]=$(this).val();
-				  })
 			  });
 		registerElem.find("#registerSend").unbind("click").bind("click",function(){
 			if(!userCheck){

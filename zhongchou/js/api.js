@@ -168,7 +168,7 @@ app.apis.removeClient=function(data,fn,err){
 
 /*检测用户名*/
 app.apis.checkUser=function(data,fn,err){
-	var data = "name"/*传输入的东西过来*/
+	console.log(data);
 	var sendData = {
 		model:"client",
 		action:"checkUser",
@@ -187,7 +187,8 @@ app.apis.checkUser=function(data,fn,err){
 	}
 /*检测手机号*/
 app.apis.checkPhone=function(data,fn,err){
-	var data = "phone"/*传输入的东西过来*/
+	//var data = "phone"/*传输入的东西过来*/
+	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"checkPhone",
@@ -204,7 +205,8 @@ app.apis.checkPhone=function(data,fn,err){
 	}
 /*检测邮箱*/
 app.apis.checkEmail=function(data,fn,err){
-	var data = "email"/*传输入的东西过来*/
+	console.log(data)
+	//var data = "email"/*传输入的东西过来*/
 	var sendData = {
 		model:"client",
 		action:"checkEmail",
