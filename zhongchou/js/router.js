@@ -428,8 +428,30 @@ app.objs.routeTable={
 				fn:function(data){
 					app.objs.accountV.el=".mb_right";
 					app.objs.accountV.data=app.objs.user.get();
-					/*出页面*/
-					app.objs.accountV.render();
+					function getDeal(){
+						app.apis.getdealList(null,function(data){
+							app.objs.accountV.data.deal=data
+							app.objs.accountV.render();
+							},function(){
+							alert("获取交易信息失败")
+							})
+						}
+					function getbind(){
+						app.apis.getBind(null,function(data){
+						app.objs.accountV.data.bind=data;
+						/*出页面*/
+					getDeal()
+						},function(){
+							alert("获取绑定信息失败")
+							})
+						}
+					app.apis.getSafeQusetion(null,function(){
+						app.objs.accountV.data.saveQuestion=true;
+						getbind()
+						},function(){
+							app.objs.accountV.data.saveQuestion=false;
+							getbind()
+							})
 				}
 		},
 	/*充值*/

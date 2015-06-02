@@ -1673,6 +1673,35 @@ app.views.account = Backbone.View.extend({
 	el:".mb_right",
 	data:{},
 	render:function(){
+		var emailString='<li class="m_ac_propic" id="mailSet"><img src="/img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">未绑定</a></li>';
+		if(this.data.email){
+			emailString='<li class="m_ac_propic" id="mailModify"><img src="/img/uc/icon_a1_on.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">修改</a></li>'
+			}
+		var questionString='<li class="m_ac_propic" id="secQuesSet">'+
+						'<img src="/img/uc/icon_a2.jpg" alt="">'+
+					'<h4>密码问题</h4>'+
+						'<a href="secureQuestion">未设置</a>'+
+					'</li>'
+			if(this.data.saveQuestion){
+				questionString='<li class="m_ac_propic" id="secQuesModify" style="display:none">'+
+						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
+					'<h4>密码问题</h4>'+
+						'<a href="secureQuestion">修改</a>'+
+					'</li>'
+				}		
+		var messageString='<li class="m_ac_propic" id="infoSet">'+
+						'<img src="/img/uc/icon_a3.jpg" alt="">'+
+					'<h4>个人资料</h4>'+
+						'<a href="modifyUser">未完善</a>'+
+					'</li>'
+			if(this.data.name){
+				messageString='<li class="m_ac_propic" id="infoModify" style="display:none">'+
+						'<img src="/img/uc/icon_a3_on.jpg" alt="">'+
+					'<h4>个人资料</h4>'+
+						'<a href="modifyUser">修改</a>'+
+					'</li>'
+				}
+							
 		console.log(this);
 		$(this.el).html('<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
 				'<h2>我的资产</h2>'+
@@ -1722,36 +1751,9 @@ app.views.account = Backbone.View.extend({
 							'<img src="/img/uc/progress_pic4.png">'+
 						'</h4></li>'+
 					'<div class="clear"></div>'+
-					'<li class="m_ac_propic" id="mailSet">'+
-						'<img src="/img/uc/icon_a1.jpg" alt="">'+
-					'<h4>电子邮箱</h4>'+
-						'<a href="mailAuthenticate">未绑定</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="mailModify" style="display:none">'+
-						'<img src="/img/uc/icon_a1_on.jpg" alt="">'+
-					'<h4>电子邮箱</h4>'+
-						'<a href="mailAuthenticate">修改</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="secQuesSet">'+
-						'<img src="/img/uc/icon_a2.jpg" alt="">'+
-					'<h4>密码问题</h4>'+
-						'<a href="secureQuestion">未设置</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="secQuesModify" style="display:none">'+
-						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
-					'<h4>密码问题</h4>'+
-						'<a href="secureQuestion">修改</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="infoSet">'+
-						'<img src="/img/uc/icon_a3.jpg" alt="">'+
-					'<h4>个人资料</h4>'+
-						'<a href="modifyUser">未完善</a>'+
-					'</li>'+
-					'<li class="m_ac_propic" id="infoModify" style="display:none">'+
-						'<img src="/img/uc/icon_a3_on.jpg" alt="">'+
-					'<h4>个人资料</h4>'+
-						'<a href="modifyUser">修改</a>'+
-					'</li>'+
+					emailString+
+					questionString+
+					messageString+
 				'</ul>'+
 			'</div>'+
 
@@ -1853,36 +1855,62 @@ app.views.redPacketDetail = Backbone.View.extend({
 app.views.safeQusetion = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
+		var templateData={"id":"",question1:"0",question2:"0",answer1:"",answer2:""}
 		$(this.el).html('<div class="account_security">'+
             '<h2>温馨提示：您好，您的安全问题未设置，请填写以下信息进行设置</h2>'+
             '<ul>'+
                 '<p>请在下面的下拉列表中选择问题，并在答案部分予以回答。<br>注意：回答安全问题是您修改手机号码，变更邮箱，找回密码和修改银行账号的必备验证程序，请妥善保存您的安全问题及答案，谢谢。</p>'+
                 '<li><h4>问题一：</h4>'+
                     '<span>'+
-                       '<select id="question1" name="请选择">'+
-                           '<option>我的出生地在哪？</option>'+
-                           '<option>我的母亲叫什么？</option>'+
-                           '<option>我的星座是什么？</option>'+
+                       '<select id="question1" formtype="select" to="question1" name="请选择">'+
+                           '<option vlaue="0">我的出生地在哪？</option>'+
+                           '<option vlaue="1">我的母亲叫什么？</option>'+
+                           '<option vlaue="2">我的星座是什么？</option>'+
                            
                        '</select>'+
                      '</span>'+
                 '</li>'+
-                '<li><h4>答案一：</h4><span><input id="answer1" name="answer1" type="text"></span><i id="answer1Notice" class="ts"></i></li>'+
+                '<li><h4>答案一：</h4><span><input id="answer1" name="answer1" type="text" formtype="simple" to="answer1"></span><i id="answer1Notice" class="ts"></i></li>'+
                 '<li><h4>问题二：</h4>'+
                     '<span>'+
-                       '<select id="question2" name="请选择">'+
-                           '<option>我最喜欢的食物是什么？</option>'+
-                           '<option>我最喜欢的电影是什么？</option>'+
-                           '<option>我最喜欢的歌曲是什么？</option>'+
+                       '<select id="question2" formtype="select" to="question2" name="请选择">'+
+                           '<option vlaue="0">我最喜欢的食物是什么？</option>'+
+                           '<option vlaue="1">我最喜欢的电影是什么？</option>'+
+                           '<option vlaue="2">我最喜欢的歌曲是什么？</option>'+
                        '</select>'+
                      '</span>'+
                 '</li>'+
-                '<li><h4>答案二：</h4><span><input id="answer2" name="answer2" type="text"></span><i id="answer2Notice" class="ts"></i></li>'+
-                '<a onclick="secQuesSubmit();" class="confirm_btn">提交更新</a>'+
+                '<li><h4>答案二：</h4><span><input id="answer2" name="answer2" formtype="simple" to="answer2" type="text"></span><i id="answer2Notice" class="ts"></i></li>'+
+                '<a class="confirm_btn">提交更新</a>'+
                 '<!-- <div class="cancel_btn"><a href="#">取消</a></div> -->'+
             '</ul>'+
             '<div class="clear"></div>'+
         '</div>')
+		$(this.el).find("[ formtype='simple']").each(function(){
+			$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=$(this).val();
+				})
+			})
+		$(this.el).find("[ formtype='select']").each(function(){
+			
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			})
+		$(this.el).find(".confirm_btn").unbind("click").unbind("click",function(){
+			app.apis.setSafeQusetion(templateData,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
 	}
 	})
 /*邮箱验证*/
@@ -1898,18 +1926,39 @@ app.views.emailVerify = Backbone.View.extend({
                  '<i class="glyphicon glyphicon-envelope"></i>'+
                '</li>'+
                '<li id="mailNotice"></li>'+
-               '<li id="sendBtn" class="basics_btn"><a id="bindBtn" onclick="mailAuthSend()">绑定</a></li>'+
+               '<li id="sendBtn" class="basics_btn"><a id="bindBtn">绑定</a></li>'+
                '<li id="mailLoginBtn" class="basics_btn" style="display:none"><a onclick="mailAuthSend()">登录邮箱</a></li>'+
                '<div class="clear"></div>'+
-            '</ul>'+
-            
+            '</ul>'+    
         '</div>')
+		function sendBind(){
+			$("#bindBtn").html("绑定")
+			$(this.el).find("#sendBtn").unbind("click").bind("click",function(){
+			app.apis.getBindCode({"type":"email","id":app.objs.user.get().id},function(data){
+					alert("信息已发送")
+					var sendTime=30;
+					var sendI=setInterval(function(){
+						$("#bindBtn").html(sendTime+"秒后可重新发送");
+						sendTime--;
+						if(sendTime<0){
+							clearInterval(sendI)
+							sendBind();
+							}
+						},1000)
+					
+				},function(){
+					alert("发送失败")
+					})
+			})
+			}
+		sendBind()
 	}
 	})
 /*修改手机*/
 app.views.setPhone = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
+		var code="";
 		$(this.el).html('<div class="bankcard" style="position:relative;">'+
 	            '<h2>用户手机修改</h2>'+
 	            '<ul>'+
@@ -1917,27 +1966,70 @@ app.views.setPhone = Backbone.View.extend({
 	                '<li><h4>新手机号:</h4><span><input id="phoneNumber" name="phoneNumber" type="text"/></span><i id="phoneNumberNotice" class="in_notice" style="margin-top:145px;margin-left:290px;"></i></li>'+
 	                '<li>'+
 		                '<h4>输入验证码:</h4><span><input id="msgValidCode" name="msgValidCode" type="text" onfocus="msgValidCodeCheck();" onblur="msgValidCodeCheck();"></span><i id="msgValidNotice" class="in_notice" style="margin-top:190px;margin-left:290px;"></i>'+
-		                '<h4 class="yzm" style="position:absolute; right:205px; top:194px;width:150px;"><a id="btnSendmsg" href="javascript:void(0)" onclick="msgSendCheck()" style="width:150px; height:30px; line-height:30px; box-shadow:none;">[获取验证码]</a></h4>'+
+		                '<h4 class="yzm" style="position:absolute; right:205px; top:194px;width:150px;"><a id="btnSendmsg"  style="width:150px; height:30px; line-height:30px; box-shadow:none;">[获取验证码]</a></h4>'+
 	                '</li>'+
-	                '<div class="bankcard_confirm"><a href="javascript:void(0)" onclick="submitCheck()">确&nbsp;&nbsp;认</a></div>'+
+	                '<div class="bankcard_confirm"><a>确&nbsp;&nbsp;认</a></div>'+
 	            '</ul>'+
 	            '<div class="clear"></div>'+
 	        '</div>')
-	}
+		function sendBind(){
+			$(this.el).find("#btnSendmsg").html("[获取验证码]")
+			$(this.el).find("#btnSendmsg").unbind("click").bind("click",function(){
+				app.apis.getBindCode({"type":"phone","id":app.objs.user.get().id},function(data){
+					alert("信息已发送")
+					code=data;
+					var sendTime=30;
+					var sendI=setInterval(function(){
+						$("#btnSendmsg").html(sendTime+"秒后可重新发送");
+						sendTime--;
+						if(sendTime<0){
+							clearInterval(sendI)
+							sendBind();
+							}
+						},1000)
+					
+				},function(){
+					alert("发送失败")
+					})
+				})
+			}	
+			sendBind()
+			$(this.el).find(".bankcard_confirm").unbind("click").bind("click",function(){
+				if(code==$("#msgValidCode")){
+					app.apis.bind({
+					"type":"phone","id":app.objs.user.get().id,"code":code
+					},function(){
+						alert("绑定成功")
+						window.location.reload();
+						},function(){
+							alert("绑定失败")
+							}
+				)
+					}
+			})
+		}
 	})
 /*修改资料*/
 app.views.setDetail = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
-		console.log(this.data)
 		var templateData=$.extend({},this.data);
+		console.log(this.data)
+		var phoneString='<a>[绑定]</a>'
+		if(templateData.phone){
+			phoneString=templateData.phone+'<a">[修改]</a>'
+			}
+		var emailString='<a>[绑定]</a>'
+		if(templateData.email){
+			emailString=templateData.email+'<a">[修改]</a>'
+			}
 		$(this.el).html('<div class="bankcard">'+
             '<h2>用户资料修改</h2>'+
             '<form action="/user/updateUser" method="post" id="modifyUserForm" name="modifyUserForm">'+
 	            '<ul>'+
 	              '<li><h4>用户名:</h4>'+templateData.userName+'</li>'+
-	              '<li><h4>手机号:</h4>13692146343<a href="tel">[修改]</a></li>'+
-	              '<li><h4>邮箱:</h4><a href="mailAuthenticate">[绑定]</a></li>'+
+	              '<li><h4>手机号:</h4>'+phoneString+'</li>'+
+	              '<li><h4>邮箱:</h4>'+emailString+'</li>'+
 	              '<li><h4>真实姓名:</h4>'+
 	              '<span>'+
 		              '<span>'+

@@ -299,7 +299,7 @@ app.apis.resetKey=function(data,fn,err){
 	});
 		
 	}
-/*获取帐户信息*/
+/*获取绑定信息*/
 app.apis.getBind=function(data,fn,err){
 	data={"id":""}
 	var sendData = {
@@ -334,6 +334,7 @@ app.apis.getBindCode=function(data,fn,err){
 
 	
 }
+/*绑定*/
 app.apis.bind=function(data,fn,err){
 	data={"type":"email","id":"","code":""}
 	var sendData = {
@@ -351,9 +352,10 @@ app.apis.bind=function(data,fn,err){
 	
 	
 }
+
 /*获取安全问题*/
 app.apis.getSafeQusetion=function(data,fn,err){
-	data="ddd";
+	data=app.objs.user.get().id;
 	var sendData = {
 		model:"client",
 		action:"getSafeQusetion",
@@ -361,7 +363,25 @@ app.apis.getSafeQusetion=function(data,fn,err){
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(qusetionReturn){
 		if(qusetionReturn && qusetionReturn.code){
-		fn(qusetionReturn.data)
+		fn()
+	}else{
+		err()
+	}
+	});
+	
+	}
+
+/*设置安全问题*/
+app.apis.setSafeQusetion=function(data,fn,err){
+	data=app.objs.user.get().id;
+	var sendData = {
+		model:"client",
+		action:"getSafeQusetion",
+		data:data
+	}
+	$.get("http://"+location.hostname+":8888/",sendData,function(qusetionReturn){
+		if(qusetionReturn && qusetionReturn.code){
+		fn()
 	}else{
 		err()
 	}
