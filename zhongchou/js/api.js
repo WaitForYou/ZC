@@ -8,7 +8,7 @@ app.apis.getProduct=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(productReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(productReturn){
 		if(productReturn && productReturn.code && productReturn.code != 0){
 		if(productReturn.code == 1){
 			app.objs.productTime = productReturn.time;
@@ -30,7 +30,7 @@ app.apis.addProduct=function(data,fn,err){
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
 				fn(addReturn.data)
 			}else{
@@ -46,7 +46,7 @@ app.apis.editProduct=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn&&editReturn.code){
 			fn(editReturn.data)
 		}else{
@@ -63,7 +63,7 @@ app.apis.removeProduct=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(removeReturn){
 		if(removeReturn && (removeReturn.code = 1)){
 			fn();
 		}else{
@@ -83,7 +83,7 @@ app.apis.getClient=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(clientReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(clientReturn){
 		if(clientReturn && clientReturn.code && clientReturn.code != 0){
 		if(clientReturn.code == 1){
 			app.objs.clientTime = clientReturn.time
@@ -105,7 +105,7 @@ app.apis.addClient=function(data,fn,err){
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
 			fn(addReturn.data)
 		}else{
@@ -138,7 +138,7 @@ app.apis.editClient=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
 			fn(editReturn.data)
 		}else{
@@ -156,7 +156,7 @@ app.apis.removeClient=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
 		fn(removeReturn.data)
 		}else{
@@ -174,7 +174,7 @@ app.apis.checkUser=function(data,fn,err){
 		action:"checkUser",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(checkReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(checkReturn){
 		if(checkReturn&&checkReturn.code){
 		fn(true);
 	}else{
@@ -193,7 +193,7 @@ app.apis.checkPhone=function(data,fn,err){
 		action:"checkPhone",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(checkReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(checkReturn){
 		if(checkReturn&&checkReturn.code){
 		fn(true);
 	}else{
@@ -210,7 +210,7 @@ app.apis.checkEmail=function(data,fn,err){
 		action:"checkEmail",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(checkReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(checkReturn){
 		if(checkReturn&&checkReturn.code){
 		fn(true);
 	}else{
@@ -228,7 +228,7 @@ app.apis.login=function(data,fn,err){
 		action:"login",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(loginReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(loginReturn){
 		if(loginReturn && loginReturn.code && loginReturn.code != 0){
 		if(loginReturn.code == 1){
 			var userSting=JSON.stringify(loginReturn.data[0]);
@@ -269,7 +269,7 @@ app.apis.register=function(data,fn,err){
 		action:"register",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(registerReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(registerReturn){
 		if(registerReturn && registerReturn.code){
 		fn(registerReturn.data)
 	}else{
@@ -290,7 +290,7 @@ app.apis.resetKey=function(data,fn,err){
 		action:"resetKey",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(registerReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(registerReturn){
 		if(resetReturn && resetReturn.code){
 			fn(resetReturn.data);
 		}else{
@@ -307,7 +307,7 @@ app.apis.getBind=function(data,fn,err){
 		action:"getBind",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(accountReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(accountReturn){
 		if(accountReturn && accountReturn.code){
 		fn(accountReturn.data)
 	}else{
@@ -324,7 +324,7 @@ app.apis.getBindCode=function(data,fn,err){
 		action:"getBindCode",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(BindReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(BindReturn){
 		if(BindReturn && BindReturn.code){
 		fn(BindReturn.data)
 	}else{
@@ -342,7 +342,7 @@ app.apis.bind=function(data,fn,err){
 		action:"bind",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(BindReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(BindReturn){
 		if(BindReturn && BindReturn.code){
 		fn(BindReturn.data)
 	}else{
@@ -361,7 +361,7 @@ app.apis.getSafeQusetion=function(data,fn,err){
 		action:"getSafeQusetion",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(qusetionReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(qusetionReturn){
 		if(qusetionReturn && qusetionReturn.code){
 		fn()
 	}else{
@@ -396,7 +396,7 @@ app.apis.checkSafeQusetion=function(data,fn,err){
 		action:"checkSafeQusetion",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(checkReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(checkReturn){
 		if(checkReturn && checkReturn.code){
 		fn(checkReturn.data)
 	}else{
@@ -414,7 +414,7 @@ app.apis.getAdmin=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(adminReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(adminReturn){
 		if(adminReturn && adminReturn.code && adminReturn.code != 0){
 			if(adminReturn.code==1){
 				app.objs.adminTime = adminReturn.time;
@@ -441,7 +441,7 @@ app.apis.addAdmin=function(data,fn,err){
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
 			fn()
 		}else{
@@ -458,7 +458,7 @@ app.apis.editAdmin=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
 			fn()
 		}else{
@@ -475,7 +475,7 @@ app.apis.removeAdmin=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
 		fn(removeReturn.data)
 	}else{
@@ -493,7 +493,7 @@ app.apis.getannouncement=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(announcementReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(announcementReturn){
 		if(announcementReturn && announcementReturn.code && announcementReturn.code != 0){
 		if(announcementReturn.code==1){
 			app.objs.announcementTime = announcementReturn.time
@@ -516,7 +516,7 @@ app.apis.addannouncement=function(data,fn,err){
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
 		fn()
 	}else{
@@ -533,7 +533,7 @@ app.apis.editannouncement=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
 		fn()
 	}else{
@@ -551,7 +551,7 @@ app.apis.removeannouncement=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
 		fn()
 	}else{
@@ -569,7 +569,7 @@ app.apis.getrecruit=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(recruitReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(recruitReturn){
 		console.log(recruitReturn);
 		if(recruitReturn && recruitReturn.code && recruitReturn.code !=0){
 			if(recruitReturn.code == 1){
@@ -594,7 +594,7 @@ console.log(data)
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
 		fn()
 	}else{
@@ -611,7 +611,7 @@ app.apis.editrecruit=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
 		fn()
 	}else{
@@ -628,7 +628,7 @@ app.apis.removerecruit=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
 		fn()
 	}else{
@@ -647,7 +647,7 @@ app.apis.getcompany=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(companyReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(companyReturn){
 		if(companyReturn && companyReturn.code && companyReturn.code !=0){
 			if(companyReturn.code == 1){
 				app.objs.companyTime = companyReturn.time
@@ -673,7 +673,7 @@ app.apis.addcompany=function(data,fn,err){
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn && addReturn.code){
 			fn(addReturn.data)
 		}else{
@@ -690,7 +690,7 @@ app.apis.editcompany=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
 		fn(editReturn.data)
 	}else{
@@ -707,7 +707,7 @@ app.apis.removecompany=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(removeReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(removeReturn){
 		if(removeReturn && removeReturn.code){
 		fn(removeReturn.data)
 	}else{
@@ -725,7 +725,7 @@ app.apis.getpromotion=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(promotionReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(promotionReturn){
 		if(promotionReturn && promotionReturn.code !=0){
 		if(promotionReturn.code == 1){
 			app.objs.promotionTime = promotionReturn.time
@@ -747,7 +747,7 @@ app.apis.editpromotion=function(data,fn,err){
 		action:"edit",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(editReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
 		if(editReturn && editReturn.code){
 			fn()
 		}else{
@@ -766,7 +766,7 @@ app.apis.redPacketDetail=function(data,fn,err){
 		action:"detail",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(redPacketReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(redPacketReturn){
 		if(redPacketReturn && redPacketReturn.code && redPacketReturn.code !=0){
 			if(redPacketReturn.code == 1){
 				app.objs.redPacketTime = redPacketReturn.time;
@@ -788,7 +788,7 @@ app.apis.getRedPacket=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(getReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(getReturn){
 		if(getReturn && getReturn.code){
 		fn(getReturn.data)
 	}else{
@@ -805,7 +805,7 @@ app.apis.addRedPacket=function(data,fn,err){
 		action:"add",
 		data:JSON.stringify(data)
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(addReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(addReturn){
 		if(addReturn&&addReturn.code){
 		fn()
 	}else{
@@ -827,7 +827,7 @@ app.apis.getdeal=function(data,fn,err){
 		action:"get",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(returndata){
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code && returndata.code != 0){
 		if(returndata.code == 1){
 			app.objs.deal.set(returndata.data)
@@ -848,7 +848,7 @@ app.apis.adddeal=function(data,fn,err){
 		action:"add",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(returndata){
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code){
 		fn(returndata.data)
 	}else{
@@ -865,7 +865,7 @@ app.apis.editdeal=function(data,fn,err){
 		action:"edit",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(returndata){
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code){
 		fn(returndata.data)
 	}else{
@@ -882,7 +882,7 @@ app.apis.removedeal=function(data,fn,err){
 		action:"remove",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(returndata){
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code){
 		fn(returndata.data)
 	}else{
@@ -899,7 +899,7 @@ app.apis.getdealList=function(data,fn,err){
 		action:"list",
 		data:data
 	}
-	$.get("http://"+location.hostname+":8888/",sendData,function(returndata){
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code){
 		fn(returndata.data)
 	}else{

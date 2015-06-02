@@ -57,7 +57,8 @@ app.objs.routeTable={
 								on:[],
 								end:[]
 								}
-								$.each(Product,function(i,n){
+								if(Product){
+									$.each(Product,function(i,n){
 									if(n.copy<=n.payedCount||n.money<=n.payed){
 										fenzu.end.push(n)
 										}else if(n.stratTime<new Date().getTime()){
@@ -66,6 +67,8 @@ app.objs.routeTable={
 												fenzu.noStart.push(n)
 												}
 									})
+									}
+								
 							app.objs.productV.data = fenzu;
 							app.objs.productV.render();
 						});
