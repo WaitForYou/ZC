@@ -782,9 +782,12 @@ app.views.register = Backbone.View.extend({
 		  function getcode(){
 			  registerElem.find("#btnSendmsg").html("获取验证码");
 			  registerElem.find("#btnSendmsg").unbind("click").bind("click",function(){
+				  
 			  app.apis.getBindCode({"type":"phone",number:$(this).parents("form").find("[to='phone']").val()},function(data){
+				  console.log(data)
 				  code=data;
-				  var totalTime=60
+				  var totalTime=60;
+				  registerElem.find("#btnSendmsg").unbind("click")
 				  getcodeTime=setInterval(function(){
 					  $("#btnSendmsg").html(totalTime+"秒后可重新发送验证码")
 					  totalTime--;
@@ -799,7 +802,7 @@ app.views.register = Backbone.View.extend({
 					  })
 			  }) 
 			  }
-		  
+		  getcode()
 		  registerElem.find("[formtype='simple']").each(function(i,n){
 			  $(this).unbind("change").bind("change",function(){
 				  templateData[$(this).attr("to")]=$(this).val();

@@ -303,11 +303,10 @@ app.apis.resetKey=function(data,fn,err){
 	}
 /*获取绑定信息*/
 app.apis.getBind=function(data,fn,err){
-	data={"id":""}
 	var sendData = {
 		model:"client",
 		action:"getBind",
-		data:data
+		data:app.objs.get("user").id
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(accountReturn){
 		if(accountReturn && accountReturn.code){
@@ -320,11 +319,11 @@ app.apis.getBind=function(data,fn,err){
 	}
 /*获取验证吗*/
 app.apis.getBindCode=function(data,fn,err){
-	data={"type":"email","id":""}
+	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"getBindCode",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(BindReturn){
 		if(BindReturn && BindReturn.code){
@@ -338,11 +337,11 @@ app.apis.getBindCode=function(data,fn,err){
 }
 /*绑定*/
 app.apis.bind=function(data,fn,err){
-	data={"type":"email","id":"","code":""}
+	//data={"type":"email","id":"","number":"","code":""}
 	var sendData = {
 		model:"client",
 		action:"bind",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(BindReturn){
 		if(BindReturn && BindReturn.code){

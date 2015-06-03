@@ -533,7 +533,13 @@ app.objs.routeTable={
 					/*出页面*/
 					app.objs.emailVerifyV.el=".mb_right";
 					app.objs.emailVerifyV.data=app.objs.user.get();
-					app.objs.emailVerifyV.render();
+					app.apis.getBind(null,function(bind){
+						app.objs.emailVerifyV.data.bind=bind;
+						app.objs.emailVerifyV.render();
+						},function(){
+						alert("绑定信息获取失败")
+						})
+					
 					}
 		},
 	/*修改手机*/
@@ -543,7 +549,13 @@ app.objs.routeTable={
 				/*出页面*/
 				app.objs.setPhoneV.el=".mb_right";
 				app.objs.setPhoneV.data=app.objs.user.get();
-				app.objs.setPhoneV.render();
+				app.apis.getBind(null,function(bind){
+						app.objs.setPhoneV.data.bind=bind;
+						app.objs.setPhoneV.render();
+						},function(){
+						alert("绑定信息获取失败")
+						})
+			
 				}
 		},
 	/*修改资料*/
