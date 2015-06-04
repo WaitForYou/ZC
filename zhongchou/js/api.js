@@ -282,17 +282,13 @@ app.apis.register=function(data,fn,err){
 	}
 /*重置密码*/
 app.apis.resetKey=function(data,fn,err){
-	var data = {
-				id:"2333r3",/*用户id*/
-				oldKey:"1231231",/*旧密码*/
-				newKey:"532424"/*新密码*/
-				}
+	console.log(data)
 		var sendData = {
 		model:"client",
 		action:"resetKey",
-		data:data
+		data:JSON.stringify(data)
 	}
-	$.get("http://"+config.sour+":8888/",sendData,function(registerReturn){
+	$.get("http://"+config.sour+":8888/",sendData,function(resetReturn){
 		if(resetReturn && resetReturn.code){
 			fn(resetReturn.data);
 		}else{

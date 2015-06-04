@@ -765,7 +765,7 @@ app.views.register = Backbone.View.extend({
 		                +'</li> '
 		                +'<li> '
 		        			+'<div class="in_title">短信验证码:</div> '
-		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode" to="code"> </span> '
+		                    +'<span class="btn_span" style="margin-left:23px;"> <input type="text" id="msgValidCode" name="msgValidCode" to="code" formtype="simple"> </span> '
 		                    +'<a id="btnSendmsg" style="margin-left:15px;">获取验证码</a> '
 		                    +'<span id="msgValidNotice" class="in_notice"> </span> '
 		         		+'</li>'
@@ -1695,7 +1695,7 @@ app.views.account = Backbone.View.extend({
 						'<a href="secureQuestion">未设置</a>'+
 					'</li>'
 			if(this.data.saveQuestion){
-				questionString='<li class="m_ac_propic" id="secQuesModify" style="display:none">'+
+				questionString='<li class="m_ac_propic" id="secQuesModify">'+
 						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
 					'<h4>密码问题</h4>'+
 						'<a href="secureQuestion">修改</a>'+
@@ -1930,25 +1930,33 @@ app.views.emailVerify = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
 		console.log(this.data)
+		var that=this;
+		var bindString='<li id="sendBtn" class="basics_btn"><a id="bindBtn">绑定</a></li>'
+		if(this.data.bind&&this.data.bind.email){
+			bindString='<li id="sendBtn" class="basics_btn"><a id="bindBtn">修改绑定</a></li>'
+			}
 		$(this.el).html('<div class="email_authentication">'+
             '<h2>邮箱认证</h2>'+
             '<ul>'+
                '<h4>请输入您的邮箱地址:</h4>'+
                '<li class="form-item">'+
-                 '<input type="text" value="" id="myEmail" class="shadow-none">'+
+                 '<input type="text" value="'+this.data.email+'" id="myEmail" class="shadow-none">'+
                  '<i class="glyphicon glyphicon-envelope"></i>'+
                '</li>'+
                '<li id="mailNotice"></li>'+
-               '<li id="sendBtn" class="basics_btn"><a id="bindBtn">绑定</a></li>'+
-               '<li id="mailLoginBtn" class="basics_btn" style="display:none"><a onclick="mailAuthSend()">登录邮箱</a></li>'+
+               bindString+
+               '<li id="mailLoginBtn" class="basics_btn" style="display:none"><a>登录邮箱</a></li>'+
                '<div class="clear"></div>'+
             '</ul>'+    
         '</div>')
+		
 		function sendBind(){
 			$("#bindBtn").html("绑定")
-			$(this.el).find("#sendBtn").unbind("click").bind("click",function(){
-			app.apis.getBindCode({"type":"email","id":app.objs.user.get().id},function(data){
+			$(that.el).find("#sendBtn").unbind("click").bind("click",function(){
+			app.apis.getBindCode({"type":"email","number":$("#myEmail").val()},function(data){
 					alert("信息已发送")
+					$("#mailLoginBtn a").attr("href","http://mail."+$("#myEmail").val().split("@")[1])
+					$("#mailLoginBtn").show();
 					var sendTime=30;
 					var sendI=setInterval(function(){
 						$("#bindBtn").html(sendTime+"秒后可重新发送");
@@ -1975,21 +1983,23 @@ app.views.setPhone = Backbone.View.extend({
 		$(this.el).html('<div class="bankcard" style="position:relative;">'+
 	            '<h2>用户手机修改</h2>'+
 	            '<ul>'+
-	                '<li><h4>用户名:</h4>'+app.objs.user.get().userName+'</li>'+
-	                '<li><h4>新手机号:</h4><span><input id="phoneNumber" name="phoneNumber" type="text"/></span><i id="phoneNumberNotice" class="in_notice" style="margin-top:145px;margin-left:290px;"></i></li>'+
+	                '<li><h4>用户名:</h4>'+this.data.userName+'</li>'+
+	                '<li><h4>新手机号:</h4><span><input id="phoneNumber" name="phoneNumber" type="text" value="'+this.data.phone+'"/></span><i id="phoneNumberNotice" class="in_notice" style="margin-top:145px;margin-left:290px;"></i></li>'+
 	                '<li>'+
-		                '<h4>输入验证码:</h4><span><input id="msgValidCode" name="msgValidCode" type="text" onfocus="msgValidCodeCheck();" onblur="msgValidCodeCheck();"></span><i id="msgValidNotice" class="in_notice" style="margin-top:190px;margin-left:290px;"></i>'+
+		                '<h4>输入验证码:</h4><span><input id="msgValidCode" name="msgValidCode" type="text"></span><i id="msgValidNotice" class="in_notice" style="margin-top:190px;margin-left:290px;"></i>'+
 		                '<h4 class="yzm" style="position:absolute; right:205px; top:194px;width:150px;"><a id="btnSendmsg"  style="width:150px; height:30px; line-height:30px; box-shadow:none;">[获取验证码]</a></h4>'+
 	                '</li>'+
 	                '<div class="bankcard_confirm"><a>确&nbsp;&nbsp;认</a></div>'+
 	            '</ul>'+
 	            '<div class="clear"></div>'+
 	        '</div>')
+			var that=this;
 		function sendBind(){
-			$(this.el).find("#btnSendmsg").html("[获取验证码]")
-			$(this.el).find("#btnSendmsg").unbind("click").bind("click",function(){
-				app.apis.getBindCode({"type":"phone","id":app.objs.user.get().id},function(data){
+			$(that.el).find("#btnSendmsg").html("[获取验证码]")
+			$(that.el).find("#btnSendmsg").unbind("click").bind("click",function(){
+				app.apis.getBindCode({"type":"phone","number":$("#phoneNumber").val()},function(data){
 					alert("信息已发送")
+					console.log(data)
 					code=data;
 					var sendTime=30;
 					var sendI=setInterval(function(){
@@ -2008,9 +2018,9 @@ app.views.setPhone = Backbone.View.extend({
 			}	
 			sendBind()
 			$(this.el).find(".bankcard_confirm").unbind("click").bind("click",function(){
-				if(code==$("#msgValidCode")){
+				if(code==$("#msgValidCode").val()){
 					app.apis.bind({
-					"type":"phone","id":app.objs.user.get().id,"code":code
+					"type":"phone","id":app.objs.user.get().id,"code":code,"number":$("#phoneNumber").val()
 					},function(){
 						alert("绑定成功")
 						window.location.reload();
@@ -2123,11 +2133,11 @@ app.views.setPassWord = Backbone.View.extend({
             '<ul>'+
                 '<li><h4>用户名:</h4>'+app.objs.user.get().userName+'</li>'+
                 '<li><h4>原密码:</h4><span><input id="password" name="password" to="oldKey" formtype="simple" type="password"></span><i id="passwordNotice" class="ts"></i></li>'+
-                '<li><h4>新密码:</h4><span><input id="newPassword" name="newPassword" to="newKey" formtype="simple" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="newPasswordNotice" class="ts"></i></li>'+
+                '<li><h4>新密码:</h4><span><input id="newPassword" name="newPassword" to="newKey" formtype="simple" type="password"></span><i id="newPasswordNotice" class="ts"></i></li>'+
                 '<li class="pw_ts"><h4>密码规则：</h4>8-16个字符的英文字母、符号和数字组合</li>'+
                 '<!--  <li><h4>密码强度:</h4><h5 class="pg_bar"><b id="" style="width:352px;"></b></h5></li>-->'+
-                '<li><h4>再次输入密码:</h4><span><input id="passagain" to="newKey2" formtype="simple" name="passagain" type="password" onclick="validateInput()" onblur="validateInput()"></span><i id="passagainNotice" class="ts"></i></li>'+
-                '<div class="bankcard_confirm"><a onclick="submitValid();">确&nbsp;&nbsp;认</a></div>'+
+                '<li><h4>再次输入密码:</h4><span><input id="passagain" to="newKey2" formtype="simple" name="passagain" type="password"></span><i id="passagainNotice" class="ts"></i></li>'+
+                '<div class="bankcard_confirm"><a>确&nbsp;&nbsp;认</a></div>'+
             '</ul>'+
             '</form>'+
             '<div class="clear"></div>'+
@@ -2136,6 +2146,17 @@ app.views.setPassWord = Backbone.View.extend({
 			$(this).unbind("change").bind("change",function(){
 				templateData[$(this).attr("to")]=$(this).val();
 				})
+			})
+		$(this.el).find(".bankcard_confirm").unbind("click").bind("click",function(){
+			if(templateData['newKey']==templateData['newKey2']){
+				app.apis.resetKey(templateData,function(){
+					alert("重置成功")
+					},function(){
+						alert("重置失败")
+						})
+				}else{
+					alert("再次输入密码不正确")
+					}
 			})
 	}
 	})
