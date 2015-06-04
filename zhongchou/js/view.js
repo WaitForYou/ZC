@@ -38,7 +38,7 @@ app.views.head = Backbone.View.extend({
 							}
 					}else{
 						buttonKey = 0;
-						buttonArry=[{id:"login",name:"登陆"},{id:"register",name:"注册"}];
+						buttonArry=[{id:"login",name:"登录"},{id:"register",name:"注册"}];
 						}
 			}else if(this.type==1){
 				buttonKey=2
