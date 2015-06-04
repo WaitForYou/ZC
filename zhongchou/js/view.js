@@ -1202,6 +1202,15 @@ app.views.productDetail = Backbone.View.extend({
 	data:{},
 	render:function(){
 		console.log(this.data)
+		var buyButton=''
+		if(this.data.copy<=this.data.payedCount||this.data.money<=this.data.payed){
+									buyButton=	'<li class="pl_buy_btn"><a id="crowdBtn">众筹结束</a></li>'
+										}else if(this.data.stratTime<new Date().getTime()){
+											buyButton='<li class="input_amount_2" id="redEnvelopeLi">可用红包：<span id="reAmtVal"></span>元&nbsp;&nbsp;&nbsp;立即使用？<input type="checkbox" id="useREFlag" style="width:16px;height:16px; margin-top:-2px;"></li>'+
+                      '<li class="pl_buy_btn"><a id="crowdBtn" formtype="buybutton">立即购买</a></li>'
+											}else{
+												buyButton=	'<li class="pl_buy_btn"><a id="crowdBtn">敬请期待</a></li>'
+												}
 		var decorateArry=["无披房","豪华装修","简单装修"];
 		var propertyTypeArry=["公寓","复式","豪宅"];
 		var rightTypeArry=["商业用房","住在用房"];
@@ -1248,7 +1257,7 @@ app.views.productDetail = Backbone.View.extend({
                 '<form id="businessForm" action="/business/add" method="post">'+
                    '<h4>单笔不能超过总额的<span>5%</span>，即<span>465</span>份</h4>'+
                    '<ul>'+
-                      '<li class="input_amount">众筹份数：<input id="crowdCount" name="crowdCount" type="text" value="100元/份" autocomplete="off">份</li>'+
+                      '<li class="input_amount">众筹份数：<input id="crowdCount" name="crowdCount" type="text" placeholder="'+this.data.minUnit+'元/份" autocomplete="off"  to="price" formtype="number">份</li>'+
                       '<input type="hidden" name="projUuid" value="30093164">'+
                       '<input type="hidden" name="crowSmallest" value="100">'+
                       '<input type="hidden" id="accAmt" name="accAmt" value="0">'+
@@ -1256,9 +1265,8 @@ app.views.productDetail = Backbone.View.extend({
                       '<input type="hidden" id="reUuid" name="reUuid">'+
                       '<li class="input_amount_ts" id="crowdNotice" style="display: none;"></li>'+
                       '<li class="input_amount_2">众筹金额：<span id="crowdAmt">'+this.data.money+'</span>元</li>'+
-                      '<li class="input_amount_2" id="redEnvelopeLi" style="display:none">可用红包：<span id="reAmtVal"></span>元&nbsp;&nbsp;&nbsp;立即使用？<input type="checkbox" id="useREFlag" style="width:16px;height:16px; margin-top:-2px;"></li>'+
-                      '<li class="pl_buy_btn"><a id="crowdBtn">众筹结束</a></li>'+
-                      '<li class="pl_progress"><b style="width:88.57%;"></b><h6>已众筹：88.57%</h6></li>'+
+                      buyButton+
+                      '<li class="pl_progress"><b style="width:'+((this.data.payedCount/this.data.copy)*100)+'%;"></b><h6>已众筹：'+((this.data.payedCount/this.data.copy)*100)+'%</h6></li>'+
                    '</ul>'+
                 '</form>'+
               '</div>'+
@@ -1651,7 +1659,22 @@ app.views.productDetail = Backbone.View.extend({
        ' </div>'+
     '</div>'+
 '</div>');
-
+var that=this
+$("[formtype='buybutton']").unbind("click").bind("click",function(){
+	if(app.objs.user.get()&&app.objs.user.get().id){
+		
+		}else{
+			alert("请先登录再购买");
+			app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
+			}
+	})
+$("[formtype='number']").each(
+			function(){
+				$(this).spinner({change:function(event,ui){
+				$("#crowdAmt").html($(this).spinner("value")*that.data.minUnit)
+				}});
+			}
+		)
 $(".Menubox3 li").each(function(){
 	$(this).unbind("click").bind("click",function(){
 		$(".threebutton").removeClass("hover");
