@@ -817,7 +817,7 @@ app.views.register = Backbone.View.extend({
 				  templateData[$(this).attr("to")]=$(this).val();
 				  })
 			  });
-		registerElem.find("[to='userName']").on("change",function(){debugger;
+		registerElem.find("[to='userName']").on("change",function(){
 			  app.apis.checkUser($(this).val(),function(){
 				  userCheck=true;
 				  },function(){
@@ -1929,6 +1929,7 @@ app.views.safeQusetion = Backbone.View.extend({
 app.views.emailVerify = Backbone.View.extend({
 	el:".mb_right",
 	render:function(){
+		console.log(this.data)
 		$(this.el).html('<div class="email_authentication">'+
             '<h2>邮箱认证</h2>'+
             '<ul>'+

@@ -306,7 +306,7 @@ app.apis.getBind=function(data,fn,err){
 	var sendData = {
 		model:"client",
 		action:"getBind",
-		data:app.objs.get("user").id
+		data:app.objs.user.get().id
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(accountReturn){
 		if(accountReturn && accountReturn.code){
