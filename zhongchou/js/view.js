@@ -58,11 +58,15 @@ app.views.head = Backbone.View.extend({
 			$.each(this.nav,function(i,n){
 				//navFirst+="<div id='"+n.id+"'>"+n.name+"</div>"
 				//<li><a href="/cncrowd">中筹模式<br><span class="en_t">What's CNCrowd</span></a></li>
-				navFirst += "<li id='"+n.id+"'><a>"+n.name+"<br><span class='en_t'>What's CNCrowd</span></a></li>";
+				// navFirst += "<li id='"+n.id+"'><a>"+n.name+"<br><span class='en_t'>What's CNCrowd</span></a></li>";
+
+   navFirst += '<li id="'+n.id+'"><a href="#" class="three-d">'+n.name+'<span class="three-d-box"><span class="front">'+n.name+'</span><span class="back">'+n.name+'</span></span> </a></li>';
+
+
 			});
-			//$(this.el).html(buttonHtml+navFirst);
 			$(this.el).find(".top_btn_group").html(buttonHtml);
 			$(this.el).find("#gnavi").html(navFirst);
+			$(this.el).find("li").eq(0).children('a').addClass("active");
 			console.log($(this.el).find("#gnavi"))
 			var page=["login","register","mode","product","procedure","FAQS","about"]
 			$.each(page,function(i,n){
