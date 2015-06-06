@@ -67,6 +67,12 @@
     <script src="js/ui/datepicker-zh-CN.js"></script>
     <script src="ueditor/ueditor.config.js"></script>
     <script src="ueditor/ueditor.all.min.js"></script>
+    <script>
+if (!document.addEventListener) {
+	// IE6~IE8
+	document.write('<script src="js/ieBetter.js"><\/script>');	
+}
+</script>
 	<link rel="stylesheet" href="css/demos.css">
         <title>Hello World</title>
     </head>
@@ -115,11 +121,8 @@
     <!-- end footer -->
 
     <script type="text/javascript" src="js/Chart.js"></script>
-	<script type="text/javascript" src="js/backbone-min.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/router.js"></script>
-    <script type="text/javascript" src="js/model.js"></script>
-    <script type="text/javascript" src="js/collection.js"></script>
     <script type="text/javascript" src="js/view.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/fn.js"></script>

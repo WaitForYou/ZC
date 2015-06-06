@@ -23,7 +23,7 @@ var app = {
 			app.total=true;
 			var chushi=setTimeout(function(){
 
-			    app.objs.route=new app.routers();	
+			  //  app.objs.route=new app.routers();	
 			    app.onDeviceReady();
                // debugger;
 			},100);
@@ -42,7 +42,46 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        Backbone.history.start({pushState : true});
+      //  Backbone.history.start({pushState : true});
+	  function hashparse(){
+		  var hash=window.location.hash.replace("#","").split("/")
+		  if(!hash[0]){
+			  hash[0]="index"
+			  }
+			var dataObj={}
+			$.each(hash,function(i,n){
+				if(i==0){
+					dataObj.page=n
+					}else{
+						var key=n.split(":")
+						dataObj[key[0]]=key[1]
+						}
+				})
+			app.apis.config(null,function(data){
+			app.objs.configData=data;
+
+			app.objs.headV.type = app.objs.routeTable[dataObj.page].type;
+			if(app.objs.headV.typeBefore!=app.objs.headV.type){
+				app.objs.headV.typeBefore=app.objs.headV.type;
+				app.objs.headV.render();
+				}
+			app.objs.middleV.type = app.objs.routeTable[dataObj.page].type;
+			if(app.objs.middleV.typeBefore!=app.objs.middleV.type){
+				app.objs.middleV.typeBefore=app.objs.middleV.type;
+				app.objs.middleV.render();
+				}
+		if(!app.objs.footV.done){
+			app.objs.footV.done = true;
+			app.objs.footV.render();
+			}
+		
+		app.objs.routeTable[dataObj.page].fn(dataObj);
+		})
+		  }
+	  	window.onhashchange = function(event) {
+			hashparse()
+		};
+		hashparse();
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
@@ -90,8 +129,7 @@ var $_GET = function(){
     }
 };
 
-app.models={};
-app.collections={};
+
 app.apis={};
 app.views={};
 app.objs={};

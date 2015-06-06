@@ -754,7 +754,9 @@ app.apis.getpromotion=function(data,fn,err){
 		model:"promotion",
 		action:"get",
 		data:data
-	}
+	};
+	$.support.cors = true;
+
 	$.get("http://"+config.sour+":8888/",sendData,function(promotionReturn){
 		if(promotionReturn && promotionReturn.code !=0){
 		if(promotionReturn.code == 1){
@@ -765,7 +767,7 @@ app.apis.getpromotion=function(data,fn,err){
 			alert("获取宣传信息失败")
 			}
 	fn(app.objs.promotion.get())
-	});
+	},"json");
 
 	
 	}

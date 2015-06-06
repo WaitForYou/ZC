@@ -6,11 +6,13 @@ app.objs.routeTable={
 			type:0,
 			fn:function(data){
 			/*获取宣传*/
+			
 			app.apis.getpromotion(data,function(promotion){
 				/*获取公告*/
 				app.apis.getannouncement(data,function(announcement){
 					/*获取商品*/
 					app.apis.getProduct(data,function(product){
+						
 						/*出页面*/
 						console.log(promotion);
 						console.log(announcement);
@@ -793,34 +795,3 @@ app.objs.routeTable={
 				}
 		}		
 	}
-app.routers=Backbone.Router.extend({
-	"routes":{
-		"*action":"changePage"
-    },
-	"changePage":function(){
-		app.apis.config(null,function(data){
-			app.objs.configData=data;
-			var get=$_GET();
-		if(!get.page){
-			get.page = "index"
-			}
-			app.objs.headV.type = app.objs.routeTable[get.page].type;
-			if(app.objs.headV.typeBefore!=app.objs.headV.type){
-				app.objs.headV.typeBefore=app.objs.headV.type;
-				app.objs.headV.render();
-				}
-			app.objs.middleV.type = app.objs.routeTable[get.page].type;
-			if(app.objs.middleV.typeBefore!=app.objs.middleV.type){
-				app.objs.middleV.typeBefore=app.objs.middleV.type;
-				app.objs.middleV.render();
-				}
-		if(!app.objs.footV.done){
-			app.objs.footV.done = true;
-			app.objs.footV.render();
-			}
-		
-		app.objs.routeTable[get.page].fn(get);
-		}) 
-		
-		}
-	});

@@ -19,7 +19,7 @@ function popClose(fn){
 		$("#popMain").empty();
 	}
 /*头部*/
-app.views.head = Backbone.View.extend({
+app.views.head = function(){return {
 	type:0,/*0普通，1空间,2管理*/
 	typeBefore:null,
 	el:".header",
@@ -59,10 +59,10 @@ app.views.head = Backbone.View.extend({
 				//navFirst+="<div id='"+n.id+"'>"+n.name+"</div>"
 				//<li><a href="/cncrowd">中筹模式<br><span class="en_t">What's CNCrowd</span></a></li>
 				// navFirst += "<li id='"+n.id+"'><a>"+n.name+"<br><span class='en_t'>What's CNCrowd</span></a></li>";
-                if((i==0)&&!sessionStorage.hl){
-                	sessionStorage.hl = n.id;
-                }
-   navFirst += '<li id="'+n.id+'"><a href="" class="three-d">'+n.name+'<span class="three-d-box"><span class="front">'+n.name+'</span><span class="back">'+n.name+'</span></span> </a></li>';
+               // if((i==0)&&!sessionStorage.hl){
+                	//sessionStorage.hl = n.id;
+               // }
+   navFirst += '<li id="'+n.id+'"><a class="three-d">'+n.name+'<span class="three-d-box"><span class="front">'+n.name+'</span><span class="back">'+n.name+'</span></span> </a></li>';
 
 
 			});
@@ -72,19 +72,20 @@ app.views.head = Backbone.View.extend({
 			console.log($(this.el).find("#gnavi"))
 			var page=["login","register","mode","product","procedure","FAQS","about"]
 			$.each(page,function(i,n){
-				$("#"+n).unbind("click").bind("click",function(){
-				    app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n,{trigger: true});
-				    $("#gnavi").find("a").removeClass("active");
-				    sessionStorage.hl = n;
+				$("#"+n).unbind("click").bind("click",function(e){
+				   // $("#gnavi").find("a").removeClass("active");
+				   // sessionStorage.hl = n; 
+					window.location.hash=n;
+					
 				    //debugger
 				})
 			})
 			$("#zone").unbind("click").bind("click",function(){
 
-					app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+					window.location.hash="account";
 				})
 			$("#admin").unbind("click").bind("click",function(){
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=adminManage",{trigger: true});
+				window.location.hash="adminManage";
 				})
 			$("#out").unbind("click").bind("click",function(){
 				app.objs.user.set(null);
@@ -106,12 +107,12 @@ app.views.head = Backbone.View.extend({
 				app.objs.companyTime = 0;
 				app.objs.promotionTime = 0;
 				app.objs.redPacketTime = 0;
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=index",{trigger: true});
+				window.location.hash="index";
 				})
 		}
-	})
+	}}
 /*脚部*/
-app.views.foot = Backbone.View.extend({
+app.views.foot = function(){return {
 	done:null,
 	el:".footerBox",
 	data:app.objs.configData,
@@ -175,13 +176,13 @@ app.views.foot = Backbone.View.extend({
 		//$(this.el).find("h3").html(nav)
 		$.each(this.nav,function(i,n){
 			$("."+n.id).unbind("click").bind("click",function(){
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n.id,{trigger: true});
+				window.location.hash=n.id
 			});
 		});
 		}
-	})
+	}}
 /*中部*/
-app.views.middle = Backbone.View.extend({
+app.views.middle = function(){return {
 	type:0,/*0普通，1空间,2管理*/
 	typeBefore:null,
 	el:".middle",
@@ -266,7 +267,7 @@ app.views.middle = Backbone.View.extend({
 		$(this.el).html(this.template[this.type]);
 		$.each(this.page,function(i,n){
 			$("#"+n).unbind("click").bind("click",function(){
-			    app.objs.route.navigate(location.pathname.replace("/","")+"?page="+n,{trigger: true});
+			    window.location.hash=n
 			    $(this).parent().children().removeClass('hover');
 			    $("#tabs_menu").find("li").removeClass('hover');
 			    $(this).addClass("hover");
@@ -274,9 +275,9 @@ app.views.middle = Backbone.View.extend({
 		});
 		$("#adminManage").trigger("click");
 		}
-	})
+	}}
 /*首页*/
-app.views.index = Backbone.View.extend({
+app.views.index = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
@@ -498,7 +499,7 @@ var pieData = [
 
 			newAn.unbind("click").bind("click",function(){
 				app.objs.announcementDetailV.data = $(this).data("an");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
+				window.location.hash="announcementDetail";
 			});
 		});
 			}
@@ -574,7 +575,7 @@ var pieData = [
 	      +'</div>').appendTo($(".project_area"));
 		  newElem.data("result",value)
 			newElem.unbind("click").bind("click",function(){
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=productDetail&id="+$(this).data("result").id,{trigger: true});
+				window.location.hash="productDetail/id:"+$(this).data("result").id;
 				})
         });
 			}
@@ -619,9 +620,9 @@ var pieData = [
 
 
 		}//rendert
-})
+}}
 /*登录*/
-app.views.login = Backbone.View.extend({
+app.views.login = function(){return {
 	el:".middle",
 	render:function(){
 	$(this.el).empty(); 
@@ -678,7 +679,7 @@ app.views.login = Backbone.View.extend({
 	var data = {"userName":loginElem.find("#userName").val(),/*登录名/手机/邮箱*/
 				"passWord":loginElem.find("#userPass").val()}/*密码*/
 	app.apis.login(data,function(data){
-		app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+		window.location.hash="account";
 	},function(error){
 		alert("账号或密码错误")
 		});
@@ -688,7 +689,7 @@ app.views.login = Backbone.View.extend({
        app.apis.checkUser($(this).val(),function(data){},function(data){});
     });
 	loginElem.find("#register").unbind("click").bind("click",function(){
-	    app.objs.route.navigate(location.pathname.replace("/","")+"?page=register",{trigger: true});
+	    window.location.hash="register";
 	});
 	/**验证码***/
 
@@ -697,9 +698,9 @@ app.views.login = Backbone.View.extend({
     // }, false);
 	
 }
-})
+}}
 /*注册*/
-app.views.register = Backbone.View.extend({
+app.views.register = function(){return {
 	el:".middle",
 	render:function(){
 		var code="";
@@ -860,20 +861,20 @@ app.views.register = Backbone.View.extend({
 				}
 			app.apis.register(templateData,function(){
 				alert("注册成功");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
+				window.location.hash="login";
 				},function(){alert("err")});
 			})
 $("#agreement").click(function(){
    $(this).parents().toggleClass("agreementChxNoCheck");
 });
 	registerElem.find("#loginBtn").unbind("click").bind("click",function(){
-	    app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
+	    window.location.hash="login";
 	})
 	
 	}
-	})
+	}}
 /*众筹模式*/
-app.views.mode = Backbone.View.extend({
+app.views.mode = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
@@ -908,9 +909,9 @@ app.views.mode = Backbone.View.extend({
         //  +'</p>').appendTo(picBoxElem);
         });
 	}
-})
+}}
 /*我要众筹*/
-app.views.product = Backbone.View.extend({
+app.views.product = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
@@ -972,16 +973,16 @@ app.views.product = Backbone.View.extend({
 
 			newProduct.unbind("click").bind("click",function(){
 				app.objs.productDetailV.data = $(this).data("product");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=productDetail&id="+$(this).data("product").id,{trigger: true});
+				window.location.hash="productDetail/id:"+$(this).data("product").id;
 
 				//app.apis.buy({},this.render(),function(){})
 			});
 		});
 	})
 	}
-});
+}};
 /*众筹步聚*/
-app.views.procedure = Backbone.View.extend({
+app.views.procedure = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
@@ -1005,9 +1006,9 @@ app.views.procedure = Backbone.View.extend({
           // }
 		});
 	}
-})
+}}
 /*常见问题*/
-app.views.FAQS = Backbone.View.extend({
+app.views.FAQS = function(){return {
 	el:".middle",
 	render:function(){
 		console.log(this.data)
@@ -1038,9 +1039,9 @@ app.views.FAQS = Backbone.View.extend({
 
 
 	}
-})
+}}
 /*关于我们*/
-app.views.about = Backbone.View.extend({
+app.views.about = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
@@ -1145,7 +1146,7 @@ if(this.data.announcement){
 	elem.data("data",value);
 	elem.find("a").unbind("click").bind("click",function(){
 		app.objs.announcementDetailV.data = $(this).data("data");
-		app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
+		window.location.hash="announcementDetail";
 	});
   }); 
 	}
@@ -1195,9 +1196,9 @@ if(this.data.announcement){
 		// 	})
 		// })
 	}
-	})
+	}}
 /*商品详情*/
-app.views.productDetail = Backbone.View.extend({
+app.views.productDetail = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
@@ -1662,10 +1663,10 @@ app.views.productDetail = Backbone.View.extend({
 var that=this
 $("[formtype='buybutton']").unbind("click").bind("click",function(){debugger;
 	if(app.objs.user.get()&&app.objs.user.get().id){debugger;
-		app.objs.route.navigate(location.pathname.replace("/","")+"?page=buy&id="+that.data.id+"&count="+$("#crowdCount").val(),{trigger: true});
+		window.location.hash="buy/id:"+that.data.id+"/count:"+$("#crowdCount").val();
 		}else{
 			alert("请先登录再购买");
-			app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
+			window.location.hash="login";
 			}
 	})
 $("[formtype='number']").each(
@@ -1693,9 +1694,9 @@ $.each(this.data.imageA,function(i,n){
 	$('<p><img src="'+n+'"/></p>').appendTo($("#quweitu"))
 	})
 	}
-	})
+	}}
 /*购买*/
-app.views.buy=Backbone.View.extend({
+app.views.buy=function(){return {
 	el:".middle",
 	render:function(){
 		var that=this;
@@ -1731,15 +1732,15 @@ app.views.buy=Backbone.View.extend({
 		$(this.el).find("#payButton").unbind("click").bind("click",function(){
 			app.apis.adddeal(that.data,function(){
 				alert("交易成功");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+				window.location.hash="account";
 				},function(){
 				alert("交易失败");
 				})
 			})
 		}
-	})
+	}}
 /*卖出*/
-app.views.sell=Backbone.View.extend({
+app.views.sell=function(){return {
 	el:".middle",
 	render:function(){
 		var that=this;
@@ -1777,15 +1778,15 @@ app.views.sell=Backbone.View.extend({
 		$(this.el).find("#payButton").unbind("click").bind("click",function(){
 			app.apis.editdeal(that.data,function(){
 				alert("交易成功");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+				window.location.hash="account";
 				},function(){
 				alert("交易失败");
 				})
 			})
 		}
-	})
+	}}
 /*债权转让*/
-app.views.change=Backbone.View.extend({
+app.views.change=function(){return {
 	el:".middle",
 	render:function(){
 		var that=this;
@@ -1828,7 +1829,7 @@ app.views.change=Backbone.View.extend({
 			function editdeal(){
 				app.apis.editdeal(that.data,function(){
 				alert("转移成功");
-				app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+				window.location.hash="account";
 				},function(){
 				alert("转移失败");
 				})
@@ -1842,18 +1843,18 @@ app.views.change=Backbone.View.extend({
 			
 			})
 		}
-	})
+	}}
 /*公告详情*/
-app.views.announcementDetail = Backbone.View.extend({
+app.views.announcementDetail = function(){return {
 	el:".middle",
 	render:function(){
 		console.log(this.data)
 		$(this.el).html("公告详情")
 	}
-	})
+	}}
 /*用户部分**********************************************************************/
 /*账户*/
-app.views.account = Backbone.View.extend({
+app.views.account = function(){return {
 	el:".mb_right",
 	data:{},
 	render:function(){
@@ -1982,37 +1983,37 @@ app.views.account = Backbone.View.extend({
 					
 					})
 					$(".sallbutton").unbind("click").bind("click",function(){
-						app.objs.route.navigate(location.pathname.replace("/","")+"?page=sell&id="+$(this).attr("id"),{trigger: true});
+						window.location.hash="sell/id:"+$(this).attr("id");
 						})
 					$(".changeRight").unbind("click").bind("click",function(){
-						app.objs.route.navigate(location.pathname.replace("/","")+"?page=change&id="+$(this).attr("id"),{trigger: true});
+						window.location.hash="change/id:"+$(this).attr("id");
 						})
 				}
 	}
-	})
+	}}
 /*充值*/
-app.views.recharge = Backbone.View.extend({
+app.views.recharge = function(){return {
 	el:".mb_right",
 	render:function(){
 		$(this.el).html("充值")
 	}
-	})
+	}}
 /*提现*/
-app.views.paid = Backbone.View.extend({
+app.views.paid = function(){return {
 	el:".mb_right",
 	render:function(){
 		$(this.el).html("提现")
 	}
-	})
+	}}
 /*银行卡*/
-app.views.card = Backbone.View.extend({
+app.views.card = function(){return {
 	el:".mb_right",
 	render:function(){
 		$(this.el).html("银行卡")
 	}
-	})
+	}}
 /*资金纪录*/
-app.views.capitalDetail = Backbone.View.extend({
+app.views.capitalDetail = function(){return {
 	el:".mb_right",
 	render:function(){
 		$(this.el).empty();
@@ -2040,9 +2041,9 @@ app.views.capitalDetail = Backbone.View.extend({
             '</div>'+
         '</div>');
 	}
-	})
+	}}
 /*红包记录*/
-app.views.redPacketDetail = Backbone.View.extend({
+app.views.redPacketDetail = function(){return {
 	el:".mb_right",
 	data:{},
 	render:function(){
@@ -2074,9 +2075,9 @@ app.views.redPacketDetail = Backbone.View.extend({
             '<div class="clear"></div>'+
         '</div>')
 	}
-	})
+	}}
 /*安全问题*/
-app.views.safeQusetion = Backbone.View.extend({
+app.views.safeQusetion = function(){return {
 	el:".mb_right",
 	render:function(){
 		var templateData={"id":"",question1:"0",question2:"0",answer1:"",answer2:""}
@@ -2136,9 +2137,9 @@ app.views.safeQusetion = Backbone.View.extend({
 					})
 			})
 	}
-	})
+	}}
 /*邮箱验证*/
-app.views.emailVerify = Backbone.View.extend({
+app.views.emailVerify = function(){return {
 	el:".mb_right",
 	render:function(){
 		console.log(this.data)
@@ -2186,9 +2187,9 @@ app.views.emailVerify = Backbone.View.extend({
 			}
 		sendBind()
 	}
-	})
+	}}
 /*修改手机*/
-app.views.setPhone = Backbone.View.extend({
+app.views.setPhone = function(){return {
 	el:".mb_right",
 	render:function(){
 		var code="";
@@ -2243,9 +2244,9 @@ app.views.setPhone = Backbone.View.extend({
 					}
 			})
 		}
-	})
+	}}
 /*修改资料*/
-app.views.setDetail = Backbone.View.extend({
+app.views.setDetail = function(){return {
 	el:".mb_right",
 	render:function(){
 		var templateData=$.extend({},this.data);
@@ -2328,9 +2329,9 @@ app.views.setDetail = Backbone.View.extend({
 					});
 				})
 	}
-	})
+	}}
 /*修改密码*/
-app.views.setPassWord = Backbone.View.extend({
+app.views.setPassWord = function(){return {
 	el:".mb_right",
 	render:function(){
 		templateData={
@@ -2371,10 +2372,10 @@ app.views.setPassWord = Backbone.View.extend({
 					}
 			})
 	}
-	})
+	}}
 /*后台部分************************************************************************************/
 /*管理员管理*/
-app.views.adminManage = Backbone.View.extend({
+app.views.adminManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
@@ -2624,9 +2625,9 @@ app.views.adminManage = Backbone.View.extend({
 			})
 		
 	}
-	})
+	}}
 /*公告管理*/
-app.views.announcementManage = Backbone.View.extend({
+app.views.announcementManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
@@ -2792,9 +2793,9 @@ app.views.announcementManage = Backbone.View.extend({
 			add($(this));
 			})
 	}
-	})
+	}}
 /*客户管理*/
-app.views.clientManage = Backbone.View.extend({
+app.views.clientManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
@@ -2980,15 +2981,15 @@ app.views.clientManage = Backbone.View.extend({
 			add($(this));
 			})
 	}
-	})
+	}}
 /*客户详情*/
-app.views.clientDetail = Backbone.View.extend({
+app.views.clientDetail = function(){return {
 	el:".right",
 	data:{},
 	render:function(){}
-	})
+	}}
 /*产品管理*/
-app.views.procedureManage = Backbone.View.extend({
+app.views.procedureManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
@@ -3480,9 +3481,9 @@ app.views.procedureManage = Backbone.View.extend({
 			add($(this));
 			})
 	}
-	})
+	}}
 /*招聘管理 公司资料管理*/
-app.views.recruitManage = Backbone.View.extend({
+app.views.recruitManage = function(){return {
 	el:".right",
 	type:"",
 	data:{},
@@ -3651,8 +3652,8 @@ app.views.recruitManage = Backbone.View.extend({
 			add($(this));
 			})
 	}
-	})
-app.views.companyManage = Backbone.View.extend({
+	}}
+app.views.companyManage = function(){return {
 	el:".right",
 	type:"",
 	data:{},
@@ -3820,9 +3821,9 @@ app.views.companyManage = Backbone.View.extend({
 			add($(this));
 			})
 	}
-	})
+	}}
 /*宣传管理*/
-app.views.promotionManage = Backbone.View.extend({
+app.views.promotionManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
@@ -4348,10 +4349,10 @@ app.views.promotionManage = Backbone.View.extend({
 		
 		
 	}
-	})
+	}}
 
 /*红包管理*/
-app.views.redPacketManage = Backbone.View.extend({
+app.views.redPacketManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
@@ -4506,4 +4507,4 @@ app.views.redPacketManage = Backbone.View.extend({
 			add($(this));
 			})
 	}
-});
+}};
