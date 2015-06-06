@@ -62,7 +62,7 @@ app.views.head = Backbone.View.extend({
                 if((i==0)&&!sessionStorage.hl){
                 	sessionStorage.hl = n.id;
                 }
-   navFirst += '<li id="'+n.id+'"><a href="" class="three-d">'+n.name+'<span class="three-d-box"><span class="front">'+n.name+'</span><span class="back">'+n.name+'</span></span> </a></li>';
+   navFirst += '<li id="'+n.id+'"><a href="" class="three-d">'+n.name+'</a></li>';
 
 
 			});
