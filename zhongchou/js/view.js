@@ -974,7 +974,7 @@ app.views.product = Backbone.View.extend({
 				app.objs.productDetailV.data = $(this).data("product");
 				app.objs.route.navigate(location.pathname.replace("/","")+"?page=productDetail&id="+$(this).data("product").id,{trigger: true});
 
-				app.apis.buy({},this.render(),function(){})
+				//app.apis.buy({},this.render(),function(){})
 			});
 		});
 	})
@@ -1660,9 +1660,9 @@ app.views.productDetail = Backbone.View.extend({
     '</div>'+
 '</div>');
 var that=this
-$("[formtype='buybutton']").unbind("click").bind("click",function(){
-	if(app.objs.user.get()&&app.objs.user.get().id){
-		
+$("[formtype='buybutton']").unbind("click").bind("click",function(){debugger;
+	if(app.objs.user.get()&&app.objs.user.get().id){debugger;
+		app.objs.route.navigate(location.pathname.replace("/","")+"?page=buy&id="+that.data.id+"&count="+$("#crowdCount").val(),{trigger: true});
 		}else{
 			alert("请先登录再购买");
 			app.objs.route.navigate(location.pathname.replace("/","")+"?page=login",{trigger: true});
@@ -1693,6 +1693,155 @@ $.each(this.data.imageA,function(i,n){
 	$('<p><img src="'+n+'"/></p>').appendTo($("#quweitu"))
 	})
 	}
+	})
+/*购买*/
+app.views.buy=Backbone.View.extend({
+	el:".middle",
+	render:function(){
+		var that=this;
+		console.log(this.data)
+		$(this.el).empty();
+		$(this.el).html('<div class="credit_lending">'+
+            '<h2>确认并支付</h2>'+
+            '<div class="lending_table">'+
+            '<table width="100%" border="0" id="pro_table">'+
+                '<thead>'+
+                  '<tr>'+
+                  	'<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>商品名</td>'+
+                    '<td>现价</td>'+
+                    '<td>购买份数</td>'+
+                    '<td>支付金额</td>'+
+                  '</tr>'+
+                '</thead>'+
+               '<tbody><tr>'+
+			   		'<td width="5%"></td>'+
+                    '<td>'+that.data.id+'</td>'+
+                    '<td>'+that.data.title+"-"+that.data.subhead+'</td>'+
+                    '<td>'+that.data.buyPrice+'</td>'+
+                    '<td>'+that.data.count+'</td>'+
+                    '<td>'+that.data.count*that.data.buyPrice+'</td>'+
+			   '</tr></tbody></table>'+
+               
+            '</div>'+
+           '<div id="payButton">确认支付</div>'+
+            '<div class="clear"></div>'+
+        '</div>');
+		$(this.el).find("#payButton").unbind("click").bind("click",function(){
+			app.apis.adddeal(that.data,function(){
+				alert("交易成功");
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+				},function(){
+				alert("交易失败");
+				})
+			})
+		}
+	})
+/*卖出*/
+app.views.sell=Backbone.View.extend({
+	el:".middle",
+	render:function(){
+		var that=this;
+		console.log(this.data)
+		$(this.el).empty();
+		$(this.el).html('<div class="credit_lending">'+
+            '<h2>确认并支付</h2>'+
+            '<div class="lending_table">'+
+            '<table width="100%" border="0" id="pro_table">'+
+                '<thead>'+
+                  '<tr>'+
+                  	'<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>商品名</td>'+
+					'<td>买入价</td>'+
+                    '<td>现价</td>'+
+                    '<td>份数</td>'+
+                    '<td>结算金额</td>'+
+                  '</tr>'+
+                '</thead>'+
+               '<tbody><tr>'+
+			   		'<td width="5%"></td>'+
+                    '<td>'+that.data.id+'</td>'+
+                    '<td>'+that.data.title+"-"+that.data.subhead+'</td>'+
+                    '<td>'+that.data.buyPrice+'</td>'+
+					'<td>'+that.data.sellPrice+'</td>'+
+                    '<td>'+that.data.count+'</td>'+
+                    '<td>'+that.data.count*that.data.sellPrice+'</td>'+
+			   '</tr></tbody></table>'+
+               
+            '</div>'+
+           '<div id="payButton">确认卖出</div>'+
+            '<div class="clear"></div>'+
+        '</div>');
+		$(this.el).find("#payButton").unbind("click").bind("click",function(){
+			app.apis.editdeal(that.data,function(){
+				alert("交易成功");
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+				},function(){
+				alert("交易失败");
+				})
+			})
+		}
+	})
+/*债权转让*/
+app.views.change=Backbone.View.extend({
+	el:".middle",
+	render:function(){
+		var that=this;
+		console.log(this.data)
+		$(this.el).empty();
+		$(this.el).html('<div class="credit_lending">'+
+            '<h2>确认并支付</h2>'+
+            '<div class="lending_table">'+
+            '<table width="100%" border="0" id="pro_table">'+
+                '<thead>'+
+                  '<tr>'+
+                  	'<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>商品名</td>'+
+					'<td>买入价</td>'+
+                    '<td>现价</td>'+
+                    '<td>份数</td>'+
+                    '<td>转让手续费</td>'+
+					'<td>手续费合计</td>'+
+                  '</tr>'+
+                '</thead>'+
+               '<tbody><tr>'+
+			   		'<td width="5%"></td>'+
+                    '<td>'+that.data.id+'</td>'+
+                    '<td>'+that.data.title+"-"+that.data.subhead+'</td>'+
+                    '<td>'+that.data.buyPrice+'</td>'+
+					'<td>'+that.data.sellPrice+'</td>'+
+                    '<td>'+that.data.count+'</td>'+
+                    '<td>'+that.data.change+'</td>'+
+					'<td>'+that.data.count*that.data.change+'</td>'+
+			   '</tr></tbody></table>'+
+               
+            '</div>'+
+			'<p>请输入转让客户的用户名</p>'+
+			'<input to="changeMember" formtype="simple"/>'+
+           '<div id="payButton">确认卖出</div>'+
+            '<div class="clear"></div>'+
+        '</div>');
+		$(this.el).find("#payButton").unbind("click").bind("click",function(){
+			function editdeal(){
+				app.apis.editdeal(that.data,function(){
+				alert("转移成功");
+				app.objs.route.navigate(location.pathname.replace("/","")+"?page=account",{trigger: true});
+				},function(){
+				alert("转移失败");
+				})
+				}
+			app.apis.checkUserName($("[to='changeMember']").val(),function(data){
+				that.data.userId=data[0].id
+				editdeal()
+				},function(){
+				alert("找不到该用户")
+				})
+			
+			})
+		}
 	})
 /*公告详情*/
 app.views.announcementDetail = Backbone.View.extend({
@@ -1737,7 +1886,6 @@ app.views.account = Backbone.View.extend({
 					'</li>'
 				}
 							
-		console.log(this);
 		$(this.el).html('<div class="my_assets" style="width: 703px; height: auto; border: 1px solid #c8c8c8; margin-bottom: 1px;">'+
 				'<h2>我的资产</h2>'+
 				'<ul>'+
@@ -1794,11 +1942,52 @@ app.views.account = Backbone.View.extend({
 
 			'<div class="my_projectlist">'+
 				'<h2>我的众筹产品</h2>'+
-				'<ul>'+
+				'<ul id="dealListFrame">'+
 					
-					'<div class="clear"></div>'+
+					
 				'</ul>'+
-			'</div>')
+			'</div>');
+			var that=this;
+			if(this.data.deal){
+				$(this.el).find("#dealListFrame").html('<div class="lending_table"><table width="100%" border="0" id="deal_table">'+
+                '<thead>'+
+                  '<tr>'+
+                  	'<td width="5%"></td>'+
+                    '<td>编号</td>'+
+                    '<td>商品名</td>'+
+                    '<td>买入价</td>'+
+					'<td>现价</td>'+
+                    '<td>购买份数</td>'+
+                    '<td>利润</td>'+
+					'<td>卖出</td>'+
+					'<td>债权转让</td>'+
+                  '</tr>'+
+                '</thead>'+
+               '<tbody></tbody></table></div>');
+			  console.log(that.data)
+				$.each(that.data.deal,function(i,n){
+					if(!n.endTime){
+						$("#deal_table tbody").append('<tr>'+
+			   		'<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+that.data.product[n.productId].title+"-"+that.data.product[n.productId].subhead+'</td>'+
+                    '<td>'+n.buyPrice+'</td>'+
+					'<td>'+that.data.product[n.productId].minUnit+'</td>'+
+                    '<td>'+n.count+'</td>'+
+                    '<td>'+n.count*(that.data.product[n.productId].minUnit-n.buyPrice)+'元</td>'+
+					'<td><div class="sallbutton" id="'+n.id+'">卖出</div></td>'+
+					'<td><div class="changeRight" id="'+n.id+'">债权转让</div></td>'+
+			   '</tr>')
+						}
+					
+					})
+					$(".sallbutton").unbind("click").bind("click",function(){
+						app.objs.route.navigate(location.pathname.replace("/","")+"?page=sell&id="+$(this).attr("id"),{trigger: true});
+						})
+					$(".changeRight").unbind("click").bind("click",function(){
+						app.objs.route.navigate(location.pathname.replace("/","")+"?page=change&id="+$(this).attr("id"),{trigger: true});
+						})
+				}
 	}
 	})
 /*充值*/
@@ -2842,7 +3031,8 @@ app.views.procedureManage = Backbone.View.extend({
 				"action":"",//房价走势
 				"manager":"",//资产管理
 				"review":"",//资产评估
-				"suggest":""//综合建议
+				"suggest":"",//综合建议
+				"change":0//债券转移费用
 				};
 			if(data){
 				templateData=data;
@@ -2970,6 +3160,11 @@ app.views.procedureManage = Backbone.View.extend({
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">单价</div>'+
 				'<div class="templatePointRight"><input to="UnitPrice" formtype="number"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">债权转移费用</div>'+
+				'<div class="templatePointRight"><input to="change" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+

@@ -164,6 +164,98 @@ app.objs.routeTable={
 					
 					}
 		},
+	/*购买*/
+	"buy":{
+		type:0,
+					fn:function(data){
+					/*出页面*/
+					app.apis.getProduct(null,function(dataA){
+						var dataA=_.indexBy(dataA,"id")
+						if(dataA[data.id]){
+							app.objs.buyV.data={
+								id:app.fns.uuid(),
+								productId:data.id,
+								userId:app.objs.user.get().id,
+								title:dataA[data.id].title,
+								subhead:dataA[data.id].subhead,
+								count:Number(data.count),
+								startTime:new Date().getTime(),
+								buyPrice:dataA[data.id].minUnit,
+								endTime:null,
+								sellPrice:null,
+								}
+								app.objs.buyV.render();
+							}
+						},function(){
+							alert("获取商品出错")
+							})
+					
+					}
+		},
+	/*卖出*/
+	"sell":{
+		type:0,
+					fn:function(data){
+					/*出页面*/
+					
+					function getProduct(){
+						app.apis.getProduct(null,function(dataA){
+						var dataA=_.indexBy(dataA,"id")
+						if(dataA[app.objs.sellV.data.productId]){
+								app.objs.sellV.data.sellPrice=dataA[app.objs.sellV.data.productId].minUnit;
+								app.objs.sellV.data.title=dataA[app.objs.sellV.data.productId].title;
+								app.objs.sellV.data.subhead=dataA[app.objs.sellV.data.productId].subhead;
+								app.objs.sellV.render();
+							}
+						},function(){
+							alert("获取商品出错")
+							})
+						}
+					app.apis.getdealList(null,function(dataA){
+						var dataA=_.indexBy(dataA,"id")
+						if(dataA[data.id]){
+							app.objs.sellV.data=dataA[data.id];
+							app.objs.sellV.data.endTime=new Date().getTime();
+							getProduct()
+							}
+						},function(){
+						alert("获取交易信息失败")
+						})
+					
+					}
+		},
+		/*卖出*/
+	"change":{
+		type:0,
+					fn:function(data){
+					/*出页面*/
+					
+					function getProduct(){
+						app.apis.getProduct(null,function(dataA){
+						var dataA=_.indexBy(dataA,"id")
+						if(dataA[app.objs.changeV.data.productId]){
+								app.objs.changeV.data.sellPrice=dataA[app.objs.changeV.data.productId].minUnit;
+								app.objs.changeV.data.title=dataA[app.objs.changeV.data.productId].title;
+								app.objs.changeV.data.subhead=dataA[app.objs.changeV.data.productId].subhead;
+								app.objs.changeV.data.change=dataA[app.objs.changeV.data.productId].change;
+								app.objs.changeV.render();
+							}
+						},function(){
+							alert("获取商品出错")
+							})
+						}
+					app.apis.getdealList(null,function(dataA){
+						var dataA=_.indexBy(dataA,"id")
+						if(dataA[data.id]){
+							app.objs.changeV.data=dataA[data.id]
+							getProduct()
+							}
+						},function(){
+						alert("获取交易信息失败")
+						})
+					
+					}
+		},
 	/*公告详情*/
 	"announcementDetail":{
 					type:0,
@@ -431,10 +523,17 @@ app.objs.routeTable={
 				fn:function(data){
 					app.objs.accountV.el=".mb_right";
 					app.objs.accountV.data=app.objs.user.get();
+					function getProduct(){
+						app.apis.getProduct(null,function(data){
+						var data=_.indexBy(data,"id");
+						app.objs.accountV.data.product=data;
+						app.objs.accountV.render();
+						})
+						}
 					function getDeal(){
 						app.apis.getdealList(null,function(data){
 							app.objs.accountV.data.deal=data
-							app.objs.accountV.render();
+							getProduct();
 							},function(){
 							alert("获取交易信息失败")
 							})

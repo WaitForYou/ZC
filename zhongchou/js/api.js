@@ -185,6 +185,25 @@ app.apis.checkUser=function(data,fn,err){
 	
 	
 	}
+/*检测用户名*/
+app.apis.checkUserName=function(data,fn,err){
+	console.log(data);
+	var sendData = {
+		model:"client",
+		action:"checkUserName",
+		data:data
+	}
+	$.get("http://"+config.sour+":8888/",sendData,function(checkReturn){
+		if(checkReturn&&checkReturn.code){
+		fn(checkReturn.data);
+	}else{
+		err();
+	}
+	});
+
+	
+	
+	}
 /*检测手机号*/
 app.apis.checkPhone=function(data,fn,err){
 	//var data = "phone"/*传输入的东西过来*/
@@ -401,6 +420,20 @@ app.apis.checkSafeQusetion=function(data,fn,err){
 	}
 	});
 	
+	}
+app.apis.getCard=function(data,fn,err){
+	var sendData = {
+		model:"client",
+		action:"getBind",
+		data:app.objs.user.get().id
+	}
+	$.get("http://"+config.sour+":8888/",sendData,function(accountReturn){
+		if(accountReturn && accountReturn.code){
+		fn(accountReturn.data)
+	}else{
+		err()
+	}
+	});
 	}
 /************************************************************************/
 /*获取管理员*/
@@ -839,11 +872,11 @@ app.apis.getdeal=function(data,fn,err){
 	}
 /*添加订单*/
 app.apis.adddeal=function(data,fn,err){
-	data={"id":uuid(),"productId":"","userId":"","startTime":10086,"buyPrice":100,"count":100}
+	//data={"id":uuid(),"productId":"","userId":"","startTime":10086,"buyPrice":100,"count":100}
 	var sendData = {
 		model:"deal",
 		action:"add",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code){
@@ -856,11 +889,11 @@ app.apis.adddeal=function(data,fn,err){
 	}
 /*修改订单*/
 app.apis.editdeal=function(data,fn,err){
-	data={"id":"","productId":"","userId":"","startTime":10086,"buyPrice":100,"count":100}
+	
 	var sendData = {
 		model:"deal",
 		action:"edit",
-		data:data
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
 		if(returndata && returndata.code){
@@ -890,7 +923,7 @@ app.apis.removedeal=function(data,fn,err){
 	}
 /*获取交易记录*/
 app.apis.getdealList=function(data,fn,err){
-	data={"id":""}
+	data=app.objs.user.get().id;
 	var sendData = {
 		model:"deal",
 		action:"list",

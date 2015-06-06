@@ -173,6 +173,9 @@ app.objs.promotionManageV = new app.views.promotionManage();
 app.objs.loginV = new app.views.login();
 app.objs.registerV = new app.views.register();
 app.objs.redPacketManageV = new app.views.redPacketManage();
+app.objs.buyV = new app.views.buy();
+app.objs.sellV = new app.views.sell();
+app.objs.changeV = new app.views.change();
 app.objs.configData = null;
 /****************************************************************************************/
 /*
