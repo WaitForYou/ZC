@@ -535,11 +535,12 @@ background: url(../img/header-text.png) no-repeat left;}
 /*login btn*/
 .top_btn_group { position:absolute; right:25px; top:20px; z-index:10; }
 .btn-s1 {
+    background: #198eca;
 	border: 1px solid #fff;
 	cursor: pointer;
 	padding: 6px 40px;
 	display: inline-block;
-	margin: 10px;
+	margin:30px 10px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	outline: none;
@@ -570,30 +571,31 @@ background: url(../img/header-text.png) no-repeat left;}
 	height: 0;
 	top: 50%;
 	left: 50%;
-	background: #fff;
+	background: #198eca;
 	opacity:0;
-	-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+/*	-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
 	-moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
 	-ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
-	transform: translateX(-50%) translateY(-50%) rotate(45deg);
+	transform: translateX(-50%) translateY(-50%) rotate(45deg);*/
 }
 
 .btn-1a:hover,
 .btn-1a:active {
-	color: #dd0120;
+/*	color: #dd0120;
 	opacity: 1;
+	background: #198eca;
 	-ms-filter: alpha(opacity=100);
-	filter: alpha(opacity=100);
+	filter: alpha(opacity=100);*/
 }
 
 .btn-1a:hover:after {
-	height: 260%;
-	opacity: 1;
+/*	height: 260%;
+	opacity: 1;*/
 }
 
 .btn-1a:active:after {
-	height: 400%;
-	opacity: 1;
+/*	height: 400%;
+	opacity: 1;*/
 }
 
 /*btn-1b*/
@@ -613,10 +615,11 @@ background: url(../img/header-text.png) no-repeat left;}
 .btn-1b:hover,
 .btn-1b:active {
 	color: #198eca;
-	background: #fff;
-	opacity: 1;
-	-ms-filter: alpha(opacity=100);
-	filter: alpha(opacity=100);
+	background: #198eca;
+	opacity: 0.8;
+	font-weight: bold;
+	-ms-filter: alpha(opacity=80);
+	filter: alpha(opacity=80);
 }
 
 .btn-1b:hover:after,

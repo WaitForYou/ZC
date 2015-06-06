@@ -59,10 +59,12 @@ app.views.head = function(){return {
 				//navFirst+="<div id='"+n.id+"'>"+n.name+"</div>"
 				//<li><a href="/cncrowd">中筹模式<br><span class="en_t">What's CNCrowd</span></a></li>
 				// navFirst += "<li id='"+n.id+"'><a>"+n.name+"<br><span class='en_t'>What's CNCrowd</span></a></li>";
-               // if((i==0)&&!sessionStorage.hl){
-                	//sessionStorage.hl = n.id;
-               // }
-   navFirst += '<li id="'+n.id+'"><a class="three-d">'+n.name+'<span class="three-d-box"><span class="front">'+n.name+'</span><span class="back">'+n.name+'</span></span> </a></li>';
+
+                if((i==0)&&!sessionStorage.hl){
+                	sessionStorage.hl = n.id;
+                }
+   navFirst += '<li id="'+n.id+'"><a class="three-d">'+n.name+'</a></li>';
+
 
 
 			});
