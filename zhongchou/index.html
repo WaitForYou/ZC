@@ -49,34 +49,22 @@
 
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="js/jquery-form.js"></script>
-    <script type="text/javascript" src="js/underscore-min.js"></script>
-    <script src="js/extend/slides.min.jquery.js"></script>
-    	<link rel="stylesheet" href="css/base/all.css">
-	<script src="js/ui/core.js"></script>
-	<script src="js/ui/widget.js"></script>
-	<script src="js/ui/position.js"></script>
-	<script src="js/ui/menu.js"></script>
-    <script src="js/ui/button.js"></script>
-	<script src="js/ui/spinner.js"></script>
-	<script src="js/ui/selectmenu.js"></script>
-    <script src="js/ui/mouse.js"></script>
-	<script src="js/ui/slider.js"></script>
-    <script src="js/ui/datepicker.js"></script>
-    <script src="js/ui/datepicker-zh-CN.js"></script>
-    <script src="ueditor/ueditor.config.js"></script>
-    <script src="ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="js/cookies.min.js"></script>
+
     <script>
 if (!document.addEventListener) {
 	// IE6~IE8
-	document.write('<script src="js/ieBetter.js"><\/script>');	
+	//document.write('<script src="js/ieBetter.js"><\/script>');	
 }
 </script>
 	<link rel="stylesheet" href="css/demos.css">
         <title>Hello World</title>
     </head>
     <body>
+
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    
     <div class="header" id="header">
     	<div class="top_btn_group"></div>
     	<div class="top_btn_group" style="  display:none;  ">
@@ -124,9 +112,26 @@ if (!document.addEventListener) {
     <div id="popMain"></div>
     </div>
     <div id="popBg"></div>
-    <!-- end footer -->
+    <!-- end footer --> 
+    
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script src="js/extend/slides.min.jquery.js"></script>
+    	<link rel="stylesheet" href="css/base/all.css">
+	<script src="js/ui/core.js"></script>
+	<script src="js/ui/widget.js"></script>
+	<script src="js/ui/position.js"></script>
+	<script src="js/ui/menu.js"></script>
+    <script src="js/ui/button.js"></script>
+	<script src="js/ui/spinner.js"></script>
+	<script src="js/ui/selectmenu.js"></script>
+    <script src="js/ui/mouse.js"></script>
+	<script src="js/ui/slider.js"></script>
+    <script src="js/ui/datepicker.js"></script>
+    <script src="js/ui/datepicker-zh-CN.js"></script>
+    <script src="ueditor/ueditor.config.js"></script>
+    <script src="ueditor/ueditor.all.min.js"></script>
 
-    <script type="text/javascript" src="js/Chart.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/router.js"></script>
     <script type="text/javascript" src="js/view.js"></script>

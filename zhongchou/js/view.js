@@ -325,8 +325,7 @@ app.views.index = function(){return {
 		      +'</div>'
 		    +'</div>'
 */
-$('<div class="index_top">'
-	+'<div class="index_top_left">'
+var newElem = $('<div class="index_top_left">'
 		+'<div class="index_message_head">全国首家专业房地产众筹平台</div>'
 		+'<div class="index_message_frame">'
 			+'<div class="index_message_title">预期年化利率达<span style="font-size:30px">15%</span>以上</div>'
@@ -338,38 +337,31 @@ $('<div class="index_top">'
 		+'</div>'
 		+'<img class="index_message_foot" src="images/index.png"/>'
 	+'</div>'
+	+'<div class="index_top">'
 	+'<div class="index_top_right">'
-		+'<div class="index_canvar_1">'
-			+'<div class="index_canvar_title">图1</div>'
-			+'<canvas id="canvar_1" class="index_canvar_left" width="125" height="125"></canvas>'
-			+'<div class="index_canvar_right"></div>'
-			+'<div class="clear"></div>'
-		+'</div>'
-		+'<div class="index_canvar_2">'
-			+'<div class="index_canvar_title">图2</div>'
-			+'<canvas id="canvar_2" class="index_canvar_single"></canvas>'
-		+'</div>'
-		+'<div class="index_canvar_3">'
-			+'<div class="index_canvar_title">图3</div>'
-			+'<canvas id="canvar_3" class="index_canvar_single"/></canvas>'
-		+'</div>'
+		+'<div class="index_canvar_1" id="canvar_1"></div>'
 		+'<div class="index_promo_1"></div>'
+		+'<div class="clear"></div>'
 		+'<div class="index_promo_2"></div>'
+		+'<div class="index_canvar_2" id="canvar_2"></div>'
+		+'<div class="clear"></div>'
+		+'<div class="index_canvar_3" id="canvar_3"></div>'
 		+'<div class="index_promo_3"></div>'
+		+'<div class="clear"></div>'
 	+'</div>'
 	+'<div class="clear"></div>'
-	+'</div>').appendTo($(this.el));
-		   $(' <div id="topics">'
-			     +'<div class="inner" style=" height:30px;">'
++'</div>').appendTo($(this.el));
+$('<div id="topics">'
++'<div class="inner" style=" height:30px;">'
 			       +' <span style=" display:block; float:left;"><img src="img/topics.png" alt=""></span>'
 			        +'<div id="slides"><div class="slides_container"></div></div>'
 			        +'<a href="/company?id=3" style=" color:#F00; font-size:12px; float:right;">查看更多 &gt;&gt;</a>'
 			      +'</div>'
-			    +'</div>'
-		    +'</div>'
-		   /* +'<div class="recharge_style03"></div>'*/
-		    +'<div class="index_center"><div class="project_area"></div></div>'
-		    +'<div class="slide earnings"></div> ').appendTo($(this.el));
++'</div>'
++'<div class="index_center"><div class="project_area"></div></div>'
+		    +'<div class="slide earnings"></div>'
+).appendTo($(this.el));
+
 		  /*  +'<div class="team" id="smp"></div>'*/
               /*var demo = document.getElementById("demo");
               var marquePic2 = document.getElementById("marquePic2");
@@ -406,6 +398,181 @@ $('<div class="index_top">'
 		   nameArry6.push(n.name)
 		   valueArry6.push(n.value)
 		   })
+	   /***********************************************************************************************/
+	   // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/pie',// 使用柱状图就加载bar模块，按需加载
+				 'echarts/chart/bar',
+				 'echarts/chart/line'
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('canvar_2')); 
+                
+                var option = {
+                    
+    title : {
+        text: promoObj["004"].name,
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel']
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:promoObj["004"].name,
+            type:'pie',
+            radius : [30, 80],
+            center : ['50%', 170],
+            roseType : 'area',
+            x: '50%',               // for funnel
+            max: 40,                // for funnel
+            sort : 'ascending',     // for funnel
+            data:promoObj["004"].data
+        }
+    ]
+
+                };
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option);
+/***********************************************************/				
+				 var myChart2 = ec.init(document.getElementById('canvar_1')); 
+				 var option2={
+    title : {
+        text: promoObj["006"].name
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : nameArry6
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:promoObj["006"].name,
+            type:'bar',
+            data:valueArry6,
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        }
+    ]
+};
+				 myChart2.setOption(option2);
+				 
+				 var myChart3 = ec.init(document.getElementById('canvar_3')); 
+				 var option3 = {
+    title : {
+        text: promoObj["005"].name,
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : nameArry5
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            axisLabel : {
+                formatter: '{value}'
+            }
+        }
+    ],
+    series : [
+        {
+            name:promoObj["005"].name,
+            type:'line',
+            data:valueArry5,
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        }
+    ]
+};
+				 myChart3.setOption(option3);
+            }
+        );
+	   
+	   /*************************************************************************************************/
+	/*
+	   
 		
        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 		var lineChartData = {
@@ -490,7 +657,7 @@ var pieData = [
 	};
 	window.myRadar = new Chart(document.getElementById("canvar_2").getContext("2d")).Radar(radarChartData, {
 			responsive: true
-		});
+		});*/
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this;
 		//公告
@@ -514,6 +681,7 @@ var pieData = [
                 hoverPause: true
               });
          });
+		 
 		//介绍我们是做什么的
 		/*
 		$("#index_video").find("h1").text(this.data.promotion.introduceVideo.title);

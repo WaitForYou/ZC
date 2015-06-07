@@ -27,8 +27,8 @@ app.objs.uploadOk = [];
 /***************************************************************************/	
 objs.user={}
 	objs.user.get = function(){
-		if(!userMessage&&$.cookie("zc_user")){
-			userMessage=JSON.parse($.cookie("zc_user"));
+		if(!userMessage&&Cookies("zc_user")){
+			userMessage=JSON.parse(Cookies("zc_user"));
 			}
 		return	userMessage
 		}

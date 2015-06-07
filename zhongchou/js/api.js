@@ -253,7 +253,7 @@ app.apis.login=function(data,fn,err){
 		if(loginReturn && loginReturn.code && loginReturn.code != 0){
 		if(loginReturn.code == 1){
 			var userSting=JSON.stringify(loginReturn.data[0]);
-			$.cookie("zc_user",userSting,{expires:0.5});
+			Cookies("zc_user",userSting,{expires:0.5});
 			app.objs.user.set(loginReturn.data[0])
 			}
 		fn(app.objs.user.get())
