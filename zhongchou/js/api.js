@@ -421,6 +421,7 @@ app.apis.checkSafeQusetion=function(data,fn,err){
 	});
 	
 	}
+
 app.apis.getCard=function(data,fn,err){
 	var sendData = {
 		model:"client",
