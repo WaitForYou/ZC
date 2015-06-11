@@ -2338,6 +2338,7 @@ app.views.emailVerify = function(){return {
 			$(that.el).find("#sendBtn").unbind("click").bind("click",function(){
 			app.apis.getBindCode({"type":"email","number":$("#myEmail").val()},function(data){
 					alert("信息已发送")
+					$(that.el).find("#sendBtn").unbind("click");
 					$("#mailLoginBtn a").attr("href","http://mail."+$("#myEmail").val().split("@")[1])
 					$("#mailLoginBtn").show();
 					var sendTime=30;
@@ -2401,7 +2402,7 @@ app.views.setPhone = function(){return {
 			}	
 			sendBind()
 			$(this.el).find(".bankcard_confirm").unbind("click").bind("click",function(){
-				if(code==$("#msgValidCode").val()){
+				if(code&&code==$("#msgValidCode").val()){
 					app.apis.bind({
 					"type":"phone","id":app.objs.user.get().id,"code":code,"number":$("#phoneNumber").val()
 					},function(){
