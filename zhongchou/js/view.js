@@ -1996,7 +1996,7 @@ app.views.change=function(){return {
             '</div>'+
 			'<p>请输入转让客户的用户名</p>'+
 			'<input to="changeMember" formtype="simple"/>'+
-           '<div id="payButton">确认卖出</div>'+
+           '<div id="payButton">确认转让</div>'+
             '<div class="clear"></div>'+
         '</div>');
 		$(this.el).find("#payButton").unbind("click").bind("click",function(){
