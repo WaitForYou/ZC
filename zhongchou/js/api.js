@@ -950,10 +950,22 @@ app.apis.getHeaderConent=function(data,fn,err){
 }
 app.apis.config = function(data,fn,err){
 	var data = {
-		footerInfo:{titleText:"全国首家专业房地产众筹平台",slogan:"人人参与  创新投资",mobile:"（021）6181-3682",fax:"（021）6181-3682",time:"（周一至周五 10:00-18:30）",number:"400-661-3350",
-	      companyName:"上海中筹互联网金融信息服务有限公司",referredToAs:"",companyUrl:"",
-	      cooperationEmail:"biz@cncrowd.com",recruitmentEmail:"biz@cncrowd.com",address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
-	      copRight:"©2014 CNCrowd",record:" 沪ICP备14044695号-1",
+		
+		footerInfo:{
+			titleText:"全国首家专业房地产众筹平台",
+			slogan:"人人参与  创新投资",
+			mobile:"（021）6181-3682",
+			fax:"（021）6181-3682",
+			time:"（周一至周五 10:00-18:30）",
+			number:"400-661-3350",
+	      companyName:"上海中筹互联网金融信息服务有限公司",
+		  referredToAs:"",
+		  companyUrl:"",
+	      cooperationEmail:"biz@cncrowd.com",
+		  recruitmentEmail:"biz@cncrowd.com",
+		  address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
+	      copRight:"©2014 CNCrowd",
+		  record:" 沪ICP备14044695号-1",
 	      nav:[{id:"mode",name:"中筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
 	      conText_0:"为全国首家专业房地产众筹平台",
 	      conText_1:"致力于通过互联网金融的创新",
@@ -968,6 +980,9 @@ app.apis.config = function(data,fn,err){
            title_2:"众筹",
            image:"images/slide_01.png"
          },
+		 logo:"http://",
+		 more:"1",
+		 change:"1",
          button:[[{id:"login",name:"登录"},{id:"register",name:"注册"}],[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}],[{id:"out",name:"退出"}]],
          nav:[{id:"mode",name:"众筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}]
      }

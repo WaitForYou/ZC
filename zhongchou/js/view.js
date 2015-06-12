@@ -34,7 +34,7 @@ app.views.head = function(){return {
 					if(app.objs.user.get().type==1){
 						buttonArry=[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}];
 						}else{
-							buttonArry=[{id:"zone",name:"用户中心"},{id:"admin",name:"管理中心"},{id:"out",name:"退出"}];
+							buttonArry=[{id:"admin",name:"管理中心"},{id:"out",name:"退出"}];
 							}
 					}else{
 						buttonKey = 0;
@@ -176,11 +176,11 @@ app.views.foot = function(){return {
 			   +'<div class="clear"></div>'
 			+'</div>').appendTo($(this.el));
 		var nav="";
-		$.each(configData.nav,function(i,n){
+		$.each(app.objs.configData.nav,function(i,n){
 			nav += '<a class="'+n.id+'" id="'+n.id+'">'+n.name+'</a>|';
 			})
 		//$(this.el).find("h3").html(nav)
-		$.each(this.nav,function(i,n){
+		$.each(app.objs.configData.nav,function(i,n){
 			$("."+n.id).unbind("click").bind("click",function(){
 				window.location.hash=n.id
 			});
@@ -853,7 +853,12 @@ app.views.login = function(){return {
 	var data = {"userName":loginElem.find("#userName").val(),/*登录名/手机/邮箱*/
 				"passWord":loginElem.find("#userPass").val()}/*密码*/
 	app.apis.login(data,function(data){
-		window.location.hash="account";
+		if(data.type==1){
+			window.location.hash="account";
+			}else if(data.type==2){
+				window.location.hash="admin";
+				}
+		
 	},function(error){
 		alert("账号或密码错误")
 		});
@@ -4653,6 +4658,189 @@ app.views.redPacketManage = function(){return {
                     '<td>金额</td>'+
                   '</tr>'+
                 '</thead>'+
+            '</table>'+
+        '</div>');
+		if(this.data){
+			  $.each(this.data,function(i,n){
+        	var newPoint=$('<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.userId+'</td>'+
+                    '<td>'+n.money+'</td>'+
+                  '</tr>').appendTo($("#tableredPacket"));
+				  newPoint.data("result",n);
+				  newPoint.unbind("click").bind("click",function(e){
+					show($(this));
+					});
+				newPoint.find(".edit").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					edit($(this));
+					});
+				newPoint.find(".remove").unbind("click").bind("click",function(e){
+					e.stopPropagation()
+					remove($(this));
+					});
+        });
+			}
+      
+		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
+			add($(this));
+			})
+	}
+}};
+
+/*配置管理*/
+app.views.configManage = function(){return {
+	el:".right",
+	data:{},
+	render:function(){
+		console.log(this.data);
+		function templateFn(state,data){
+			var templateData={
+				footerInfo:{
+			titleText:"全国首家专业房地产众筹平台",
+			slogan:"人人参与  创新投资",
+			mobile:"（021）6181-3682",
+			fax:"（021）6181-3682",
+			time:"（周一至周五 10:00-18:30）",
+			number:"400-661-3350",
+	      companyName:"上海中筹互联网金融信息服务有限公司",
+		  referredToAs:"",
+		  companyUrl:"",
+	      cooperationEmail:"biz@cncrowd.com",
+		  recruitmentEmail:"biz@cncrowd.com",
+		  address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
+	      copRight:"©2014 CNCrowd",
+		  record:" 沪ICP备14044695号-1",
+	      nav:[{id:"mode",name:"中筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
+	      conText_0:"为全国首家专业房地产众筹平台",
+	      conText_1:"致力于通过互联网金融的创新",
+	      conText_2:"推动传统房地产投融资模式的变革和创新"
+         },
+		 logo:"http://",
+		 more:"1",
+		 change:"1",
+				};
+			if(data){
+				templateData=data;
+				}
+		var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">编号</div>'+
+				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">账号</div>'+
+				'<div class="templatePointRight">'+templateData.userId+'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">金额</div>'+
+				'<div class="templatePointRight"><input to="money" formtype="number"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">激活时间</div>'+
+				'<div class="templatePointRight"><input to="strat" formtype="date"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">截止时间</div>'+
+				'<div class="templatePointRight"><input to="end" formtype="date"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">类型</div>'+
+				'<div class="templatePointRight">'+
+					'<select to="type">'+
+						'<option value="0">用户派发</option>'+
+						'<option value="1">系统派发</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>');
+		templateDom.find("[formtype='date']").each(
+			function(){
+				$(this).datepicker({
+					onSelect:function( event,ui ) {
+						templateData[$(this).attr("to")]=app.fns.d2t($(this).val());
+						}
+					}).datepicker("setDate", app.fns.t2d(templateData[$(this).attr("to")]));
+			}
+		)
+		templateDom.find("[formtype='number']").each(
+			function(){
+				$(this).spinner({change:function(event,ui){
+				templateData[$(this).attr("to")]=$(this).spinner("value")
+				}}).spinner("value",templateData[$(this).attr("to")]);
+			
+			}
+		)
+		templateDom.find("select").each(function(){
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			});
+		templateDom.find(".templateSend").unbind("click").bind("click",function(){
+			app.apis.addRedPacket(templateData,function(){
+				alert("创建成功")
+				window.location.reload();
+				},function(){
+					alert("创建失败")
+					})
+			})
+		templateDom.appendTo($("#popMain"));
+			}
+		function add(target){
+			var openfn=function(){new templateFn(1,null)};
+			popOpen(openfn,function(){});
+			}
+		function edit(target){
+			
+			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
+			popOpen(openfn,function(){});
+			};
+		function remove(target){
+			window.location.reload();
+			}
+		function show(target){
+			var openfn=function(){new templateFn(0,target.data("result"))};
+			popOpen(openfn,function(){});
+			}
+		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
+			'<div class="clear"></div>'+
+			'<div class="right_table">'+
+            '<table id="tableconfig" width="100%" border="0">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>名称</td>'+
+                    '<td>描述</td>'+
+                    '<td width="5%">修改</td>'+
+                  '</tr>'+
+                '</thead>'+
+				'<tbody>'+
+				   '<tr>'+
+                    '<td width="5%"></td>'+
+                    '<td>logo</td>'+
+                    '<td>网站左上方的logo</td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                  '</tr>'+
+				'</tbody>'+
             '</table>'+
         '</div>');
 		if(this.data){

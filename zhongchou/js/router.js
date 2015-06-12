@@ -6,7 +6,6 @@ app.objs.routeTable={
 			type:0,
 			fn:function(data){
 			/*获取宣传*/
-			
 			app.apis.getpromotion(data,function(promotion){
 				/*获取公告*/
 				app.apis.getannouncement(data,function(announcement){
@@ -793,5 +792,18 @@ app.objs.routeTable={
 					app.objs.redPacketManageV.render();
 					})
 				}
+		},
+	/*配置管理*/
+	"configManage":{
+		type:2,
+		fn:function(data){
+			/*获取配置信息*/
+			app.apis.getConfig(data,function(config){
+					/*出页面*/
+					app.objs.configManageV.el=".mb_right";
+					app.objs.configManageV.data=config;
+					app.objs.configManageV.render();
+					})
+			}
 		}		
 	}
