@@ -91,7 +91,7 @@ app.views.head = function(){return {
 				})
 			$("#out").unbind("click").bind("click",function(){
 				app.objs.user.set(null);
-				$.cookie('zc_user', '', { expires: -1 }); // 删除 cookie
+				Cookies('zc_user', '', { expires: -1 }); // 删除 cookie
 				app.objs.product.set(null);
 				app.objs.client.set(null);
 				app.objs.admin.set(null);
@@ -109,7 +109,11 @@ app.views.head = function(){return {
 				app.objs.companyTime = 0;
 				app.objs.promotionTime = 0;
 				app.objs.redPacketTime = 0;
-				window.location.hash="index";
+
+						window.location.hash="index";
+						window.location.reload();
+				
+				
 				})
 		}
 	}}
@@ -976,7 +980,7 @@ app.views.register = function(){return {
 						  getcode();
 						  }
 					  },1000)
-				  registerElem.find("#btnSendmsg")
+		
 				  },function(){
 					  alert("发送失败，请检查手机号是否有效")
 					  })
@@ -1504,11 +1508,11 @@ app.views.productDetail = function(){return {
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
-                                            '<td align="right">'+
-                                                this.data.costPrice+'项目原价：'+
+                                            '<td width="140" align="right">'+
+                                                '项目原价：'+
                                             '</td>'+
                                             '<td>'+
-                                                '元'+
+                                               +this.data.costPrice +'元'+
                                             '</td>'+
                                         '</tr>'+
                                         '<tr>'+
@@ -1831,8 +1835,8 @@ app.views.productDetail = function(){return {
     '</div>'+
 '</div>');
 var that=this
-$("[formtype='buybutton']").unbind("click").bind("click",function(){debugger;
-	if(app.objs.user.get()&&app.objs.user.get().id){debugger;
+$("[formtype='buybutton']").unbind("click").bind("click",function(){
+	if(app.objs.user.get()&&app.objs.user.get().id){
 		window.location.hash="buy/id:"+that.data.id+"/count:"+$("#crowdCount").val();
 		}else{
 			alert("请先登录再购买");
