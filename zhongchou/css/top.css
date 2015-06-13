@@ -399,7 +399,7 @@ a {
 .project_intro .right .title01 h2 { font-size:30px; height:40px; line-height:40px;}
 .project_intro .right .title01 h4 { font-size:16px; height:25px; line-height:25px; color:#888;}
 
-.project_intro .right .price { width:475px; height:60px; margin:15px 0 20px 0; color:#888; }
+.project_intro .right .price { width:475px; height:60px; margin:15px 0 8px 0; color:#888; }
 .project_intro .right .price_01 { display:block; float:left; width:165px; height:50px; border-right:1px solid #bababa;padding:5px;}
 .project_intro .right .price_01 h4 {text-align:center; font-size:14px; line-height:20px;}
 .project_intro .right .price_01 h5 {text-align:center; font-size:20px; line-height:35px; font-weight:bold;}
@@ -411,9 +411,9 @@ a {
 
 
 .home_progress_bar, .home_progress_bar b {background: url(../img/uc/pro_progress_bar.png) no-repeat scroll 0 0; display: block;} 
-.home_progress_bar {background-position: 0 0; height:40px;width: 475px;} 
-.home_progress_bar b {background-position: 0 -40px; height: 40px;}
-.project_intro .right h6 { display:block;width:475px; height:40px; line-height:40px; text-align:center; font-size:14px; position:absolute; left:0; bottom:0px;}
+.home_progress_bar {background-position: 0 0; height:20px;width: 475px;position:relative; border-radius:10px;margin-bottom:5px;} 
+.home_progress_bar b {background-position: 0 -40px; height: 20px; border-radius:10px;}
+.project_intro .right h6 { display:block;width:475px; height:20px; line-height:20px; text-align:center; font-size:14px; position:absolute; left:0; bottom:0px;}
 
 .project_intro .right .title03 {display:block; width:455px; height:45px; line-height:22px; font-size:14px; color:#444; padding-top:20px;}
 .project_intro_2 { width:980px; height:150px; margin-bottom:70px;}

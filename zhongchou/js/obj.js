@@ -24,6 +24,8 @@ app.objs.uploadOk = [];
 	var redPacket = null;
 	/*交易信息*/
 	var deal = null;
+	/*配置信息*/
+	var config = null;
 /***************************************************************************/	
 objs.user={}
 	objs.user.get = function(){
@@ -124,8 +126,16 @@ objs.redPacket.get = function(){
 objs.redPacket.set = function(data){
 		redPacket = data;
 		}
-/***************************************************************************/	
+/***************************************************************************/			
 
+objs.config = {}
+objs.config.get = function(){
+		return config
+	}
+objs.config.set = function(data){
+		config = data;
+		}
+/***************************************************************************/
 	})(app.objs)
 /****************************************************************************************/
 app.objs.userTime = 0;
@@ -138,6 +148,7 @@ app.objs.companyTime = 0;
 app.objs.promotionTime = 0;
 app.objs.redPacketTime = 0;
 app.objs.dealTime=0;
+app.objs.configTime=0;
 /****************************************************************************************/
 
 app.objs.headV = new app.views.head();
@@ -176,6 +187,7 @@ app.objs.redPacketManageV = new app.views.redPacketManage();
 app.objs.buyV = new app.views.buy();
 app.objs.sellV = new app.views.sell();
 app.objs.changeV = new app.views.change();
+app.objs.configManageV = new app.views.configManage();
 app.objs.configData = null;
 /****************************************************************************************/
 /*

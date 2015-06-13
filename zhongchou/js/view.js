@@ -48,7 +48,7 @@ app.views.head = function(){return {
 							buttonArry=[{id:"admin",name:"管理中心"},{id:"out",name:"退出"}];
 							}
 				}else{
-					buttonArry=[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}];
+					buttonArry=[{id:"out",name:"退出"}];
 					}
 			var buttonHtml="";
 			$.each(buttonArry,function(i,n){
@@ -122,12 +122,6 @@ app.views.foot = function(){return {
 	done:null,
 	el:".footerBox",
 	data:app.objs.configData,
-	nav:[{id:"mode",name:"中筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
-	info:{titleText:"全国首家专业房地产众筹平台",slogan:"人人参与  创新投资",mobile:"（021）6181-3682",fax:"（021）6181-3682",time:"（周一至周五 10:00-18:30）",number:"400-661-3350",
-	      companyName:"上海中筹互联网金融信息服务有限公司",referredToAs:"",companyUrl:"",concept:["为全国首家专业房地产众筹平台","致力于通过互联网金融的创新","推动传统房地产投融资模式的变革和创新"],
-	      cooperationEmail:"biz@cncrowd.com",recruitmentEmail:"biz@cncrowd.com",address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
-	      copRight:"©2014 CNCrowd",record:" 沪ICP备14044695号-1"
-         },
 	render:function(){
 		console.log(app.objs.configData)
 		var configData = app.objs.configData.footerInfo;
@@ -203,7 +197,7 @@ app.views.middle = function(){return {
 '</div>'+
 			'<div class="content_center">'+
 		'<!-- left -->'+
-'<div class="mb_left" id="tabs_menu">'+
+'<div class="mb_left" id="tabs_menu" style="height: 672px;">'+
     '<ul>'+
         '<li class=""><h4><i class="nav_01"></i><span>我的账户</span></h4>'+
             '<ul>'+
@@ -245,11 +239,12 @@ app.views.middle = function(){return {
 '</div>'+
 			'<div class="content_center">'+
 		'<!-- left -->'+
-'<div class="mb_left" id="tabs_menu">'+
+'<div class="mb_left" id="tabs_menu" style="height: 672px;">'+
     '<ul>'+
         '<li class=""><h4><i class="nav_01"></i><span>后台管理</span></h4>'+
             '<ul>'+
-                '<li id="adminManage"><a>管理员管理</a></li>'+
+				'<li id="adminManage"><a>管理员管理</a></li>'+
+				'<li id="configManage"><a>配置管理</a></li>'+
 				'<li id="announcementManage"><a>公告管理</a></li>'+
 				'<li id="clientManage"><a>客户管理</a></li>'+
 				'<li id="procedureManage"><a>产品管理</a></li>'+
@@ -268,7 +263,7 @@ app.views.middle = function(){return {
 		'<div class="clear"></div>'+
 	'</div>'
 	],
-	page:["account","recharge","paid","card","capitalDetail","redPacketDetail","safeQusetion","emailVerify","setPhone","setDetail","setPassWord","adminManage","announcementManage","clientManage","procedureManage","recruitManage","companyManage","promotionManage","redPacketManage"],
+	page:["account","recharge","paid","card","capitalDetail","redPacketDetail","safeQusetion","emailVerify","setPhone","setDetail","setPassWord","adminManage","announcementManage","clientManage","procedureManage","recruitManage","companyManage","promotionManage","redPacketManage","configManage"],
 	render:function(){
 		$(this.el).html(this.template[this.type]);
 		$.each(this.page,function(i,n){
@@ -718,7 +713,15 @@ var pieData = [
 		introducePicElem.data("data",this.data.promotion.introducePic);*/
 		//产品
 		if(this.data.product){
+			
 			$.each(this.data.product,function(i,value){
+				var morebar="";
+			if(app.objs.config.get().more=="1"){
+				morebar='<div class="home_progress_bar"><b style="width:'+value.more+'%;background-image: none;background-color: #E85D5D;">'
+				   +'</b>'
+				   +'<h6> 增值：'+value.more+'%</h6>'
+				   +'</div>'
+				}
             var newElem = $('<div class="project_intro">'
 	          +'<div class="left">'
 	             +'<span class="intro_pic"><a>'
@@ -742,9 +745,12 @@ var pieData = [
                        +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
                        +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
                   +' </div>'
-                   +'<h5 class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;">'
-				   +'</b></h5>'
-                   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
+				  
+                   +'<div class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;">'
+				   +'</b>'
+				   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
+				   +'</div>'
+                   +morebar
 	         +'</div>'
 	      +'</div>').appendTo($(".project_area"));
 		  newElem.data("result",value)
@@ -856,7 +862,7 @@ app.views.login = function(){return {
 		if(data.type==1){
 			window.location.hash="account";
 			}else if(data.type==2){
-				window.location.hash="admin";
+				window.location.hash="adminManage";
 				}
 		
 	},function(error){
@@ -890,6 +896,7 @@ app.views.register = function(){return {
 		"id":app.fns.uuid(),/*id*/
 		"type":1,/*类型,1普通用户2管理用户*/
 		"userName":"",/*用户名*/
+		"userType":"0",/*用户类型,0普通1企业*/
 		"image":"",/*头像*/
 		"sex":"",/*性别*/
 		"place":"",/*地址*/
@@ -904,7 +911,8 @@ app.views.register = function(){return {
 		"company":"",/*公司*/
 		"password":"",
 		"password2":"",
-		"code":""/*验证码*/
+		"code":"",/*验证码*/
+		"introducer":""/*介绍人*/
 	}
 		$(this.el).empty();
 		var registerElem=$('<div class="mainPanel calHeight">'
@@ -949,7 +957,19 @@ app.views.register = function(){return {
 		                    +'<a id="btnSendmsg" style="margin-left:15px;">获取验证码</a> '
 		                    +'<span id="msgValidNotice" class="in_notice"> </span> '
 		         		+'</li>'
-		               
+						+'<li> '
+		                   +'<div class="in_title">账号类型：</div>'
+		                   +'<select to="userType" style="width: 400px;float: left;background: url(../img/signup-gray.png) no-repeat -1px -1px;height: 47px;margin-top: 13px;margin-left: 20px;">'
+						   +'<option value="0">个人</option>'
+						   +'<option value="1">机构</option>'
+						   +'</select>'
+		                   +'<span id="phoneNumberNotice" class="in_notice"> </span>'
+		                +'</li> '
+		               +'<li> '
+		                   +'<div class="in_title">邀请码：</div>'
+		                   +'<span class="in_span"> <label class="emailIcon"> </label> <input type="text" placeholder="请输入邀请码" id="phoneNumber" name="phoneNumber" to="introducer" formtype="simple"> </span>'
+		                   +'<span id="phoneNumberNotice" class="in_notice"> </span>'
+		                +'</li> '
 		                  
 		                +'<li class="item40" style=" position:relative; margin-top:10px;">'
 		                   +'<span class="chx_span ml86" id="jieru" style=" margin-top:0; margin-left:120px;">'
@@ -967,6 +987,18 @@ app.views.register = function(){return {
 		     +' </form>'
 		    +'</div>'
 		  +'</div>').appendTo($(this.el));
+		  $(this.el).find("[ formtype='select']").each(function(){
+			
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			})
 		  var getcodeTime;
 		  function getcode(){
 			  registerElem.find("#btnSendmsg").html("获取验证码");
@@ -1118,6 +1150,13 @@ app.views.product = function(){return {
          +'<div id="on_product" class="products-lst"></div>').appendTo($(that.el));
 		$.each(this.data,function(i,n){
 			$.each(n,function(index,value){
+					var morebar="";
+			if(app.objs.config.get().more=="1"){
+				morebar='<div class="home_progress_bar"><b style="width:'+value.more+'%;background-image: none;background-color: #E85D5D;">'
+				   +'</b>'
+				   +'<h6> 增值：'+value.more+'%</h6>'
+				   +'</div>'
+				}
 			     var newProduct = $('<div class="project_intro">'
 				          +'<div class="left">'
 				             +'<span class="intro_pic"><a href="/items/30093164">'
@@ -1141,8 +1180,11 @@ app.views.product = function(){return {
 			                       +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
 			                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
 			                  +' </div>'
-			                   +'<h5 class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;"></b></h5>'
-			                   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
+			                   +'<div class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;"></b>'
+							   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
+							   +'</div>'
+			                   
+							   +morebar
 				         +'</div>'
 				      +'</div>').appendTo($("#"+i+"_product"));
 				
@@ -2129,6 +2171,10 @@ app.views.account = function(){return {
 			'</div>');
 			var that=this;
 			if(this.data.deal){
+				var changeHead="";
+				if(app.objs.config.get().change=="1"){
+					changeHead='<td>债权转让</td>'
+					}
 				$(this.el).find("#dealListFrame").html('<div class="lending_table"><table width="100%" border="0" id="deal_table">'+
                 '<thead>'+
                   '<tr>'+
@@ -2140,12 +2186,16 @@ app.views.account = function(){return {
                     '<td>购买份数</td>'+
                     '<td>利润</td>'+
 					'<td>卖出</td>'+
-					'<td>债权转让</td>'+
+					changeHead+
                   '</tr>'+
                 '</thead>'+
                '<tbody></tbody></table></div>');
 			  console.log(that.data)
 				$.each(that.data.deal,function(i,n){
+					var changeButton="";
+					if(app.objs.config.get().change=="1"){
+						changeButton='<td><div class="changeRight" id="'+n.id+'">债权转让</div></td>'
+						}
 					if(!n.endTime){
 						$("#deal_table tbody").append('<tr>'+
 			   		'<td width="5%"></td>'+
@@ -2156,7 +2206,7 @@ app.views.account = function(){return {
                     '<td>'+n.count+'</td>'+
                     '<td>'+n.count*(that.data.product[n.productId].minUnit-n.buyPrice)+'元</td>'+
 					'<td><div class="sallbutton" id="'+n.id+'">卖出</div></td>'+
-					'<td><div class="changeRight" id="'+n.id+'">债权转让</div></td>'+
+					changeButton+
 			   '</tr>')
 						}
 					
@@ -4712,17 +4762,16 @@ app.views.configManage = function(){return {
 		  address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
 	      copRight:"©2014 CNCrowd",
 		  record:" 沪ICP备14044695号-1",
-	      nav:[{id:"mode",name:"中筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
 	      conText_0:"为全国首家专业房地产众筹平台",
 	      conText_1:"致力于通过互联网金融的创新",
 	      conText_2:"推动传统房地产投融资模式的变革和创新"
          },
 		 logo:"http://",
 		 more:"1",
-		 change:"1",
+		 change:"1"
 				};
 			if(data){
-				templateData=data;
+				templateData=data.footerInfo;
 				}
 		var templateState="disable";
 		if(state){
@@ -4731,56 +4780,96 @@ app.views.configManage = function(){return {
 		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
 		var templateDom=$('<div class="templateTable">'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">编号</div>'+
-				'<div class="templatePointRight">'+templateData.id+'</div>'+
+				'<div class="templatePointLeft">标题</div>'+
+				'<div class="templatePointRight"><input to="titleText" formtype="simple" value="'+templateData.titleText+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">账号</div>'+
-				'<div class="templatePointRight">'+templateData.userId+'</div>'+
+				'<div class="templatePointLeft">副标</div>'+
+				'<div class="templatePointRight"><input to="slogan" formtype="simple" value="'+templateData.slogan+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">金额</div>'+
-				'<div class="templatePointRight"><input to="money" formtype="number"/></div>'+
+				'<div class="templatePointLeft">联系电话</div>'+
+				'<div class="templatePointRight"><input to="mobile" formtype="simple" value="'+templateData.mobile+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">激活时间</div>'+
-				'<div class="templatePointRight"><input to="strat" formtype="date"/></div>'+
+				'<div class="templatePointLeft">传真</div>'+
+				'<div class="templatePointRight"><input to="fax" formtype="simple" value="'+templateData.fax+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">截止时间</div>'+
-				'<div class="templatePointRight"><input to="end" formtype="date"/></div>'+
+				'<div class="templatePointLeft">约谈时间</div>'+
+				'<div class="templatePointRight"><input to="time" formtype="simple" value="'+templateData.time+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">类型</div>'+
-				'<div class="templatePointRight">'+
-					'<select to="type">'+
-						'<option value="0">用户派发</option>'+
-						'<option value="1">系统派发</option>'+
-					'</select>'+
-				'</div>'+
+				'<div class="templatePointLeft">固话</div>'+
+				'<div class="templatePointRight"><input to="number" formtype="simple" value="'+templateData.number+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">公司名</div>'+
+				'<div class="templatePointRight"><input to="companyName" formtype="simple" value="'+templateData.companyName+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">商务合作</div>'+
+				'<div class="templatePointRight"><input to="cooperationEmail" formtype="simple" value="'+templateData.cooperationEmail+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">人才招聘</div>'+
+				'<div class="templatePointRight"><input to="recruitmentEmail" formtype="simple" value="'+templateData.recruitmentEmail+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">地址</div>'+
+				'<div class="templatePointRight"><input to="address" formtype="simple"  value="'+templateData.address+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">版权</div>'+
+				'<div class="templatePointRight"><input to="copRight" formtype="simple" value="'+templateData.copyRight+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">备案</div>'+
+				'<div class="templatePointRight"><input to="record" formtype="simple" value="'+templateData.record+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">短语0</div>'+
+				'<div class="templatePointRight"><input to="conText_0" formtype="simple" value="'+templateData["conText_0"]+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">短语1</div>'+
+				'<div class="templatePointRight"><input to="conText_1" formtype="simple" value="'+templateData["conText_1"]+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">短语2</div>'+
+				'<div class="templatePointRight"><input to="conText_2" formtype="simple" value="'+templateData["conText_2"]+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
 		'</div>');
-		templateDom.find("[formtype='date']").each(
+		templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.setConfig(data,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
+		
+		templateDom.find("[formtype='simple']").each(
 			function(){
-				$(this).datepicker({
-					onSelect:function( event,ui ) {
-						templateData[$(this).attr("to")]=app.fns.d2t($(this).val());
-						}
-					}).datepicker("setDate", app.fns.t2d(templateData[$(this).attr("to")]));
-			}
-		)
-		templateDom.find("[formtype='number']").each(
-			function(){
-				$(this).spinner({change:function(event,ui){
-				templateData[$(this).attr("to")]=$(this).spinner("value")
-				}}).spinner("value",templateData[$(this).attr("to")]);
+				$(this).unbind("change").bind("change",function(){
+					templateData[$(this).attr("to")]=$(this).val();
+					})
 			
 			}
 		)
@@ -4795,34 +4884,166 @@ app.views.configManage = function(){return {
 				$(this).selectmenu(templateState);
 				}	
 			});
-		templateDom.find(".templateSend").unbind("click").bind("click",function(){
-			app.apis.addRedPacket(templateData,function(){
-				alert("创建成功")
-				window.location.reload();
-				},function(){
-					alert("创建失败")
-					})
-			})
 		templateDom.appendTo($("#popMain"));
 			}
-		function add(target){
-			var openfn=function(){new templateFn(1,null)};
-			popOpen(openfn,function(){});
-			}
+
 		function edit(target){
 			
 			var openfn=function(){new templateFn(2,target.parents("tr").data("result"))};
 			popOpen(openfn,function(){});
 			};
-		function remove(target){
-			window.location.reload();
-			}
 		function show(target){
 			var openfn=function(){new templateFn(0,target.data("result"))};
 			popOpen(openfn,function(){});
 			}
-		$(this.el).html('<div class="addButton"><img src="images/add.png"/> 添加</div>'+
-			'<div class="clear"></div>'+
+		function logoEdit(state,data){
+			var openTime=new Date().getTime();
+			var templateData={};
+			if(data){
+				templateData=data;
+				}
+			var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointFormLeft">头像</div>'+
+				'<div class="templatePointFormRight">'+
+				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
+				'<label for="singlepic'+openTime+'_to_images">'+
+					'<div class="addFile" style="background-image:url('+templateData.logo+');width:80px;height:80px"></div>'+
+					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+				'</label>'+
+			'</form>'+
+				'</div>'+
+				'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>');
+			templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.setConfig(data,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
+			templateDom.appendTo($("#popMain"));
+					$("#popMain").find("[formtype='singlepic']").each(function(){
+				$(this).ajaxForm({
+			success:function(data){
+				console.log(data);
+			}
+		});
+				$(this).find("input").unbind("change").bind("change",function(){
+					var that=this;
+					var to=$(this).attr("to");
+					var targetData=templateData
+					$(this).parents("form").ajaxSubmit({
+							success:function(data){
+								var data=JSON.parse(data);
+								if(data.state=="SUCCESS"){
+									targetData[to]=[data.url];
+									$(that).parents("label").find("div").css("background-image","url("+data.url+")")
+									};
+						}
+					})
+				});
+			
+	
+				
+			});
+			}
+		function changeEdit(state,data){
+			var templateData={};
+			if(data){
+				templateData=data;
+				}
+			var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">是否开启债权转移</div>'+
+				'<div class="templatePointRight">'+
+					'<select to="change">'+
+						'<option value="0">否</option>'+
+						'<option value="1">是</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>');
+			templateDom.appendTo($("#popMain"));
+			templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.setConfig(data,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
+			templateDom.find("select").each(function(){
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			});
+			}
+		function moreEdit(state,data){
+			var templateData={};
+			if(data){
+				templateData=data;
+				}
+			var templateState="disable";
+		if(state){
+			templateState="";
+			};
+		var buttonArry=['','<div class="templateSend">创建</div>','<div class="templateEdit">确定</div>']//0只读 1创建 2修改
+		var templateDom=$('<div class="templateTable">'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">是否显示增值</div>'+
+				'<div class="templatePointRight">'+
+					'<select to="more">'+
+						'<option value="0">否</option>'+
+						'<option value="1">是</option>'+
+					'</select>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templateButton">'+buttonArry[state]+'</div>'+
+		'</div>');
+			templateDom.appendTo($("#popMain"));
+			templateDom.find(".templateEdit").unbind("click").bind("click",function(){
+			app.apis.setConfig(data,function(){
+				alert("修改成功")
+				window.location.reload();
+				},function(){
+					alert("修改失败")
+					})
+			})
+			templateDom.find("select").each(function(){
+			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
+			$(this).selectmenu({
+				change: function( event,ui ) {
+					templateData[$(this).attr("to")]=ui.item.value;
+					}
+				});
+			if(templateState){
+				$(this).selectmenu(templateState);
+				}	
+			});
+			}
+		$(this.el).html('<div class="clear"></div>'+
 			'<div class="right_table">'+
             '<table id="tableconfig" width="100%" border="0">'+
                 '<thead>'+
@@ -4834,15 +5055,70 @@ app.views.configManage = function(){return {
                   '</tr>'+
                 '</thead>'+
 				'<tbody>'+
-				   '<tr>'+
+				   '<tr id="logoPoint">'+
                     '<td width="5%"></td>'+
                     '<td>logo</td>'+
                     '<td>网站左上方的logo</td>'+
                     '<td width="5%"><div class="tableButton edit"></div></td>'+
                   '</tr>'+
+				  '<tr id="changePoint">'+
+                    '<td width="5%"></td>'+
+                    '<td>债权转让</td>'+
+                    '<td>是否开启债权转让</td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                  '</tr>'+
+				  '<tr id=morePoint>'+
+                    '<td width="5%"></td>'+
+                    '<td>增值</td>'+
+                    '<td>是否显示增值</td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                  '</tr>'+
+				  '<tr id="footPoint">'+
+                    '<td width="5%"></td>'+
+                    '<td>脚部</td>'+
+                    '<td>配置脚部出现的内容</td>'+
+                    '<td width="5%"><div class="tableButton edit"></div></td>'+
+                  '</tr>'+
 				'</tbody>'+
             '</table>'+
         '</div>');
+		var that=this;
+		$(this.el).find("#logoPoint").unbind("click").bind("click",function(){
+			var openfn=function(){new logoEdit(0,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#logoPoint .edit").unbind("click").bind("click",function(e){
+			e.stopPropagation();
+			var openfn=function(){new logoEdit(2,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#changePoint").unbind("click").bind("click",function(){
+			var openfn=function(){new changeEdit(0,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#changePoint .edit").unbind("click").bind("click",function(e){
+			e.stopPropagation();
+			var openfn=function(){new changeEdit(2,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#morePoint").unbind("click").bind("click",function(){
+			var openfn=function(){new moreEdit(0,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#morePoint .edit").unbind("click").bind("click",function(e){
+			e.stopPropagation();
+			var openfn=function(){new moreEdit(2,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#footPoint").unbind("click").bind("click",function(){
+			var openfn=function(){new templateFn(0,that.data)};
+			popOpen(openfn,function(){});
+			})
+		$(this.el).find("#footPoint .edit").unbind("click").bind("click",function(e){
+			e.stopPropagation();
+			var openfn=function(){new templateFn(2,that.data)};
+			popOpen(openfn,function(){});
+			})
 		if(this.data){
 			  $.each(this.data,function(i,n){
         	var newPoint=$('<tr>'+

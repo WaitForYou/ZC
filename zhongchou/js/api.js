@@ -948,44 +948,37 @@ app.apis.getdealList=function(data,fn,err){
 app.apis.getHeaderConent=function(data,fn,err){
 	fn();
 }
-app.apis.config = function(data,fn,err){
-	var data = {
+app.apis.getConfig = function(data,fn,err){
+	var sendData = {
+		model:"config",
+		action:"get",
+		data:app.objs.configTime
+	}
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
+		if(returndata && returndata.code){
+		if(returndata.code==1){
+			app.objs.config.set(returndata.data)
+		app.objs.configTime=returndata.time;
+			}
 		
-		footerInfo:{
-			titleText:"全国首家专业房地产众筹平台",
-			slogan:"人人参与  创新投资",
-			mobile:"（021）6181-3682",
-			fax:"（021）6181-3682",
-			time:"（周一至周五 10:00-18:30）",
-			number:"400-661-3350",
-	      companyName:"上海中筹互联网金融信息服务有限公司",
-		  referredToAs:"",
-		  companyUrl:"",
-	      cooperationEmail:"biz@cncrowd.com",
-		  recruitmentEmail:"biz@cncrowd.com",
-		  address:["地址：上海市长宁区延安西路1118号","龙之梦大厦2202室&nbsp;&nbsp;&nbsp;&nbsp;","200052"],
-	      copRight:"©2014 CNCrowd",
-		  record:" 沪ICP备14044695号-1",
-	      nav:[{id:"mode",name:"中筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
-	      conText_0:"为全国首家专业房地产众筹平台",
-	      conText_1:"致力于通过互联网金融的创新",
-	      conText_2:"推动传统房地产投融资模式的变革和创新"
-         },
-         earnings:{
-           titleText:"高收益从何而来",
-           dsc:"高收益来自于对市场的深度判断和有力操控",
-           earningsRateTitle:"收益率",
-           earningsRate:"15%",
-           steps:["开始众筹","风险把控","资产来源","每份100元","众筹获利","增值管理","溢价出售"],
-           title_2:"众筹",
-           image:"images/slide_01.png"
-         },
-		 logo:"http://",
-		 more:"1",
-		 change:"1",
-         button:[[{id:"login",name:"登录"},{id:"register",name:"注册"}],[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}],[{id:"out",name:"退出"}]],
-         nav:[{id:"mode",name:"众筹模式"},{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}]
-     }
-	 fn(data);
+		fn(app.objs.config.get())
+	}else{
+		err()
+	}
+	})
 }
 
+app.apis.setConfig = function(data,fn,err){
+	var sendData = {
+		model:"config",
+		action:"edit",
+		data:JSON.stringify(data)
+	}
+	$.get("http://"+config.sour+":8888/",sendData,function(returndata){
+		if(returndata && returndata.code){
+		fn()
+	}else{
+		err()
+	}
+	})
+}

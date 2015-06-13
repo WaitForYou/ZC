@@ -57,7 +57,8 @@ var app = {
 						dataObj[key[0]]=key[1]
 						}
 				})
-			app.apis.config(null,function(data){
+			app.apis.getConfig(null,function(data){
+			console.log(data)
 			app.objs.configData=data;
 
 			app.objs.headV.type = app.objs.routeTable[dataObj.page].type;
