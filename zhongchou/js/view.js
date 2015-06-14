@@ -183,6 +183,7 @@ app.views.foot = function(){return {
 		}
 	}}
 /*中部*/
+var dd=function(){if(app.objs.user.get()&&app.objs.user.get().userName){return app.objs.user.get().userName}else{return ""}}
 app.views.middle = function(){return {
 	type:0,/*0普通，1空间,2管理*/
 	typeBefore:null,
@@ -192,7 +193,7 @@ app.views.middle = function(){return {
 			'<div class="member_top">'+
     '<div class="member">'+
         '<h2><img src="img/uc/member_headerpic.jpg"></h2>'+
-        '<h4><span>'+app.objs.user.get().userName+'</span> 您好，欢迎回来！</h4>'+
+        '<h4><span>'+dd()+'</span> 您好，欢迎回来！</h4>'+
         '<h5 style="display: block;" id="redEnvelopeBanner"><span>您有未领取的红包！</span><a href="redEnvelope">领取</a></h5>'+
     '</div>'+
 '</div>'+

@@ -135,7 +135,7 @@ app.apis={};
 app.views={};
 app.objs={};
 app.fns={};
-
+$.support.cors = true;
 //$(".test").singleTap(function(){
 //	alert("单击")
 //	})
