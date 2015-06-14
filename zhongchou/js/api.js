@@ -24,7 +24,8 @@ app.apis.getProduct=function(data,fn,err){
 	}
 /*添加商品*/
 app.apis.addProduct=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 	var sendData = {
 		model:"product",
 		action:"add",
@@ -37,10 +38,16 @@ app.apis.addProduct=function(data,fn,err){
 				err()
 			}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	}
 /*修改商品*/
 app.apis.editProduct=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 	var sendData = {
 		model:"product",
 		action:"edit",
@@ -53,12 +60,17 @@ app.apis.editProduct=function(data,fn,err){
 			err()
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*删除商品*/
 app.apis.removeProduct=function(data,fn,err){
-	
-	var sendData = {
+	if(app.objs.user.get()){
+		var sendData = {
 		model:"product",
 		action:"remove",
 		data:data
@@ -70,6 +82,11 @@ app.apis.removeProduct=function(data,fn,err){
 			err();
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 
 	
 	
@@ -77,7 +94,8 @@ app.apis.removeProduct=function(data,fn,err){
 /**********************************************************************/
 /*获取客户*/
 app.apis.getClient=function(data,fn,err){
-	var data = app.objs.clientTime/*更新时间*/
+	if(app.objs.user.get()){
+		var data = app.objs.clientTime/*更新时间*/
 	var sendData = {
 		model:"client",
 		action:"get",
@@ -95,11 +113,17 @@ app.apis.getClient=function(data,fn,err){
 			err()
 			}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*添加客户*/
 app.apis.addClient=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 	var sendData = {
 		model:"client",
 		action:"add",
@@ -112,10 +136,33 @@ app.apis.addClient=function(data,fn,err){
 			err()
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*修改客户*/
 app.apis.editClient=function(data,fn,err){
+	if(app.objs.user.get()){
+		console.log(data)
+	var sendData = {
+		model:"client",
+		action:"edit",
+		data:JSON.stringify(data)
+	}
+	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
+		if(editReturn && editReturn.code){
+			fn(editReturn.data)
+		}else{
+			err()
+		}
+	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
 	//var data = {
 	//	"id":"24253",/*id*/
 	//	"type":1,/*类型,1普通用户2管理用户*/
@@ -132,25 +179,13 @@ app.apis.editClient=function(data,fn,err){
 	//	"job":"这个职位",/*职位*/
 	//	"company":"公司"/*公司*/
 	//}
-	console.log(data)
-	var sendData = {
-		model:"client",
-		action:"edit",
-		data:JSON.stringify(data)
-	}
-	$.get("http://"+config.sour+":8888/",sendData,function(editReturn){
-		if(editReturn && editReturn.code){
-			fn(editReturn.data)
-		}else{
-			err()
-		}
-	});
+	
 
 	}
 /*删除客户*/
 app.apis.removeClient=function(data,fn,err){
-	//var data = "eeerf"/*客户id*/
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 	var sendData = {
 		model:"client",
 		action:"remove",
@@ -163,6 +198,12 @@ app.apis.removeClient=function(data,fn,err){
 			err();
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	//var data = "eeerf"/*客户id*/
+	
 	
 	}
 
@@ -301,7 +342,8 @@ app.apis.register=function(data,fn,err){
 	}
 /*重置密码*/
 app.apis.resetKey=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 		var sendData = {
 		model:"client",
 		action:"resetKey",
@@ -312,13 +354,19 @@ app.apis.resetKey=function(data,fn,err){
 			fn(resetReturn.data);
 		}else{
 			err();
+		}});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
 		}
-	});
+	
+	
 		
 	}
 /*获取绑定信息*/
 app.apis.getBind=function(data,fn,err){
-	var sendData = {
+	if(app.objs.user.get()){
+		var sendData = {
 		model:"client",
 		action:"getBind",
 		data:app.objs.user.get().id
@@ -330,6 +378,11 @@ app.apis.getBind=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*获取验证吗*/
@@ -371,7 +424,8 @@ app.apis.bind=function(data,fn,err){
 
 /*获取安全问题*/
 app.apis.getSafeQusetion=function(data,fn,err){
-	data=app.objs.user.get().id;
+	if(app.objs.user.get()){
+		data=app.objs.user.get().id;
 	var sendData = {
 		model:"client",
 		action:"getSafeQusetion",
@@ -384,6 +438,11 @@ app.apis.getSafeQusetion=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 
@@ -423,7 +482,8 @@ app.apis.checkSafeQusetion=function(data,fn,err){
 	}
 
 app.apis.getCard=function(data,fn,err){
-	var sendData = {
+	if(app.objs.user.get()){
+		var sendData = {
 		model:"client",
 		action:"getBind",
 		data:app.objs.user.get().id
@@ -435,11 +495,17 @@ app.apis.getCard=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	}
 /************************************************************************/
 /*获取管理员*/
 app.apis.getAdmin=function(data,fn,err){
-	var data = app.objs.adminTime/*更新时间*/
+	if(app.objs.user.get()){
+		var data = app.objs.adminTime/*更新时间*/
 	var sendData = {
 		model:"admin",
 		action:"get",
@@ -458,15 +524,17 @@ app.apis.getAdmin=function(data,fn,err){
 				err();
 				}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*添加管理员*/
 app.apis.addAdmin=function(data,fn,err){
-	//var data = {
-		//"id":uuid(),/*id*/
-		//"userName":"sfdffgdgdgd",/*帐号*/
-		//}
-	console.log(data);
+	if(app.objs.user.get()){
+		console.log(data);
 	var sendData = {
 		model:"admin",
 		action:"add",
@@ -479,11 +547,21 @@ app.apis.addAdmin=function(data,fn,err){
 			err()
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	//var data = {
+		//"id":uuid(),/*id*/
+		//"userName":"sfdffgdgdgd",/*帐号*/
+		//}
+	
 
 	}
 /*修改管理员*/
 app.apis.editAdmin=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 	var sendData = {
 		model:"admin",
 		action:"edit",
@@ -496,11 +574,17 @@ app.apis.editAdmin=function(data,fn,err){
 			err()
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*删除管理员*/
 app.apis.removeAdmin=function(data,fn,err){
-	//var data = "ddgdgd"/*管理员id*/
+	if(app.objs.user.get()){
+		//var data = "ddgdgd"/*管理员id*/
 	var sendData = {
 		model:"admin",
 		action:"remove",
@@ -513,6 +597,11 @@ app.apis.removeAdmin=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 
 	}
 /**************************************************************************/
@@ -541,7 +630,8 @@ app.apis.getannouncement=function(data,fn,err){
 	}
 /*添加公告*/
 app.apis.addannouncement=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 		var sendData = {
 		model:"announcement",
 		action:"add",
@@ -554,11 +644,17 @@ app.apis.addannouncement=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 
 	}
 /*修改公告*/
 app.apis.editannouncement=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 		var sendData = {
 		model:"announcement",
 		action:"edit",
@@ -571,11 +667,17 @@ app.apis.editannouncement=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 
 	}
 /*删除公告*/
 app.apis.removeannouncement=function(data,fn,err){
-	//var data="ehdjk"/*id*/
+	if(app.objs.user.get()){
+		//var data="ehdjk"/*id*/
 	console.log(data)
 	var sendData = {
 		model:"announcement",
@@ -589,6 +691,11 @@ app.apis.removeannouncement=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /******************************************************************************/
@@ -619,7 +726,8 @@ app.apis.getrecruit=function(data,fn,err){
 	}
 /*添加招聘*/
 app.apis.addrecruit=function(data,fn,err){
-console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 		var sendData = {
 		model:"recruit",
 		action:"add",
@@ -632,11 +740,17 @@ console.log(data)
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+
 	
 	}
 /*修改招聘*/
 app.apis.editrecruit=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 		var sendData = {
 		model:"recruit",
 		action:"edit",
@@ -649,12 +763,17 @@ app.apis.editrecruit=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*删除招聘*/
 app.apis.removerecruit=function(data,fn,err){
-	
-	var sendData = {
+	if(app.objs.user.get()){
+		var sendData = {
 		model:"recruit",
 		action:"remove",
 		data:data
@@ -666,6 +785,11 @@ app.apis.removerecruit=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 
 	
 	}
@@ -698,8 +822,8 @@ app.apis.getcompany=function(data,fn,err){
 	}
 /*添加企业资料*/
 app.apis.addcompany=function(data,fn,err){
-
-	var sendData = {
+if(app.objs.user.get()){
+		var sendData = {
 		model:"company",
 		action:"add",
 		data:JSON.stringify(data)
@@ -711,12 +835,17 @@ app.apis.addcompany=function(data,fn,err){
 			err()
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*修改企业资料*/
 app.apis.editcompany=function(data,fn,err){
-
-	var sendData = {
+if(app.objs.user.get()){
+		var sendData = {
 		model:"company",
 		action:"edit",
 		data:JSON.stringify(data)
@@ -728,12 +857,17 @@ app.apis.editcompany=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*删除企业资料*/
 app.apis.removecompany=function(data,fn,err){
-
-	var sendData = {
+if(app.objs.user.get()){
+		var sendData = {
 		model:"company",
 		action:"remove",
 		data:data
@@ -745,6 +879,11 @@ app.apis.removecompany=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /********************************************************************/
@@ -774,8 +913,8 @@ app.apis.getpromotion=function(data,fn,err){
 	}
 /*修改宣传*/
 app.apis.editpromotion=function(data,fn,err){
-
-	var sendData = {
+if(app.objs.user.get()){
+		var sendData = {
 		model:"promotion",
 		action:"edit",
 		data:JSON.stringify(data)
@@ -787,6 +926,11 @@ app.apis.editpromotion=function(data,fn,err){
 			err() 
 		}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 
@@ -815,7 +959,8 @@ app.apis.redPacketDetail=function(data,fn,err){
 	}
 /*获取所有红包*/
 app.apis.getRedPacket=function(data,fn,err){
-	var data = app.objs.redPacketTime/*更新时间*/
+	if(app.objs.user.get()){
+		var data = app.objs.redPacketTime/*更新时间*/
 	var sendData = {
 		model:"redPacket",
 		action:"get",
@@ -828,11 +973,17 @@ app.apis.getRedPacket=function(data,fn,err){
 		err();
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*发红包*/
 app.apis.addRedPacket=function(data,fn,err){
-	console.log(data)
+	if(app.objs.user.get()){
+		console.log(data)
 	var sendData = {
 		model:"redPacket",
 		action:"add",
@@ -845,6 +996,11 @@ app.apis.addRedPacket=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 
 	
 	}
@@ -853,7 +1009,8 @@ app.apis.addRedPacket=function(data,fn,err){
 
 /*获取交易*/
 app.apis.getdeal=function(data,fn,err){
-	data={"time":app.objs.dealTime}
+	if(app.objs.user.get()){
+		data={"time":app.objs.dealTime}
 
 	var sendData = {
 		model:"deal",
@@ -871,11 +1028,17 @@ app.apis.getdeal=function(data,fn,err){
 			err();
 			}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*添加订单*/
 app.apis.adddeal=function(data,fn,err){
-	//data={"id":uuid(),"productId":"","userId":"","startTime":10086,"buyPrice":100,"count":100}
+	if(app.objs.user.get()){
+		//data={"id":uuid(),"productId":"","userId":"","startTime":10086,"buyPrice":100,"count":100}
 	var sendData = {
 		model:"deal",
 		action:"add",
@@ -888,12 +1051,17 @@ app.apis.adddeal=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*修改订单*/
 app.apis.editdeal=function(data,fn,err){
-	
-	var sendData = {
+	if(app.objs.user.get()){
+		var sendData = {
 		model:"deal",
 		action:"edit",
 		data:JSON.stringify(data)
@@ -905,11 +1073,17 @@ app.apis.editdeal=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*删除订单*/
 app.apis.removedeal=function(data,fn,err){
-	data={"id":""}
+	if(app.objs.user.get()){
+		data={"id":""}
 	var sendData = {
 		model:"deal",
 		action:"remove",
@@ -922,11 +1096,17 @@ app.apis.removedeal=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 /*获取交易记录*/
 app.apis.getdealList=function(data,fn,err){
-	data=app.objs.user.get().id;
+	if(app.objs.user.get()){
+		data=app.objs.user.get().id;
 	var sendData = {
 		model:"deal",
 		action:"list",
@@ -939,6 +1119,11 @@ app.apis.getdealList=function(data,fn,err){
 		err()
 	}
 	});
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 	
 	}
 
@@ -969,7 +1154,8 @@ app.apis.getConfig = function(data,fn,err){
 }
 
 app.apis.setConfig = function(data,fn,err){
-	var sendData = {
+	if(app.objs.user.get()){
+		var sendData = {
 		model:"config",
 		action:"edit",
 		data:JSON.stringify(data)
@@ -981,4 +1167,9 @@ app.apis.setConfig = function(data,fn,err){
 		err()
 	}
 	})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+	
 }

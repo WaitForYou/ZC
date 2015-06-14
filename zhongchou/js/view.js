@@ -26,6 +26,7 @@ app.views.head = function(){return {
 	button:[[{id:"login",name:"登陆"},{id:"register",name:"注册"}],[{id:"zone",name:"用户中心"},{id:"out",name:"退出"}],[{id:"out",name:"退出"}]],
 	nav:[{id:"product",name:"我要众筹"},{id:"procedure",name:"众筹步聚"},{id:"FAQS",name:"常见问题"},{id:"about",name:"关于我们"}],
 	render:function(){
+		$("#headIcon").attr("src",app.objs.config.get().logo);
 		var buttonKey ;
 		var buttonArry;
 		if(this.type==0){
@@ -828,12 +829,11 @@ app.views.login = function(){return {
          +' </li> '
          +' <li>'
             +'<span class="btn_span mt5 ">'
-              +'<input type="text" placeholder="输入验证码" id="code1" name="imgValidCode" onkeydown="keyDown(event)">'
+              +'<input type="text" placeholder="输入验证码" id="code1" name="imgValidCode">'
             +'</span>' 
-            +'<div class="verificationCode" id="vCode1" style="width:100px;height:41px;margin-top:13px;">'
+            +'<div class="verificationCode" id="vCode1" style="width:122px;height:41px;margin-top:13px;">'
               // +'<img id="validImg" onclick="javascript:refreshImgValidCode();" src="/imageServlet"><input type="hidden" id="imgCode" value="366f2">'
             +'</div> '
-            +'<span href="" onClick="javascript:void(0)" id="refreshBtn" type="button" class="codeRefresh" style="margin-top:13px;"></span>'
           +'</li> '
           +'<li class="h30 mt100"> '
             +'<span class="chx_span mt0 w304"> '
@@ -855,6 +855,10 @@ app.views.login = function(){return {
      +'</div> '
     +'</div>').appendTo($(this.el));
 	loginElem.find("#login").unbind("click").bind("click",function(){
+		if(!$.idcode.validateCode()){
+			alert("验证码错误")
+			return false;
+			}
 		//登录按钮
 	var data = {"userName":loginElem.find("#userName").val(),/*登录名/手机/邮箱*/
 				"passWord":loginElem.find("#userPass").val()}/*密码*/
@@ -877,7 +881,7 @@ app.views.login = function(){return {
 	    window.location.hash="register";
 	});
 	/**验证码***/
-
+	$.idcode.setCode();
     // document.getElementById("btn1").addEventListener("click", function () {
     //     alert(code1.verify(document.getElementById("code1").value));
     // }, false);
@@ -1054,6 +1058,10 @@ app.views.register = function(){return {
 					  })
 			  });
 		registerElem.find("#registerSend").unbind("click").bind("click",function(){
+			if(!$("#agreement")[0].checked){
+				alert("必须先同意服务协议才能注册")
+				return false;
+				}
 			if(!userCheck){
 				alert("请填写唯一的用户名")
 				return false;
@@ -1920,6 +1928,7 @@ $.each(this.data.imageA,function(i,n){
 app.views.buy=function(){return {
 	el:".middle",
 	render:function(){
+		if(app.objs.user.get()){
 		var that=this;
 		console.log(this.data)
 		$(this.el).empty();
@@ -1958,12 +1967,18 @@ app.views.buy=function(){return {
 				alert("交易失败");
 				})
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 		}
 	}}
 /*卖出*/
 app.views.sell=function(){return {
 	el:".middle",
 	render:function(){
+		if(app.objs.user.get()){
 		var that=this;
 		console.log(this.data)
 		$(this.el).empty();
@@ -2004,12 +2019,18 @@ app.views.sell=function(){return {
 				alert("交易失败");
 				})
 			})
+
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
 		}
+				}
 	}}
 /*债权转让*/
 app.views.change=function(){return {
 	el:".middle",
 	render:function(){
+		if(app.objs.user.get()){
 		var that=this;
 		console.log(this.data)
 		$(this.el).empty();
@@ -2063,6 +2084,11 @@ app.views.change=function(){return {
 				})
 			
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 		}
 	}}
 /*公告详情*/
@@ -2079,6 +2105,7 @@ app.views.account = function(){return {
 	el:".mb_right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		var emailString='<li class="m_ac_propic" id="mailSet"><img src="/img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">未绑定</a></li>';
 		if(this.data.email){
 			emailString='<li class="m_ac_propic" id="mailModify"><img src="/img/uc/icon_a1_on.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">修改</a></li>'
@@ -2218,6 +2245,11 @@ app.views.account = function(){return {
 						window.location.hash="change/id:"+$(this).attr("id");
 						})
 				}
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*充值*/
@@ -2245,6 +2277,7 @@ app.views.card = function(){return {
 app.views.capitalDetail = function(){return {
 	el:".mb_right",
 	render:function(){
+		if(app.objs.user.get()){
 		$(this.el).empty();
 
 		$(this.el).html('<div id="con_funds_1">'+
@@ -2269,6 +2302,11 @@ app.views.capitalDetail = function(){return {
                 '<a id="nextPage_1" href="javascript:void(0)" onclick="pageDown(2,1)">下一页</a>'+
             '</div>'+
         '</div>');
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*红包记录*/
@@ -2276,6 +2314,7 @@ app.views.redPacketDetail = function(){return {
 	el:".mb_right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data);
 		$(this.el).html('<div class="credit_lending">'+
             '<h2>我的红包</h2>'+
@@ -2303,12 +2342,18 @@ app.views.redPacketDetail = function(){return {
           '</div>'+
             '<div class="clear"></div>'+
         '</div>')
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*安全问题*/
 app.views.safeQusetion = function(){return {
 	el:".mb_right",
 	render:function(){
+		if(app.objs.user.get()){
 		var templateData={"id":"",question1:"0",question2:"0",answer1:"",answer2:""}
 		$(this.el).html('<div class="account_security">'+
             '<h2>温馨提示：您好，您的安全问题未设置，请填写以下信息进行设置</h2>'+
@@ -2365,12 +2410,18 @@ app.views.safeQusetion = function(){return {
 					alert("修改失败")
 					})
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*邮箱验证*/
 app.views.emailVerify = function(){return {
 	el:".mb_right",
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data)
 		var that=this;
 		var bindString='<li id="sendBtn" class="basics_btn"><a id="bindBtn">绑定</a></li>'
@@ -2416,12 +2467,18 @@ app.views.emailVerify = function(){return {
 			})
 			}
 		sendBind()
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*修改手机*/
 app.views.setPhone = function(){return {
 	el:".mb_right",
 	render:function(){
+		if(app.objs.user.get()){
 		var code="";
 		$(this.el).html('<div class="bankcard" style="position:relative;">'+
 	            '<h2>用户手机修改</h2>'+
@@ -2473,12 +2530,18 @@ app.views.setPhone = function(){return {
 				)
 					}
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 		}
 	}}
 /*修改资料*/
 app.views.setDetail = function(){return {
 	el:".mb_right",
 	render:function(){
+		if(app.objs.user.get()){
 		var templateData=$.extend({},this.data);
 		console.log(this.data)
 		var phoneString='<a>[绑定]</a>'
@@ -2558,12 +2621,18 @@ app.views.setDetail = function(){return {
 					alert("修改失败")
 					});
 				})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*修改密码*/
 app.views.setPassWord = function(){return {
 	el:".mb_right",
 	render:function(){
+		if(app.objs.user.get()){
 		templateData={
 				id:app.objs.user.get().id,/*用户id*/
 				oldKey:"",/*旧密码*/
@@ -2601,6 +2670,11 @@ app.views.setPassWord = function(){return {
 					alert("再次输入密码不正确")
 					}
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*后台部分************************************************************************************/
@@ -2609,6 +2683,7 @@ app.views.adminManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		function templateFn(state,data){
 			console.log(data)
 			var templateData={
@@ -2853,6 +2928,11 @@ app.views.adminManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 		
 	}
 	}}
@@ -2861,7 +2941,7 @@ app.views.announcementManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
-		
+		if(app.objs.user.get()){
 		console.log(this.data)
 		function templateFn(state,data){
 			var openTime=new Date().getTime();
@@ -3022,6 +3102,11 @@ app.views.announcementManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*客户管理*/
@@ -3029,6 +3114,7 @@ app.views.clientManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data)
 		function templateFn(state,data){
 			var templateData={
@@ -3210,6 +3296,11 @@ app.views.clientManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*客户详情*/
@@ -3223,6 +3314,7 @@ app.views.procedureManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data);
 		var openTime=new Date().getTime();
 		function templateFn(state,data){
@@ -3710,6 +3802,11 @@ app.views.procedureManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*招聘管理 公司资料管理*/
@@ -3718,6 +3815,7 @@ app.views.recruitManage = function(){return {
 	type:"",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		var that=this;
 		console.log(this);
 		console.log(this.data);
@@ -3881,6 +3979,11 @@ app.views.recruitManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 app.views.companyManage = function(){return {
@@ -3888,6 +3991,7 @@ app.views.companyManage = function(){return {
 	type:"",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		var that=this;
 		console.log(this);
 		function templateFn(state,data){
@@ -4050,6 +4154,11 @@ app.views.companyManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 	}}
 /*宣传管理*/
@@ -4057,6 +4166,7 @@ app.views.promotionManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data);
 		var templateArry={};
 		/**********************************************/
@@ -4576,6 +4686,11 @@ app.views.promotionManage = function(){return {
 					});
 			})
 			}
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 		
 		
 	}
@@ -4586,6 +4701,7 @@ app.views.redPacketManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data);
 		function templateFn(state,data){
 			var templateData={
@@ -4736,6 +4852,11 @@ app.views.redPacketManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 }};
 
@@ -4744,6 +4865,7 @@ app.views.configManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		if(app.objs.user.get()){
 		console.log(this.data);
 		function templateFn(state,data){
 			var templateData={
@@ -4913,8 +5035,8 @@ app.views.configManage = function(){return {
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
 				'<label for="singlepic'+openTime+'_to_images">'+
-					'<div class="addFile" style="background-image:url('+templateData.logo+');width:80px;height:80px"></div>'+
-					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+					'<div class="addFile" style="background-image:url('+templateData.logo+');width:276px;height:89px;background-size:276px 89px;background-repeat:no-repeat;"></div>'+
+					'<input type="file" id="singlepic'+openTime+'_to_images" to="logo" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
 				'</div>'+
@@ -5145,5 +5267,10 @@ app.views.configManage = function(){return {
 		$(this.el).find(".addButton").unbind("click").bind("click",function(e){
 			add($(this));
 			})
+		}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
 	}
 }};
