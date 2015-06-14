@@ -43,7 +43,7 @@ app.views.head = function(){return {
 						}
 			}else if(this.type==1){
 				buttonKey=2
-				if(app.objs.user.get().type==1){
+				if(app.objs.user.get()&&app.objs.user.get().type==1){
 						buttonArry=[{id:"out",name:"退出"}];
 						}else{
 							buttonArry=[{id:"admin",name:"管理中心"},{id:"out",name:"退出"}];
@@ -191,8 +191,8 @@ app.views.middle = function(){return {
 			'',
 			'<div class="member_top">'+
     '<div class="member">'+
-        '<h2><img src="/img/uc/member_headerpic.jpg"></h2>'+
-        '<h4><span>jiumogaoao86</span> 您好，欢迎回来！</h4>'+
+        '<h2><img src="img/uc/member_headerpic.jpg"></h2>'+
+        '<h4><span>'+app.objs.user.get().userName+'</span> 您好，欢迎回来！</h4>'+
         '<h5 style="display: block;" id="redEnvelopeBanner"><span>您有未领取的红包！</span><a href="redEnvelope">领取</a></h5>'+
     '</div>'+
 '</div>'+
@@ -1932,7 +1932,7 @@ app.views.buy=function(){return {
 		var that=this;
 		console.log(this.data)
 		$(this.el).empty();
-		$(this.el).html('<div class="credit_lending">'+
+		$(this.el).html('<div class="credit_lending singleUse">'+
             '<h2>确认并支付</h2>'+
             '<div class="lending_table">'+
             '<table width="100%" border="0" id="pro_table">'+
@@ -1982,8 +1982,8 @@ app.views.sell=function(){return {
 		var that=this;
 		console.log(this.data)
 		$(this.el).empty();
-		$(this.el).html('<div class="credit_lending">'+
-            '<h2>确认并支付</h2>'+
+		$(this.el).html('<div class="credit_lending singleUse">'+
+            '<h2>确认并卖出</h2>'+
             '<div class="lending_table">'+
             '<table width="100%" border="0" id="pro_table">'+
                 '<thead>'+
@@ -2034,8 +2034,8 @@ app.views.change=function(){return {
 		var that=this;
 		console.log(this.data)
 		$(this.el).empty();
-		$(this.el).html('<div class="credit_lending">'+
-            '<h2>确认并支付</h2>'+
+		$(this.el).html('<div class="credit_lending singleUse">'+
+            '<h2>确认并转让</h2>'+
             '<div class="lending_table">'+
             '<table width="100%" border="0" id="pro_table">'+
                 '<thead>'+
@@ -2062,8 +2062,8 @@ app.views.change=function(){return {
 			   '</tr></tbody></table>'+
                
             '</div>'+
-			'<p>请输入转让客户的用户名</p>'+
-			'<input to="changeMember" formtype="simple"/>'+
+			'<p style="margin-left: 10px;">请输入转让客户的用户名</p>'+
+			'<input style="border: 1px solid #999797;margin-left: 10px;margin-top: 10px;margin-bottom: 10px;" to="changeMember" formtype="simple"/>'+
            '<div id="payButton">确认转让</div>'+
             '<div class="clear"></div>'+
         '</div>');
@@ -2106,30 +2106,30 @@ app.views.account = function(){return {
 	data:{},
 	render:function(){
 		if(app.objs.user.get()){
-		var emailString='<li class="m_ac_propic" id="mailSet"><img src="/img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">未绑定</a></li>';
+		var emailString='<li class="m_ac_propic" id="mailSet"><img src="img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">未绑定</a></li>';
 		if(this.data.email){
-			emailString='<li class="m_ac_propic" id="mailModify"><img src="/img/uc/icon_a1_on.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">修改</a></li>'
+			emailString='<li class="m_ac_propic" id="mailModify"><img src="img/uc/icon_a1_on.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">修改</a></li>'
 			}
 		var questionString='<li class="m_ac_propic" id="secQuesSet">'+
-						'<img src="/img/uc/icon_a2.jpg" alt="">'+
+						'<img src="img/uc/icon_a2.jpg" alt="">'+
 					'<h4>密码问题</h4>'+
 						'<a href="secureQuestion">未设置</a>'+
 					'</li>'
 			if(this.data.saveQuestion){
 				questionString='<li class="m_ac_propic" id="secQuesModify">'+
-						'<img src="/img/uc/icon_a2_on.jpg" alt="">'+
+						'<img src="img/uc/icon_a2_on.jpg" alt="">'+
 					'<h4>密码问题</h4>'+
 						'<a href="secureQuestion">修改</a>'+
 					'</li>'
 				}		
 		var messageString='<li class="m_ac_propic" id="infoSet">'+
-						'<img src="/img/uc/icon_a3.jpg" alt="">'+
+						'<img src="img/uc/icon_a3.jpg" alt="">'+
 					'<h4>个人资料</h4>'+
 						'<a href="modifyUser">未完善</a>'+
 					'</li>'
 			if(this.data.name){
 				messageString='<li class="m_ac_propic" id="infoModify" style="display:none">'+
-						'<img src="/img/uc/icon_a3_on.jpg" alt="">'+
+						'<img src="img/uc/icon_a3_on.jpg" alt="">'+
 					'<h4>个人资料</h4>'+
 						'<a href="modifyUser">修改</a>'+
 					'</li>'
@@ -2171,16 +2171,16 @@ app.views.account = function(){return {
 								'</span>'+
 						'</h3>'+
 						'<h4 class="m_ac_progress">'+
-							'<img src="/img/uc/progress_pic1.png">'+
+							'<img src="img/uc/progress_pic1.png">'+
 						'</h4>'+
 						'<h4 class="m_ac_progress" style="display:none">'+
-							'<img src="/img/uc/progress_pic2.png">'+
+							'<img src="img/uc/progress_pic2.png">'+
 						'</h4>'+
 						'<h4 class="m_ac_progress" style="display:none">'+
-							'<img src="/img/uc/progress_pic3.png">'+
+							'<img src="img/uc/progress_pic3.png">'+
 						'</h4>'+
 						'<h4 class="m_ac_progress" style="display:none">'+
-							'<img src="/img/uc/progress_pic4.png">'+
+							'<img src="img/uc/progress_pic4.png">'+
 						'</h4></li>'+
 					'<div class="clear"></div>'+
 					emailString+
@@ -2390,17 +2390,11 @@ app.views.safeQusetion = function(){return {
 				templateData[$(this).attr("to")]=$(this).val();
 				})
 			})
-		$(this.el).find("[ formtype='select']").each(function(){
-			
-			$(this).find("[value='"+templateData[$(this).attr("to")]+"']").attr("selected","selected");
-			$(this).selectmenu({
-				change: function( event,ui ) {
-					templateData[$(this).attr("to")]=ui.item.value;
-					}
-				});
-			if(templateState){
-				$(this).selectmenu(templateState);
-				}	
+		$(this.el).find("select").each(function(){
+			$(this).unbind("change").bind("change",function(){
+				templateData[$(this).attr("to")]=ui.item.value;
+				})
+
 			})
 		$(this.el).find(".confirm_btn").unbind("click").unbind("click",function(){
 			app.apis.setSafeQusetion(templateData,function(){

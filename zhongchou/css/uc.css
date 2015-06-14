@@ -203,6 +203,19 @@
 .basics_btn a,.basics_btn a:visited { display:block;width: 160px; height:36px;text-align:center; color:#fff; line-height:36px; text-align:center; background:#198eca; border-radius:3px; box-shadow:0 3px 0 0 #0979b3; }
 .basics_btn a:hover {background:#0979b3;}
 .credit_lending {width:703px; height:auto; border:1px solid #c8c8c8; margin-bottom:30px;}
+.credit_lending.singleUse{margin:auto;margin-top:20px;}
+.credit_lending.singleUse #payButton{
+	font-size:16px;
+	color:#fff;
+	background-color:#198eca;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	border-radius:5px;
+	margin-left:10px;
+	margin-bottom:10px
+	}
 .credit_lending h2 { background: #f2f3f4; height:50px; line-height:50px;  font-size:18px; color:#444; text-align:center;border-top:5px solid #198eca;border-bottom: 1px solid #c8c8c8;}
 .lending_table { width:680px; border:solid #c8c8c8; border-width:1px 1px 0 1px; margin:20px 10px 10px 10px;}
 .lending_table table thead { height:45px; line-height:45px; background:#4e7199; font-size:12px; border-bottom:1px solid #c8c8c8;}

@@ -515,7 +515,7 @@ app.apis.getAdmin=function(data,fn,err){
 		if(adminReturn && adminReturn.code && adminReturn.code != 0){
 			if(adminReturn.code==1){
 				app.objs.adminTime = adminReturn.time;
-				var newClient = new app.collections.admin();
+				//var newClient = new app.collections.admin();
 
 				app.objs.admin.set(adminReturn.data)
 				}
