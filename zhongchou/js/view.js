@@ -2230,9 +2230,9 @@ app.views.account = function(){return {
                     '<td>'+n.id+'</td>'+
                     '<td>'+that.data.product[n.productId].title+"-"+that.data.product[n.productId].subhead+'</td>'+
                     '<td>'+n.buyPrice+'</td>'+
-					'<td>'+that.data.product[n.productId].minUnit+'</td>'+
+					'<td>'+that.data.product[n.productId].UnitPrice+'</td>'+
                     '<td>'+n.count+'</td>'+
-                    '<td>'+n.count*(that.data.product[n.productId].minUnit-n.buyPrice)+'元</td>'+
+                    '<td>'+n.count*(that.data.product[n.productId].UnitPrice-n.buyPrice)+'元</td>'+
 					'<td><div class="sallbutton" id="'+n.id+'">卖出</div></td>'+
 					changeButton+
 			   '</tr>')
