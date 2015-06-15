@@ -2107,32 +2107,32 @@ app.views.account = function(){return {
 	data:{},
 	render:function(){
 		if(app.objs.user.get()){
-		var emailString='<li class="m_ac_propic" id="mailSet"><img src="img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">未绑定</a></li>';
+		var emailString='<li class="m_ac_propic" id="mailSet"><img src="img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="#emailVerify">未绑定</a></li>';
 		if(this.data.email){
-			emailString='<li class="m_ac_propic" id="mailModify"><img src="img/uc/icon_a1_on.jpg" alt=""><h4>电子邮箱</h4><a href="mailAuthenticate">修改</a></li>'
+			emailString='<li class="m_ac_propic" id="mailModify"><img src="img/uc/icon_a1_on.jpg" alt=""><h4>电子邮箱</h4><a href="#emailVerify">修改</a></li>'
 			}
 		var questionString='<li class="m_ac_propic" id="secQuesSet">'+
 						'<img src="img/uc/icon_a2.jpg" alt="">'+
 					'<h4>密码问题</h4>'+
-						'<a href="secureQuestion">未设置</a>'+
+						'<a href="#setPassWord">未设置</a>'+
 					'</li>'
 			if(this.data.saveQuestion){
 				questionString='<li class="m_ac_propic" id="secQuesModify">'+
 						'<img src="img/uc/icon_a2_on.jpg" alt="">'+
 					'<h4>密码问题</h4>'+
-						'<a href="secureQuestion">修改</a>'+
+						'<a href="#setPassWord">修改</a>'+
 					'</li>'
 				}		
 		var messageString='<li class="m_ac_propic" id="infoSet">'+
 						'<img src="img/uc/icon_a3.jpg" alt="">'+
 					'<h4>个人资料</h4>'+
-						'<a href="modifyUser">未完善</a>'+
+						'<a href="#setDetail">未完善</a>'+
 					'</li>'
 			if(this.data.name){
 				messageString='<li class="m_ac_propic" id="infoModify" style="display:none">'+
 						'<img src="img/uc/icon_a3_on.jpg" alt="">'+
 					'<h4>个人资料</h4>'+
-						'<a href="modifyUser">修改</a>'+
+						'<a href="#setDetail">修改</a>'+
 					'</li>'
 				}
 							
@@ -2156,7 +2156,7 @@ app.views.account = function(){return {
 						'</h4>'+
 						'<p></p>'+
 						'<!-- <p>已认购金额：20,000.00 元</p> --></li>'+
-					'<li class="m_a_right"><a href="recharge?recharge=1">充值</a><a onclick="Prompt()">提现</a></li>'+
+					//'<li class="m_a_right"><a href="recharge?recharge=1">充值</a><a onclick="Prompt()">提现</a></li>'+
 				'</ul>'+
 			'</div>'+
 			
