@@ -181,7 +181,7 @@ app.objs.routeTable={
 								subhead:dataA[data.id].subhead,
 								count:Number(data.count),
 								startTime:new Date().getTime(),
-								buyPrice:dataA[data.id].minUnit,
+								buyPrice:dataA[data.id].UnitPrice,
 								endTime:null,
 								sellPrice:null,
 								}
@@ -203,7 +203,7 @@ app.objs.routeTable={
 						app.apis.getProduct(null,function(dataA){
 						var dataA=_.indexBy(dataA,"id")
 						if(dataA[app.objs.sellV.data.productId]){
-								app.objs.sellV.data.sellPrice=dataA[app.objs.sellV.data.productId].minUnit;
+								app.objs.sellV.data.sellPrice=dataA[app.objs.sellV.data.productId].UnitPrice;
 								app.objs.sellV.data.title=dataA[app.objs.sellV.data.productId].title;
 								app.objs.sellV.data.subhead=dataA[app.objs.sellV.data.productId].subhead;
 								app.objs.sellV.render();
@@ -235,7 +235,7 @@ app.objs.routeTable={
 						app.apis.getProduct(null,function(dataA){
 						var dataA=_.indexBy(dataA,"id")
 						if(dataA[app.objs.changeV.data.productId]){
-								app.objs.changeV.data.sellPrice=dataA[app.objs.changeV.data.productId].minUnit;
+								app.objs.changeV.data.sellPrice=dataA[app.objs.changeV.data.productId].UnitPrice;
 								app.objs.changeV.data.title=dataA[app.objs.changeV.data.productId].title;
 								app.objs.changeV.data.subhead=dataA[app.objs.changeV.data.productId].subhead;
 								app.objs.changeV.data.change=dataA[app.objs.changeV.data.productId].change;
@@ -359,12 +359,28 @@ app.objs.routeTable={
 					type:1,
 					fn:function(data){
 					/*获取帐户信息*/
-					app.apis.getdealList(data,function(deal){
+					function getDeal(product){
+						app.apis.getdealList(data,function(dealList){
 						/*出页面*/
+						if(dealList){
+						$.each(dealList,function(i,deal){
+							deal.title=product[deal.productId].title;
+							deal.subhead=product[deal.productId].subhead;
+							deal.minUnit=product[deal.productId].minUnit;
+							})
+						}
 					app.objs.capitalDetailV.el=".mb_right";
-					app.objs.capitalDetailV.data=deal;
+					app.objs.capitalDetailV.data=dealList;
 					app.objs.capitalDetailV.render();
 					});
+						}
+					
+					app.apis.getProduct(null,function(product){
+						product=_.indexBy(product,"id");
+						getDeal(product);
+						},function(){
+						alert("获取商品信息失败")
+						});
 					}
 		},
 	/*红包记录*/

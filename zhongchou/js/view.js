@@ -744,7 +744,7 @@ var pieData = [
                    +'</div>'
                    +'<div class="price">'
                        +'<span class="price_01"><h4>当前市值</h4><h5>￥'+value.costPrice+'</h5></span>'
-                       +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
+                       +'<span class="price_01"><h4>众筹价格</h4><h5>￥'+value.payed+'</h5></span>'
                        +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
                   +' </div>'
 				  
@@ -1508,7 +1508,7 @@ app.views.productDetail = function(){return {
                      '<li><h4>众筹金额</h4><span>￥'+this.data.money+'</span></li>'+
                      '<li><h4>众筹笔数</h4><span>'+this.data.copy+'笔</span></li>'+
                      '<li><h4>预期年化收益率</h4><span>'+this.data.yearReturn+'</span></li>'+
-                     '<li><h4>最小单位</h4><span id="crowSmallest">￥'+this.data.minUnit+'元/份</span></li>'+
+                     '<li><h4>最小单位</h4><span id="crowSmallest">￥'+this.data.minUnit+'份</span></li>'+
                      '<li><h4>最大单位</h4><span>'+this.data.maxUnit+'份（总额的5%）</span></li>'+
                      '<li><h4>总份数</h4><span>'+this.data.copy+'份</span></li>'+
                       '<li><h4>剩余份数</h4><span>'+(this.data.copy-this.data.payedCount)+'份 </span></li>'+
@@ -1902,7 +1902,7 @@ $("[formtype='buybutton']").unbind("click").bind("click",function(){
 $("[formtype='number']").each(
 			function(){
 				$(this).spinner({change:function(event,ui){
-				$("#crowdAmt").html($(this).spinner("value")*that.data.minUnit)
+				$("#crowdAmt").html($(this).spinner("value")*that.data.UnitPrice)
 				}});
 			}
 		)
@@ -2287,22 +2287,36 @@ app.views.capitalDetail = function(){return {
                 '<thead>'+
                   '<tr>'+
                     '<td width="5%"></td>'+
-                    '<td>项目名称</td>'+
                     '<td>订单号</td>'+
-                    '<td>交易时间</td>'+
-                    '<td>交易类型</td>'+
-                    '<td>交易金额</td>'+
-                    '<td>交易状态</td>'+
+                    '<td>商品名</td>'+
+                    '<td>交易日期</td>'+
+                    '<td>金额</td>'+
                   '</tr>'+
                 '</thead>'+
             '</table>'+
         '</div>'+
-        	'<div id="pagination">'+
-            	'<a id="prePage_1" href="javascript:void(0)" onclick="pageDown(1,1)">上一页</a>'+
-                	'<span id="currPage_1">1</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span id="totalPage_1">1</span>'+
-                '<a id="nextPage_1" href="javascript:void(0)" onclick="pageDown(2,1)">下一页</a>'+
-            '</div>'+
         '</div>');
+		var that=this;
+		if(this.data&&this.data.length){
+			$.each(this.data,function(i,n){
+				$(that.el).find("table").append('<tr>'+
+					'<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.title+'-'+n.subhead+'</td>'+
+                    '<td>'+app.fns.t2d(n.startTime)+'</td>'+
+                    '<td>'+n.buyPrice*n.count+'</td>'+
+				'</tr>')
+				if(n.endTime){
+					$(that.el).find("table").append('<tr>'+
+					'<td width="5%"></td>'+
+                    '<td>'+n.id+'</td>'+
+                    '<td>'+n.title+'-'+n.subhead+'</td>'+
+                    '<td>'+app.fns.t2d(n.endTime)+'</td>'+
+                    '<td>'+n.sellPrice*n.count+'</td>'+
+				'</tr>')
+					}
+				})
+			}
 		}else{
 			alert("请先登录")
 			window.location.hash="login"
@@ -3430,16 +3444,16 @@ app.views.procedureManage = function(){return {
 				'<div class="templatePointRight"><input to="money" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">已筹金额</div>'+
-				'<div class="templatePointRight"><input to="payed" formtype="number"/></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">众筹笔数</div>'+
-				'<div class="templatePointRight"><input to="payedCount" formtype="number"/></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
+			//'<div class="templatePoint">'+
+				//'<div class="templatePointLeft">已筹金额</div>'+
+				//'<div class="templatePointRight"><input to="payed" formtype="number"/></div>'+
+				//'<div class="clear"></div>'+
+			//'</div>'+
+			//'<div class="templatePoint">'+
+				//'<div class="templatePointLeft">众筹笔数</div>'+
+				//'<div class="templatePointRight"><input to="payedCount" formtype="number"/></div>'+
+				//'<div class="clear"></div>'+
+			//'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">份数</div>'+
 				'<div class="templatePointRight"><input to="copy" formtype="number"/></div>'+
@@ -3455,11 +3469,11 @@ app.views.procedureManage = function(){return {
 				'<div class="templatePointRight"><input to="minUnit" formtype="number"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">最大单位</div>'+
-				'<div class="templatePointRight"><input to="maxUnit" formtype="number"/></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
+			//'<div class="templatePoint">'+
+				//'<div class="templatePointLeft">最大单位</div>'+
+				//'<div class="templatePointRight"><input to="maxUnit" formtype="number"/></div>'+
+				//'<div class="clear"></div>'+
+			//'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">税费预算</div>'+
 				'<div class="templatePointRight"><input to="tax" formtype="number"/></div>'+
