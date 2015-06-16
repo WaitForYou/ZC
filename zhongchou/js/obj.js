@@ -188,6 +188,7 @@ app.objs.buyV = new app.views.buy();
 app.objs.sellV = new app.views.sell();
 app.objs.changeV = new app.views.change();
 app.objs.configManageV = new app.views.configManage();
+app.objs.shareV = new app.views.share();
 app.objs.configData = null;
 /****************************************************************************************/
 /*

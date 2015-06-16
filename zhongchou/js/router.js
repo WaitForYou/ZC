@@ -588,5 +588,18 @@ app.objs.routeTable={
 					app.objs.configManageV.render();
 					})
 			}
-		}		
+		},	
+	/*分享*/
+	"share":{
+		type:1,
+		fn:function(data){
+			/*获取配置信息*/
+			app.apis.getConfig(data,function(config){
+					/*出页面*/
+					app.objs.shareV.el=".mb_right";
+					app.objs.shareV.data=config;
+					app.objs.shareV.render();
+					})
+			}
+		}	
 	}

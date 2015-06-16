@@ -193,7 +193,7 @@ app.views.middle = function(){return {
 			'<div class="member_top">'+
     '<div class="member">'+
         '<h2><img src="img/uc/member_headerpic.jpg"></h2>'+
-        '<h4><span>'+dd()+'</span> 您好，欢迎回来！</h4>'+
+        '<h4><span id="username">'+dd()+'</span> 您好，欢迎回来！</h4>'+
         '<h5 style="display: block;" id="redEnvelopeBanner"><span>您有未领取的红包！</span><a href="redEnvelope">领取</a></h5>'+
     '</div>'+
 '</div>'+
@@ -203,7 +203,8 @@ app.views.middle = function(){return {
     '<ul>'+
         '<li class=""><h4><i class="nav_01"></i><span>我的账户</span></h4>'+
             '<ul>'+
-                '<li id="account" class="hover"><a>我的账户</a></li>'+
+                '<li id="account"><a>我的账户</a></li>'+
+				'<li id="share"><a>分享</a></li>'+
             '</ul>'+
         '</li>'+
         '<li><h4><i class="nav_03"></i><span>资金管理</span></h4>'+
@@ -235,8 +236,8 @@ app.views.middle = function(){return {
 	'</div>',
 	'<div class="member_top">'+
     '<div class="member">'+
-        '<h2><img src="/img/uc/member_headerpic.jpg"></h2>'+
-        '<h4><span>jiumogaoao86</span> 您好，欢迎回来！</h4>'+
+        '<h2><img src="img/uc/member_headerpic.jpg"></h2>'+
+        '<h4><span id="username">'+dd()+'</span> 您好，欢迎回来！</h4>'+
     '</div>'+
 '</div>'+
 			'<div class="content_center">'+
@@ -265,18 +266,16 @@ app.views.middle = function(){return {
 		'<div class="clear"></div>'+
 	'</div>'
 	],
-	page:["account","recharge","paid","card","capitalDetail","redPacketDetail","safeQusetion","emailVerify","setPhone","setDetail","setPassWord","adminManage","announcementManage","clientManage","procedureManage","recruitManage","companyManage","promotionManage","redPacketManage","configManage"],
+	page:["account","share","recharge","paid","card","capitalDetail","redPacketDetail","safeQusetion","emailVerify","setPhone","setDetail","setPassWord","adminManage","announcementManage","clientManage","procedureManage","recruitManage","companyManage","promotionManage","redPacketManage","configManage"],
 	render:function(){
 		$(this.el).html(this.template[this.type]);
+		$("#username").html(dd());
 		$.each(this.page,function(i,n){
 			$("#"+n).unbind("click").bind("click",function(){
 			    window.location.hash=n
-			    $(this).parent().children().removeClass('hover');
-			    $("#tabs_menu").find("li").removeClass('hover');
-			    $(this).addClass("hover");
 			})
 		});
-		$("#adminManage").trigger("click");
+		//$("#adminManage").trigger("click");
 		}
 	}}
 /*首页*/
@@ -2106,6 +2105,8 @@ app.views.account = function(){return {
 	el:".mb_right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#account").addClass('hover');
 		if(app.objs.user.get()){
 		var emailString='<li class="m_ac_propic" id="mailSet"><img src="img/uc/icon_a1.jpg" alt=""><h4>电子邮箱</h4><a href="#emailVerify">未绑定</a></li>';
 		if(this.data.email){
@@ -2253,6 +2254,42 @@ app.views.account = function(){return {
 		
 	}
 	}}
+/*分享*/
+app.views.share = function(){return {
+	el:".mb_right",
+	data:{},
+	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#share").addClass('hover');
+		if(app.objs.user.get()){
+			$(this.el).html("share");
+			var ShareTip = function(){}
+			//分享到腾讯微博
+			ShareTip.prototype.sharetoqq=function(content,url,picurl)
+			{
+			 var shareqqstring='http://v.t.qq.com/share/share.php?title='+content+'&url='+url+'&pic='+picurl;
+			 window.open(shareqqstring,'newwindow','height=100,width=100,top=100,left=100');
+			}
+			//分享到新浪微博
+			ShareTip.prototype.sharetosina=function(title,url,picurl)
+			{
+			 var sharesinastring='http://v.t.sina.com.cn/share/share.php?title='+title+'&url='+url+'&content=utf-8&sourceUrl='+url+'&pic='+picurl;
+			 window.open(sharesinastring,'newwindow','height=400,width=400,top=100,left=100');
+			}
+			//分享到QQ空间
+			ShareTip.prototype.sharetoqqzone=function(title,url,picurl)
+			{
+			 var shareqqzonestring='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+title+'&url='+url+'&pics='+picurl;
+			 window.open(shareqqzonestring,'newwindow','height=400,width=400,top=100,left=100');
+			}
+
+			}else{
+			alert("请先登录")
+			window.location.hash="login"
+		}
+		
+	}
+	}}
 /*充值*/
 app.views.recharge = function(){return {
 	el:".mb_right",
@@ -2278,6 +2315,8 @@ app.views.card = function(){return {
 app.views.capitalDetail = function(){return {
 	el:".mb_right",
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#capitalDetail").addClass('hover');
 		if(app.objs.user.get()){
 		$(this.el).empty();
 
@@ -2329,6 +2368,8 @@ app.views.redPacketDetail = function(){return {
 	el:".mb_right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#redPacketDetail").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data);
 		$(this.el).html('<div class="credit_lending">'+
@@ -2368,6 +2409,8 @@ app.views.redPacketDetail = function(){return {
 app.views.safeQusetion = function(){return {
 	el:".mb_right",
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#safeQusetion").addClass('hover');
 		if(app.objs.user.get()){
 		var templateData={"id":"",question1:"0",question2:"0",answer1:"",answer2:""}
 		$(this.el).html('<div class="account_security">'+
@@ -2430,6 +2473,8 @@ app.views.safeQusetion = function(){return {
 app.views.emailVerify = function(){return {
 	el:".mb_right",
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#emailVerify").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data)
 		var that=this;
@@ -2487,6 +2532,8 @@ app.views.emailVerify = function(){return {
 app.views.setPhone = function(){return {
 	el:".mb_right",
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#setPhone").addClass('hover');
 		if(app.objs.user.get()){
 		var code="";
 		$(this.el).html('<div class="bankcard" style="position:relative;">'+
@@ -2550,6 +2597,8 @@ app.views.setPhone = function(){return {
 app.views.setDetail = function(){return {
 	el:".mb_right",
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#setDetail").addClass('hover');
 		if(app.objs.user.get()){
 		var templateData=$.extend({},this.data);
 		console.log(this.data)
@@ -2641,6 +2690,8 @@ app.views.setDetail = function(){return {
 app.views.setPassWord = function(){return {
 	el:".mb_right",
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#setPassWord").addClass('hover');
 		if(app.objs.user.get()){
 		templateData={
 				id:app.objs.user.get().id,/*用户id*/
@@ -2692,6 +2743,8 @@ app.views.adminManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#adminManage").addClass('hover');
 		if(app.objs.user.get()){
 		function templateFn(state,data){
 			console.log(data)
@@ -2950,6 +3003,8 @@ app.views.announcementManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#announcementManage").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data)
 		function templateFn(state,data){
@@ -3123,6 +3178,8 @@ app.views.clientManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#clientManage").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data)
 		function templateFn(state,data){
@@ -3323,6 +3380,8 @@ app.views.procedureManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#procedureManage").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data);
 		var openTime=new Date().getTime();
@@ -3824,6 +3883,8 @@ app.views.recruitManage = function(){return {
 	type:"",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#recruitManage").addClass('hover');
 		if(app.objs.user.get()){
 		var that=this;
 		console.log(this);
@@ -4000,6 +4061,8 @@ app.views.companyManage = function(){return {
 	type:"",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#companyManage").addClass('hover');
 		if(app.objs.user.get()){
 		var that=this;
 		console.log(this);
@@ -4175,6 +4238,8 @@ app.views.promotionManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#promotionManage").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data);
 		var templateArry={};
@@ -4710,6 +4775,8 @@ app.views.redPacketManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#redPacketManage").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data);
 		function templateFn(state,data){
@@ -4874,6 +4941,8 @@ app.views.configManage = function(){return {
 	el:".right",
 	data:{},
 	render:function(){
+		$("#tabs_menu").find("li").removeClass('hover');
+		$("#tabs_menu li#configManage").addClass('hover');
 		if(app.objs.user.get()){
 		console.log(this.data);
 		function templateFn(state,data){
