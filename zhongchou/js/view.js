@@ -2413,6 +2413,10 @@ app.views.safeQusetion = function(){return {
 		$("#tabs_menu li#safeQusetion").addClass('hover');
 		if(app.objs.user.get()){
 		var templateData={"id":"",question1:"0",question2:"0",answer1:"",answer2:""}
+		if(this.data){
+			templateData=$.extend(templateData,this.data)
+			}
+			console.log(templateData)
 		$(this.el).html('<div class="account_security">'+
             '<h2>温馨提示：您好，您的安全问题未设置，请填写以下信息进行设置</h2>'+
             '<ul>'+
@@ -2420,24 +2424,24 @@ app.views.safeQusetion = function(){return {
                 '<li><h4>问题一：</h4>'+
                     '<span>'+
                        '<select id="question1" formtype="select" to="question1" name="请选择">'+
-                           '<option vlaue="0">我的出生地在哪？</option>'+
-                           '<option vlaue="1">我的母亲叫什么？</option>'+
-                           '<option vlaue="2">我的星座是什么？</option>'+
+                           '<option value="0">我的出生地在哪？</option>'+
+                           '<option value="1">我的母亲叫什么？</option>'+
+                           '<option value="2">我的星座是什么？</option>'+
                            
                        '</select>'+
                      '</span>'+
                 '</li>'+
-                '<li><h4>答案一：</h4><span><input id="answer1" name="answer1" type="text" formtype="simple" to="answer1"></span><i id="answer1Notice" class="ts"></i></li>'+
+                '<li><h4>答案一：</h4><span><input id="answer1" name="answer1" type="text" formtype="simple" to="answer1" value="'+templateData["answer1"]+'"></span><i id="answer1Notice" class="ts"></i></li>'+
                 '<li><h4>问题二：</h4>'+
                     '<span>'+
                        '<select id="question2" formtype="select" to="question2" name="请选择">'+
-                           '<option vlaue="0">我最喜欢的食物是什么？</option>'+
-                           '<option vlaue="1">我最喜欢的电影是什么？</option>'+
-                           '<option vlaue="2">我最喜欢的歌曲是什么？</option>'+
+                           '<option value="0">我最喜欢的食物是什么？</option>'+
+                           '<option value="1">我最喜欢的电影是什么？</option>'+
+                           '<option value="2">我最喜欢的歌曲是什么？</option>'+
                        '</select>'+
                      '</span>'+
                 '</li>'+
-                '<li><h4>答案二：</h4><span><input id="answer2" name="answer2" formtype="simple" to="answer2" type="text"></span><i id="answer2Notice" class="ts"></i></li>'+
+                '<li><h4>答案二：</h4><span><input id="answer2" name="answer2" formtype="simple" to="answer2" type="text" value="'+templateData["answer2"]+'"></span><i id="answer2Notice" class="ts"></i></li>'+
                 '<a class="confirm_btn">提交更新</a>'+
                 '<!-- <div class="cancel_btn"><a href="#">取消</a></div> -->'+
             '</ul>'+
@@ -2449,12 +2453,18 @@ app.views.safeQusetion = function(){return {
 				})
 			})
 		$(this.el).find("select").each(function(){
+			var target=$(this);
+			$(this).find("option").each(function(){
+				if(templateData[target.attr("to")]==$(this).attr("value")){
+					$(this).attr("selected","selected");
+					}
+				});
 			$(this).unbind("change").bind("change",function(){
-				templateData[$(this).attr("to")]=ui.item.value;
+				templateData[$(this).attr("to")]=$(this).val();
 				})
 
 			})
-		$(this.el).find(".confirm_btn").unbind("click").unbind("click",function(){
+		$(this.el).find(".confirm_btn").unbind("click").bind("click",function(){
 			app.apis.setSafeQusetion(templateData,function(){
 				alert("修改成功")
 				window.location.reload();

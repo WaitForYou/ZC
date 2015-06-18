@@ -433,7 +433,7 @@ app.apis.getSafeQusetion=function(data,fn,err){
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(qusetionReturn){
 		if(qusetionReturn && qusetionReturn.code){
-		fn()
+		fn(qusetionReturn.data)
 	}else{
 		err()
 	}
@@ -448,11 +448,11 @@ app.apis.getSafeQusetion=function(data,fn,err){
 
 /*设置安全问题*/
 app.apis.setSafeQusetion=function(data,fn,err){
-	data=app.objs.user.get().id;
+	//data=app.objs.user.get().id;
 	var sendData = {
 		model:"client",
-		action:"getSafeQusetion",
-		data:data
+		action:"setSafeQusetion",
+		data:JSON.stringify(data)
 	}
 	$.get("http://"+location.hostname+":8888/",sendData,function(qusetionReturn){
 		if(qusetionReturn && qusetionReturn.code){
