@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+  
+        <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+		<link rel="stylesheet" href="js/idcode/jquery.idcode.css" type="text/css">
+
+    <script type="text/javascript" src="dist/js/lib.js"></script>
+    
+    	<link rel="stylesheet" href="dist/css/base/ui.css">
+	
+    <script>
+if (!document.addEventListener) {
+	// IE6~IE8
+	//document.write('<script src="js/ieBetter.js"><\/script>');	
+}
+</script>
+<!-- ECharts单文件引入 -->
+        <title>Hello World</title>
+    </head>
+    <body>
+
+    
+    
+    <div class="header" id="header">
+    	<div class="top_btn_group"></div>
+    	<div class="top_btn_group" style="  display:none;  ">
+	       <a href="https://www.cncrowd.com:443/user/center" class="btn-s1 btn-1b">用户中心</a>
+	       <a href="https://www.cncrowd.com:443/user/logout" class="btn-s1 btn-1b">退出</a>
+        </div>
+	    <div class="inner clearfix">
+	      <h1>
+	        <a href="">
+	          <img id="headIcon" src="http://" alt="" style="width:276px;height:89px;">
+	        </a>
+	      </h1>
+	      <div class="header-right">
+	         <div class="header-right-top clearfix">
+<!-- 		          <div id="amount_raised" style="display: block;">
+		            <div class="livetime" style=" font-size:12px; margin-top:21px;"><span id="proNameProAmt">平台累计众筹金额：</span></div>
+		            <div class="dash_amount">￥<span id="crowdProAmt">3,194,200</span>.00</div>
+		            <div class="top_buybtn"><a id="saleURL" href="/items/30093164">认&nbsp;购</a></div>
+		          </div> -->
+		          <div class="topmenu_0" id="nav">
+                    <ul id="gnavi" class="nav-menu clearfix unstyled">
+                    </ul>
+                </div>  
+	         </div><!-- header-right-top clearfix -->
+
+	      </div><!--  header-right-->
+
+	    </div>
+<!--                                 <div class="topmenu_0" id="nav">
+                    <ul id="gnavi" class="nav-menu clearfix unstyled">
+                    </ul>
+                </div>   -->
+	</div>
+	<!-- end header -->
+	<div class="middle">
+			
+    </div>
+    <div class="clear"></div>
+    <!-- end middle -->
+    <div class="footerBox">
+    	
+    </div>
+    <div id="pop">
+    <div id="popClose"></div>
+    <div id="popMain"></div>
+    </div>
+    <div id="popBg"></div>
+    <!-- end footer --> 
+    
+    
+
+    <script type="text/javascript" src="dist/js/common.js"></script>
+    <script>
+     $(document).ready(function(){   
+        app.initialize();
+      });
+	  $("#pop").css("left",($(window).width()-$("#pop").width())/2);
+		  $("#pop").css("top",($(window).height()-$("#pop").height())/2);
+		  $("#popBg").width($(window).width());
+		  $("#popBg").height($(window).height());
+	  $(window).on("resize",function(){
+		  $("#pop").css("left",($(window).width()-$("#pop").width())/2);
+		  $("#pop").css("top",($(window).height()-$("#pop").height())/2);
+		  $("#popBg").width($(window).width());
+		  $("#popBg").height($(window).height());
+		  });
+    </script>
+    </body>
+</html>
