@@ -275,7 +275,6 @@ app.views.middle = function(){return {
 			    window.location.hash=n
 			})
 		});
-		//$("#adminManage").trigger("click");
 		}
 	}}
 /*首页*/
@@ -284,47 +283,6 @@ app.views.index = function(){return {
 	data:{},
 	render:function(){
 		$(this.el).empty();
-		/*$('<div id="visual"> '   
-		           +'<div id="demo" style="overflow: hidden; width:100%; align: center;">'
-		            +'<table cellspacing="0" cellpadding="0" align="center" border="0">'
-		              +'<tbody>'
-		              +'<tr>'
-		                +'<td id="marquePic1" valign="top">'
-		                    +'<table width="100%" height="494" border="0" cellpadding="0" cellspacing="0">'
-		                      +'<tbody><tr>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
-		                      +'</tr>'
-		                    +'</tbody></table>'    
-		                +'</td>'
-		                +'<td id="marquePic2" valign="top">'
-		                    +'<table width="100%" height="494" border="0" cellpadding="0" cellspacing="0">'
-		                      +'<tbody><tr>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
-		                        +'<td class="marquee_pic"><a href="/reg"><img src="/images/visual.jpg"></a></td>'
-		                      +'</tr>'
-		                    +'</tbody></table>  '  
-		                +'</td>'
-		              +'</tr>'
-		            +'</tbody></table>'
-		            +'<p>'
-		            +'</p>' 
-		        +'</div>'
-
-		      +'<div class="header-banner">'
-		       +'<div class="inner">'
-		           +'<div class="banner">'
-		            +'<a href="reg" rel="nofollow">'
-		                +'<img class="hover" src="/img/top/header_banner2-1.png" alt="">'
-		           +'</a>'
-		            +'<a href=+'+'"#smp">'
-		              +'<img class="hover" src="/img/top/header_banner3.png" alt="">'
-		            +'</a>'
-		          +'</div>'
-		        +'</div>'
-		      +'</div>'
-		    +'</div>'
-*/
 var newElem = $('<div class="index_top_left">'
 		+'<div class="index_message_head">全国首家专业房地产众筹平台</div>'
 		+'<div class="index_message_frame">'
@@ -362,25 +320,6 @@ $('<div id="topics">'
 		    +'<div class="slide earnings"></div>'
 ).appendTo($(this.el));
 
-		  /*  +'<div class="team" id="smp"></div>'*/
-              /*var demo = document.getElementById("demo");
-              var marquePic2 = document.getElementById("marquePic2");
-              var marquePic1 = document.getElementById("marquePic1");
-     	      var speed=15 ;
-              marquePic2.innerHTML=marquePic1.innerHTML;
-              function Marquee(){ 
-                 if(demo.scrollLeft>=marquePic1.scrollWidth){ 
-                   demo.scrollLeft=0 ;
-                  }else{ 
-                   demo.scrollLeft++ ;
-                 }
-              } 
-              var MyMar=setInterval(Marquee,speed);
-              if(demo){ 
-		          demo.onmouseover=function() {clearInterval(MyMar);}; 
-		          demo.onmouseout=function() {MyMar=setInterval(Marquee,speed);};  
-              }
-       */
 	   var promoObj=_.indexBy(this.data.promotion, 'id');
 	   console.log(promoObj);
 	   $(".index_promo_1").html(promoObj["001"].dsc)
@@ -571,93 +510,7 @@ $('<div id="topics">'
         );
 	   
 	   /*************************************************************************************************/
-	/*
-	   
-		
-       var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-		var lineChartData = {
-			labels : nameArry6,
-			datasets : [
-				{
-					label: "My Second dataset",
-					fillColor : "rgba(151,187,205,0.2)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : valueArry6
-				}
-			]
 
-		}
-
-	var ctx = document.getElementById("canvar_3").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			responsive: true
-		})
-var colorArry=[{color:"#cc3333",highlight: "#cc6666"},{color:"#cc33cc",highlight: "#cc66cc"},{color:"#3333cc",highlight: "#6666cc"},{color:"#33cccc",highlight: "#66cccc"},{color:"#33cc33",highlight: "#66cc66"},{color:"#cccc33",highlight: "#cccc66"}]
-$.each(promoObj["004"].data,function(i,n){
-	n=$.extend(n,colorArry[i%5]);
-	n.label=n.name;
-	})
-var pieData = [
-				{
-					value: 300,
-					color:"#F7464A",
-					highlight: "#FF5A5E",
-					label: "Red"
-				},
-				{
-					value: 50,
-					color: "#46BFBD",
-					highlight: "#5AD3D1",
-					label: "Green"
-				},
-				{
-					value: 100,
-					color: "#FDB45C",
-					highlight: "#FFC870",
-					label: "Yellow"
-				},
-				{
-					value: 40,
-					color: "#949FB1",
-					highlight: "#A8B3C5",
-					label: "Grey"
-				},
-				{
-					value: 120,
-					color: "#4D5360",
-					highlight: "#616774",
-					label: "Dark Grey"
-				}
-
-			];
-
-			var ctx1 = document.getElementById("canvar_1").getContext("2d");
-				window.myPie = new Chart(ctx1).Pie(promoObj["004"].data);
-				$("#canvar_1").width(160);
-				$("#canvar_1").height(125);
-	var radarChartData = {
-		labels: nameArry5,
-		datasets: [
-			
-			{
-				label: "My Second dataset",
-				fillColor: "rgba(151,187,205,0.2)",
-				strokeColor: "rgba(151,187,205,1)",
-				pointColor: "rgba(151,187,205,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(151,187,205,1)",
-				data: valueArry5
-			}
-		]
-	};
-	window.myRadar = new Chart(document.getElementById("canvar_2").getContext("2d")).Radar(radarChartData, {
-			responsive: true
-		});*/
 		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
 		var that = this;
 		//公告
@@ -682,36 +535,6 @@ var pieData = [
               });
          });
 		 
-		//介绍我们是做什么的
-		/*
-		$("#index_video").find("h1").text(this.data.promotion.introduceVideo.title);
-		$("#index_video").find("h2").text(this.data.promotion.introduceVideo.dsc);
-		$.each(this.data.promotion.introduceVideo.data,function(i,n){
-			var newElem = $('<div class="video_style1 mg_r34">'
-            +'<span class="vedette1 mobileCS" style="display: none;">'
-                  +'<video id="Html5Video" poster="'+n.image+'" controls="controls" width="302" height="170">'
-                      +'<source src="'+n.video+'" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">'
-                  +'</video>'
-             +'</span>'
-	         +'<span class="computerCS" style="display: block;">'
-	         +'<a href="#videomodal1" data-toggle="modal" data-target="#video-modal1">'
-	         +'<img src="'+n.image+'">'
-	         +'</a>'
-	         +'</span>'
-	         +'<h4>'+n.name+'</h4>'
-	         +'<h5>'+n.dsc+'</h5>'
-	      +'</div>').appendTo($("#index_video").find(".video_area"));
-            newElem.data("data",n);
-			newElem.unbind("click").bind("click",function(){
-				//app.objs.announcementDetailV.data = $(this).data("an");
-				//app.objs.route.navigate(location.pathname.replace("/","")+"?page=announcementDetail",{trigger: true});
-			});
-		});*/
- /*       $(".video_style1").last().removeClass("mg_r34");
-        //大图充值
-        var introducePicElem =$(".recharge_style03").css("background-image","url("+this.data.promotion.introducePic.data[0].image+")");
-         //$('<span style="background:url('+this.data.promotion.introducePic.data[0].image+') 185px 80px no-repeat"><a href="#">立即充值</a></span>').appendTo($(".recharge_style03"));
-		introducePicElem.data("data",this.data.promotion.introducePic);*/
 		//产品
 		if(this.data.product){
 			
@@ -3523,18 +3346,18 @@ app.views.procedureManage = function(){return {
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">价格</div>'+
-				'<div class="templatePointRight"><input to="price" formtype="number"/></div>'+
+				'<div class="templatePointLeft">众筹价格</div>'+
+				'<div class="templatePointRight"><input to="price" formtype="number"/>&nbsp;&nbsp;元</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">原价</div>'+
-				'<div class="templatePointRight"><input to="costPrice" formtype="number"/></div>'+
+				'<div class="templatePointLeft">项目原价</div>'+
+				'<div class="templatePointRight"><input to="costPrice" formtype="number"/>&nbsp;&nbsp;元</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">金额</div>'+
-				'<div class="templatePointRight"><input to="money" formtype="number"/></div>'+
+				'<div class="templatePointLeft">众筹金额</div>'+
+				'<div class="templatePointRight"><input to="money" formtype="number"/>&nbsp;&nbsp;元</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			//'<div class="templatePoint">'+
@@ -3548,18 +3371,18 @@ app.views.procedureManage = function(){return {
 				//'<div class="clear"></div>'+
 			//'</div>'+
 			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">份数</div>'+
-				'<div class="templatePointRight"><input to="copy" formtype="number"/></div>'+
+				'<div class="templatePointLeft">众筹份数</div>'+
+				'<div class="templatePointRight"><input to="copy" formtype="number"/>&nbsp;&nbsp;份</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">持有限期</div>'+
-				'<div class="templatePointRight"><input to="maxTime" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="maxTime" formtype="number"/>&nbsp;&nbsp;个月</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">最小单位</div>'+
-				'<div class="templatePointRight"><input to="minUnit" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="minUnit" formtype="number"/>&nbsp;&nbsp;元</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			//'<div class="templatePoint">'+
@@ -3569,27 +3392,27 @@ app.views.procedureManage = function(){return {
 			//'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">税费预算</div>'+
-				'<div class="templatePointRight"><input to="tax" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="tax" formtype="number"/>&nbsp;&nbsp;元</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">面积</div>'+
-				'<div class="templatePointRight"><input to="area" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="area" formtype="number"/>&nbsp;&nbsp;平米</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">原单价</div>'+
-				'<div class="templatePointRight"><input to="costUnitPrice" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="costUnitPrice" formtype="number"/>&nbsp;&nbsp;元&frasl;平米</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">单价</div>'+
-				'<div class="templatePointRight"><input to="UnitPrice" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="UnitPrice" formtype="number"/>&nbsp;&nbsp;元&frasl;平米</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">债权转移费用</div>'+
-				'<div class="templatePointRight"><input to="change" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="change" formtype="number"/>&nbsp;&nbsp;%</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
@@ -3656,12 +3479,12 @@ app.views.procedureManage = function(){return {
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">年收益率</div>'+
-				'<div class="templatePointRight"><input to="yearReturn" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="yearReturn" formtype="number"/>&nbsp;&nbsp;%</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">增值</div>'+
-				'<div class="templatePointRight"><input to="more" formtype="number"/></div>'+
+				'<div class="templatePointRight"><input to="more" formtype="number"/>&nbsp;&nbsp;%</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
@@ -4562,13 +4385,14 @@ app.views.promotionManage = function(){return {
 		function reflash(){
 			templateDom.find(".templateFrame").empty();
 			$.each(templateData.data,function(i,n){
+				var creatTime=new Date().getTime();
 			var newpoint=$('<div class="templatePoint">'+
 				'<div class="templatePointFormLeft">头像</div>'+
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
-				'<label for="singlepic'+openTime+'_to_images">'+
+				'<label for="singlepic'+creatTime+'_to_images">'+
 					'<div class="addFile" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
-					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+					'<input type="file" id="singlepic'+creatTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
 				'</div>'+
@@ -4606,6 +4430,7 @@ app.views.promotionManage = function(){return {
 				$(this).find("input").unbind("change").bind("change",function(){
 					var to=$(this).attr("to");
 					var targetData=$(this).parents(".templatePoint").data("result")
+					debugger;
 					$(this).parents("form").ajaxSubmit({
 							success:function(data){
 								var data=JSON.parse(data);
@@ -4666,13 +4491,14 @@ app.views.promotionManage = function(){return {
 		function reflash(){
 			templateDom.find(".templateFrame").empty();
 			$.each(templateData.data,function(i,n){
+				var creatTime=new Date().getTime();
 			var newpoint=$('<div class="templatePoint">'+
 				'<div class="templatePointFormLeft">头像</div>'+
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
-				'<label for="singlepic'+openTime+'_to_images">'+
+				'<label for="singlepic'+creatTime+'_to_images">'+
 					'<div class="addFile" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
-					'<input type="file" id="singlepic'+openTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
+					'<input type="file" id="singlepic'+creatTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
 				'</div>'+
