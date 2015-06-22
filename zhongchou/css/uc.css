@@ -452,3 +452,12 @@ background: #198eca;border-radius: 3px;box-shadow: 0 3px 0 0 #0979b3;font-size: 
 	margin: 4px;
 	margin-right: 8px;
 	}
+.shareTitle{
+	font-size:24px;
+	line-height:50px;
+	margin-top:20px;}
+.shareIcon{
+	display:block;
+	margin-right:43px;
+	cursor:pointer;
+	float:left;}

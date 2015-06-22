@@ -2262,7 +2262,31 @@ app.views.share = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#share").addClass('hover');
 		if(app.objs.user.get()){
-			$(this.el).html("share");
+			$(this.el).html('<div class="shareTitle"><b>直接复制邀请码给好友</b></div>'+
+							'<div class="shareMain">'+app.objs.user.get().id+'</div>'+
+							'<div class="shareTitle"><b>点击分享到各平台</b></div>'+
+							'<div class="shareMain">'+
+								'<img id="qw" class="shareIcon" src="img/share/qw.jpg"/>'+
+								'<img id="qz" class="shareIcon" src="img/share/qz.jpg"/>'+
+								'<img id="wb" class="shareIcon" src="img/share/wb.jpg"/>'+
+								'<div class="clear"></div>'+
+							'</div>'+
+							'<div class="shareTitle"><b>扫描二维码分享到微信</b></div>'+
+							'<div class="shareMain">'+
+								'<div class="shareQR"></div>'+
+							'</div>'
+			);
+			$(this.el).find("#qw").unbind("click").bind("click",function(){
+				share.sharetoqq("星众众筹","http://120.25.154.29/#register/key:"+app.objs.user.get().id,"http://120.25.154.29/img/headerLogo.jpg");
+				})
+			$(this.el).find("#qz").unbind("click").bind("click",function(){
+				share.sharetoqqzone("星众众筹","http://120.25.154.29/#register/key:"+app.objs.user.get().id,"http://120.25.154.29/img/headerLogo.jpg");
+				})
+			$(this.el).find("#wb").unbind("click").bind("click",function(){
+				share.sharetosina("星众众筹","http://120.25.154.29/#register/key:"+app.objs.user.get().id,"http://120.25.154.29/img/headerLogo.jpg");
+				})
+			$(this.el).find(".shareQR").qrcode({render	: "table",
+		text	: "http://120.25.154.29/phone/#register/"+app.objs.user.get().id,width:192,height:192})
 			var ShareTip = function(){}
 			//分享到腾讯微博
 			ShareTip.prototype.sharetoqq=function(content,url,picurl)
@@ -2282,7 +2306,7 @@ app.views.share = function(){return {
 			 var shareqqzonestring='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+title+'&url='+url+'&pics='+picurl;
 			 window.open(shareqqzonestring,'newwindow','height=400,width=400,top=100,left=100');
 			}
-
+			var share=new ShareTip();
 			}else{
 			alert("请先登录")
 			window.location.hash="login"
