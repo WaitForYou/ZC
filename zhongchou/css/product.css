@@ -723,7 +723,7 @@ dl.simulation-text-wrap-in dd {
 .pl_buy h4 span { padding:0 2px; font-weight:bold;}
 
 .input_amount { padding:0 19px;height:36px; font-size:16px; color:#444; line-height:36px; margin-bottom:10px;}
-.input_amount input {width:150px; height:16px; line-height:16px; border-radius:5px; border:1px solid #d0d0d0; outline:medium; padding:10px; color:#999; font-size:16px; margin:0 10px;font-family: "Microsoft YAHEI"; }
+.input_amount input {width:135px; height:16px; line-height:16px; border-radius:5px; border:0px solid #d0d0d0; outline:medium; padding:10px; color:#999; font-size:16px; margin:0 10px;font-family: "Microsoft YAHEI"; }
 .input_amount span { padding:0 10px;}
 
 .input_amount_ts {

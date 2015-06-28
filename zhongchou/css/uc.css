@@ -461,3 +461,8 @@ background: #198eca;border-radius: 3px;box-shadow: 0 3px 0 0 #0979b3;font-size: 
 	margin-right:43px;
 	cursor:pointer;
 	float:left;}
+.addFile.singleHead{
+	width:80px;height:80px;
+	background-size:80px 80px;
+	background-repeat:no-repeat;
+}

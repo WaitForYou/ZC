@@ -131,40 +131,37 @@ app.views.foot = function(){return {
 			   		+'<h1>'+configData.titleText+'</h1>'
 			        +'<h2><i></i><span> '+configData.slogan+'</span><i></i></h2>' 
 			        +'<div class="contact_infor">'
-			           +' <ul>'
-			                +'<li class="fci_s1 ">'
-			                    +'<i></i><p>电话: '+configData.mobile+'传真: '+configData.fax+'</p>'
-			                +'</li>'
-			                +'<li class="fci_s2 ">'
-			                    +'<i></i><p>众筹洽谈'+configData.time+'<br><span>'+configData.number+'</span></p>'
-			                +'</li>'
-			                +'<li class="fci_s3 ">'
-			                    +'<p>'+configData.companyName+'<br>'+configData.referredToAs+'（'+configData.number+'）<br>'+configData.conText_0+'<br>'+configData.conText_1+'<br>'+configData.conText_2+'</p>'
-			                +'</li>'
-			                +'<li class="fci_s4 ">'
-			                   +' <i></i><p>商务合作：'+configData.cooperationEmail+'<br>人才招聘：'+configData.recruitmentEmail+'</p>'
-			                +'</li>'
-			                +'<li class="fci_s5">'
-			                   +' <i></i><p>地址：'+configData.address[0]+'<br>'+configData.address[1]+'&nbsp;&nbsp;&nbsp;&nbsp;邮编：'+configData.address[2]+'</p>'
-			               +' </li>'
-			                +'<li class="fci_s6">'
-			                    
-			                +'</li>'
-			                +'<div class="clear"></div>'
-			            +'</ul>'
+					   +'<ul>'
+                +'<li class="fci_s1 ">'
+                    +'<i></i><p>电话:'+configData.mobile+'<br>传真:'+configData.fax+'</p>'
+               +' </li>'
+                +'<li class="fci_s2 ">'
+                    +'<i></i><p>众筹洽谈（'+configData.time+'）<br><span'+configData.number+'</span></p>'
+               +' </li>         '
+               +' <li class="fci_s3" id="fci_s3">'
+                  +'  <i></i><p>欢迎您关注'+configData.companyName+'官方微信<br>官方微信号：'+configData.wx+'</p>'
+               +' </li>'
+                +'<li class="fci_s4">'
+                   +' <i></i><p>商务合作'+configData.cooperationEmail+'<br>人才招聘：'+configData.recruitmentEmail+'</p>'
+               +' </li>'
+                +'<li class="fci_s5">'
+                   +' <i></i><p>地址：'+configData.cooperationEmail+'<br/>邮编：'+configData["zip_code"]+'</p>'
+               +' </li>'
+                +'<li class="fci_s6" id="fci_s6">'
+                    +'<i></i><p>欢迎您关注'+configData.companyName+'官方微博<br>官方微博：@'+configData.wb+'</p>'
+               +' </li>'
+               +' <div class="clear"></div>'
+            +'</ul>'
 			        +'</div>'
 			        +'<div class="footer_logo">'
-			            +'<div id="fl_s1"></div> '
-			            +'<div id="fl_s2"></div> ' 
-			            +'<div id="fl_s3"></div>'  
-			            +'<a href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&amp;dn=www.cncrowd.com&amp;lang=zh_cn" target="_blank">'
-			                +'<div id="fl_s4"></div>'
-			            +'</a> '
-			            +'<div id="fl_s1_img" style="display: none;"></div>'
-			           +' <div id="fl_s2_img" style="display: none;"></div>'
-			            +'<div id="fl_s3_img" style="display: none;"></div>'
-			            +'<div id="fl_s4_img" style="display: none;"></div> ' 
-			        +'</div>'
+            +'<!--<div id="fl_s1"></div><div id="fl_s2"></div>-->  '
+            +'<div id="fl_s3"></div>'
+            +'<div id="fl_s4"></div>'
+            +'<div id="fl_s5"></div>'
+            +'<a href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&amp;dn=www.cncrowd.com&amp;lang=zh_cn" target="_blank">'
+            +'<div id="fl_s6"></div>'
+            +'</a>          '   
+        +'</div>'
 			     +'<h3></h3>'
 			        +'<h5>'+configData.copRight+' &nbsp;&nbsp;&nbsp;&nbsp;备案号: <a target="_blank" href="http://www.beianbeian.com/beianxinxi/1c979456-a73d-42d8-bb76-2ab1afbb4a5e.html"> '+configData.record+'</a></h5>'
 			  +'</div>'
@@ -556,7 +553,7 @@ $('<div id="topics">'
 	          +'</div>'
 	          +'<div class="right">'
 	            +'<div class="r01">'
-                       +'<h4>目标金额：<span>￥'+value.payed+'</span></h4>'
+                       +'<h4>目标金额：<span>￥'+value.money+'</span></h4>'
                        +'<a class="a" role="button" data-toggle="modal">认&nbsp;&nbsp;&nbsp;&nbsp;购</a>'
                    +'</div>'
                    +'<div class="clear"></div>'
@@ -566,8 +563,8 @@ $('<div id="topics">'
                    +'</div>'
                    +'<div class="price">'
                        +'<span class="price_01"><h4>当前市值</h4><h5>￥'+value.costPrice+'</h5></span>'
-                       +'<span class="price_01"><h4>众筹价格</h4><h5>￥'+value.payed+'</h5></span>'
-                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
+                       +'<span class="price_01"><h4>众筹价格</h4><h5>￥'+value.price+'</h5></span>'
+                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'个月</h5></span>'
                   +' </div>'
 				  
                    +'<div class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;">'
@@ -990,7 +987,7 @@ app.views.product = function(){return {
 				}
 			     var newProduct = $('<div class="project_intro">'
 				          +'<div class="left">'
-				             +'<span class="intro_pic"><a href="/items/30093164">'
+				             +'<span class="intro_pic"><a>'
 			        		  +'<img src="'+value.image[0]+'" width="475" height="255">'
 					         +'</a></span>'
 				             +'<span class="timer">'
@@ -998,18 +995,18 @@ app.views.product = function(){return {
 				          +'</div>'
 				          +'<div class="right">'
 				            +'<div class="r01">'
-			                       +'<h4>目标金额：<span>￥'+value.payed+'</span></h4>'
+			                       +'<h4>目标金额：<span>￥'+value.money+'</span></h4>'
 			                       +'<a class="a" role="button" data-toggle="modal" onclick="">认&nbsp;&nbsp;&nbsp;&nbsp;购</a>'
 			                   +'</div>'
 			                   +'<div class="clear"></div>'
 			                   +'<div class="title01">'
-			                       +'<h2><a href="/items/30093164">'+value.title+'-'+value.subhead+'</a></h2>'
+			                       +'<h2><a>'+value.title+'-'+value.subhead+'</a></h2>'
 			                       +'<h4>年化收益率高达'+value.yearReturn+'以上</h4>'
 			                   +'</div>'
 			                   +'<div class="price">'
 			                       +'<span class="price_01"><h4>当前市值</h4><h5>￥'+value.costPrice+'</h5></span>'
-			                       +'<span class="price_01"><h4>中筹价格</h4><h5>￥'+value.payed+'</h5></span>'
-			                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'</h5></span>'
+			                       +'<span class="price_01"><h4>众筹价格</h4><h5>￥'+value.price+'</h5></span>'
+			                       +'<span class="price_02"><h4>持有期限不超过</h4><h5>'+value.maxTime+'个月</h5></span>'
 			                  +' </div>'
 			                   +'<div class="home_progress_bar"><b style="width:'+(value.payedCount/value.copy)*100+'%;"></b>'
 							   +'<h6> 已众筹：'+(value.payedCount/value.copy)*100+'%</h6>'
@@ -1295,9 +1292,13 @@ app.views.productDetail = function(){return {
                 '</div>'+
             '</div>'+
             '<div class="top-wrap-inner3">'+
-                '<p style="line-height: 25px;margin: 10px 0 0 0;">'+
-                   '<img src="/img/hftx.png" style="width: 88px;margin-right: 20px;"> 众筹资金由第三方托管'+
-                '</p>'+
+                '<p style="line-height: 25px;margin:10px 0 0 0;">'+
+					'<span>众筹资金托管方：</span>'+
+					'<img src="img/zsyh.png" style="width: 88px;margin-right: 20px;">'+
+					'<span>众筹资金支付通道：</span>'+
+					'<img src="img/llzf.png" style="width: 88px;margin-right: 20px;">'+
+					'<img src="img/hftx.png" style="width: 88px;margin-right: 20px;">'+
+				'</p>'+
             '</div>'+
         '</div>'+
     '</div>'+
@@ -1342,7 +1343,7 @@ app.views.productDetail = function(){return {
             
             '<div class="lef fr">'+
 	    		'<!-- <a href="#videomodal" data-toggle="modal" data-target="#video-modal"> -->'+
-                	'<img src="/project/images/20150127/142237097847095.jpg" width="650">'+
+                	//'<img src="/project/images/20150127/142237097847095.jpg" width="650">'+
                 '<!-- </a> -->'+
                 '<ul class="social">'+
                     '<li>'+
@@ -4391,7 +4392,7 @@ app.views.promotionManage = function(){return {
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
 				'<label for="singlepic'+creatTime+'_to_images">'+
-					'<div class="addFile" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
+					'<div class="addFile singleHead" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
 					'<input type="file" id="singlepic'+creatTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
@@ -4430,7 +4431,6 @@ app.views.promotionManage = function(){return {
 				$(this).find("input").unbind("change").bind("change",function(){
 					var to=$(this).attr("to");
 					var targetData=$(this).parents(".templatePoint").data("result")
-					debugger;
 					$(this).parents("form").ajaxSubmit({
 							success:function(data){
 								var data=JSON.parse(data);
@@ -4450,7 +4450,7 @@ app.views.promotionManage = function(){return {
 			}
 			templateDom.find("[formtype='add']").each(function(){
 				$(this).unbind("click").bind("click",function(){
-					templateData[$(this).attr("to")].push({"id":"036","name":"暂未填写","image":["http://"],"dsc":"暂未填写","job":"暂未填写",group:"009"});
+					templateData[$(this).attr("to")].push({"id":"036","name":"暂未填写","image":["images/addfile.png"],"dsc":"暂未填写","job":"暂未填写",group:"009"});
 					reflash();
 					})
 				})
@@ -4497,7 +4497,7 @@ app.views.promotionManage = function(){return {
 				'<div class="templatePointFormRight">'+
 				'<form action="ueditor/php/controller.php?action=uploadimage" method="post" enctype="multipart/form-data" formtype="singlepic">'+
 				'<label for="singlepic'+creatTime+'_to_images">'+
-					'<div class="addFile" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
+					'<div class="addFile singleHead" style="background-image:url('+n.image[0]+');width:80px;height:80px"></div>'+
 					'<input type="file" id="singlepic'+creatTime+'_to_images" to="image" name="upfile" style="width:0px;height:0px;"></input>'+
 				'</label>'+
 			'</form>'+
@@ -4554,7 +4554,7 @@ app.views.promotionManage = function(){return {
 			}
 			templateDom.find("[formtype='add']").each(function(){
 				$(this).unbind("click").bind("click",function(){
-					templateData[$(this).attr("to")].push({"id":"036","name":"暂未填写","image":["http://"],"dsc":"暂未填写","job":"暂未填写",group:"009"});
+					templateData[$(this).attr("to")].push({"id":"036","name":"暂未填写","image":["images/addfile.png"],"dsc":"暂未填写","job":"暂未填写",group:"009"});
 					reflash();
 					})
 				})
@@ -4890,6 +4890,21 @@ app.views.configManage = function(){return {
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">邮编</div>'+
+				'<div class="templatePointRight"><input to="zip_code" formtype="simple"  value="'+templateData["zip_code"]+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">微信</div>'+
+				'<div class="templatePointRight"><input to="wx" formtype="simple"  value="'+templateData.wx+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">微博</div>'+
+				'<div class="templatePointRight"><input to="wb" formtype="simple"  value="'+templateData.wb+'"/></div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">版权</div>'+
 				'<div class="templatePointRight"><input to="copRight" formtype="simple" value="'+templateData.copyRight+'"/></div>'+
 				'<div class="clear"></div>'+
@@ -4897,21 +4912,6 @@ app.views.configManage = function(){return {
 			'<div class="templatePoint">'+
 				'<div class="templatePointLeft">备案</div>'+
 				'<div class="templatePointRight"><input to="record" formtype="simple" value="'+templateData.record+'"/></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">短语0</div>'+
-				'<div class="templatePointRight"><input to="conText_0" formtype="simple" value="'+templateData["conText_0"]+'"/></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">短语1</div>'+
-				'<div class="templatePointRight"><input to="conText_1" formtype="simple" value="'+templateData["conText_1"]+'"/></div>'+
-				'<div class="clear"></div>'+
-			'</div>'+
-			'<div class="templatePoint">'+
-				'<div class="templatePointLeft">短语2</div>'+
-				'<div class="templatePointRight"><input to="conText_2" formtype="simple" value="'+templateData["conText_2"]+'"/></div>'+
 				'<div class="clear"></div>'+
 			'</div>'+
 			'<div class="templateButton">'+buttonArry[state]+'</div>'+
