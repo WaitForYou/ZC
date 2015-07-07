@@ -25,7 +25,6 @@ app.apis.getProduct=function(data,fn,err){
 /*添加商品*/
 app.apis.addProduct=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"product",
 		action:"add",
@@ -47,7 +46,6 @@ app.apis.addProduct=function(data,fn,err){
 /*修改商品*/
 app.apis.editProduct=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"product",
 		action:"edit",
@@ -123,7 +121,6 @@ app.apis.getClient=function(data,fn,err){
 /*添加客户*/
 app.apis.addClient=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"client",
 		action:"add",
@@ -146,7 +143,6 @@ app.apis.addClient=function(data,fn,err){
 /*修改客户*/
 app.apis.editClient=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"client",
 		action:"edit",
@@ -185,7 +181,6 @@ app.apis.editClient=function(data,fn,err){
 /*删除客户*/
 app.apis.removeClient=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"client",
 		action:"remove",
@@ -209,7 +204,6 @@ app.apis.removeClient=function(data,fn,err){
 
 /*检测用户名*/
 app.apis.checkUser=function(data,fn,err){
-	console.log(data);
 	var sendData = {
 		model:"client",
 		action:"checkUser",
@@ -228,7 +222,6 @@ app.apis.checkUser=function(data,fn,err){
 	}
 /*检测用户名*/
 app.apis.checkUserName=function(data,fn,err){
-	console.log(data);
 	var sendData = {
 		model:"client",
 		action:"checkUserName",
@@ -248,7 +241,6 @@ app.apis.checkUserName=function(data,fn,err){
 /*检测手机号*/
 app.apis.checkPhone=function(data,fn,err){
 	//var data = "phone"/*传输入的东西过来*/
-	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"checkPhone",
@@ -265,7 +257,6 @@ app.apis.checkPhone=function(data,fn,err){
 	}
 /*检测邮箱*/
 app.apis.checkEmail=function(data,fn,err){
-	console.log(data)
 	//var data = "email"/*传输入的东西过来*/
 	var sendData = {
 		model:"client",
@@ -343,7 +334,6 @@ app.apis.register=function(data,fn,err){
 /*重置密码*/
 app.apis.resetKey=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 		var sendData = {
 		model:"client",
 		action:"resetKey",
@@ -387,7 +377,6 @@ app.apis.getBind=function(data,fn,err){
 	}
 /*获取验证吗*/
 app.apis.getBindCode=function(data,fn,err){
-	console.log(data)
 	var sendData = {
 		model:"client",
 		action:"getBindCode",
@@ -534,7 +523,6 @@ app.apis.getAdmin=function(data,fn,err){
 /*添加管理员*/
 app.apis.addAdmin=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data);
 	var sendData = {
 		model:"admin",
 		action:"add",
@@ -561,7 +549,6 @@ app.apis.addAdmin=function(data,fn,err){
 /*修改管理员*/
 app.apis.editAdmin=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"admin",
 		action:"edit",
@@ -631,7 +618,6 @@ app.apis.getannouncement=function(data,fn,err){
 /*添加公告*/
 app.apis.addannouncement=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 		var sendData = {
 		model:"announcement",
 		action:"add",
@@ -654,7 +640,6 @@ app.apis.addannouncement=function(data,fn,err){
 /*修改公告*/
 app.apis.editannouncement=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 		var sendData = {
 		model:"announcement",
 		action:"edit",
@@ -677,8 +662,6 @@ app.apis.editannouncement=function(data,fn,err){
 /*删除公告*/
 app.apis.removeannouncement=function(data,fn,err){
 	if(app.objs.user.get()){
-		//var data="ehdjk"/*id*/
-	console.log(data)
 	var sendData = {
 		model:"announcement",
 		action:"remove",
@@ -708,7 +691,6 @@ app.apis.getrecruit=function(data,fn,err){
 		data:data
 	}
 	$.get("http://"+config.sour+":8888/",sendData,function(recruitReturn){
-		console.log(recruitReturn);
 		if(recruitReturn && recruitReturn.code && recruitReturn.code !=0){
 			if(recruitReturn.code == 1){
 				app.objs.recruitTime = recruitReturn.time;
@@ -727,7 +709,6 @@ app.apis.getrecruit=function(data,fn,err){
 /*添加招聘*/
 app.apis.addrecruit=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 		var sendData = {
 		model:"recruit",
 		action:"add",
@@ -750,7 +731,6 @@ app.apis.addrecruit=function(data,fn,err){
 /*修改招聘*/
 app.apis.editrecruit=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 		var sendData = {
 		model:"recruit",
 		action:"edit",
@@ -895,8 +875,7 @@ app.apis.getpromotion=function(data,fn,err){
 		action:"get",
 		data:data
 	};
-	$.support.cors = true;
-
+	
 	$.get("http://"+config.sour+":8888/",sendData,function(promotionReturn){
 		if(promotionReturn && promotionReturn.code !=0){
 		if(promotionReturn.code == 1){
@@ -983,7 +962,6 @@ app.apis.getRedPacket=function(data,fn,err){
 /*发红包*/
 app.apis.addRedPacket=function(data,fn,err){
 	if(app.objs.user.get()){
-		console.log(data)
 	var sendData = {
 		model:"redPacket",
 		action:"add",

@@ -1,4 +1,4 @@
-
+//$.support.cors = true;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -41,7 +41,6 @@ var app = {
 						}
 				})
 			app.apis.getConfig(null,function(data){
-			console.log(data)
 			app.objs.configData=data;
 
 			app.objs.headV.type = app.objs.routeTable[dataObj.page].type;
@@ -73,7 +72,6 @@ var app = {
 		$(".loading").hide();
         $("#deviceready").show();
         var parentElement = document.getElementById(id);
-        console.log('Received Event: ' + id);
     }
 };
 var resizeArry = {}
@@ -118,6 +116,6 @@ app.apis={};
 app.views={};
 app.objs={};
 app.fns={};
-$.support.cors = true;
+
 
 

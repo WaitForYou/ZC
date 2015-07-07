@@ -13,9 +13,7 @@ app.objs.routeTable={
 					app.apis.getProduct(data,function(product){
 						
 						/*出页面*/
-						console.log(promotion);
-						console.log(announcement);
-						console.log(product);
+
 						var promoArry=[];
 						$.each(promotion,function(i,n){
 							if(n.group=="index"){

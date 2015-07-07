@@ -19,7 +19,7 @@
      * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
-	 window.UEDITOR_HOME_URL = "http://localhost/zc/zhongchou/ueditor/"
+	 window.UEDITOR_HOME_URL = "http://120.25.242.95/ueditor/"
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
     /**
@@ -35,7 +35,7 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         
-        , toolbars: [["source","link","unlink","print","preview","simpleupload","insertimage","snapscreen","attachment","map","bold","italic","underline","fontborder","strikethrough","forecolor","backcolor","superscript","subscript","justifyleft","justifycenter","justifyright","justifyjustify","paragraph","rowspacingbottom","rowspacingtop","lineheight","fontfamily","fontsize","inserttable","deletetable","mergeright","mergedown","splittorows","splittocols","splittocells","mergecells","insertcol","insertrow","deletecol","deleterow","charts","pasteplain","pagebreak"]]
+        , toolbars: [["source","link","unlink","print","preview","insertimage","snapscreen","attachment","map","bold","italic","underline","fontborder","strikethrough","forecolor","backcolor","superscript","subscript","justifyleft","justifycenter","justifyright","justifyjustify","paragraph","rowspacingbottom","rowspacingtop","lineheight","fontfamily","fontsize","inserttable","deletetable","mergeright","mergedown","splittorows","splittocols","splittocells","mergecells","insertcol","insertrow","deletecol","deleterow","charts","pasteplain","pagebreak"]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''

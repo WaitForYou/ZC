@@ -53,12 +53,10 @@ function sendMsgValidCode() {
 			url : urlPath,
 			dataType : 'json',
 			success : function(data) {
-				console.log(data);
+		
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				console.log(XMLHttpRequest);
-				console.log(textStatus);
-				console.log(errorThrown);
+		
 			}
 		});
 		sendmsg();

@@ -121,7 +121,7 @@ function sendMsgValidCode(flag) {
 		dataType : 'json',
 		success : function(data) {
 			try{
-				console.log(data);
+				
 			}catch(e){
 				
 			}
@@ -129,9 +129,7 @@ function sendMsgValidCode(flag) {
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			try{
-				console.log(XMLHttpRequest);
-				console.log(textStatus);
-				console.log(errorThrown);
+
 			}catch(e){
 				
 			}

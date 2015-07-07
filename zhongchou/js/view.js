@@ -72,7 +72,7 @@ app.views.head = function(){return {
 			$(this.el).find(".top_btn_group").html(buttonHtml);
 			$(this.el).find("#gnavi").html(navFirst);
 			$(this.el).find("li#"+sessionStorage.hl).children('a').addClass("active");
-			console.log($(this.el).find("#gnavi"))
+		
 			var page=["login","register","mode","product","procedure","FAQS","about"]
 			$.each(page,function(i,n){
 				$("#"+n).unbind("click").bind("click",function(e){
@@ -124,7 +124,7 @@ app.views.foot = function(){return {
 	el:".footerBox",
 	data:app.objs.configData,
 	render:function(){
-		console.log(app.objs.configData)
+	
 		var configData = app.objs.configData.footerInfo;
 		var newElem = $('<div class="footer_area">'
 			   +'<div class="footer">'
@@ -318,7 +318,7 @@ $('<div id="topics">'
 ).appendTo($(this.el));
 
 	   var promoObj=_.indexBy(this.data.promotion, 'id');
-	   console.log(promoObj);
+	
 	   $(".index_promo_1").html(promoObj["001"].dsc)
 	   $(".index_promo_2").html(promoObj["002"].dsc)
 	   $(".index_promo_3").html(promoObj["003"].dsc)
@@ -508,7 +508,7 @@ $('<div id="topics">'
 	   
 	   /*************************************************************************************************/
 
-		console.log(this.data);//http://mini.114dianxin.com/pop2/images/bg_阴.png
+	
 		var that = this;
 		//公告
 		if(this.data.announcement){
@@ -582,7 +582,7 @@ $('<div id="topics">'
 			}
         
         //----start人物介绍
-        // console.log(this.data.promotion) alert();
+    
         /*
          var peopleData = this.data.promotion.danger;
          var peoplesElem = $('<h1>'+peopleData.name+'</h1>'
@@ -829,7 +829,7 @@ app.views.register = function(){return {
 			  registerElem.find("#btnSendmsg").unbind("click").bind("click",function(){
 				  
 			  app.apis.getBindCode({"type":"phone",number:$(this).parents("form").find("[to='phone']").val()},function(data){
-				  console.log(data)
+			
 				  code=data;
 				  var totalTime=60;
 				  registerElem.find("#btnSendmsg").unbind("click")
@@ -920,7 +920,7 @@ app.views.mode = function(){return {
 		$(this.el).empty();
 		app.fns.setSecondNav($(this.el),"众筹模式");
 		var pageData = this.data[0];
-		console.log(pageData);
+	
 
 
         $('<div id="mark-navi">'
@@ -955,7 +955,7 @@ app.views.product = function(){return {
 	data:{},
 	render:function(){
 				$(this.el).empty();
-		console.log(this.data);
+	
 		app.fns.setSecondNav($(this.el),"我要众筹");
 		var that = this;
 
@@ -1036,7 +1036,7 @@ app.views.procedure = function(){return {
 	data:{},
 	render:function(){
 		$(this.el).empty();
-		console.log(this.data);
+		
 		var pageData = this.data[0];
 		app.fns.setSecondNav($(this.el),"众筹步聚");
 		    var newProcedure = $('<div class="cnc_step">'
@@ -1060,7 +1060,7 @@ app.views.procedure = function(){return {
 app.views.FAQS = function(){return {
 	el:".middle",
 	render:function(){
-		console.log(this.data)
+		
 		$(this.el).empty();
 		app.fns.setSecondNav($(this.el),"常见问题");
 
@@ -1095,7 +1095,7 @@ app.views.about = function(){return {
 	data:{},
 	render:function(){
 		var that=this;
-		console.log(this.data)
+		
 		var that = this
 		$(this.el).empty();
 		var navElem = $('<div id="company_tab" class="company">'
@@ -1119,7 +1119,7 @@ app.views.about = function(){return {
           $("#con_"+$(this).attr("v")).show();
 		});
 	var teamObj=_.indexBy(this.data.team,"id");
-	console.log(teamObj)
+	
     $('<div class="team_introbox1">'+teamObj["009"].dsc+'</div>').appendTo($("#con_company_1"));
     $('<div class="team_introbox3"></div><div class="clear"></div>').appendTo($("#con_company_1"));
     $.each(teamObj["010"].data,function(index,value){ 
@@ -1251,7 +1251,7 @@ app.views.productDetail = function(){return {
 	el:".middle",
 	data:{},
 	render:function(){
-		console.log(this.data)
+	
 		var buyButton=''
 		if(this.data.copy<=this.data.payedCount||this.data.money<=this.data.payed){
 									buyButton=	'<li class="pl_buy_btn"><a id="crowdBtn">众筹结束</a></li>'
@@ -1754,7 +1754,7 @@ app.views.buy=function(){return {
 	render:function(){
 		if(app.objs.user.get()){
 		var that=this;
-		console.log(this.data)
+		
 		$(this.el).empty();
 		$(this.el).html('<div class="credit_lending singleUse">'+
             '<h2>确认并支付</h2>'+
@@ -1804,7 +1804,7 @@ app.views.sell=function(){return {
 	render:function(){
 		if(app.objs.user.get()){
 		var that=this;
-		console.log(this.data)
+		
 		$(this.el).empty();
 		$(this.el).html('<div class="credit_lending singleUse">'+
             '<h2>确认并卖出</h2>'+
@@ -1856,7 +1856,7 @@ app.views.change=function(){return {
 	render:function(){
 		if(app.objs.user.get()){
 		var that=this;
-		console.log(this.data)
+		
 		$(this.el).empty();
 		$(this.el).html('<div class="credit_lending singleUse">'+
             '<h2>确认并转让</h2>'+
@@ -1919,7 +1919,7 @@ app.views.change=function(){return {
 app.views.announcementDetail = function(){return {
 	el:".middle",
 	render:function(){
-		console.log(this.data)
+		
 		$(this.el).html("公告详情")
 	}
 	}}
@@ -2043,7 +2043,7 @@ app.views.account = function(){return {
                   '</tr>'+
                 '</thead>'+
                '<tbody></tbody></table></div>');
-			  console.log(that.data)
+			
 				$.each(that.data.deal,function(i,n){
 					var changeButton="";
 					if(app.objs.config.get().change=="1"){
@@ -2219,7 +2219,7 @@ app.views.redPacketDetail = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#redPacketDetail").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data);
+		
 		$(this.el).html('<div class="credit_lending">'+
             '<h2>我的红包</h2>'+
             '<div class="lending_table">'+
@@ -2264,7 +2264,7 @@ app.views.safeQusetion = function(){return {
 		if(this.data){
 			templateData=$.extend(templateData,this.data)
 			}
-			console.log(templateData)
+			
 		$(this.el).html('<div class="account_security">'+
             '<h2>温馨提示：您好，您的安全问题未设置，请填写以下信息进行设置</h2>'+
             '<ul>'+
@@ -2334,7 +2334,7 @@ app.views.emailVerify = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#emailVerify").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data)
+	
 		var that=this;
 		var bindString='<li id="sendBtn" class="basics_btn"><a id="bindBtn">绑定</a></li>'
 		if(this.data.bind&&this.data.bind.email){
@@ -2413,7 +2413,7 @@ app.views.setPhone = function(){return {
 			$(that.el).find("#btnSendmsg").unbind("click").bind("click",function(){
 				app.apis.getBindCode({"type":"phone","number":$("#phoneNumber").val()},function(data){
 					alert("信息已发送")
-					console.log(data)
+					
 					code=data;
 					var sendTime=30;
 					var sendI=setInterval(function(){
@@ -2459,7 +2459,7 @@ app.views.setDetail = function(){return {
 		$("#tabs_menu li#setDetail").addClass('hover');
 		if(app.objs.user.get()){
 		var templateData=$.extend({},this.data);
-		console.log(this.data)
+	
 		var phoneString='<a>[绑定]</a>'
 		if(templateData.phone){
 			phoneString=templateData.phone+'<a">[修改]</a>'
@@ -2605,7 +2605,7 @@ app.views.adminManage = function(){return {
 		$("#tabs_menu li#adminManage").addClass('hover');
 		if(app.objs.user.get()){
 		function templateFn(state,data){
-			console.log(data)
+			
 			var templateData={
 				id: app.fns.uuid(),
 				userName: app.objs.user.get().userName,
@@ -2864,7 +2864,7 @@ app.views.announcementManage = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#announcementManage").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data)
+		
 		function templateFn(state,data){
 			var openTime=new Date().getTime();
 			var templateData={
@@ -2913,11 +2913,11 @@ app.views.announcementManage = function(){return {
 		templateDom.find("[formtype='html']").each(function(){
 			
 			var to = $(this).attr("to")
-			console.log($(this))
+			
 			var ue = UE.getEditor($(this).attr("id"));
-			console.log("a")	
+				
 			ue.addListener( 'ready', function( editor ) {
-				console.log("b")	
+				
      			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
  } );			
 		ue.addListener( 'afterSelectionChange', function( editor ) {
@@ -3039,7 +3039,7 @@ app.views.clientManage = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#clientManage").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data)
+		
 		function templateFn(state,data){
 			var templateData={
 				id: app.fns.uuid(),
@@ -3241,7 +3241,7 @@ app.views.procedureManage = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#procedureManage").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data);
+		
 		var openTime=new Date().getTime();
 		function templateFn(state,data){
 			var templateData={
@@ -3596,7 +3596,7 @@ app.views.procedureManage = function(){return {
 		templateDom.find("[formtype='mulipic']").each(function(){
 				$(this).ajaxForm({
 			success:function(data){
-				console.log(data);
+				
 			}
 		});
 				$(this).find("input").unbind("change").bind("change",function(){
@@ -3605,9 +3605,7 @@ app.views.procedureManage = function(){return {
 							success:function(data){
 								var data=JSON.parse(data);
 								if(data.state=="SUCCESS"){
-									console.log(templateData)
-									console.log(to)
-									console.log(templateData[to])
+			
 									templateData[to].push(data.url);
 									reflash();
 									};
@@ -3624,11 +3622,11 @@ app.views.procedureManage = function(){return {
 				templateDom.find("[formtype='html']").each(function(){
 			
 			var to = $(this).attr("to")
-			console.log($(this))
+			
 			var ue = UE.getEditor($(this).attr("id"));
-			console.log("a")	
+				
 			ue.addListener( 'ready', function( editor ) {
-				console.log("b")	
+					
      			ue.setContent(templateData[to]); //编辑器家在完成后，让编辑器拿到焦点
  } );			
 		ue.addListener( 'afterSelectionChange', function( editor ) {
@@ -3745,8 +3743,7 @@ app.views.recruitManage = function(){return {
 		$("#tabs_menu li#recruitManage").addClass('hover');
 		if(app.objs.user.get()){
 		var that=this;
-		console.log(this);
-		console.log(this.data);
+		
 		function templateFn(state,data){
 			var openTime=new Date().getTime();
 			var templateData={
@@ -3923,7 +3920,7 @@ app.views.companyManage = function(){return {
 		$("#tabs_menu li#companyManage").addClass('hover');
 		if(app.objs.user.get()){
 		var that=this;
-		console.log(this);
+	
 		function templateFn(state,data){
 			var openTime=new Date().getTime();
 			var templateData={
@@ -4099,7 +4096,7 @@ app.views.promotionManage = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#promotionManage").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data);
+		
 		var templateArry={};
 		/**********************************************/
 		templateArry.A=function(state,data){
@@ -4257,7 +4254,7 @@ app.views.promotionManage = function(){return {
 			$("[formtype='mulipic']").each(function(){
 				$(this).ajaxForm({
 			success:function(data){
-				console.log(data);
+			
 			}
 		});
 				$(this).find("input").unbind("change").bind("change",function(){
@@ -4266,9 +4263,7 @@ app.views.promotionManage = function(){return {
 							success:function(data){
 								var data=JSON.parse(data);
 								if(data.state=="SUCCESS"){
-									console.log(templateData)
-									console.log(to)
-									console.log(templateData[to])
+							
 									templateData[to].push(data.url);
 									reflash();
 									};
@@ -4425,7 +4420,7 @@ app.views.promotionManage = function(){return {
 			newpoint.find("[formtype='singlepic']").each(function(){
 				$(this).ajaxForm({
 			success:function(data){
-				console.log(data);
+				
 			}
 		});
 				$(this).find("input").unbind("change").bind("change",function(){
@@ -4529,7 +4524,7 @@ app.views.promotionManage = function(){return {
 			newpoint.find("[formtype='singlepic']").each(function(){
 				$(this).ajaxForm({
 			success:function(data){
-				console.log(data);
+			
 			}
 		});
 				$(this).find("input").unbind("change").bind("change",function(){
@@ -4638,7 +4633,7 @@ app.views.redPacketManage = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#redPacketManage").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data);
+		
 		function templateFn(state,data){
 			var templateData={
 				end: new Date().getTime()+24*3600*1000,
@@ -4804,7 +4799,7 @@ app.views.configManage = function(){return {
 		$("#tabs_menu").find("li").removeClass('hover');
 		$("#tabs_menu li#configManage").addClass('hover');
 		if(app.objs.user.get()){
-		console.log(this.data);
+		
 		function templateFn(state,data){
 			var templateData={
 				footerInfo:{
@@ -4993,7 +4988,7 @@ app.views.configManage = function(){return {
 					$("#popMain").find("[formtype='singlepic']").each(function(){
 				$(this).ajaxForm({
 			success:function(data){
-				console.log(data);
+				
 			}
 		});
 				$(this).find("input").unbind("change").bind("change",function(){

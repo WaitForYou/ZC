@@ -66,7 +66,7 @@
 
         var nodes = oldQsa(node, sel)
       } catch(e) {
-        console.error('error performing selector: %o', selector)
+        
         throw e
       } finally {
         if (taggedParent) taggedParent.removeClass(classTag)
