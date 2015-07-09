@@ -300,12 +300,23 @@ var newElem = $('<div class="index_top_left">'
 		+'<div class="index_promo_2"></div>'
 		+'<div class="index_canvar_2" id="canvar_2"></div>'
 		+'<div class="clear"></div>'
-		+'<div class="index_canvar_3" id="canvar_3"></div>'
-		+'<div class="index_promo_3"></div>'
-		+'<div class="clear"></div>'
 	+'</div>'
 	+'<div class="clear"></div>'
 +'</div>').appendTo($(this.el));
+$('<br/><br/>').appendTo($(this.el));
+$('<div class="slider-wrapper theme-bar">'+
+            '<div id="slider" class="nivoSlider">'+
+                '<img src="images/toystory.jpg" data-thumb="images/toystory.jpg" alt="" />'+
+                '<a href="http://dev7studios.com"><img src="images/up.jpg" data-thumb="images/up.jpg" alt="" title="This is an example of a caption" /></a>'+
+                '<img src="images/walle.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" />'+
+                '<img src="images/nemo.jpg" data-thumb="images/nemo.jpg" alt="" title="#htmlcaption" />'+
+            '</div>'+
+            '<div id="htmlcaption" class="nivo-html-caption">'+
+                '<strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. '+
+            '</div>'+
+        '</div>').appendTo($(this.el));
+		$('#slider').nivoSlider();
+
 $('<div id="topics">'
 +'<div class="inner" style=" height:30px;">'
 			       +' <span style=" display:block; float:left;"><img src="img/topics.png" alt=""></span>'
@@ -321,7 +332,7 @@ $('<div id="topics">'
 	
 	   $(".index_promo_1").html(promoObj["001"].dsc)
 	   $(".index_promo_2").html(promoObj["002"].dsc)
-	   $(".index_promo_3").html(promoObj["003"].dsc)
+	  // $(".index_promo_3").html(promoObj["003"].dsc)
 	   var nameArry5=[];
 	   var valueArry5=[];
 	   $.each(promoObj["005"].data,function(i,n){
@@ -449,8 +460,8 @@ $('<div id="topics">'
 };
 				 myChart2.setOption(option2);
 				 
-				 var myChart3 = ec.init(document.getElementById('canvar_3')); 
-				 var option3 = {
+				// var myChart3 = ec.init(document.getElementById('canvar_3')); 
+		/*		 var option3 = {
     title : {
         text: promoObj["005"].name,
     },
@@ -501,8 +512,8 @@ $('<div id="topics">'
             }
         }
     ]
-};
-				 myChart3.setOption(option3);
+};*/
+				// myChart3.setOption(option3);
             }
         );
 	   

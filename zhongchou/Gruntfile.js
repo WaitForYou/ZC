@@ -32,7 +32,7 @@ module.exports = function(grunt){
             },
 			lib: {
                 files: {
-                    'dist/js/lib.js': ['js/config.js','js/cookies.min.js','js/idcode/jquery.idcode.js','js/jquery.qrcode.js','js/qrcode.js','js/jquery-form.js','js/underscore-min.js','js/extend/slides.min.jquery.js','js/ui/core.js','js/ui/widget.js','js/ui/position.js','js/ui/menu.js','js/ui/button.js','js/ui/spinner.js','js/ui/selectmenu.js','js/ui/mouse.js','js/ui/slider.js','js/ui/datepicker.js','js/ui/datepicker-zh-CN.js','ueditor/ueditor.config.js','ueditor/ueditor.all.min.js','js/require.js','js/echarts.js']
+                    'dist/js/lib.js': ['js/config.js','js/cookies.min.js','js/jquery.nivo.slider.js','js/idcode/jquery.idcode.js','js/jquery.qrcode.js','js/qrcode.js','js/jquery-form.js','js/underscore-min.js','js/extend/slides.min.jquery.js','js/ui/core.js','js/ui/widget.js','js/ui/position.js','js/ui/menu.js','js/ui/button.js','js/ui/spinner.js','js/ui/selectmenu.js','js/ui/mouse.js','js/ui/slider.js','js/ui/datepicker.js','js/ui/datepicker-zh-CN.js','ueditor/ueditor.config.js','ueditor/ueditor.all.min.js','js/require.js','js/echarts.js']
                 }
             }
         },
