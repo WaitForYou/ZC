@@ -1791,16 +1791,31 @@ app.views.buy=function(){return {
 			   '</tr></tbody></table>'+
                
             '</div>'+
-           '<div id="payButton">确认支付</div>'+
+			'<form name=llpayment action="webllpay/llpayapi.php" method=post target="_blank">'+
+                        '<input type="hidden" name="user_id" value="22222222" />'+
+                        '<input type="hidden" name="busi_partner" value="101001"/>'+
+                        '<input type="hidden" name="no_order" value="'+that.data.id+'"/>'+
+                        '<input type="hidden" name="money_order" value="'+that.data.count*that.data.buyPrice+'"/>'+
+                        '<input type="hidden" name="name_goods" value="'+that.data.subhead+'"/>'+
+                        '<input type="hidden" name="url_order" value=""/>'+
+                        '<input type="hidden" name="info_order" value="'+that.data.id+' '+that.data.count+' '+that.data.buyPrice+'"/>'+
+                        '<input type="hidden" name="bank_code" value=""/>'+
+                        '<input type="hidden" name="pay_type" value=""/>'+
+                        '<input type="hidden" name="acct_name" value=""/>'+
+                        '<input type="hidden" name="shareing_data" value=""/>'+
+                        '<input type="hidden" name="valid_order" value="10080"/>'+
+                        '<button  id="payButton" class="new-btn-login" type="submit" style="text-align:center;">确认支付</button>'+
+		'</form>'+
+         //  '<div id="payButton">确认支付</div>'+
             '<div class="clear"></div>'+
         '</div>');
 		$(this.el).find("#payButton").unbind("click").bind("click",function(){
-			app.apis.adddeal(that.data,function(){
-				alert("交易成功");
-				window.location.hash="account";
-				},function(){
-				alert("交易失败");
-				})
+			//app.apis.adddeal(that.data,function(){
+				//alert("交易成功");
+				//window.location.hash="account";
+				//},function(){
+				//alert("交易失败");
+				//})
 			})
 		}else{
 			alert("请先登录")
@@ -1843,16 +1858,31 @@ app.views.sell=function(){return {
 			   '</tr></tbody></table>'+
                
             '</div>'+
-           '<div id="payButton">确认卖出</div>'+
+			'<form name=llpayment action="webllpay/llpayapi.php" method=post target="_blank">'+
+                        '<input type="hidden" name="user_id" value="22222222" />'+
+                        '<input type="hidden" name="busi_partner" value="101001"/>'+
+                        '<input type="hidden" name="no_order" value="'+that.data.id+'"/>'+
+                        '<input type="hidden" name="money_order" value="'+that.data.count*that.data.sellPrice+'"/>'+
+                        '<input type="hidden" name="name_goods" value="'+that.data.subhead+'"/>'+
+                        '<input type="hidden" name="url_order" value=""/>'+
+                        '<input type="hidden" name="info_order" value="'+that.data.id+' '+that.data.count+' '+that.data.sellPrice+'"/>'+
+                        '<input type="hidden" name="bank_code" value=""/>'+
+                        '<input type="hidden" name="pay_type" value=""/>'+
+                        '<input type="hidden" name="acct_name" value=""/>'+
+                        '<input type="hidden" name="shareing_data" value=""/>'+
+                        '<input type="hidden" name="valid_order" value="10080"/>'+
+                        '<button  id="payButton" class="new-btn-login" type="submit" style="text-align:center;">确认卖出</button>'+
+		'</form>'+
+          // '<div id="payButton">确认卖出</div>'+
             '<div class="clear"></div>'+
         '</div>');
 		$(this.el).find("#payButton").unbind("click").bind("click",function(){
-			app.apis.editdeal(that.data,function(){
-				alert("交易成功");
-				window.location.hash="account";
-				},function(){
-				alert("交易失败");
-				})
+			//app.apis.editdeal(that.data,function(){
+				//alert("交易成功");
+				//window.location.hash="account";
+				//},function(){
+				//alert("交易失败");
+				//})
 			})
 
 		}else{
@@ -1899,7 +1929,22 @@ app.views.change=function(){return {
             '</div>'+
 			'<p style="margin-left: 10px;">请输入转让客户的用户名</p>'+
 			'<input style="border: 1px solid #999797;margin-left: 10px;margin-top: 10px;margin-bottom: 10px;" to="changeMember" formtype="simple"/>'+
-           '<div id="payButton">确认转让</div>'+
+			'<form name=llpayment action="webllpay/llpayapi.php" method=post target="_blank">'+
+                        '<input type="hidden" name="user_id" value="22222222" />'+
+                        '<input type="hidden" name="busi_partner" value="101001"/>'+
+                        '<input type="hidden" name="no_order" value="'+that.data.id+'"/>'+
+                        '<input type="hidden" name="money_order" value="'+that.data.count*that.data.change+'"/>'+
+                        '<input type="hidden" name="name_goods" value="'+that.data.subhead+'"/>'+
+                        '<input type="hidden" name="url_order" value=""/>'+
+                        '<input type="hidden" name="info_order" value="'+that.data.id+' '+that.data.count+' '+that.data.change+'"/>'+
+                        '<input type="hidden" name="bank_code" value=""/>'+
+                        '<input type="hidden" name="pay_type" value=""/>'+
+                        '<input type="hidden" name="acct_name" value=""/>'+
+                        '<input type="hidden" name="shareing_data" value=""/>'+
+                        '<input type="hidden" name="valid_order" value="10080"/>'+
+                        '<button  id="payButton" class="new-btn-login" type="submit" style="text-align:center;">确认卖出</button>'+
+		'</form>'+
+           //'<div id="payButton">确认转让</div>'+
             '<div class="clear"></div>'+
         '</div>');
 		$(this.el).find("#payButton").unbind("click").bind("click",function(){
@@ -1911,12 +1956,12 @@ app.views.change=function(){return {
 				alert("转移失败");
 				})
 				}
-			app.apis.checkUserName($("[to='changeMember']").val(),function(data){
-				that.data.userId=data[0].id
-				editdeal()
-				},function(){
-				alert("找不到该用户")
-				})
+			//app.apis.checkUserName($("[to='changeMember']").val(),function(data){
+				//that.data.userId=data[0].id
+				//editdeal()
+				//},function(){
+				//alert("找不到该用户")
+				//})
 			
 			})
 		}else{
@@ -2058,7 +2103,7 @@ app.views.account = function(){return {
 				$.each(that.data.deal,function(i,n){
 					var changeButton="";
 					if(app.objs.config.get().change=="1"){
-						changeButton='<td><div class="changeRight" id="'+n.id+'">债权转让</div></td>'
+						changeButton='<td><div class="changeRight" id="'+n.id+'" style="cursor:pointer">债权转让</div></td>'
 						}
 					if(!n.endTime){
 						$("#deal_table tbody").append('<tr>'+
@@ -2069,7 +2114,7 @@ app.views.account = function(){return {
 					'<td>'+that.data.product[n.productId].UnitPrice+'</td>'+
                     '<td>'+n.count+'</td>'+
                     '<td>'+n.count*(that.data.product[n.productId].UnitPrice-n.buyPrice)+'元</td>'+
-					'<td><div class="sallbutton" id="'+n.id+'">卖出</div></td>'+
+					'<td><div class="sallbutton" id="'+n.id+'" style="cursor:pointer">卖出</div></td>'+
 					changeButton+
 			   '</tr>')
 						}

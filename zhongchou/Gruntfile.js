@@ -2,7 +2,18 @@
 module.exports = function(grunt){
 	'use strict';
     grunt.initConfig({
-        concat: {
+		jshint: {
+    options: {
+      curly: true,
+      eqeqeq: true,
+      eqnull: true,
+      browser: true,
+      globals: {
+        jQuery: true
+      },
+    },
+    uses_defaults: ['js/**/*.js']},
+        cssmin: {
             options: {                                       //配置
                 stripBanners:true,
                 banner: '/*! This is the grunt test ' +      //添加自定义的banner
@@ -48,6 +59,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
-    grunt.registerTask('default', ['concat','uglify']);
+ grunt.loadNpmTasks('grunt-contrib-cssmin');
+ grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.registerTask('default', ['cssmin','uglify']);
 }
