@@ -870,3 +870,74 @@ background: url(../img/header-text.png) no-repeat left;}
   background-repeat: no-repeat;
   background-position: 1px 1px;
 }
+.secondHand{
+	width:316px;
+	height:418px;
+	float:left;
+	margin-right:8px;
+	margin-top:10px;
+	border:1px solid #DBDBDB;
+	cursor:pointer;}
+.secondHand img{
+	width:316px;
+	height:200px;}
+.secondHandTop{
+	position:relative}
+.secondHandTopTag{
+	width:72px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#fff;
+	position:absolute;
+	top:10px;
+	left:-5px;
+	background-image:url(../img/tag.gif);
+	}
+.secondHandTopMessage{
+	width:316px;
+	height:30px;
+	background-color:rgba(0,0,0,0.3);
+	position:absolute;
+	top:170px;
+	left:0px;}
+.secondHandTopMessageL{
+	float:left;
+	color:#fff;
+	line-height:30px;
+	margin-left:10px;}
+.secondHandTopMessageR{
+	float:right;
+	color:#fff;
+	line-height:30px;
+	margin-right:10px;
+	}
+.secondHandBottomTitle{
+	font-size:18px;
+	font-weight:bold;
+	margin-top:20px;
+	margin-left:10px;}
+.secondHandBottomTagPoint{
+	float:left;
+	background-color:#f2f2f2;
+	padding:5px;
+	margin-bottom:10px;
+	margin-left:10px;
+	}
+.secondHandBottomDsc{
+	width:90%;
+	margin:auto;
+	margin-top:20px;}
+.secondHandBottom{
+	position:relative;
+	height:198px;}
+.secondHandBottomMore{
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	}
+.secondHandBottomMoney{
+	position:absolute;
+	right:10px;
+	bottom:10px;
+	}

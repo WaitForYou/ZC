@@ -280,6 +280,18 @@ app.views.index = function(){return {
 	data:{},
 	render:function(){
 		$(this.el).empty();
+		$('<div class="slider-wrapper theme-bar">'+
+            '<div id="slider" class="nivoSlider">'+
+                '<img src="images/toystory.jpg" data-thumb="images/toystory.jpg" alt="" />'+
+                '<a href="http://dev7studios.com"><img src="images/up.jpg" data-thumb="images/up.jpg" alt="" title="This is an example of a caption" /></a>'+
+                '<img src="images/walle.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" />'+
+                '<img src="images/nemo.jpg" data-thumb="images/nemo.jpg" alt="" title="#htmlcaption" />'+
+            '</div>'+
+            '<div id="htmlcaption" class="nivo-html-caption">'+
+                '<strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. '+
+            '</div>'+
+        '</div>').appendTo($(this.el));
+		$('#slider').nivoSlider();
 var newElem = $('<div class="index_top_left">'
 		+'<div class="index_message_head">全国首家专业房地产众筹平台</div>'
 		+'<div class="index_message_frame">'
@@ -304,18 +316,7 @@ var newElem = $('<div class="index_top_left">'
 	+'<div class="clear"></div>'
 +'</div>').appendTo($(this.el));
 $('<br/><br/>').appendTo($(this.el));
-$('<div class="slider-wrapper theme-bar">'+
-            '<div id="slider" class="nivoSlider">'+
-                '<img src="images/toystory.jpg" data-thumb="images/toystory.jpg" alt="" />'+
-                '<a href="http://dev7studios.com"><img src="images/up.jpg" data-thumb="images/up.jpg" alt="" title="This is an example of a caption" /></a>'+
-                '<img src="images/walle.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" />'+
-                '<img src="images/nemo.jpg" data-thumb="images/nemo.jpg" alt="" title="#htmlcaption" />'+
-            '</div>'+
-            '<div id="htmlcaption" class="nivo-html-caption">'+
-                '<strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. '+
-            '</div>'+
-        '</div>').appendTo($(this.el));
-		$('#slider').nivoSlider();
+
 
 $('<div id="topics">'
 +'<div class="inner" style=" height:30px;">'
@@ -324,10 +325,10 @@ $('<div id="topics">'
 			        +'<a href="/company?id=3" style=" color:#F00; font-size:12px; float:right;">查看更多 &gt;&gt;</a>'
 			      +'</div>'
 +'</div>'
-+'<div class="index_center"><div class="project_area"></div></div>'
++'<div class="index_center"><div class="secondHand_area"></div><div class="project_area"></div></div>'
 		    +'<div class="slide earnings"></div>'
 ).appendTo($(this.el));
-
+		
 	   var promoObj=_.indexBy(this.data.promotion, 'id');
 	
 	   $(".index_promo_1").html(promoObj["001"].dsc)
@@ -545,8 +546,43 @@ $('<div id="topics">'
 		 
 		//产品
 		if(this.data.product){
-			
+			var decorateArry=["无披房","豪华装修","简单装修"];
+		var propertyTypeArry=["公寓","复式","豪宅"];
+		var rightTypeArry=["商业用房","住在用房"];
 			$.each(this.data.product,function(i,value){
+				value.dsc=value.dsc.replace(/<(?!br).*?>/g,"");
+				if(value.dsc.length>40){
+					value.dsc=value.dsc.substr(0,40)+"...";
+					}
+				var secondHand=$('<div class="secondHand">'+
+					'<div class="secondHandTop">'+
+						'<img src="'+value.image[0]+'" width="316" height="200"/>'+
+						'<div class="secondHandTopTag">预热期</div>'+
+						'<div class="secondHandTopMessage">'+
+							'<div class="secondHandTopMessageL">已众筹：'+(value.payedCount/value.copy)*100+'%</div>'+
+							'<div class="secondHandTopMessageR">持有限期 '+value.maxTime+'个月</div>'+
+							'<div class="clear"></div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="secondHandBottom">'+
+						'<div class="secondHandBottomTitle">'+value.title+'-'+value.subhead+'</div>'+
+						'<div class="secondHandBottomTagArea">'+
+							'<div class="secondHandBottomTagPoint">'+decorateArry[value.decorate]+'</div>'+
+							'<div class="secondHandBottomTagPoint">'+propertyTypeArry[value.propertyType]+'</div>'+
+							'<div class="secondHandBottomTagPoint">'+rightTypeArry[value.rightType]+'</div>'+
+							'<div class="clear"></div>'+
+						'</div>'+
+						'<div class="secondHandBottomDsc">'+value.dsc+'</div>'+
+						'<div class="clear"></div>'+
+						'<div class="secondHandBottomMore">当前市值 ￥'+value.costPrice+'</div>'+
+						'<div class="secondHandBottomMoney">众筹单价 ￥'+value.UnitPrice+'</div>'+
+						'<div class="clear"></div>'+
+					'</div>'+
+				'</div>').appendTo($(".secondHand_area"));
+				secondHand.data("result",value);
+				secondHand.unbind("click").bind("click",function(){
+				window.location.hash="productDetail/id:"+$(this).data("result").id;
+				})
 				var morebar="";
 			if(app.objs.config.get().more=="1"){
 				morebar='<div class="home_progress_bar"><b style="width:'+value.more+'%;background-image: none;background-color: #E85D5D;">'
@@ -585,11 +621,14 @@ $('<div id="topics">'
                    +morebar
 	         +'</div>'
 	      +'</div>').appendTo($(".project_area"));
+		  
 		  newElem.data("result",value)
 			newElem.unbind("click").bind("click",function(){
 				window.location.hash="productDetail/id:"+$(this).data("result").id;
 				})
         });
+		$('<div class="clear"></div>').appendTo($(".project_area"));
+		  $('<div class="clear"></div>').appendTo($(".secondHand_area"));
 			}
         
         //----start人物介绍
