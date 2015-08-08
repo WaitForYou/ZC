@@ -292,19 +292,7 @@ app.views.index = function(){return {
             '</div>'+
         '</div>').appendTo($(this.el));
 		$('#slider').nivoSlider();
-var newElem = $('<div class="index_top_left">'
-		+'<div class="index_message_head">全国首家专业房地产众筹平台</div>'
-		+'<div class="index_message_frame">'
-			+'<div class="index_message_title">预期年化利率达<span style="font-size:30px">15%</span>以上</div>'
-			+'<div class="index_message_list">资金全程托管 安全可靠</div>'
-			+'<div class="index_message_list">投资门槛低 100元即可参与</div>'
-			+'<div class="index_message_list">专业、优秀的风控及资管团队</div>'
-			+'<div class="index_message_list">一线城市或地标优质资产</div>'
-			+'<div class="index_message_list">注册即可享受随机红包10-100元</div>'
-		+'</div>'
-		+'<img class="index_message_foot" src="images/index.png"/>'
-	+'</div>'
-	+'<div class="index_top">'
+var newElem = $('<div class="index_top">'
 	+'<div class="index_top_right">'
 		+'<div class="index_canvar_1" id="canvar_1"></div>'
 		+'<div class="index_promo_1"></div>'
@@ -550,7 +538,8 @@ $('<div id="topics">'
 		var propertyTypeArry=["公寓","复式","豪宅"];
 		var rightTypeArry=["商业用房","住在用房"];
 			$.each(this.data.product,function(i,value){
-				value.dsc=value.dsc.replace(/<(?!br).*?>/g,"");
+				if(value.second&&value.second=="1"){
+					value.dsc=value.dsc.replace(/<(?!br).*?>/g,"");
 				if(value.dsc.length>40){
 					value.dsc=value.dsc.substr(0,40)+"...";
 					}
@@ -583,7 +572,8 @@ $('<div id="topics">'
 				secondHand.unbind("click").bind("click",function(){
 				window.location.hash="productDetail/id:"+$(this).data("result").id;
 				})
-				var morebar="";
+					}else{
+					var morebar="";
 			if(app.objs.config.get().more=="1"){
 				morebar='<div class="home_progress_bar"><b style="width:'+value.more+'%;background-image: none;background-color: #E85D5D;">'
 				   +'</b>'
@@ -625,7 +615,9 @@ $('<div id="topics">'
 		  newElem.data("result",value)
 			newElem.unbind("click").bind("click",function(){
 				window.location.hash="productDetail/id:"+$(this).data("result").id;
-				})
+				})	
+						}
+				
         });
 		$('<div class="clear"></div>').appendTo($(".project_area"));
 		  $('<div class="clear"></div>').appendTo($(".secondHand_area"));
@@ -786,7 +778,11 @@ app.views.register = function(){return {
 		"password":"",
 		"password2":"",
 		"code":"",/*验证码*/
-		"introducer":""/*介绍人*/
+		"introducer":"",/*介绍人*/
+		"lastTime":new Date().getTime(),/*上次登录时间*/
+		"lastIp":"none",/*上次登录IP*/
+		"time":new Date().getTime(),/*当前登录时间*/
+		"ip":"none"/*当前登录ip*/
 	}
 		$(this.el).empty();
 		var registerElem=$('<div class="mainPanel calHeight">'
@@ -3376,7 +3372,8 @@ app.views.procedureManage = function(){return {
 				"manager":"",//资产管理
 				"review":"",//资产评估
 				"suggest":"",//综合建议
-				"change":0//债券转移费用
+				"change":0,//债券转移费用
+				"second":"0"
 				};
 			if(data){
 				templateData=data;
@@ -3438,6 +3435,16 @@ app.views.procedureManage = function(){return {
 						'</label>'+
 					'</form>'+
 					'<div class="templateFrame" formtype="picFrame" to="imageA"></div>'+
+				'</div>'+
+				'<div class="clear"></div>'+
+			'</div>'+
+			'<div class="templatePoint">'+
+				'<div class="templatePointLeft">是否二手房</div>'+
+				'<div class="templatePointRight">'+
+					'<select to="second">'+
+						'<option value="0">否</option>'+
+						'<option value="1">是</option>'+
+					'</select>'+
 				'</div>'+
 				'<div class="clear"></div>'+
 			'</div>'+

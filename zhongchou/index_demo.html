@@ -26,15 +26,15 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
   
-        <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <link rel="shortcut icon" href="img/favicon.png">
 		<link rel="stylesheet" href="js/idcode/jquery.idcode.css" type="text/css">
  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
   <script type="text/javascript" src="js/jquery.xdomainrequest.min.js"></script>
-    <script type="text/javascript" src="dist/js/lib.js"></script>
+    <script type="text/javascript" src="js/lib.js"></script>
     
-    	<link rel="stylesheet" href="dist/css/base/ui.css">
+    	<link rel="stylesheet" href="css/base/ui.css">
 	
     <script>
 if (!document.addEventListener) {
@@ -52,8 +52,8 @@ if (!document.addEventListener) {
     <div class="header" id="header">
     	<div class="top_btn_group"></div>
     	<div class="top_btn_group" style="  display:none;  ">
-	       <a href="https://www.cncrowd.com:443/user/center" class="btn-s1 btn-1b">用户中心</a>
-	       <a href="https://www.cncrowd.com:443/user/logout" class="btn-s1 btn-1b">退出</a>
+	       <a class="btn-s1 btn-1b">用户中心</a>
+	       <a class="btn-s1 btn-1b">退出</a>
         </div>
 	    <div class="inner clearfix">
 	      <h1>
@@ -91,6 +91,18 @@ if (!document.addEventListener) {
     <div class="footerBox">
     	
     </div>
+    <div class="index_top_left">
+		<div class="index_message_head">全国首家专业房地产众筹平台</div>
+		<div class="index_message_frame">
+			<div class="index_message_title">欢迎光临<span style="font-size:30px">星众筹</span></div>
+			<div class="index_message_list">你的账号：<span id="myUserName">tester1</span></div>
+			<div class="index_message_list">上次登录时间：<span id="myLastTime">2015/02/30</span></div>
+            <div class="index_message_list">上次登录id： <span id="myLastId">120.1.1.1</span></div>
+			<div class="index_message_list">邮箱：<span id="myEmail">dhdh@163.com</span></div>
+			<div class="index_message_list">电话：<span id="myPhone">2334932039</span></div>
+		</div>
+		<a href="#account"><img class="index_message_foot" src="images/index.png"/></a>
+	</div>
     <div id="pop">
     <div id="popClose"></div>
     <div id="popMain"></div>
@@ -100,7 +112,7 @@ if (!document.addEventListener) {
     
     
 
-    <script type="text/javascript" src="dist/js/common.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
      $(document).ready(function(){   
         app.initialize();

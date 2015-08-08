@@ -762,6 +762,7 @@ background: url(../img/header-text.png) no-repeat left;}
 	left:10px;
 	z-index:12;
 	background-color:#FFFFFF;
+	display:none;
 }
 .index_top_right{
 	width:980px;

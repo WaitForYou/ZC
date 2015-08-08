@@ -27,6 +27,16 @@ var app = {
     onDeviceReady: function() {
       //  Backbone.history.start({pushState : true});
 	  function hashparse(){
+		  if(app.objs.user.get() && app.objs.user.get().id){
+			  $(".index_top_left").show();
+			  $("#myUserName").html(app.objs.user.get().userName);
+			  $("#myLastTime").html(app.fns.t2d(app.objs.user.get().lastTime||new Date().getTime()));
+			  $("#myPhone").html(app.objs.user.get().phone);
+			  $("#myEmail").html(app.objs.user.get().email);
+			  $("#myLastIp").html(app.objs.user.get().lastIp||"192.168.1.1")
+			  }else{
+				  $(".index_top_left").hide();
+				  }
 		  var hash=window.location.hash.replace("#","").split("/")
 		  if(!hash[0]){
 			  hash[0]="index"
